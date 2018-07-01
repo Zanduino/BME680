@@ -20,5 +20,6 @@ The gas sensor works by heating a small surface internally and measuring the res
 
 A detailed library description and further details are available at the [GitHub BME680 Wiki](https://github.com/SV-Zanshin/BME680/wiki)
 
+[![DOI](https://zenodo.org/badge/139349456.svg)](https://zenodo.org/badge/latestdoi/139349456)
 
 ![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
