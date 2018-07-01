@@ -41,27 +41,22 @@
 ** Declare all program constants                                                                                  **
 *******************************************************************************************************************/
 const uint32_t SERIAL_SPEED            = 115200;                              // Set the baud rate for Serial I/O //
-
-                /************************************************************************************
-                ** Software SPI requires 4 digital pins to be defined in order to work:            **
-                ** CS   - Chip Select or sometimes called SS for Slave-select. Used to address chip**
-                ** MISO - Master In, Slave Out. Wire used to send data from the BME680 to program  **
-                ** MOSI - Mast Out,  Slave In. Wire used to send data from the program to BME680   **
-                ** SCK  - System Clock. This is used for timing data                               **
-                ************************************************************************************/
-/*                
-const uint8_t  SPI_CS_PIN              = 10;                                  // Pin for slave-select of BME680   //
-const uint8_t  SPI_SCK_PIN             = 13;                                  // Pin for clock signal             //
-const uint8_t  SPI_MOSI_PIN            = 11;                                  // Master-out, Slave-in Pin         //
-const uint8_t  SPI_MISO_PIN            = 12;                                  // Master-in, Slave-out Pin         //
-*/
-
+              /************************************************************************************
+              ** Software SPI requires 4 digital pins to be defined in order to work:            **
+              ** CS   - Chip Select or sometimes called SS for Slave-select. Used to address chip**
+              ** MISO - Master In, Slave Out. Wire used to send data from the BME680 to program  **
+              ** MOSI - Mast Out,  Slave In. Wire used to send data from the program to BME680   **
+              ** SCK  - System Clock. This is used for timing data                               **
+              ************************************************************************************/
+/*const uint8_t  SPI_CS_PIN              = 10;                                // Pin for slave-select of BME680   //
+  const uint8_t  SPI_SCK_PIN             = 13;                                // Pin for clock signal             //
+  const uint8_t  SPI_MOSI_PIN            = 11;                                // Master-out, Slave-in Pin         //
+  const uint8_t  SPI_MISO_PIN            = 12;                                // Master-in, Slave-out Pin         */  
+                                                                              //----------------------------------//
 const uint8_t  SPI_CS_PIN              = 53;                                  // Pin for slave-select of BME680   //
 const uint8_t  SPI_SCK_PIN             = 52;                                  // Pin for clock signal             //
 const uint8_t  SPI_MOSI_PIN            = 51;                                  // Master-out, Slave-in Pin         //
 const uint8_t  SPI_MISO_PIN            = 50;                                  // Master-in, Slave-out Pin         //
-
-
 /*******************************************************************************************************************
 ** Declare global variables and instantiate classes                                                               **
 *******************************************************************************************************************/

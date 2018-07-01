@@ -34,7 +34,7 @@ bool BME680_Class::begin(const uint16_t i2cSpeed) {                           //
   _I2CAddress = 0;                                                            // Set to 0 to denote no I2C found  //
   return false;                                                               // return failure if we get here    //
 } // of method begin()                                                        //                                  //
-bool BME680_Class::begin(const uint8_t chipSelect) {                          // Use hardware SPI for comms       //
+bool BME680_Class::begin(const uint8_t chipSelect) {                          // Use hardware SPI communications  //
   _cs = chipSelect;                                                           // Store value for future use       //
   digitalWrite(_cs, HIGH);                                                    // High means ignore master         //
   pinMode(_cs, OUTPUT);                                                       // Make the chip select pin output  //
@@ -57,18 +57,12 @@ bool BME680_Class::begin(const uint8_t chipSelect, const uint8_t mosi,        //
 *******************************************************************************************************************/
 bool BME680_Class::commonInitialization() {                                   // Called from all begin() methods  //
   if (_I2CAddress==0 && readByte(BME680_SPI_REGISTER)!=0) {                   // We are in the wrong mode for SPI //
-Serial.print("Resetting from ");Serial.println(readByte(BME680_SPI_REGISTER),BIN);
     putData(BME680_SPI_REGISTER,(uint8_t)0);                                  // Return to correct SPI page       //
-Serial.print("Value is now ");Serial.println(readByte(BME680_SPI_REGISTER),BIN);
-Serial.print("Hardware id is ");Serial.println(readByte(BME680_CHIPID_REGISTER),HEX);
   } // of if-then we are in SPI mode                                          //                                  //
   if (readByte(BME680_CHIPID_REGISTER)==BME680_CHIPID) {                      // check for correct chip id        //
     getCalibration();                                                         // get the calibration values       //
     if (_I2CAddress==0) {                                                     // Switch to correct register bank  //
-      putData(BME680_SPI_REGISTER|0x80,(uint8_t)B00010000);
-Serial.print("Hardware id is ");Serial.println(readByte(BME680_CHIPID_REGISTER),HEX);
-Serial.print("status is now ");Serial.println(readByte(BME680_SPI_REGISTER),BIN);
-Serial.print("ctrl_meas is ");Serial.println(readByte(BME680_CONTROL_MEASURE_REGISTER),BIN);
+      putData(BME680_SPI_REGISTER|0x80,(uint8_t)B00010000);                   //                                  //
     } // of if-then SPI mode                                                  //                                  //
     return true;                                                              // return success                   //
   } // of if-then device is really a BME680                                   //                                  //

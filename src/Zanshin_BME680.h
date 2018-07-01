@@ -20,6 +20,8 @@
 ** so both my comments and variable names tend to be verbose. The code is written to fit in the first 80 spaces   **
 ** and the comments start after that and go to column 117 - allowing the code to be printed in A4 landscape mode. **
 **                                                                                                                **
+** G N U   G e n e r a l   P u b l i c   L i c e n s e                                                            **
+** ===================================================                                                            **
 ** This program is free software: you can redistribute it and/or modify it under the terms of the GNU General     **
 ** Public License as published by the Free Software Foundation, either version 3 of the License, or (at your      **
 ** option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY     **
@@ -29,6 +31,7 @@
 **                                                                                                                **
 ** Vers.  Date       Developer                     Comments                                                       **
 ** ====== ========== ============================= ============================================================== **
+** 1.0.0  2018-07-01 https://github.com/SV-Zanshin Added and tested I2C, SPI and software SPI connections         **
 ** 1.0.0a 2018-06-30 https://github.com/SV-Zanshin Cloned from BME280 library and started recoding                **
 **                                                                                                                **
 *******************************************************************************************************************/
