@@ -25,7 +25,7 @@ bool BME680_Class::begin() {                                                  //
 bool BME680_Class::begin(const uint16_t i2cSpeed) {                           // Find I2C device                  //
   Wire.begin();                                                               // Start I2C as master device       //
   Wire.setClock(i2cSpeed);                                                    // Set I2C bus speed                //
-  for(_I2CAddress=0;_I2CAddress<127;_I2CAddress++) {                          // loop all possible addresses      //
+  for(_I2CAddress=0x76;_I2CAddress<=0x77;_I2CAddress++) {                     // loop all possible addresses      //
     Wire.beginTransmission(_I2CAddress);                                      // Check current address for BME680 //
     if (Wire.endTransmission()==0) {                                          // If no error we have a device     //
        return commonInitialization();                                         // Perform common initialization    //
