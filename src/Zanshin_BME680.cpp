@@ -243,8 +243,9 @@ uint8_t BME680_Class::setIIRFilter(const uint8_t iirFilterSetting ) {         //
 ** Method getSensorData() returns the most recent temperature, humidity and pressure readings                     **
 *******************************************************************************************************************/
 void BME680_Class::getSensorData(int32_t &temp, int32_t &hum,                 // get most recent readings         //
-                                 int32_t &press, int32_t &gas ){              //                                  //
-  readSensors();                                                              // Get compensated data from BME680 //
+                                 int32_t &press, int32_t &gas,                //                                  //
+                                 const bool waitSwitch ){                     //                                  //
+  readSensors(waitSwitch);                                                    // Get compensated data from BME680 //
   temp  = _Temperature;                                                       // Copy global variable to parameter//
   hum   = _Humidity;                                                          //                                  //
   press = _Pressure;                                                          //                                  //
@@ -257,7 +258,7 @@ void BME680_Class::getSensorData(int32_t &temp, int32_t &hum,                 //
 ** https://github.com/adafruit/Adafruit_BME680. I think it can be refactored into more efficient code at  some    **
 ** point in the future, but it does work correctly.                                                               **
 *******************************************************************************************************************/
-void BME680_Class::readSensors() {                                            // read the sensors                 //
+void BME680_Class::readSensors(const bool waitSwitch) {                       // read the sensors                 //
   uint32_t lookupTable1[16] = {UINT32_C(2147483647), UINT32_C(2147483647),    // Look up table for the possible   //
                                UINT32_C(2147483647), UINT32_C(2147483647),    // gas range values                 //
                                UINT32_C(2147483647), UINT32_C(2126008810),    //                                  //
@@ -278,7 +279,7 @@ uint32_t lookupTable2[16]  = { UINT32_C(4096000000), UINT32_C(2048000000),    //
   int64_t var1, var2, var3, var4, var5, var6, temp_scaled;                    // Work variables                   //
   uint32_t adc_temp, adc_pres;                                                // Raw ADC temperature and pressure //
   uint16_t adc_hum, adc_gas_res;                                              // Raw ADC humidity and gas         //
-  while ((readByte(BME680_STATUS_REGISTER)&B00100000)!=0);                    // Loop until reading is finished   //
+  if (waitSwitch) waitForReadings();                                          // Don't return until readings done //
   getData(BME680_STATUS_REGISTER,buff);                                       // read all 15 bytes in one go      //
   adc_pres    = (uint32_t)(((uint32_t) buff[2]*4096)|((uint32_t)buff[3]*16)|  // put the 3 bytes of Pressure      //
                 ((uint32_t)buff[4]/16));                                      //                                  //
@@ -353,6 +354,13 @@ uint32_t lookupTable2[16]  = { UINT32_C(4096000000), UINT32_C(2048000000),    //
   uint8_t workRegister = readByte(BME680_CONTROL_MEASURE_REGISTER);           // Read the control measure         //
   putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(workRegister|1));         // Trigger start of next measurement//
 } // of method readSensors()                                                  //                                  //
+/*******************************************************************************************************************
+** Method waitForReadings() doesn't return until current set of measurements completes                            //
+*******************************************************************************************************************/
+void BME680_Class::waitForReadings() {                                        // Wait for readings to complete    //
+  while ((readByte(BME680_STATUS_REGISTER)&B00100000)!=0);                    // Loop until readings bit cleared  //
+} // of method waitForReadings                                                //                                  //
+
 /*******************************************************************************************************************
 ** Method setGas() sets the gas measurement target temperature and heating time                                   **
 *******************************************************************************************************************/

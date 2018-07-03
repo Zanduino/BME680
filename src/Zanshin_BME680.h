@@ -31,6 +31,7 @@
 **                                                                                                                **
 ** Vers.  Date       Developer                     Comments                                                       **
 ** ====== ========== ============================= ============================================================== **
+** 1.0.1  2018-07-03 https://github.com/SV-Zanshin Issue #1. Added waitForReading and paramter to getSensorData() **
 ** 1.0.0  2018-07-02 https://github.com/SV-Zanshin Added guard code against multiple I2C constants definitions    **
 ** 1.0.0  2018-07-01 https://github.com/SV-Zanshin Added and tested I2C, SPI and software SPI connections         **
 ** 1.0.0a 2018-06-30 https://github.com/SV-Zanshin Cloned from BME280 library and started recoding                **
@@ -96,12 +97,14 @@
       bool     setGas(uint16_t GasTemp, uint16_t GasMillis);                  // Gas heating temperature and time //
       uint8_t  setIIRFilter(const uint8_t iirFilterSetting=UINT8_MAX);        // Set IIR Filter and return value  //
       void     getSensorData(int32_t &temp, int32_t &hum,                     // get most recent readings         //
-                             int32_t &press, int32_t &gas);                   //                                  //
+                             int32_t &press, int32_t &gas,                    //                                  //
+                             const bool waitSwitch = true);                   //                                  //
       void     reset();                                                       // Reset the BME680                 //
     private:                                                                  // -------- Private methods ------- //
       bool     commonInitialization();                                        // Common initialization code       //
       uint8_t  readByte(const uint8_t addr);                                  // Read byte from register address  //
-      void     readSensors();                                                 // read the registers in one burst  //
+      void     readSensors(const bool waitSwitch);                            // read the registers in one burst  //
+      void     waitForReadings();                                             // Wait for readings to finish      //
       void     getCalibration();                                              // Load calibration from registers  //
       uint8_t  _I2CAddress         = 0;                                       // Default is no I2C address known  //
       uint8_t  _cs,_sck,_mosi,_miso;                                          // Hardware and software SPI pins   //
