@@ -31,6 +31,7 @@
 **                                                                                                                **
 ** Vers.  Date       Developer                     Comments                                                       **
 ** ====== ========== ============================= ============================================================== **
+** 1.0.0  2018-07-02 https://github.com/SV-Zanshin Added guard code against multiple I2C constants definitions    **
 ** 1.0.0  2018-07-01 https://github.com/SV-Zanshin Added and tested I2C, SPI and software SPI connections         **
 ** 1.0.0a 2018-06-30 https://github.com/SV-Zanshin Cloned from BME280 library and started recoding                **
 **                                                                                                                **
@@ -45,11 +46,11 @@
   ** Declare constants used in the class                                                                          **
   *****************************************************************************************************************/
   #ifndef I2C_MODES                                                           // I2C related constants            //
-  #define I2C_MODES                                                         // Guard code to prevent multiple   //
-  const uint16_t I2C_STANDARD_MODE              =  100000;                  // Default normal I2C 100KHz speed  //
-  const uint16_t I2C_FAST_MODE                  =  400000;                  // Fast mode                        //
-  const uint16_t I2C_FAST_MODE_PLUS             = 1000000;                  // Really fast mode                 //
-  const uint16_t I2C_HIGH_SPEED_MODE            = 3400000;                  // Turbo mode                       //
+    #define I2C_MODES                                                         // Guard code to prevent multiple   //
+    const uint16_t I2C_STANDARD_MODE              =  100000;                  // Default normal I2C 100KHz speed  //
+    const uint16_t I2C_FAST_MODE                  =  400000;                  // Fast mode                        //
+    const uint16_t I2C_FAST_MODE_PLUS             = 1000000;                  // Really fast mode                 //
+    const uint16_t I2C_HIGH_SPEED_MODE            = 3400000;                  // Turbo mode                       //
   #endif                                                                      //----------------------------------//
                                                                               // SPI-Related constants            //
   const uint32_t SPI_HERTZ                        =  500000;                  // SPI speed in Hz                  //
