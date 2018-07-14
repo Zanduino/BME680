@@ -13,7 +13,7 @@ BME680	KEYWORD1
 begin	KEYWORD2
 mode	KEYWORD2
 setOversampling	KEYWORD2
-setGas		KEYWORD2
+setGas	KEYWORD2
 setIIRFilter	KEYWORD2
 getSensorData	KEYWORD2
 
