@@ -31,7 +31,8 @@
 **                                                                                                                **
 ** Vers.  Date       Developer                     Comments                                                       **
 ** ====== ========== ============================= ============================================================== **
-** 1.0.1  2018-07-03 https://github.com/SV-Zanshin Issue #1. Added waitForReading and paramter to getSensorData() **
+** 1.0.1  2018-07-22 https://github.com/SV-Zanshin Corrected I2C datatypes                                        **
+** 1.0.1  2018-07-03 https://github.com/SV-Zanshin Issue #1. Added waitForReading and parameter to getSensorData()**
 ** 1.0.0  2018-07-02 https://github.com/SV-Zanshin Added guard code against multiple I2C constants definitions    **
 ** 1.0.0  2018-07-01 https://github.com/SV-Zanshin Added and tested I2C, SPI and software SPI connections         **
 ** 1.0.0a 2018-06-30 https://github.com/SV-Zanshin Cloned from BME280 library and started recoding                **
@@ -48,10 +49,10 @@
   *****************************************************************************************************************/
   #ifndef I2C_MODES                                                           // I2C related constants            //
     #define I2C_MODES                                                         // Guard code to prevent multiple   //
-    const uint16_t I2C_STANDARD_MODE              =  100000;                  // Default normal I2C 100KHz speed  //
-    const uint16_t I2C_FAST_MODE                  =  400000;                  // Fast mode                        //
-    const uint16_t I2C_FAST_MODE_PLUS             = 1000000;                  // Really fast mode                 //
-    const uint16_t I2C_HIGH_SPEED_MODE            = 3400000;                  // Turbo mode                       //
+    const uint32_t I2C_STANDARD_MODE              =  100000;                  // Default normal I2C 100KHz speed  //
+    const uint32_t I2C_FAST_MODE                  =  400000;                  // Fast mode                        //
+    const uint32_t I2C_FAST_MODE_PLUS             = 1000000;                  // Really fast mode                 //
+    const uint32_t I2C_HIGH_SPEED_MODE            = 3400000;                  // Turbo mode                       //
   #endif                                                                      //----------------------------------//
                                                                               // SPI-Related constants            //
   const uint32_t SPI_HERTZ                        =  500000;                  // SPI speed in Hz                  //
@@ -89,7 +90,7 @@
       BME680_Class();                                                         // Class constructor                //
       ~BME680_Class();                                                        // Class destructor                 //
       bool     begin();                                                       // Start using I2C Communications   //
-      bool     begin(const uint16_t i2cSpeed);                                // I2C with a non-default speed     //
+      bool     begin(const uint32_t i2cSpeed);                                // I2C with a non-default speed     //
       bool     begin(const uint8_t chipSelect);                               // Start using hardware SPI         //
       bool     begin(const uint8_t chipSelect, const uint8_t mosi,            // Start using software SPI         //
                      const uint8_t miso, const uint8_t sck);                  //                                  //
