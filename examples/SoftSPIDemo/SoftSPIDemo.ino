@@ -131,7 +131,7 @@ void loop()
   static int32_t temperature, humidity, pressure, gas;     // Store readings
   BME680.getSensorData(temperature,humidity,pressure,gas); // Get most recent readings
   Serial.print(temperature/100.0,2);                       // Temperature in deci-degrees
-#ifdef ESP32
+#ifdef ESP32 || ZERO
   Serial.print(F(" ")); // Esp32 compiler doesn't liked escaped string
 #else
   Serial.print(F("\xC2\xB0\C ")); // Representation of the ° symbol
