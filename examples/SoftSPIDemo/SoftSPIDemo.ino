@@ -27,7 +27,7 @@ for the BME180 on page 16 of http://www.adafruit.com/datasheets/BST-BMP180-DS000
 floating-point function in the library which may not be used but which would use space, an example altitude
 computation function has been added to this example program to show how it might be done.
 
-@section SPIDemolicense License
+@section SoftSPIDemolicense License
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General
 Public License as published by the Free Software Foundation, either version 3 of the License, or (at your
@@ -61,15 +61,15 @@ const uint32_t SERIAL_SPEED = 115200; ///< Set the baud rate for Serial I/O //
 *   SCK  - System Clock. This is used for timing data
 */
 #ifdef __AVR_ATmega1280__
-  const uint8_t  SPI_CS_PIN   = 53; // Pin for slave-select of BME680
-  const uint8_t  SPI_SCK_PIN  = 52; // Pin for clock signal
-  const uint8_t  SPI_MOSI_PIN = 51; // Master-out, Slave-in Pin
-  const uint8_t  SPI_MISO_PIN = 50; // Master-in, Slave-out Pin
+  const uint8_t  SPI_CS_PIN   = 53; ///< Pin for slave-select of BME680
+  const uint8_t  SPI_SCK_PIN  = 52; ///< Pin for clock signal
+  const uint8_t  SPI_MOSI_PIN = 51; ///< Master-out, Slave-in Pin
+  const uint8_t  SPI_MISO_PIN = 50; ///< Master-in, Slave-out Pin
 #else
-  const uint8_t  SPI_CS_PIN   = 10; // Pin for slave-select of BME680
-  const uint8_t  SPI_SCK_PIN  = 13; // Pin for clock signal
-  const uint8_t  SPI_MOSI_PIN = 11; // Master-out, Slave-in Pin
-  const uint8_t  SPI_MISO_PIN = 12; // Master-in, Slave-out Pin
+  const uint8_t  SPI_CS_PIN   = 10; ///< Pin for slave-select of BME680
+  const uint8_t  SPI_SCK_PIN  = 13; ///< Pin for clock signal
+  const uint8_t  SPI_MOSI_PIN = 11; ///< Master-out, Slave-in Pin
+  const uint8_t  SPI_MISO_PIN = 12; ///< Master-in, Slave-out Pin
 #endif
 
 /*******************************************************************************************************************
