@@ -423,6 +423,7 @@ void BME680_Class::waitForReadings()
 * @brief    sets the gas measurement target temperature and heating time
 * param[in] GasTemp  Target temperature in Celsius
 * param[in] GasMillis Milliseconds to turn on heater
+* return Always returns "true"
 */
 bool BME680_Class::setGas(uint16_t GasTemp,  uint16_t GasMillis) 
 {
@@ -463,4 +464,5 @@ bool BME680_Class::setGas(uint16_t GasTemp,  uint16_t GasMillis)
     putData(BME680_GAS_DURATION_REGISTER0,durval);
     putData(BME680_CONTROL_GAS_REGISTER2,(uint8_t)(gasRegister|B00010000));
   } // of if-then-else turn gas measurements on or off
+  return true
 } // of method setGas()
