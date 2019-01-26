@@ -141,7 +141,7 @@ Version | Date       | Developer                     | Comments
       template< typename T > uint8_t &getData(const uint8_t addr,T &value)
       {
         uint8_t* bytePtr    = (uint8_t*)&value;                              // Pointer to structure beginning
-        uint8_t  structSize = sizeof(T);                                     // Number of bytes in structure
+        static uint8_t  structSize = sizeof(T);                              // Number of bytes in structure
         if (_I2CAddress) {                                                   // Using I2C if address is non-zero
           Wire.beginTransmission(_I2CAddress);                               // Address the I2C device
           Wire.write(addr);                                                  // Send register address to read
@@ -192,7 +192,7 @@ Version | Date       | Developer                     | Comments
       template<typename T>uint8_t &putData(const uint8_t addr,const T &value)
       {
         const uint8_t* bytePtr = (const uint8_t*)&value;                     // Pointer to structure beginning
-        uint8_t  structSize   = sizeof(T);                                   // Number of bytes in structure
+        static uint8_t  structSize = sizeof(T);                              // Number of bytes in structure
         if (_I2CAddress) {                                                   // Using I2C if address is non-zero
           Wire.beginTransmission(_I2CAddress);                               // Address the I2C device
           Wire.write(addr);                                                  // Send register address to write
