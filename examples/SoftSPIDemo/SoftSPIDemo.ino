@@ -66,7 +66,7 @@ const uint32_t SERIAL_SPEED = 115200; ///< Set the baud rate for Serial I/O //
   const uint8_t  SPI_MOSI_PIN = 51; // Master-out, Slave-in Pin
   const uint8_t  SPI_MISO_PIN = 50; // Master-in, Slave-out Pin
 #else
-/*const uint8_t  SPI_CS_PIN   = 10; // Pin for slave-select of BME680
+  const uint8_t  SPI_CS_PIN   = 10; // Pin for slave-select of BME680
   const uint8_t  SPI_SCK_PIN  = 13; // Pin for clock signal
   const uint8_t  SPI_MOSI_PIN = 11; // Master-out, Slave-in Pin
   const uint8_t  SPI_MISO_PIN = 12; // Master-in, Slave-out Pin
