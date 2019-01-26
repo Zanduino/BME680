@@ -36,11 +36,11 @@ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
 GNU General Public License for more details. You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-@section I2CDemoauthor Author
+@section SPIDemoauthor Author
 
 Written by Arnd\@SV-Zanshin
 
-@section I2CDemoversions Changelog
+@section SPIDemoversions Changelog
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | ---------------------------------------------------
