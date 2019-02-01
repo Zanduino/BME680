@@ -1,6 +1,5 @@
 /*! @file SoftSPIDemo.ino
 
-
 @section SoftSPIDemo_intro_section Description
 
 Example program for using the Bosch BME680 sensor. The sensor measures temperature, pressure and humidity and  is

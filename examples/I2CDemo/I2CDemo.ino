@@ -44,30 +44,16 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer           | Comments
 ------- | ---------- | ------------------- | --------
+1.0.1   | 2019-01-30 | https://github.com/SV-Zanshin | Removed old comments
 1.0.1   | 2019-01-26 | https://github.com/SV-Zanshin | Issue #3 - convert documentation to Doxygen
 1.0.0b  | 2018-06-30 | https://github.com/SV-Zanshin | Cloned from original BME280 program
-
 */
-
-/*******************************************************************************************************************
-**                                                                                                                **
-** This program is free software: you can redistribute it and/or modify it under the terms of the GNU General     **
-** Public License as published by the Free Software Foundation, either version 3 of the License, or (at your      **
-** option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY     **
-** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the   **
-** GNU General Public License for more details. You should have received a copy of the GNU General Public License **
-** along with this program.  If not, see <http://www.gnu.org/licenses/>.                                          **
-**                                                                                                                **
-** Vers.  Date       Developer                     Comments                                                       **
-** ====== ========== ============================= ============================================================== **
-** 1.0.0b 2018-06-30 https://github.com/SV-Zanshin Cloned from original BME280 program                            **
-**                                                                                                                **
-*******************************************************************************************************************/
 #include "Zanshin_BME680.h" // Include the BME680 Sensor library
 /*******************************************************************************************************************
 ** Declare all program constants                                                                                  **
 *******************************************************************************************************************/
 const uint32_t SERIAL_SPEED = 115200; ///< Set the baud rate for Serial I/O
+
 /*******************************************************************************************************************
 ** Declare global variables and instantiate classes                                                               **
 *******************************************************************************************************************/
