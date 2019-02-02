@@ -224,7 +224,11 @@ Version | Date       | Developer                     | Comments
                 digitalWrite(_sck, HIGH);                                    // reset the clock signal
               } // of for-next each bit
               digitalWrite(_cs, HIGH);                                       // Tell BME680 to stop listening
-              uint8_t dummy = *bytePtr++;                                                    // go to next byte to write
+              #ifdef ESP32
+                 uint8_t dummy = *bytePtr++;                                 // ESP32 dummy assignment
+              #else
+                *bytePtr++;                                                  // go to next byte to write 
+              #endif
             } // of for-next each byte to be read
           } // of  if-then-else we are using hardware SPI
         } // of if-then-else we are using I2C
