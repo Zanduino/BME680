@@ -4,6 +4,7 @@
 #                                                                      #
 # Date       Author                        Comments                    #
 # ========== ============================= =========================== #
+# 2019-02-02 https://github.com/SV-Zanshin Ignores for Doxygen         #
 # 2018-09-22 https://github.com/SV-Zanshin Ignores for MS VS 2017      #
 # 2018-06-24 https://github.com/SV-Zanshin Changed file                #
 #                                                                      #
@@ -87,3 +88,9 @@ Release
 *.vcxproj
 *.filters
 *.user
+
+########################################################################
+# Files and directories from Doxygen                                   #
+########################################################################
+html
+
