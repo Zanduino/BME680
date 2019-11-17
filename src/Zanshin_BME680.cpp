@@ -262,7 +262,7 @@ bool BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling)
     } // of HumiditySensor
     case PressureSensor : 
     {
-      tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & B11000111; // Get contents, mask unused bits
+      tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & B11100011; // Get contents, mask unused bits
       putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(tempRegister|(sampling<<2))); // Update pressure bits
       break;
     } // of PressureSensor
