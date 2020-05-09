@@ -16,7 +16,7 @@ Non-condensing humidity between 0% and 100% is measured with an accuracy of ±3%
 The pressure sensor works in temperatures between -40°C and +85°C although the zone of full accuracy only goes from 0°C to +65°C. Pressure is measured between 300hPa and 1100hPa with an accuracy of ±1.0 hPa and a resolution of 0.2Pa
 
 ### Environment gas sensing
-The gas sensor works by heating a small surface internally and measuring the resistance of the gas layer. This indicates the amount of volatile components in the air and can be used as an indicator of air quality.
+The gas sensor works by heating a small surface internally and measuring the resistance of the gas layer. This indicates the amount of volatile components in the air and can be used as an indirect means of measuring of air quality.
 
 A detailed library description and further details are available at the [GitHub BME680 Wiki](https://github.com/SV-Zanshin/BME680/wiki)
 
