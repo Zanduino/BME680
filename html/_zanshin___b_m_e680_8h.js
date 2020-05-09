@@ -48,5 +48,5 @@ var _zanshin___b_m_e680_8h =
     [ "I2C_FAST_MODE_PLUS", "_zanshin___b_m_e680_8h.html#a875790cc4599ac8d56430c1f3e54daa5", null ],
     [ "I2C_HIGH_SPEED_MODE", "_zanshin___b_m_e680_8h.html#a4fa63c7d7ea29d06b825a86baa622b2b", null ],
     [ "I2C_STANDARD_MODE", "_zanshin___b_m_e680_8h.html#a348cbfad3423827f84b19829d91be1a7", null ],
-    [ "SPI_HERTZ", "_zanshin___b_m_e680_8h.html#a480e3ae01b1b51b0a1cdee53a8ccf866", null ]
+    [ "SPI_HERZ", "_zanshin___b_m_e680_8h.html#a818d657cbae11fcd870a98afe5809608", null ]
 ];
