@@ -6,18 +6,19 @@
 
 Class definition header for the Bosch BME680 temperature / humidity / pressure sensor. The sensor is described at 
 https://www.bosch-sensortec.com/bst/products/all_products/BME680 and the datasheet is available from Bosch at 
-https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf \n\n
+https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf 
+\n\n
 
 The BME680 can use either SPI or I2C for communications. This library allows I2C at various bus speeds as well as 
-both of the standard Arduino hardware SPI and software SPI.\n\n
+either the standard Arduino hardware SPI or software SPI.\n\n
 
 The most recent version of the library is available at https://github.com/SV-Zanshin/BME680 and extensive 
 documentation of the library as well as example programs are described in the project's wiki pages located at
-https://github.com/SV-Zanshin/BME680/wiki.\n\n
-
+https://github.com/SV-Zanshin/BME680/wiki
+\n\n
 The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it 
 will be used as part of a third-party breakout board. There are several such boards available at this time, for 
-example \n
+example:\n
 Company  | Link
 -------  | ----------
 BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
@@ -120,18 +121,19 @@ Version | Date       | Developer                     | Comments
                              const bool waitSwitch = true);                   //                                  //
       void     reset();                                                       // Reset the BME680                 //
     private:
-      bool     commonInitialization();                       ///< Common initialization code
-      uint8_t  readByte(const uint8_t addr);                 ///< Read byte from register address
-      void     readSensors(const bool waitSwitch);           ///< read the registers in one burst
-      void     waitForReadings();                            ///< Wait for readings to finish
-      void     getCalibration();                             ///< Load calibration from registers
-      uint8_t  _I2CAddress         = 0;                      ///< Default is no I2C address known
-      uint8_t  _cs,_sck,_mosi,_miso;                         ///< Hardware and software SPI pins
-      uint8_t  _H6,_P10,_res_heat_range;                     ///< unsigned configuration variables
-      int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,_res_heat_val,_range_sw_error; ///< signed configuration variables
-      uint16_t _H1,_H2,_T1,_P1;                              ///< unsigned 16bit configuration variables
-      int16_t  _G2,_T2,_P2,_P4,_P5,_P8,_P9;                  ///< signed 16bit configuration variables
-      int32_t  _tfine,_Temperature,_Pressure,_Humidity,_Gas; ///< signed 32bit configuratio variables
+      bool     commonInitialization();                                        ///< Common initialization code
+      uint8_t  readByte(const uint8_t addr);                                  ///< Read byte from register address
+      void     readSensors(const bool waitSwitch);                            ///< read the registers in one burst
+      void     waitForReadings();                                             ///< Wait for readings to finish
+      void     getCalibration();                                              ///< Load calibration from registers
+      uint8_t  _I2CAddress         = 0;                                       ///< Default is no I2C address known
+      uint8_t  _cs,_sck,_mosi,_miso;                                          ///< Hardware and software SPI pins
+      uint8_t  _H6,_P10,_res_heat_range;                                      ///< unsigned configuration vars
+      int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,
+               _res_heat_val,_range_sw_error;                                 ///< signed configuration vars
+      uint16_t _H1,_H2,_T1,_P1;                                               ///< unsigned 16bit configuration vars
+      int16_t  _G2,_T2,_P2,_P4,_P5,_P8,_P9;                                   ///< signed 16bit configuration vars
+      int32_t  _tfine,_Temperature,_Pressure,_Humidity,_Gas;                  ///< signed 32bit configuration vars
 
       /*************************************************************************************************************
       ** Declare the getData and putData methods as template functions. All device I/O is done through these two  **
@@ -139,29 +141,31 @@ Version | Date       | Developer                     | Comments
       ** designed so that only the address and a variable are passed in and the functions determine the size of   **
       ** the parameter variable and reads or writes that many bytes. So if a read is called using a character     **
       ** array[10] then 10 bytes are read, if called with a int8 then only one byte is read. The return value, if **
-      ** used, is the number of bytes read or written                                                             **
-      ** This is done by using template function definitions which need to be defined in this header file rather  **
-      ** than in the c++ program library file.                                                                    **
+      ** used, is the number of bytes read or written. Since this is implemented by using template function       **
+      ** definitions, they need to be defined in this header file rather than in the c++ program library file.    **
       *************************************************************************************************************/
-      /*!
-          @brief     Template for reading from I2C or SPI using any data type
-          @details   As a template it can support compile-time data type definitions
-          @param[in] addr Memory address
-          @param[in] value Data Type "T" to read
-          @return    Size of data read in bytes
-      */
       template< typename T > uint8_t &getData(const uint8_t addr,T &value)
       {
+        /*!
+        @brief     Template for reading from I2C or SPI using any data type
+        @details   As a template it can support compile-time data type definitions
+        @param[in] addr Memory address
+        @param[in] value Data Type "T" to read
+        @return    Size of data read in bytes
+        */
         uint8_t* bytePtr    = (uint8_t*)&value;                              // Pointer to structure beginning
         static uint8_t  structSize = sizeof(T);                              // Number of bytes in structure
-        if (_I2CAddress) {                                                   // Using I2C if address is non-zero
+        if (_I2CAddress)                                                     // Using I2C if address is non-zero
+        {                                                                    //
           Wire.beginTransmission(_I2CAddress);                               // Address the I2C device
           Wire.write(addr);                                                  // Send register address to read
           Wire.endTransmission();                                            // Close transmission
           Wire.requestFrom(_I2CAddress, sizeof(T));                          // Request 1 byte of data
           structSize = Wire.available();                                     // Use the actual number of bytes
           for (uint8_t i=0;i<structSize;i++) *bytePtr++ = Wire.read();       // loop for each byte to be read
-        } else {
+        } 
+        else
+        {
           if (_sck==0) {                                                     // if sck is zero then hardware SPI
             SPI.beginTransaction(SPISettings(SPI_HERZ,MSBFIRST,SPI_MODE0));  // Start the SPI transaction
             digitalWrite(_cs, LOW);                                          // Tell BME680 to listen up
@@ -194,15 +198,15 @@ Version | Date       | Developer                     | Comments
         return(structSize);
       } // of method getData()
 
-      /*!
-          @brief     Template for writing to I2C or SPI using any data type
-          @details   As a template it can support compile-time data type definitions
-          @param[in] addr Memory address
-          @param[in] value Data Type "T" to write
-          @return    Size of data written in bytes
-      */
       template<typename T>uint8_t &putData(const uint8_t addr,const T &value)
       {
+        /*!
+        @brief     Template for writing to I2C or SPI using any data type
+        @details   As a template it can support compile-time data type definitions
+        @param[in] addr Memory address
+        @param[in] value Data Type "T" to write
+        @return    Size of data written in bytes
+        */
         const uint8_t* bytePtr = (const uint8_t*)&value;                     // Pointer to structure beginning
         static uint8_t  structSize = sizeof(T);                              // Number of bytes in structure
         if (_I2CAddress) {                                                   // Using I2C if address is non-zero

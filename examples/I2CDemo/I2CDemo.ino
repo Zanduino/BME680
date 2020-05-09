@@ -1,6 +1,5 @@
 /*! @file I2CDemo.ino
 
-
 @section I2CDemo_intro_section Description
 
 Example program for using I2C to set and read the Bosch BME680 sensor. The sensor measures temperature, pressure and
@@ -127,6 +126,7 @@ void loop()
   */
   static int32_t temp, humidity, pressure, gas;                                // Variable to store readings
   static char    buf[16];                                                      // Text buffer for sprintf
+  static float   alt;                                                          // temporary variable for altitude
   BME680.getSensorData(temp,humidity,pressure,gas);                            // Get the most recent readings
   sprintf(buf, "%3d.%02d", (int8_t)(temp/100),(uint8_t)(temp%100));            // Temperature in decidegrees
   Serial.print(buf);                                                           //
@@ -134,7 +134,7 @@ void loop()
   Serial.print(buf);                                                           //
   sprintf(buf, "%7d.%02d", (int16_t)(pressure/100),(uint8_t)(pressure%100));   // Pressure in Pascals
   Serial.print(buf);                                                           //
-  float alt = altitude();                                                      // temporary variable for altitude
+  alt = altitude();                                                            // temporary variable for altitude
   sprintf(buf, "%5d.%02d", (int16_t)(alt),((uint8_t)(alt*100)%100));           // Altitude in meters
   Serial.print(buf);                                                           //
   sprintf(buf, "%4d.%02d\n", (int16_t)(gas/100),(uint8_t)(gas%100));           // Resistance in milliohms
