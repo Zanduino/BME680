@@ -96,7 +96,7 @@ bool BME680_Class::commonInitialization()
 {
   if (_I2CAddress==0 && readByte(BME680_SPI_REGISTER)!=0) 
   {
-    putData(BME680_SPI_REGISTER,(uint8_t)0); // We are in the wrong mode for SPI so rrturn to correct SPI page
+    putData(BME680_SPI_REGISTER,(uint8_t)0); // We are in the wrong mode for SPI so return to correct SPI page
   } // of if-then we are in SPI mode
   if (readByte(BME680_CHIPID_REGISTER)==BME680_CHIPID) // check for correct chip id
   {

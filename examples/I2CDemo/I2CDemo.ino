@@ -3,20 +3,29 @@
 
 @section I2CDemo_intro_section Description
 
-Example program for using the Bosch BME680 sensor. The sensor measures temperature, pressure and humidity and  is
-described at https://www.bosch-sensortec.com/bst/products/all_products/BME680. The datasheet is available from Bosch
-at https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680_DS001-11.pdf \n\n
+Example program for using I2C to set and read the Bosch BME680 sensor. The sensor measures temperature, pressure and
+humidity and is described at https://www.bosch-sensortec.com/bst/products/all_products/BME680. The datasheet is 
+available from Bosch at https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680_DS001-11.pdf \n\n
 
 The most recent version of the BME680 library is available at https://github.com/SV-Zanshin/BME680 and the 
 documentation of the library as well as example programs are described in the project's wiki pages located at 
 https://github.com/SV-Zanshin/BME680/wiki. \n\n
 
-The BME680 is a very small package so it is unlikely for an Arduino hobbyist to play around with directly, the 
-hardware used to develop this library is a breakout board from AdaFruit which is well-documented at
-https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout \n\n
+The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it 
+will be used as part of a third-party breakout board. There are several such boards available at this time, for 
+example \n
+Company  | Link
+-------  | ----------
+BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
+Adafruit | https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout \n\n
 
+Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed
+at https://github.com/BoschSensortec/BSEC-Arduino-library . This software is part of the Bosch "BSEC" (Bosch 
+Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence
+the choice to make a more compact and rather less abstract library. 
+ 
 This example program initializes the BME680 to use I2C for communications. The library does not using floating
-point mathematics to save on computation space and time, the values for Temperature, Pressure and Humidity are
+point numbers to save on memory space and computation time. The values for Temperature, Pressure and Humidity are
 returned in deci-units, e.g. a Temperature reading of "2731" means "27.31" degrees Celsius. The display in the 
 example program uses floating point for demonstration purposes only.  Note that the temperature reading is 
 generally higher than the ambient temperature due to die and PCB temperature and self-heating of the element.\n\n
@@ -44,6 +53,7 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | -------------------------------------------
+1.0.2   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #8 - clean up comments and code
 1.0.1   | 2019-01-30 | https://github.com/SV-Zanshin | Removed old comments
 1.0.1   | 2019-01-26 | https://github.com/SV-Zanshin | Issue #3 - convert documentation to Doxygen
 1.0.0b  | 2018-06-30 | https://github.com/SV-Zanshin | Cloned from original BME280 program
@@ -59,7 +69,8 @@ const uint32_t SERIAL_SPEED = 115200; ///< Set the baud rate for Serial I/O
 *******************************************************************************************************************/
 BME680_Class BME680; ///< Create an instance of the BME680
 
-float altitude(const float seaLevel=1013.25) 
+float altitude(const float seaLevel = 1013.25); ///< Forward declaration with default value for sea level
+float altitude(const float seaLevel) 
 {
   /*!
   * @brief     This converts a pressure measurement into a height in meters
@@ -100,37 +111,33 @@ void setup()
   BME680.setOversampling(PressureSensor,   Oversample16);
   Serial.println(F("- Setting IIR filter to a value of 4 samples"));
   BME680.setIIRFilter(IIR4);
-#ifdef ESP32
-  Serial.println(F("- Setting gas measurement to 320C for 150ms"));
-#else
-  Serial.println(F("- Setting gas measurement to 320\xC2\xB0\C for 150ms"));
-#endif
+  Serial.println(F("- Setting gas measurement to 320\xC2\xB0\x43 for 150ms")); // "°C" symbols
   BME680.setGas(320,150); // 320°c for 150 milliseconds
-  Serial.println();
+  Serial.println(F("\nTemp\xC2\xB0\x43 Humid% Press hPa   Alt m Air m\xE2\x84\xA6")); // "°C" symbols
+  Serial.println(F("====== ====== ========= ======= ======"));
 } // of method setup()
-
 void loop() 
 {
   /*!
   @brief    Arduino method for the main program loop
   @details  This is the main program for the Arduino IDE, it is an infinite loop and keeps on repeating. 
+            The "sprintf()" function is to pretty-print the values, since floating point is not supported on the 
+            Arduino, split the values into those before and those after the decimal point.
   @return   void
   */
-  static int32_t temperature, humidity, pressure, gas;     // Variable to store readings
-  BME680.getSensorData(temperature,humidity,pressure,gas); // Get most recent readings
-  Serial.print(temperature/100.0,2);                       // Temperature in deci-degrees
-#ifdef ESP32
-  Serial.print(F(" ")); // Esp32 compiler doesn't liked escaped string
-#else
-  Serial.print(F("\xC2\xB0\C "));                          // Serial output representation of the "°" symbol
-#endif
-  Serial.print(humidity/1000.0,2);                         // Humidity in milli-percent
-  Serial.print(F("%Hum "));
-  Serial.print(pressure/100.0,2);                          // Pressure in Pascals
-  Serial.print(F("hPa "));
-  Serial.print(altitude(),2);
-  Serial.print(F("m "));
-  Serial.print(gas/100.0,2);
-  Serial.println(F("mOhm"));
-  delay(5000);
+  static int32_t temp, humidity, pressure, gas;                                // Variable to store readings
+  static char    buf[16];                                                      // Text buffer for sprintf
+  BME680.getSensorData(temp,humidity,pressure,gas);                            // Get the most recent readings
+  sprintf(buf, "%3d.%02d", (int8_t)(temp/100),(uint8_t)(temp%100));            // Temperature in decidegrees
+  Serial.print(buf);                                                           //
+  sprintf(buf, "%3d.%03d", (int8_t)(humidity/1000),(uint16_t)(humidity%1000)); // Humidity in milli-percent
+  Serial.print(buf);                                                           //
+  sprintf(buf, "%7d.%02d", (int16_t)(pressure/100),(uint8_t)(pressure%100));   // Pressure in Pascals
+  Serial.print(buf);                                                           //
+  float alt = altitude();                                                      // temporary variable for altitude
+  sprintf(buf, "%5d.%02d", (int16_t)(alt),((uint8_t)(alt*100)%100));           // Altitude in meters
+  Serial.print(buf);                                                           //
+  sprintf(buf, "%4d.%02d\n", (int16_t)(gas/100),(uint8_t)(gas%100));           // Resistance in milliohms
+  Serial.print(buf);                                                           //
+  delay(10000);                                                                // Wait 10 seconds before looping
 } // of method loop()

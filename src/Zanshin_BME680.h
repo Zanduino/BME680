@@ -37,6 +37,7 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
+1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #8 - clean up comments and code
 1.0.2   | 2019-01-26 | https://github.com/SV-Zanshin | Issue #3 - Converted documentation to doxygen style
 1.0.1   | 2018-07-22 | https://github.com/SV-Zanshin | Corrected I2C datatypes
 1.0.1   | 2018-07-03 | https://github.com/SV-Zanshin | Issue #1. Added waitForReading and parameter to getSensorData()
@@ -62,7 +63,7 @@ Version | Date       | Developer                     | Comments
     const uint32_t I2C_FAST_MODE_PLUS             = 1000000; ///< Really fast mode
     const uint32_t I2C_HIGH_SPEED_MODE            = 3400000; ///< Turbo mode
   #endif
-  const uint32_t SPI_HERTZ                        =  500000; ///< SPI speed in Hz
+  const uint32_t SPI_HERZ                         =  500000; ///< SPI speed in Hz
   const uint8_t  BME680_STATUS_REGISTER           =    0x1D; ///< Device status register
   const uint8_t  BME680_GAS_HEATER_REGISTER0      =    0x5A; ///< Heater Register 0 address
   const uint8_t  BME680_GAS_DURATION_REGISTER0    =    0x64; ///< Heater Register 0 address
@@ -151,7 +152,7 @@ Version | Date       | Developer                     | Comments
           for (uint8_t i=0;i<structSize;i++) *bytePtr++ = Wire.read();       // loop for each byte to be read
         } else {
           if (_sck==0) {                                                     // if sck is zero then hardware SPI
-            SPI.beginTransaction(SPISettings(SPI_HERTZ,MSBFIRST,SPI_MODE0)); // Start the SPI transaction
+            SPI.beginTransaction(SPISettings(SPI_HERZ,MSBFIRST,SPI_MODE0));  // Start the SPI transaction
             digitalWrite(_cs, LOW);                                          // Tell BME680 to listen up
             SPI.transfer(addr | 0x80);                                       // bit 7 is high, so read a byte
             for (uint8_t i=0;i<structSize;i++) *bytePtr++ = SPI.transfer(0); // loop for each byte to be read
@@ -200,7 +201,7 @@ Version | Date       | Developer                     | Comments
           Wire.endTransmission();                                            // Close transmission
         } else {
           if (_sck==0) {                                                     // if sck is zero then hardware SPI
-            SPI.beginTransaction(SPISettings(SPI_HERTZ,MSBFIRST,SPI_MODE0)); // start the SPI transaction
+            SPI.beginTransaction(SPISettings(SPI_HERZ,MSBFIRST,SPI_MODE0));  // start the SPI transaction
             digitalWrite(_cs, LOW);                                          // Tell BME680 to listen up
             SPI.transfer(addr & ~0x80);                                      // bit 7 is low, so write a byte
             for (uint8_t i=0;i<structSize;i++) SPI.transfer(*bytePtr++);     // loop for each byte to be written
