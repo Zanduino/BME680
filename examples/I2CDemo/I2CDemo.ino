@@ -22,7 +22,7 @@ example program uses floating point for demonstration purposes only.  Note that 
 generally higher than the ambient temperature due to die and PCB temperature and self-heating of the element.\n\n
 
 The pressure reading needs to be adjusted for altitude to get the adjusted pressure reading. There are numerous
-sources on the internet for formula converting from standard sea-level pressure to altitude, see the data sheet
+sources on the internet for formulae converting from standard sea-level pressure to altitude, see the data sheet
 for the BME180 on page 16 of http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf. Rather than put a
 floating-point function in the library which may not be used but which would use space, an example altitude
 computation function has been added to this example program to show how it might be done.
@@ -42,8 +42,8 @@ Written by Arnd\@SV-Zanshin
 
 @section I2CDemoversions Changelog
 
-Version | Date       | Developer           | Comments
-------- | ---------- | ------------------- | --------
+Version | Date       | Developer                     | Comments
+------- | ---------- | ----------------------------- | -------------------------------------------
 1.0.1   | 2019-01-30 | https://github.com/SV-Zanshin | Removed old comments
 1.0.1   | 2019-01-26 | https://github.com/SV-Zanshin | Issue #3 - convert documentation to Doxygen
 1.0.0b  | 2018-06-30 | https://github.com/SV-Zanshin | Cloned from original BME280 program
@@ -59,15 +59,15 @@ const uint32_t SERIAL_SPEED = 115200; ///< Set the baud rate for Serial I/O
 *******************************************************************************************************************/
 BME680_Class BME680; ///< Create an instance of the BME680
 
-/*!
-* @brief     This converts a pressure measurement into a height in meters
-* @details   The corrected sea-level pressure can be passed into the function if it is know, otherwise the standard 
-*            atmospheric pressure of 1013.25hPa is used (see https://en.wikipedia.org/wiki/Atmospheric_pressure
-* @param[in] seaLevel Sea-Level pressure in millibars
-* @return    floating point altitude in meters.
-*/
 float altitude(const float seaLevel=1013.25) 
 {
+  /*!
+  * @brief     This converts a pressure measurement into a height in meters
+  * @details   The corrected sea-level pressure can be passed into the function if it is know, otherwise the standard 
+  *            atmospheric pressure of 1013.25hPa is used (see https://en.wikipedia.org/wiki/Atmospheric_pressure)
+  * @param[in] seaLevel Sea-Level pressure in millibars
+  * @return    floating point altitude in meters.
+  */
   static float Altitude;
   int32_t temp, hum, press, gas;
   BME680.getSensorData(temp,hum,press,gas); // Get the most recent values from the device
@@ -75,15 +75,14 @@ float altitude(const float seaLevel=1013.25)
   return(Altitude);
 } // of method altitude()
 
-
-/*!
-    @brief    Arduino method called once at startup to initialize the system
-    @details  This is an Arduino IDE method which is called first upon boot or restart. It is only called one time
-              and then control goes to the main "loop()" method, from which control never returns
-    @return   void
-*/
 void setup()
 {
+  /*!
+  @brief    Arduino method called once at startup to initialize the system
+  @details  This is an Arduino IDE method which is called first upon boot or restart. It is only called one time
+            and then control goes to the main "loop()" method, from which control never returns
+  @return   void
+  */
   Serial.begin(SERIAL_SPEED); // Start serial port at Baud rate
   #ifdef  __AVR_ATmega32U4__  // If this is a 32U4 processor, then wait 3 seconds to initialize USB
     delay(3000);
@@ -101,26 +100,29 @@ void setup()
   BME680.setOversampling(PressureSensor,   Oversample16);
   Serial.println(F("- Setting IIR filter to a value of 4 samples"));
   BME680.setIIRFilter(IIR4);
+#ifdef ESP32
+  Serial.println(F("- Setting gas measurement to 320C for 150ms"));
+#else
   Serial.println(F("- Setting gas measurement to 320\xC2\xB0\C for 150ms"));
+#endif
   BME680.setGas(320,150); // 320°c for 150 milliseconds
   Serial.println();
 } // of method setup()
 
-/*!
-    @brief    Arduino method for the main program loop
-    @details  This is the main program for the Arduino IDE, it is an infinite loop and keeps on repeating. 
-    @return   void
-*/
 void loop() 
 {
-  static uint8_t loopCounter = 0;
+  /*!
+  @brief    Arduino method for the main program loop
+  @details  This is the main program for the Arduino IDE, it is an infinite loop and keeps on repeating. 
+  @return   void
+  */
   static int32_t temperature, humidity, pressure, gas;     // Variable to store readings
   BME680.getSensorData(temperature,humidity,pressure,gas); // Get most recent readings
   Serial.print(temperature/100.0,2);                       // Temperature in deci-degrees
 #ifdef ESP32
   Serial.print(F(" ")); // Esp32 compiler doesn't liked escaped string
 #else
-  Serial.print(F("\xC2\xB0\C "));                          // Representation of the ° symbol
+  Serial.print(F("\xC2\xB0\C "));                          // Serial output representation of the "°" symbol
 #endif
   Serial.print(humidity/1000.0,2);                         // Humidity in milli-percent
   Serial.print(F("%Hum "));

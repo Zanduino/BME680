@@ -8,17 +8,17 @@ Class definition header for the Bosch BME680 temperature / humidity / pressure s
 https://www.bosch-sensortec.com/bst/products/all_products/BME680 and the datasheet is available from Bosch at 
 https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf \n\n
 
-The BME680 can use either SPI or I2C for communications. This library allow I2C at various bus speeds as well as 
-both standard Arduino hardware SPI and Software SPI.\n\n
+The BME680 can use either SPI or I2C for communications. This library allows I2C at various bus speeds as well as 
+both of the standard Arduino hardware SPI and software SPI.\n\n
 
 The most recent version of the library is available at https://github.com/SV-Zanshin/BME680 and extensive 
 documentation of the library as well as example programs are described in the project's wiki pages located at
-https://github.com/SV-Zanshin/BME680/wiki. \n\n
+https://github.com/SV-Zanshin/BME680/wiki.\n\n
 
-The BME680 is a very small package so it is unlikely for an Arduino hobbyist to play around with directly, the
+The BME680 is a very small package so it is unlikely for an Arduino hobbyist to play around with it directly, the
 hardware used to develop this library is a breakout board from AdaFruit which is well-documented at
 https://www.adafruit.com/product/3660. I purchased a https://www.bluedot.space/sensor-boards/bme680/ as I
-couldn't get a local adafruit board.
+couldn't get a local Adafruit board.
 
 @section license License
 
