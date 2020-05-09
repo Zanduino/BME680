@@ -49,6 +49,7 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
+1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #5 - Adjust temperature readings
 1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #8 - clean up comments and code
 1.0.2   | 2019-01-26 | https://github.com/SV-Zanshin | Issue #3 - Converted documentation to doxygen style
 1.0.1   | 2018-07-22 | https://github.com/SV-Zanshin | Corrected I2C datatypes
@@ -99,7 +100,7 @@ Version | Date       | Developer                     | Comments
   /*! @brief  Enumerate the iir filter types */
   enum iirFilterTypes    {IIROff,IIR2,IIR4,IIR8,IIR16,IIR32,IIR64,IIR128,UnknownIIR };
   
-  /*!
+/*!
 * @class BME680_Class
 * @brief Main BME680 class for the temperature / humidity / pressure sensor
 */
@@ -108,19 +109,23 @@ Version | Date       | Developer                     | Comments
     public:
       BME680_Class();
       ~BME680_Class();
-      bool     begin();                                                       // Start using I2C Communications   //
-      bool     begin(const uint32_t i2cSpeed);                                // I2C with a non-default speed     //
-      bool     begin(const uint8_t chipSelect);                               // Start using hardware SPI         //
-      bool     begin(const uint8_t chipSelect, const uint8_t mosi,            // Start using software SPI         //
-                     const uint8_t miso, const uint8_t sck);                  //                                  //
-      bool     setOversampling(const uint8_t sensor, const uint8_t sampling); // Set enum sensorType Oversampling //
-      bool     setGas(uint16_t GasTemp, uint16_t GasMillis);                  // Gas heating temperature and time //
-      uint8_t  setIIRFilter(const uint8_t iirFilterSetting=UINT8_MAX);        // Set IIR Filter and return value  //
-      void     getSensorData(int32_t &temp, int32_t &hum,                     // get most recent readings         //
-                             int32_t &press, int32_t &gas,                    //                                  //
-                             const bool waitSwitch = true);                   //                                  //
-      void     reset();                                                       // Reset the BME680                 //
-    private:
+      bool     begin();                                                       // Start using I2C Communications
+      bool     begin(const uint32_t i2cSpeed);                                // I2C with a non-default speed
+      bool     begin(const uint8_t chipSelect);                               // Start using hardware SPI
+      bool     begin(const uint8_t chipSelect, const uint8_t mosi,            // Start using software SPI
+                     const uint8_t miso, const uint8_t sck);                  //
+      bool     setOversampling(const uint8_t sensor, const uint8_t sampling); // Set enum sensorType Oversampling
+      bool     setGas(uint16_t GasTemp, uint16_t GasMillis);                  // Gas heating temperature and time
+      uint8_t  setIIRFilter(const uint8_t iirFilterSetting=UINT8_MAX);        // Set IIR Filter and return value
+      void     getSensorData(int32_t &temp, int32_t &hum,                     // get most recent readings
+                             int32_t &press, int32_t &gas,                    //
+                             const bool waitSwitch = true);                   //
+      void     reset();                                                       // Reset the BME680
+      void     offsetTemperature(const int32_t tempOffset);                   // Apply offset to temperature values
+      void     offsetHumidity(const int32_t humidityOffset);                  // Apply offset to temperature values
+      void     offsetPressure(const int32_t pressureOffset);                  // Apply offset to temperature values
+      void     offsetGas(const int32_t gasOffset);                            // Apply offset to temperature values
+  private:                                                                    //
       bool     commonInitialization();                                        ///< Common initialization code
       uint8_t  readByte(const uint8_t addr);                                  ///< Read byte from register address
       void     readSensors(const bool waitSwitch);                            ///< read the registers in one burst
@@ -129,11 +134,15 @@ Version | Date       | Developer                     | Comments
       uint8_t  _I2CAddress         = 0;                                       ///< Default is no I2C address known
       uint8_t  _cs,_sck,_mosi,_miso;                                          ///< Hardware and software SPI pins
       uint8_t  _H6,_P10,_res_heat_range;                                      ///< unsigned configuration vars
-      int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,
+      int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,                       //
                _res_heat_val,_range_sw_error;                                 ///< signed configuration vars
       uint16_t _H1,_H2,_T1,_P1;                                               ///< unsigned 16bit configuration vars
       int16_t  _G2,_T2,_P2,_P4,_P5,_P8,_P9;                                   ///< signed 16bit configuration vars
       int32_t  _tfine,_Temperature,_Pressure,_Humidity,_Gas;                  ///< signed 32bit configuration vars
+      int32_t  _temperature_offset = 0;                                       ///< Temperature adjustment value
+      int32_t  _humidity_offset    = 0;                                       ///< Humidity adjustment value
+      int32_t  _pressure_offset    = 0;                                       ///< Pressure adjustment value
+      int32_t  _gas_offset         = 0;                                       ///< Gas adjustment value
 
       /*************************************************************************************************************
       ** Declare the getData and putData methods as template functions. All device I/O is done through these two  **
@@ -197,8 +206,7 @@ Version | Date       | Developer                     | Comments
         } // of if-then-else we are using I2C
         return(structSize);
       } // of method getData()
-
-      template<typename T>uint8_t &putData(const uint8_t addr,const T &value)
+      template< typename T > uint8_t &putData(const uint8_t addr,const T &value)
       {
         /*!
         @brief     Template for writing to I2C or SPI using any data type
