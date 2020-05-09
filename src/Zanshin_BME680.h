@@ -15,10 +15,21 @@ The most recent version of the library is available at https://github.com/SV-Zan
 documentation of the library as well as example programs are described in the project's wiki pages located at
 https://github.com/SV-Zanshin/BME680/wiki.\n\n
 
-The BME680 is a very small package so it is unlikely for an Arduino hobbyist to play around with it directly, the
-hardware used to develop this library is a breakout board from AdaFruit which is well-documented at
-https://www.adafruit.com/product/3660. I purchased a https://www.bluedot.space/sensor-boards/bme680/ as I
-couldn't get a local Adafruit board.
+The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it 
+will be used as part of a third-party breakout board. There are several such boards available at this time, for 
+example \n
+Company  | Link
+-------  | ----------
+BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
+Adafruit | https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout 
+
+\n
+
+Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed
+at https://github.com/BoschSensortec/BSEC-Arduino-library . This software is part of the Bosch "BSEC" (Bosch 
+Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence
+the choice to make a more compact and rather less abstract library. 
+
 
 @section license License
 
@@ -49,7 +60,7 @@ Version | Date       | Developer                     | Comments
 #include <Wire.h>    // Standard I2C "Wire" library
 #include <SPI.h>     // Standard SPI library
 #ifndef BME680_h
-  /** @brief  Guard code definition for the library header*/
+  /** @brief  Guard code definition for the library header */
   #define BME680_h
   #define CONCAT_BYTES(msb, lsb) (((uint16_t)msb << 8) | (uint16_t)lsb) ///< Inline to combine msb and lsb
   /*****************************************************************************************************************
