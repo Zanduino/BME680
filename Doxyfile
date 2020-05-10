@@ -1,8 +1,11 @@
-# Doxyfile 1.8.16
-# Date       Developer       Comments
-# ========== =============== ==========================================
-# 2020-05-09 Arnd@SV-Zanshin Removed comments to make file more compact
-#
+######################################################################################################
+## Doxygen control file for Version 1.8.16                                                          ##
+##                                                                                                  ##
+## Date       Developer           Comments                                                          ##
+## ========== =================== ================================================================= ##
+## 2020-05-10 Arnd@SV-Zanshin     Removed all comments in order to compact this file                ##
+##                                                                                                  ##
+######################################################################################################
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = BME680
 PROJECT_NUMBER         = "Version 1.0.2"
