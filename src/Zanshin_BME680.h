@@ -25,12 +25,10 @@ BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
 Adafruit | https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout 
 
 \n
-
 Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed
 at https://github.com/BoschSensortec/BSEC-Arduino-library . This software is part of the Bosch "BSEC" (Bosch 
 Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence
 the choice to make a more compact and rather less abstract library. 
-
 
 @section license License
 
@@ -49,7 +47,7 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
-1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #5 - Adjust temperature readings
+1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #5 - Adjust readings. Subsequently removed code again
 1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #8 - clean up comments and code
 1.0.2   | 2019-01-26 | https://github.com/SV-Zanshin | Issue #3 - Converted documentation to doxygen style
 1.0.1   | 2018-07-22 | https://github.com/SV-Zanshin | Corrected I2C datatypes
@@ -96,9 +94,9 @@ Version | Date       | Developer                     | Comments
   /*! @brief  Enumerate the sensor type */
   enum sensorTypes       {TemperatureSensor,HumiditySensor,PressureSensor,GasSensor,UnknownSensor};
   /*! @brief  Enumerate the Oversampling types */
-  enum oversamplingTypes {SensorOff,Oversample1,Oversample2,Oversample4,Oversample8,Oversample16,UnknownOversample };
+  enum oversamplingTypes {SensorOff,Oversample1,Oversample2,Oversample4,Oversample8,Oversample16,UnknownOversample};
   /*! @brief  Enumerate the iir filter types */
-  enum iirFilterTypes    {IIROff,IIR2,IIR4,IIR8,IIR16,IIR32,IIR64,IIR128,UnknownIIR };
+  enum iirFilterTypes    {IIROff,IIR2,IIR4,IIR8,IIR16,IIR32,IIR64,IIR128,UnknownIIR};
   
 /*!
 * @class BME680_Class
@@ -121,10 +119,6 @@ Version | Date       | Developer                     | Comments
                              int32_t &press, int32_t &gas,                    //
                              const bool waitSwitch = true);                   //
       void     reset();                                                       // Reset the BME680
-      void     offsetTemperature(const int32_t tempOffset);                   // Apply offset to temperature values
-      void     offsetHumidity(const int32_t humidityOffset);                  // Apply offset to temperature values
-      void     offsetPressure(const int32_t pressureOffset);                  // Apply offset to temperature values
-      void     offsetGas(const int32_t gasOffset);                            // Apply offset to temperature values
   private:                                                                    //
       bool     commonInitialization();                                        ///< Common initialization code
       uint8_t  readByte(const uint8_t addr);                                  ///< Read byte from register address
@@ -139,11 +133,6 @@ Version | Date       | Developer                     | Comments
       uint16_t _H1,_H2,_T1,_P1;                                               ///< unsigned 16bit configuration vars
       int16_t  _G2,_T2,_P2,_P4,_P5,_P8,_P9;                                   ///< signed 16bit configuration vars
       int32_t  _tfine,_Temperature,_Pressure,_Humidity,_Gas;                  ///< signed 32bit configuration vars
-      int32_t  _temperature_offset = 0;                                       ///< Temperature adjustment value
-      int32_t  _humidity_offset    = 0;                                       ///< Humidity adjustment value
-      int32_t  _pressure_offset    = 0;                                       ///< Pressure adjustment value
-      int32_t  _gas_offset         = 0;                                       ///< Gas adjustment value
-
       /*************************************************************************************************************
       ** Declare the getData and putData methods as template functions. All device I/O is done through these two  **
       ** functions regardless of whether I2C, hardware SPI or software SPI is being used. The two functions are   **

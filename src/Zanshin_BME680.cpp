@@ -297,11 +297,11 @@ void BME680_Class::getSensorData(int32_t &temp, int32_t &hum, int32_t &press, in
   * param[out] gas   Gas reading
   * param[in] waitSwitch Optional switch that, when set to "true" will not return until reading is finished
   */
-  readSensors(waitSwitch);                    // Get compensated data from BME680
-  temp  = _Temperature + _temperature_offset; // Copy global variables to parameters, apply offset
-  hum   = _Humidity;                          // Copy global variables to parameters
-  press = _Pressure;                          // Copy global variables to parameters
-  gas   = _Gas;                               // Copy global variables to parameters
+  readSensors(waitSwitch); // Get compensated data from BME680
+  temp  = _Temperature;    // Copy global variables to parameters
+  hum   = _Humidity;       // Copy global variables to parameters
+  press = _Pressure;       // Copy global variables to parameters
+  gas   = _Gas;            // Copy global variables to parameters
 } // of method getSensorData()
 void BME680_Class::readSensors(const bool waitSwitch) 
 {
@@ -455,46 +455,3 @@ bool BME680_Class::setGas(uint16_t GasTemp,  uint16_t GasMillis)
   } // of if-then-else turn gas measurements on or off
   return true;
 } // of method setGas()
-void BME680_Class::offsetTemperature(const int32_t tempOffset)
-{
-  /*!
-  * @brief    Apply an offset to all temperature readings
-  * param[in] tempOffset  Offset value in deci-degrees
-  * return    none
-  */
-  _temperature_offset = tempOffset; // set value
-  return;
-} // of method offsetTemperature()
-
-void BME680_Class::offsetPressure(const int32_t pressureOffset)
-{
-  /*!
-  * @brief    Apply an offset to all pressure readings
-  * param[in] pressureOffset  Offset value in pascals
-  * return    none
-  */
-  _pressure_offset = pressureOffset; // set value
-  return;
-} // of method offsetPressure()
-
-void BME680_Class::offsetHumidity(const int32_t humidityOffset)
-{
-  /*!
-  * @brief    Apply an offset to all humidity readings
-  * param[in] humidityOffset  Offset value in milli-percent
-  * return    none
-  */
-  _humidity_offset = humidityOffset; // set value
-  return;
-} // of method offsetHumditiy()
-
-void BME680_Class::offsetGas(const int32_t gasOffset)
-{
-  /*!
-  * @brief    Apply an offset to all gas readings
-  * param[in] gasOffset  Offset value in milli-ohms
-  * return    none
-  */
-  _gas_offset = gasOffset; // set value
-  return;
-} // of method offsetTemperature()
