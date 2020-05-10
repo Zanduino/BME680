@@ -66,21 +66,20 @@ const uint32_t SERIAL_SPEED = 115200; ///< Set the baud rate for Serial I/O
 /*******************************************************************************************************************
 ** Declare global variables and instantiate classes                                                               **
 *******************************************************************************************************************/
-BME680_Class BME680; ///< Create an instance of the BME680
+BME680_Class BME680; ///< Create an instance of the BME680 class
 
-float altitude(const float seaLevel = 1013.25); ///< Forward declaration with default value for sea level
-float altitude(const float seaLevel) 
+float altitude(const int32_t press, const float seaLevel = 1013.25); ///< Forward function declaration with default value for sea level
+float altitude(const int32_t press, const float seaLevel) 
 {
   /*!
   * @brief     This converts a pressure measurement into a height in meters
   * @details   The corrected sea-level pressure can be passed into the function if it is know, otherwise the standard 
   *            atmospheric pressure of 1013.25hPa is used (see https://en.wikipedia.org/wiki/Atmospheric_pressure)
+  * @param[in] press    Pressure reading from BME680
   * @param[in] seaLevel Sea-Level pressure in millibars
   * @return    floating point altitude in meters.
   */
   static float Altitude;
-  int32_t temp, hum, press, gas;
-  BME680.getSensorData(temp,hum,press,gas); // Get the most recent values from the device
   Altitude = 44330.0*(1.0-pow(((float)press/100.0)/seaLevel,0.1903)); // Convert into altitude in meters
   return(Altitude);
 } // of method altitude()
@@ -94,26 +93,24 @@ void setup()
   @return   void
   */
   Serial.begin(SERIAL_SPEED); // Start serial port at Baud rate
-  #ifdef  __AVR_ATmega32U4__  // If this is a 32U4 processor, then wait 3 seconds to initialize USB
+  #ifdef  __AVR_ATmega32U4__  // If this is a 32U4 processor, then wait 3 seconds to initialize USB port
     delay(3000);
   #endif
-  Serial.println(F("Starting I2CDemo example program for BME680"));
+  Serial.print(F("Starting I2CDemo example program for BME680\n"));
   Serial.print(F("- Initializing BME680 sensor\n"));
   while (!BME680.begin(I2C_STANDARD_MODE)) // Start BME680 using I2C protocol
   {
-    Serial.println(F("-  Unable to find BME680. Waiting 3 seconds."));
-    delay(3000);
+    Serial.print(F("-  Unable to find BME680. Trying again in 5 seconds.\n"));
+    delay(5000);
   } // of loop until device is located
-  Serial.println(F("- Setting 16x oversampling for all sensors"));
+  Serial.print(F("- Setting 16x oversampling for all sensors\n"));
   BME680.setOversampling(TemperatureSensor,Oversample16); // Use enumerated type values
-  BME680.setOversampling(HumiditySensor,   Oversample16);
-  BME680.setOversampling(PressureSensor,   Oversample16);
-  Serial.println(F("- Setting IIR filter to a value of 4 samples"));
-  BME680.setIIRFilter(IIR4);
-  Serial.println(F("- Setting gas measurement to 320\xC2\xB0\x43 for 150ms")); // "°C" symbols
+  BME680.setOversampling(HumiditySensor,   Oversample16); // Use enumerated type values
+  BME680.setOversampling(PressureSensor,   Oversample16); // Use enumerated type values
+  Serial.print(F("- Setting IIR filter to a value of 4 samples\n"));
+  BME680.setIIRFilter(IIR4); // Use enumerated type values
+  Serial.print(F("- Setting gas measurement to 320\xC2\xB0\x43 for 150ms\n")); // "°C" symbols
   BME680.setGas(320,150); // 320°c for 150 milliseconds
-  Serial.println(F("\nTemp\xC2\xB0\x43 Humid% Press hPa   Alt m Air m\xE2\x84\xA6")); // "°C" symbols
-  Serial.println(F("====== ====== ========= ======= ======"));
 } // of method setup()
 void loop() 
 {
@@ -124,20 +121,27 @@ void loop()
             Arduino, split the values into those before and those after the decimal point.
   @return   void
   */
-  static int32_t temp, humidity, pressure, gas;                                // Variable to store readings
-  static char    buf[16];                                                      // Text buffer for sprintf
-  static float   alt;                                                          // temporary variable for altitude
-  BME680.getSensorData(temp,humidity,pressure,gas);                            // Get the most recent readings
-  sprintf(buf, "%3d.%02d", (int8_t)(temp/100),(uint8_t)(temp%100));            // Temperature in decidegrees
-  Serial.print(buf);                                                           //
-  sprintf(buf, "%3d.%03d", (int8_t)(humidity/1000),(uint16_t)(humidity%1000)); // Humidity in milli-percent
-  Serial.print(buf);                                                           //
-  sprintf(buf, "%7d.%02d", (int16_t)(pressure/100),(uint8_t)(pressure%100));   // Pressure in Pascals
-  Serial.print(buf);                                                           //
-  alt = altitude();                                                            // temporary variable for altitude
-  sprintf(buf, "%5d.%02d", (int16_t)(alt),((uint8_t)(alt*100)%100));           // Altitude in meters
-  Serial.print(buf);                                                           //
-  sprintf(buf, "%4d.%02d\n", (int16_t)(gas/100),(uint8_t)(gas%100));           // Resistance in milliohms
-  Serial.print(buf);                                                           //
-  delay(10000);                                                                // Wait 10 seconds before looping
+  static int32_t  temp, humidity, pressure, gas;                                    // Variable to store readings
+  static char     buf[16];                                                          // Text buffer for sprintf
+  static float    alt;                                                              // temp variable for altitude
+  static uint16_t loopCounter = 0;                                                  // Display iterations
+  if (loopCounter % 25 == 0)                                                        // Display header every 25 loops
+  {                                                                                 //
+    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa   Alt m Air m"));      // Show header plus unicode "°C"
+    Serial.print(F("\xE2\x84\xA6\n==== ====== ====== ========= ======= ======\n")); // and "?" symbols
+  } // if-then time to show headers                                                 //
+  BME680.getSensorData(temp,humidity,pressure,gas);                                 // Get the most recent readings
+  sprintf(buf, "%4d %3d.%02d", ++loopCounter%9999,                                  // Clamp iterations to 9999,
+          (int8_t)(temp/100),(uint8_t)(temp%100));                                  // Temperature in decidegrees
+  Serial.print(buf);                                                                //
+  sprintf(buf, "%3d.%03d", (int8_t)(humidity/1000),(uint16_t)(humidity%1000));      // Humidity in milli-percent
+  Serial.print(buf);                                                                //
+  sprintf(buf, "%7d.%02d", (int16_t)(pressure/100),(uint8_t)(pressure%100));        // Pressure in Pascals
+  Serial.print(buf);                                                                //
+  alt = altitude(pressure);                                                         // temp variable for altitude
+  sprintf(buf, "%5d.%02d", (int16_t)(alt),((uint8_t)(alt*100)%100));                // Altitude in meters
+  Serial.print(buf);                                                                //
+  sprintf(buf, "%4d.%02d\n", (int16_t)(gas/100),(uint8_t)(gas%100));                // Resistance in milliohms
+  Serial.print(buf);                                                                //
+  delay(10000);                                                                     // Wait 10s before repeating
 } // of method loop()
