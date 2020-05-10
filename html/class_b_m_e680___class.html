@@ -118,14 +118,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af0254182c826decbf2122375de32b62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60539ad30b61e41dc0252b06ccc0652b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#a60539ad30b61e41dc0252b06ccc0652b">reset</a> ()</td></tr>
 <tr class="separator:a60539ad30b61e41dc0252b06ccc0652b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a9cc9b173f0098fb088afb98cd23c9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#a8a9cc9b173f0098fb088afb98cd23c9a">offsetTemperature</a> (const int32_t tempOffset)</td></tr>
-<tr class="separator:a8a9cc9b173f0098fb088afb98cd23c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4f53aab96731646254987720ba4f0a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#af4f53aab96731646254987720ba4f0a3">offsetHumidity</a> (const int32_t humidityOffset)</td></tr>
-<tr class="separator:af4f53aab96731646254987720ba4f0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac068d7fb42c2df2bde19b70cf54628d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#ac068d7fb42c2df2bde19b70cf54628d6">offsetPressure</a> (const int32_t pressureOffset)</td></tr>
-<tr class="separator:ac068d7fb42c2df2bde19b70cf54628d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa67807f50fa99b7b0130bd75c0c4eda4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#aa67807f50fa99b7b0130bd75c0c4eda4">offsetGas</a> (const int32_t gasOffset)</td></tr>
-<tr class="separator:aa67807f50fa99b7b0130bd75c0c4eda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main BME680 class for the temperature / humidity / pressure sensor. </p>
@@ -332,82 +324,6 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Returns the most recent temperature, humidity and pressure readings param[out] temp Temperature reading param[out] hum Humidity reading param[out] press Pressure reading param[out] gas Gas reading param[in] waitSwitch Optional switch that, when set to "true" will not return until reading is finished</p>
-
-</div>
-</div>
-<a id="aa67807f50fa99b7b0130bd75c0c4eda4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa67807f50fa99b7b0130bd75c0c4eda4">&#9670;&nbsp;</a></span>offsetGas()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BME680_Class::offsetGas </td>
-          <td>(</td>
-          <td class="paramtype">const int32_t&#160;</td>
-          <td class="paramname"><em>gasOffset</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Apply an offset to all gas readings param[in] gasOffset Offset value in milli-ohms return none</p>
-
-</div>
-</div>
-<a id="af4f53aab96731646254987720ba4f0a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4f53aab96731646254987720ba4f0a3">&#9670;&nbsp;</a></span>offsetHumidity()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BME680_Class::offsetHumidity </td>
-          <td>(</td>
-          <td class="paramtype">const int32_t&#160;</td>
-          <td class="paramname"><em>humidityOffset</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Apply an offset to all humidity readings param[in] humidityOffset Offset value in milli-percent return none</p>
-
-</div>
-</div>
-<a id="ac068d7fb42c2df2bde19b70cf54628d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac068d7fb42c2df2bde19b70cf54628d6">&#9670;&nbsp;</a></span>offsetPressure()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BME680_Class::offsetPressure </td>
-          <td>(</td>
-          <td class="paramtype">const int32_t&#160;</td>
-          <td class="paramname"><em>pressureOffset</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Apply an offset to all pressure readings param[in] pressureOffset Offset value in pascals return none</p>
-
-</div>
-</div>
-<a id="a8a9cc9b173f0098fb088afb98cd23c9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a9cc9b173f0098fb088afb98cd23c9a">&#9670;&nbsp;</a></span>offsetTemperature()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BME680_Class::offsetTemperature </td>
-          <td>(</td>
-          <td class="paramtype">const int32_t&#160;</td>
-          <td class="paramname"><em>tempOffset</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Apply an offset to all temperature readings param[in] tempOffset Offset value in deci-degrees return none</p>
 
 </div>
 </div>
