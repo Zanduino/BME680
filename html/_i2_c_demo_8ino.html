@@ -92,9 +92,9 @@ $(document).ready(function(){initNavTree('_i2_c_demo_8ino.html','');});
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a350df771592a3cb3c0d9999873f4bd73"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_demo_8ino.html#a350df771592a3cb3c0d9999873f4bd73">altitude</a> (const float seaLevel=1013.25)</td></tr>
-<tr class="memdesc:a350df771592a3cb3c0d9999873f4bd73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward declaration with default value for sea level.  <a href="#a350df771592a3cb3c0d9999873f4bd73">More...</a><br /></td></tr>
-<tr class="separator:a350df771592a3cb3c0d9999873f4bd73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1beda5a9dd994d2856e8233d2acba63c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_demo_8ino.html#a1beda5a9dd994d2856e8233d2acba63c">altitude</a> (const int32_t press, const float seaLevel=1013.25)</td></tr>
+<tr class="memdesc:a1beda5a9dd994d2856e8233d2acba63c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward function declaration with default value for sea level.  <a href="#a1beda5a9dd994d2856e8233d2acba63c">More...</a><br /></td></tr>
+<tr class="separator:a1beda5a9dd994d2856e8233d2acba63c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_demo_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
 <tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_demo_8ino.html#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
@@ -108,7 +108,7 @@ const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="separator:adc8430dea1bce949f10d9708742cca34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5063630ccead4138f04d3c1bc67c9a39"><td class="memItemLeft" align="right" valign="top"><a id="a5063630ccead4138f04d3c1bc67c9a39"></a>
 <a class="el" href="class_b_m_e680___class.html">BME680_Class</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39">BME680</a></td></tr>
-<tr class="memdesc:a5063630ccead4138f04d3c1bc67c9a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an instance of the BME680. <br /></td></tr>
+<tr class="memdesc:a5063630ccead4138f04d3c1bc67c9a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an instance of the BME680 class. <br /></td></tr>
 <tr class="separator:a5063630ccead4138f04d3c1bc67c9a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -154,8 +154,8 @@ Changelog</h1>
 <td>1.0.0b </td><td>2018-06-30 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Cloned from original BME280 program </td></tr>
 </table>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a350df771592a3cb3c0d9999873f4bd73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a350df771592a3cb3c0d9999873f4bd73">&#9670;&nbsp;</a></span>altitude()</h2>
+<a id="a1beda5a9dd994d2856e8233d2acba63c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1beda5a9dd994d2856e8233d2acba63c">&#9670;&nbsp;</a></span>altitude()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,17 +163,28 @@ Changelog</h1>
         <tr>
           <td class="memname">float altitude </td>
           <td>(</td>
-          <td class="paramtype">const float&#160;</td>
-          <td class="paramname"><em>seaLevel</em> = <code>1013.25</code></td><td>)</td>
+          <td class="paramtype">const int32_t&#160;</td>
+          <td class="paramname"><em>press</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>seaLevel</em> = <code>1013.25</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Forward declaration with default value for sea level. </p>
+<p>Forward function declaration with default value for sea level. </p>
 <p>This converts a pressure measurement into a height in meters</p>
 <p>The corrected sea-level pressure can be passed into the function if it is know, otherwise the standard atmospheric pressure of 1013.25hPa is used (see <a href="https://en.wikipedia.org/wiki/Atmospheric_pressure">https://en.wikipedia.org/wiki/Atmospheric_pressure</a>) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">press</td><td>Pressure reading from BME680 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">seaLevel</td><td>Sea-Level pressure in millibars </td></tr>
   </table>
   </dd>
