@@ -133,12 +133,12 @@ void loop()
   static uint16_t loopCounter = 0;                                                  // Display iterations
   if (loopCounter % 25 == 0)                                                        // Display header every 25 loops
   {                                                                                 //
-    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa   Alt m  Air m"));      // Show header plus unicode "°C"
-    Serial.print(F("\xE2\x84\xA6\n==== ====== ====== ========= ======= =======\n")); // and "?" symbols
+    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa   Alt m  Air m"));     // Show header plus unicode "°C"
+    Serial.print(F("\xE2\x84\xA6\n==== ====== ====== ========= ======= =======\n"));// and "?" symbols
   } // if-then time to show headers                                                 //
   BME680.getSensorData(temp,humidity,pressure,gas);                                 // Get the most recent readings
   sprintf(buf, "%4d %3d.%02d", ++loopCounter%9999,                                  // Clamp iterations to 9999,
-    (int8_t)(temp/100),(uint8_t)(temp%100));                                  // Temperature in decidegrees
+          (int8_t)(temp/100),(uint8_t)(temp%100));                                  // Temperature in decidegrees
   Serial.print(buf);                                                                //
   sprintf(buf, "%3d.%03d", (int8_t)(humidity/1000),(uint16_t)(humidity%1000));      // Humidity in milli-percent
   Serial.print(buf);                                                                //
