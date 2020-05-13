@@ -14,7 +14,7 @@ var NAVTREEINDEX0 =
 "_s_p_i_demo_8ino.html#adc8430dea1bce949f10d9708742cca34":[2,0,0,2,0,4],
 "_s_p_i_demo_8ino.html#afe461d27b9c48d5921c00d521181f12f":[2,0,0,2,0,1],
 "_soft_s_p_i_demo_8ino.html":[2,0,0,1,0],
-"_soft_s_p_i_demo_8ino.html#a350df771592a3cb3c0d9999873f4bd73":[2,0,0,1,0,0],
+"_soft_s_p_i_demo_8ino.html#a1beda5a9dd994d2856e8233d2acba63c":[2,0,0,1,0,0],
 "_soft_s_p_i_demo_8ino.html#a4fc01d736fe50cf5b977f755b675f11d":[2,0,0,1,0,2],
 "_soft_s_p_i_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39":[2,0,0,1,0,3],
 "_soft_s_p_i_demo_8ino.html#a52fd805829d01bd98abf780a1b1a960f":[2,0,0,1,0,5],
