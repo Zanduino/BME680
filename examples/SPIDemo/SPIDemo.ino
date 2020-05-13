@@ -74,7 +74,7 @@ const uint8_t  SPI_CS_PIN   = SS;
 *******************************************************************************************************************/
 BME680_Class BME680; ///< Create an instance of the BME680
 
-float altitude(const int32_t press, const float seaLevel = 1013.25); ///< Forward function declaration with default value for sea level
+float altitude(const int32_t press, const float seaLevel = 1013.25); ///< Forward declaration with default value
 float altitude(const int32_t press, const float seaLevel) 
 {
   /*!
@@ -94,7 +94,7 @@ void setup()
   /*!
   @brief    Arduino method called once at startup to initialize the system
   @details  This is an Arduino IDE method which is called first upon boot or restart. It is only called one time
-  and then control goes to the main "loop()" method, from which control never returns
+            and then control goes to the main "loop()" method, from which control never returns
   @return   void
   */
   Serial.begin(SERIAL_SPEED); // Start serial port at Baud rate
@@ -123,8 +123,8 @@ void loop()
   /*!
   @brief    Arduino method for the main program loop
   @details  This is the main program for the Arduino IDE, it is an infinite loop and keeps on repeating. 
-  The "sprintf()" function is to pretty-print the values, since floating point is not supported on the 
-  Arduino, split the values into those before and those after the decimal point.
+            The "sprintf()" function is to pretty-print the values, since floating point is not supported on the 
+            Arduino, split the values into those before and those after the decimal point.
   @return   void
   */
   static int32_t  temp, humidity, pressure, gas;                                    // Variable to store readings
