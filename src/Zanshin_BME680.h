@@ -1,6 +1,6 @@
 /*! @file Zanshin_BME680.h
 
-@mainpage Arduino Library to control a Bosch BME Sensor
+@mainpage Arduino Library to control a Bosch BME680 environmental Sensor
 
 @section Zanshin_BME680_section Description
 
@@ -9,8 +9,8 @@ https://www.bosch-sensortec.com/bst/products/all_products/BME680 and the datashe
 https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf 
 \n\n
 
-The BME680 can use either SPI or I2C for communications. This library allows I2C at various bus speeds as well as 
-either the standard Arduino hardware SPI or software SPI.\n\n
+The BME680 can use either SPI or I2C for communications. This library supports I2C at various bus speeds as well as 
+SPI using either the standard Arduino hardware SPI or software SPI.\n\n
 
 The most recent version of the library is available at https://github.com/SV-Zanshin/BME680 and extensive 
 documentation of the library as well as example programs are described in the project's wiki pages located at
@@ -21,14 +21,16 @@ will be used as part of a third-party breakout board. There are several such boa
 example:\n
 Company  | Link
 -------  | ----------
+Sparkfun | https://www.sparkfun.com/products/14570
 BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
 Adafruit | https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout 
 
 \n
 Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed
 at https://github.com/BoschSensortec/BSEC-Arduino-library . This software is part of the Bosch "BSEC" (Bosch 
-Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence
-the choice to make a more compact and rather less abstract library. 
+Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, it 
+won't run on most Arduinos and the only example is for the Arduino Mega 2560 (due to the memory required), hence
+the decision to make a more compact and rather less abstract library that will run on typical Arduino hardware.
 
 @section license License
 
@@ -47,6 +49,7 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
+1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue #9 - Allow 2 devices when using I2C
 1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #5 - Adjust readings. Subsequently removed code again
 1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #8 - clean up comments and code
 1.0.2   | 2019-01-26 | https://github.com/SV-Zanshin | Issue #3 - Converted documentation to doxygen style
@@ -109,7 +112,8 @@ Version | Date       | Developer                     | Comments
       ~BME680_Class();
       bool     begin();                                                       // Start using I2C Communications
       bool     begin(const uint32_t i2cSpeed);                                // I2C with a non-default speed
-      bool     begin(const uint8_t chipSelect);                               // Start using hardware SPI
+      bool     begin(const uint8_t chipSelect);                               // Start using either I2C or hardware SPI
+      bool     begin(const uint32_t i2cSpeed, const uint8_t i2cAddress);      // Explicitly set speed and I2C Address
       bool     begin(const uint8_t chipSelect, const uint8_t mosi,            // Start using software SPI
                      const uint8_t miso, const uint8_t sck);                  //
       bool     setOversampling(const uint8_t sensor, const uint8_t sampling); // Set enum sensorType Oversampling

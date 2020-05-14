@@ -29,7 +29,7 @@ bool BME680_Class::begin()
   *          is searched for the first BME680 device.
   * return "true" if successful otherwise false
   */  
-  return begin(I2C_STANDARD_MODE); // Initialize I2C with standard speed
+  return begin(I2C_STANDARD_MODE,0); // Initialize I2C with standard speed, allow any i2c address
 } // of method begin()
 bool BME680_Class::begin(const uint32_t i2cSpeed)
 {
@@ -40,15 +40,31 @@ bool BME680_Class::begin(const uint32_t i2cSpeed)
   * @param[in] i2cSpeed I2C Speed value
   * return "true" if successful otherwise false
   */
+  return begin(i2cSpeed,0); // Initialize I2C with given speed, allow any i2c address
+} // of method begin()
+bool BME680_Class::begin(const uint32_t i2cSpeed, const uint8_t i2cAddress)
+{
+  /*!
+  * @brief   starts communications with device (overloaded)
+  * @details When called with a 32-bit parameter it is assumed that the I2C protocol is to be used and the speed
+  *          setting is determined by the parameter. If the i2cAddress is 0 then check both, otherwise check only
+  *          only the specified address
+  * @param[in] i2cSpeed I2C Speed value
+  * @param[in] i2cAddress I2C Address, use 0 to self-determine
+  * return "true" if successful otherwise false
+  */
   Wire.begin();                                          // Start I2C as master device
   Wire.setClock(i2cSpeed);                               // Set I2C bus speed
   for (_I2CAddress=0x76;_I2CAddress<=0x77;_I2CAddress++) // loop all possible addresses
   {
-    Wire.beginTransmission(_I2CAddress);                 // Check current address for BME680
-    if (Wire.endTransmission()==0)                       // If no error we have a device
+    if (i2cAddress == 0 || _I2CAddress == i2cAddress)
     {
-       return commonInitialization();                    // Perform common initialization
-    } // of if-then we have found a device
+      Wire.beginTransmission(_I2CAddress);                 // Check current address for BME680
+      if (Wire.endTransmission()==0)                       // If no error we have found a device
+      {
+        return commonInitialization();                     // Perform common initialization
+      } // of if-then we have found a device
+    } // of if-then check all or a specific address
   } // of for-next each I2C address loop
   _I2CAddress = 0; // Set to 0 to denote no I2C found
   return false;    // return failure if we get here 
@@ -57,14 +73,20 @@ bool BME680_Class::begin(const uint8_t chipSelect)
 {
   /*!
   * @brief     starts communications with device (overloaded)
-  * @details   When called with a single 8-bit parameter is assumed that hardware SPI is to be used
-  * @param[in] chipSelect Arduino Pin number for the Slave-Select pin
+  * @details   When called with a single 8-bit parameter is assumed that hardware SPI is to be used if the 
+               value is not 0x76 or 0x77, in which case it is assumed that this is the I2C address
+  * @param[in] chipSelect Arduino Pin number for the Slave-Select pin or the I2C address
   * return     "true" if successful otherwise false
-  */  _cs = chipSelect;              // Store value for future use
-  digitalWrite(_cs, HIGH);       // High means ignore master
-  pinMode(_cs, OUTPUT);          // Make the chip select pin output
-  SPI.begin();                   // Start hardware SPI
-  return commonInitialization(); // Perform common initialization
+  */
+  if (chipSelect == 0x76 || chipSelect == 0x77)  // If 0x76 or 0x77 then we have an I2C call
+  {                                              //
+    return begin(I2C_STANDARD_MODE, chipSelect); // I2C standard speed but use explicit address
+  } // if-then we have an I2C call               //
+  _cs = chipSelect;                              // Store value for future use
+  digitalWrite(_cs, HIGH);                       // High means ignore master
+  pinMode(_cs, OUTPUT);                          // Make the chip select pin output
+  SPI.begin();                                   // Start hardware SPI
+  return commonInitialization();                 // Perform common initialization
 } // of method begin()
 bool BME680_Class::begin(const uint8_t chipSelect, const uint8_t mosi, const uint8_t miso, const uint8_t sck)
 {

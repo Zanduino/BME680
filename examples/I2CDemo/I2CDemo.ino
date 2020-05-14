@@ -15,6 +15,7 @@ will be used as part of a third-party breakout board. There are several such boa
 example \n
 Company  | Link
 -------  | ----------
+Sparkfun | https://www.sparkfun.com/products/14570
 BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
 Adafruit | https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout \n\n
 
@@ -98,7 +99,7 @@ void setup()
   #endif
   Serial.print(F("Starting I2CDemo example program for BME680\n"));
   Serial.print(F("- Initializing BME680 sensor\n"));
-  while (!BME680.begin(I2C_STANDARD_MODE)) // Start BME680 using I2C protocol
+  while (!BME680.begin(I2C_STANDARD_MODE)) // Start BME680 using I2C, use first device found
   {
     Serial.print(F("-  Unable to find BME680. Trying again in 5 seconds.\n"));
     delay(5000);

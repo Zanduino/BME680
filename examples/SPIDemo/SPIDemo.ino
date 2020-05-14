@@ -17,6 +17,7 @@ will be used as part of a third-party breakout board. There are several such boa
 example \n
 Company  | Link
 -------  | ----------
+Sparkfun | https://www.sparkfun.com/products/14570
 BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
 Adafruit | https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout \n\n
 
