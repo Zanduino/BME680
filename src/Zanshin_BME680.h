@@ -101,19 +101,19 @@ Version | Date       | Developer                     | Comments
   /*! @brief  Enumerate the iir filter types */
   enum iirFilterTypes    {IIROff,IIR2,IIR4,IIR8,IIR16,IIR32,IIR64,IIR128,UnknownIIR};
   
-/*!
-* @class BME680_Class
-* @brief Main BME680 class for the temperature / humidity / pressure sensor
-*/
   class BME680_Class 
   {
+    /*!
+    * @class BME680_Class
+    * @brief Main BME680 class for the temperature / humidity / pressure sensor
+    */
     public:
-      BME680_Class();
-      ~BME680_Class();
+      BME680_Class();                                                         // Class constructor (unused)
+      ~BME680_Class();                                                        // Class destructor (unused)
       bool     begin();                                                       // Start using I2C Communications
       bool     begin(const uint32_t i2cSpeed);                                // I2C with a non-default speed
-      bool     begin(const uint8_t chipSelect);                               // Start using either I2C or hardware SPI
-      bool     begin(const uint32_t i2cSpeed, const uint8_t i2cAddress);      // Explicitly set speed and I2C Address
+      bool     begin(const uint8_t chipSelect);                               // Start using either I2C or HW-SPI
+      bool     begin(const uint32_t i2cSpeed, const uint8_t i2cAddress);      // Explicitly set speed and I2C Addr.
       bool     begin(const uint8_t chipSelect, const uint8_t mosi,            // Start using software SPI
                      const uint8_t miso, const uint8_t sck);                  //
       bool     setOversampling(const uint8_t sensor, const uint8_t sampling); // Set enum sensorType Oversampling
@@ -129,7 +129,7 @@ Version | Date       | Developer                     | Comments
       void     readSensors(const bool waitSwitch);                            ///< read the registers in one burst
       void     waitForReadings();                                             ///< Wait for readings to finish
       void     getCalibration();                                              ///< Load calibration from registers
-      uint8_t  _I2CAddress         = 0;                                       ///< Default is no I2C address known
+      uint8_t  _I2CAddress = 0;                                               ///< Default is I2C address is unknown
       uint8_t  _cs,_sck,_mosi,_miso;                                          ///< Hardware and software SPI pins
       uint8_t  _H6,_P10,_res_heat_range;                                      ///< unsigned configuration vars
       int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,                       //
