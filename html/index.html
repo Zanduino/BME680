@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>BME680: Arduino Library to control a Bosch BME Sensor</title>
+<title>BME680: Arduino Library to control a Bosch BME680 environmental Sensor</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,14 +82,14 @@ $(document).ready(function(){initNavTree('index.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Arduino Library to control a Bosch BME Sensor </div>  </div>
+<div class="title">Arduino Library to control a Bosch BME680 environmental Sensor </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="Zanshin_BME680_section"></a>
 Description</h1>
 <p>Class definition header for the Bosch BME680 temperature / humidity / pressure sensor. The sensor is described at <a href="https://www.bosch-sensortec.com/bst/products/all_products/BME680">https://www.bosch-sensortec.com/bst/products/all_products/BME680</a> and the datasheet is available from Bosch at <a href="https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf">https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf</a> <br />
 <br />
- The BME680 can use either SPI or I2C for communications. This library allows I2C at various bus speeds as well as either the standard Arduino hardware SPI or software SPI.<br />
+ The BME680 can use either SPI or I2C for communications. This library supports I2C at various bus speeds as well as SPI using either the standard Arduino hardware SPI or software SPI.<br />
 <br />
  The most recent version of the library is available at <a href="https://github.com/SV-Zanshin/BME680">https://github.com/SV-Zanshin/BME680</a> and extensive documentation of the library as well as example programs are described in the project's wiki pages located at <a href="https://github.com/SV-Zanshin/BME680/wiki">https://github.com/SV-Zanshin/BME680/wiki</a> <br />
 <br />
@@ -98,12 +98,14 @@ The BME680 is an extremely small physical package that is so tiny as to be impos
 <tr>
 <th>Company </th><th>Link  </th></tr>
 <tr>
+<td>Sparkfun </td><td><a href="https://www.sparkfun.com/products/14570">https://www.sparkfun.com/products/14570</a> </td></tr>
+<tr>
 <td>BlueDot </td><td><a href="https://www.bluedot.space/sensor-boards/bme680/">https://www.bluedot.space/sensor-boards/bme680/</a> </td></tr>
 <tr>
 <td>Adafruit </td><td><a href="https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout">https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout</a> </td></tr>
 </table>
 <p><br />
-Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed at <a href="https://github.com/BoschSensortec/BSEC-Arduino-library">https://github.com/BoschSensortec/BSEC-Arduino-library</a> . This software is part of the Bosch "BSEC" (Bosch Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence the choice to make a more compact and rather less abstract library.</p>
+Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed at <a href="https://github.com/BoschSensortec/BSEC-Arduino-library">https://github.com/BoschSensortec/BSEC-Arduino-library</a> . This software is part of the Bosch "BSEC" (Bosch Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, it won't run on most Arduinos and the only example is for the Arduino Mega 2560 (due to the memory required), hence the decision to make a more compact and rather less abstract library that will run on typical Arduino hardware.</p>
 <h1><a class="anchor" id="license"></a>
 License</h1>
 <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
@@ -115,6 +117,8 @@ Changelog</h1>
 <table class="doxtable">
 <tr>
 <th>Version </th><th>Date </th><th>Developer </th><th>Comments  </th></tr>
+<tr>
+<td>1.0.4 </td><td>2020-05-14 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #9 - Allow 2 devices when using I2C </td></tr>
 <tr>
 <td>1.0.3 </td><td>2020-05-09 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #5 - Adjust readings. Subsequently removed code again </td></tr>
 <tr>

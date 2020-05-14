@@ -106,6 +106,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad3c587b346f158c1f65414f5b4b9de28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac10c361538cb76c5e643509d3740b40e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#ac10c361538cb76c5e643509d3740b40e">begin</a> (const uint8_t chipSelect)</td></tr>
 <tr class="separator:ac10c361538cb76c5e643509d3740b40e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9611a3516b381ee43bcfd07e282cdc89"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#a9611a3516b381ee43bcfd07e282cdc89">begin</a> (const uint32_t i2cSpeed, const uint8_t i2cAddress)</td></tr>
+<tr class="separator:a9611a3516b381ee43bcfd07e282cdc89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7810485e014c19050198b9e7a99449b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#a7810485e014c19050198b9e7a99449b9">begin</a> (const uint8_t chipSelect, const uint8_t mosi, const uint8_t miso, const uint8_t sck)</td></tr>
 <tr class="separator:a7810485e014c19050198b9e7a99449b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a204027ceeaa1a3833eea02064d4eb4db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#a204027ceeaa1a3833eea02064d4eb4db">setOversampling</a> (const uint8_t sensor, const uint8_t sampling)</td></tr>
@@ -162,7 +164,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac0d49953ce365b412b922d396b25a83f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0d49953ce365b412b922d396b25a83f">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0d49953ce365b412b922d396b25a83f">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -181,7 +183,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="ad3c587b346f158c1f65414f5b4b9de28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3c587b346f158c1f65414f5b4b9de28">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3c587b346f158c1f65414f5b4b9de28">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,7 +208,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="ac10c361538cb76c5e643509d3740b40e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac10c361538cb76c5e643509d3740b40e">&#9670;&nbsp;</a></span>begin() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac10c361538cb76c5e643509d3740b40e">&#9670;&nbsp;</a></span>begin() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,9 +223,45 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>starts communications with device (overloaded)</p>
-<p>When called with a single 8-bit parameter is assumed that hardware SPI is to be used </p><dl class="params"><dt>Parameters</dt><dd>
+<p>When called with a single 8-bit parameter is assumed that hardware SPI is to be used if the value is not 0x76 or 0x77, in which case it is assumed that this is the I2C address </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">chipSelect</td><td>Arduino Pin number for the Slave-Select pin return "true" if successful otherwise false</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">chipSelect</td><td>Arduino Pin number for the Slave-Select pin or the I2C address return "true" if successful otherwise false</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9611a3516b381ee43bcfd07e282cdc89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9611a3516b381ee43bcfd07e282cdc89">&#9670;&nbsp;</a></span>begin() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BME680_Class::begin </td>
+          <td>(</td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>i2cSpeed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>i2cAddress</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>starts communications with device (overloaded)</p>
+<p>When called with a 32-bit parameter it is assumed that the I2C protocol is to be used and the speed setting is determined by the parameter. If the i2cAddress is 0 then check both, otherwise check only only the specified address </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">i2cSpeed</td><td>I2C Speed value </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">i2cAddress</td><td>I2C Address, use 0 to self-determine return "true" if successful otherwise false</td></tr>
   </table>
   </dd>
 </dl>
@@ -231,7 +269,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a7810485e014c19050198b9e7a99449b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7810485e014c19050198b9e7a99449b9">&#9670;&nbsp;</a></span>begin() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7810485e014c19050198b9e7a99449b9">&#9670;&nbsp;</a></span>begin() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
