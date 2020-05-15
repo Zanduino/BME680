@@ -1,3 +1,12 @@
+---
+name: Bug report
+about: Submit a bug report
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 ## Expected Behavior
 
 -enter information on what is expected to happen
