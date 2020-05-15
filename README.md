@@ -7,10 +7,10 @@
 | [Bluedot](https://www.bluedot.space/sensor-boards/bme680/) | [Guide](https://www.bluedot.space/sensor-boards/bme680/) | 3-5V |
 | [Adafruit](https://www.adafruit.com/product/3660) | [Guide](https://learn.adafruit.com/adafruit-bme680-humidity-temperature-barometic-pressure-voc-gas/) | 3-5V |
 
-A complete description of the BME680 sensor can be found in the [BME680 Datasheet](https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf) while the [Adafruit BME680 tutorial](https://learn.adafruit.com/adafruit-bme680-humidity-temperature-barometic-pressure-voc-gas) describes additional board information.
+A complete description of the BME680 sensor can be found in the [BME680 Datasheet](https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf).
 
 ## Sensing
-The BME680 allows the user to individually adjust the sampling rates for each sensor component (temperature, humidity and pressure) as well as to set the inter-measurement delay time and the [IIR](https://en.wikipedia.org/wiki/Infinite_impulse_response) filter sampling coeffient. Combining these settings allows very fine-grained control of measurement times and measurement accuracy.
+The BME680 allows the user to individually adjust the sampling rates for each sensor component (temperature, humidity, pressure and gas) as well as to set the inter-measurement delay time and the [IIR](https://en.wikipedia.org/wiki/Infinite_impulse_response) filter sampling coeffient. Combining these settings allows very fine-grained control of measurement times and measurement accuracy as well as energy management.
 
 ### Temperature sensing
 The BME280 measures temperatures between -40°C and 85°C with a full accuracy range between 0°C and +65°C. The accuracy is ±0.5°c with a full resolution of 0.01°C. Since the temperature sensor in the small package is tied to the PCB board on which it is soldered and also has some self-heating as well the temperature reading will usually be above ambient to some degree.
