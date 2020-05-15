@@ -10,9 +10,9 @@ Push to your fork and submit a gitHub pull request.
 
 At this point the ball is no longer in your court but on our side. There will be a response within a couple of days, at most. 
 
-Some things that will increase the spped at which a pull request is completed:
+Some things that will increase the speed at which a pull request is completed:
 
 * Write tests.
-* Follow the existing coding style (comments are done with [doxygen](http://www.doxygen.nl/).
+* Follow the existing coding style (comments are done with [doxygen](http://www.doxygen.nl/)).
 * Write as much information as a beginner would need to understand the problem and solution.
 
