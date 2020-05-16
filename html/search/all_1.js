@@ -2,6 +2,8 @@ var searchData=
 [
   ['begin',['begin',['../class_b_m_e680___class.html#ac0d49953ce365b412b922d396b25a83f',1,'BME680_Class::begin()'],['../class_b_m_e680___class.html#ad3c587b346f158c1f65414f5b4b9de28',1,'BME680_Class::begin(const uint32_t i2cSpeed)'],['../class_b_m_e680___class.html#ac10c361538cb76c5e643509d3740b40e',1,'BME680_Class::begin(const uint8_t chipSelect)'],['../class_b_m_e680___class.html#a9611a3516b381ee43bcfd07e282cdc89',1,'BME680_Class::begin(const uint32_t i2cSpeed, const uint8_t i2cAddress)'],['../class_b_m_e680___class.html#a7810485e014c19050198b9e7a99449b9',1,'BME680_Class::begin(const uint8_t chipSelect, const uint8_t mosi, const uint8_t miso, const uint8_t sck)']]],
   ['bme680',['BME680',['../_i2_c_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39',1,'BME680():&#160;I2CDemo.ino'],['../_soft_s_p_i_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39',1,'BME680():&#160;SoftSPIDemo.ino'],['../_s_p_i_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39',1,'BME680():&#160;SPIDemo.ino']]],
+  ['bme680_5f1',['BME680_1',['../_two_devices_i2_c_demo_8ino.html#afd0f6f3b434b6417dfa1ebf87602f02a',1,'TwoDevicesI2CDemo.ino']]],
+  ['bme680_5f2',['BME680_2',['../_two_devices_i2_c_demo_8ino.html#a158aff59c2e508b7e10c2e7c89329339',1,'TwoDevicesI2CDemo.ino']]],
   ['bme680_5fchipid',['BME680_CHIPID',['../_zanshin___b_m_e680_8h.html#a1b30034678eb34405fe68f7eb4e1c9c7',1,'Zanshin_BME680.h']]],
   ['bme680_5fchipid_5fregister',['BME680_CHIPID_REGISTER',['../_zanshin___b_m_e680_8h.html#afb461969dbd040ad54fec29885c7fec5',1,'Zanshin_BME680.h']]],
   ['bme680_5fclass',['BME680_Class',['../class_b_m_e680___class.html',1,'BME680_Class'],['../class_b_m_e680___class.html#a314ce39273fe4696683168bff9421cb3',1,'BME680_Class::BME680_Class()']]],
