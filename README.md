@@ -10,7 +10,7 @@
 A complete description of the BME680 sensor can be found in the [BME680 Datasheet](https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf).
 
 ## Documentation and Examples
-The detailed library description including installation instructions and descriptions of all functions plus further details is available on the [BME680 Wiki pages](https://github.com/SV-Zanshin/BME680/wiki). In addition, the code itself contains Doxygen style comments, which is used to generate comprehensive program and library documentation; this can be found at [BME680 Doxygen documentation](https://sv-zanshin.github.io/BME680/).
+The detailed library description including installation instructions and descriptions of all functions plus further details is available on the [BME680 Wiki pages](https://github.com/SV-Zanshin/BME680/wiki). In addition, the code itself contains Doxygen style comments, which is used to generate comprehensive program and library documentation; this can be found at [BME680 Doxygen documentation](https://sv-zanshin.github.io/BME680/html/index.html).
 
 ## Sensing
 The BME680 allows the user to individually adjust the sampling rates for each sensor component (temperature, humidity, pressure and gas) as well as to set the inter-measurement delay time and the [IIR](https://en.wikipedia.org/wiki/Infinite_impulse_response) filter sampling coeffient. Combining these settings allows very fine-grained control of measurement times and measurement accuracy as well as energy management.
