@@ -131,7 +131,7 @@ void loop()
   Serial.print(buf);                                                                 //
   sprintf(buf, " | %4d.%02d", (int8_t)(temp2/100),(uint8_t)(temp2%100));             // Temperature in decidegrees
   Serial.print(buf);                                                                 //
-  sprintf(buf, "%4d.%03d\n", (int8_t)(humidity1/1000),(uint16_t)(humidity1%1000));   // Humidity in milli-percent
+  sprintf(buf, "%4d.%03d\n", (int8_t)(humidity2/1000),(uint16_t)(humidity2%1000));   // Humidity in milli-percent
   Serial.print(buf);                                                                 //
   delay(10000);                                                                      // Wait 10s before repeating
 } // of method loop()
