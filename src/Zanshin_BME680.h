@@ -15,7 +15,7 @@ SPI using either the standard Arduino hardware SPI or software SPI.\n\n
 The most recent version of the library is available at https://github.com/SV-Zanshin/BME680 and extensive 
 documentation of the library as well as example programs are described in the project's wiki pages located at
 https://github.com/SV-Zanshin/BME680/wiki
-\n\n
+\n
 The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it 
 will be used as part of a third-party breakout board. There are several such boards available at this time, for 
 example:\n
