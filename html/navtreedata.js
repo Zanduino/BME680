@@ -1,7 +1,7 @@
 var NAVTREE =
 [
   [ "BME680", "index.html", [
-    [ "Arduino Library to control a Bosch BME680 Environmental Sensor", "index.html", [
+    [ "Arduino Library to control a Bosch BME680 environmental Sensor", "index.html", [
       [ "Description", "index.html#Zanshin_BME680_section", null ],
       [ "License", "index.html#license", null ],
       [ "Author", "index.html#author", null ],

@@ -18,9 +18,6 @@ var menudata={children:[
 {text:"o",url:"globals.html#index_o"},
 {text:"s",url:"globals.html#index_s"}]},
 {text:"Functions",url:"globals_func.html"},
-{text:"Variables",url:"globals_vars.html",children:[
-{text:"b",url:"globals_vars.html#index_b"},
-{text:"i",url:"globals_vars.html#index_i"},
-{text:"s",url:"globals_vars.html#index_s"}]},
+{text:"Variables",url:"globals_vars.html"},
 {text:"Enumerations",url:"globals_enum.html"},
 {text:"Macros",url:"globals_defs.html"}]}]}]}
