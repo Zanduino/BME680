@@ -3,12 +3,13 @@
 ##                                                                                                  ##
 ## Date       Developer           Comments                                                          ##
 ## ========== =================== ================================================================= ##
+## 2020-05-17 Arnd@SV-Zanshin     Updated "PROJECT_NUMBER" value to 1.0.4                           ##
 ## 2020-05-10 Arnd@SV-Zanshin     Removed all comments in order to compact this file                ##
 ##                                                                                                  ##
 ######################################################################################################
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = BME680
-PROJECT_NUMBER         = "Version 1.0.2"
+PROJECT_NUMBER         = "Version 1.0.4"
 PROJECT_BRIEF          = "Arduino Library for Bosch BME680 Temperature, Humidity, Pressure and Gas sensor"
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       =
