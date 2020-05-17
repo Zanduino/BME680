@@ -74,7 +74,7 @@ void setup()
   #ifdef  __AVR_ATmega32U4__  // If this is a 32U4 processor, then wait 3 seconds to initialize USB port
     delay(3000);
   #endif
-  Serial.print(F("Starting TwoDevicesI2CDemo example program for BME680\n"));
+  Serial.print(F("\nStarting TwoDevicesI2CDemo example program for 2 BME680s\n\n"));
   Serial.print(F("- Initializing BME680 sensor 1 at address 0x76\n"));
   while (!BME680_1.begin(I2C_STANDARD_MODE,0x76)) // Start BME680 using I2C, use device at address 0x76
   {
@@ -89,20 +89,21 @@ void setup()
   BME680_1.setIIRFilter(IIR4);                                 // Use enumerated type values
   Serial.print(F("- Turning off pressure and gas sensors\n")); // "°C" symbols
   BME680_1.setGas(0,0);                                        // If either Temp/Time is zero then turn off
-  Serial.print(F("\n\n- Initializing BME680 sensor 2 at address 0x77\n"));
+  Serial.print(F("\n- Initializing BME680 sensor 2 at address 0x77\n"));
+
   while (!BME680_2.begin(I2C_STANDARD_MODE,0x77)) // Start BME680 using I2C, use device at address 0x76
   {
     Serial.print(F("-  Unable to find BME680. Trying again in 5 seconds.\n"));
     delay(5000);
   } // of loop until device is located
   Serial.print(F("- Setting 16x oversampling for all sensors\n"));
-  BME680_2.setOversampling(TemperatureSensor,Oversample16);    // Use enumerated type values
-  BME680_2.setOversampling(HumiditySensor,   Oversample16);    // Use enumerated type values
-  BME680_2.setOversampling(PressureSensor,   SensorOff);       // Use enumerated type value to turn off
+  BME680_2.setOversampling(TemperatureSensor,Oversample16);      // Use enumerated type values
+  BME680_2.setOversampling(HumiditySensor,   Oversample16);      // Use enumerated type values
+  BME680_2.setOversampling(PressureSensor,   SensorOff);         // Use enumerated type value to turn off
   Serial.print(F("- Setting IIR filter to a value of 4 samples\n"));
-  BME680_2.setIIRFilter(IIR4);                                 // Use enumerated type values
-  Serial.print(F("- Turning off pressure and gas sensors\n")); // "°C" symbols
-  BME680_2.setGas(0,0);                                        // If either Temp/Time is zero then turn off
+  BME680_2.setIIRFilter(IIR4);                                   // Use enumerated type values
+  Serial.print(F("- Turning off pressure and gas sensors\n\n")); // "°C" symbols
+  BME680_2.setGas(0,0);                                          // If either Temp/Time is zero then turn off
 } // of method setup()
 void loop() 
 {
@@ -120,7 +121,8 @@ void loop()
   if (loopCounter % 25 == 0)                                                         // Display header every 25 loops
   {                                                                                  //
     Serial.print(F("\nLoop Temp1\xC2\xB0\x43 Humid1% | Temp2\xC2\xB0\x43 Humid2%")); // Show header plus unicode "°C"
-    Serial.print(F("\n==== ======= ======= | ======= =======\n"));                   // symbol
+    Serial.print(F(" |  \xCE\x94Temp \xCE\x94Humid%"));                              // and "?" symbols
+    Serial.print(F("\n==== ======= ======= | ======= ======= | ====== =======\n"));  //
   } // if-then time to show headers                                                  //
   BME680_1.getSensorData(temp1,humidity1,pressure1,gas1);                            // Get the most recent readings
   BME680_2.getSensorData(temp2,humidity2,pressure2,gas2);                            // Get the most recent readings
@@ -131,7 +133,12 @@ void loop()
   Serial.print(buf);                                                                 //
   sprintf(buf, " | %4d.%02d", (int8_t)(temp2/100),(uint8_t)(temp2%100));             // Temperature in decidegrees
   Serial.print(buf);                                                                 //
-  sprintf(buf, "%4d.%03d\n", (int8_t)(humidity2/1000),(uint16_t)(humidity2%1000));   // Humidity in milli-percent
+  sprintf(buf, "%4d.%03d ", (int8_t)(humidity2/1000),(uint16_t)(humidity2%1000));    // Humidity in milli-percent
+  Serial.print(buf);                                                                 //
+  temp1 = abs(temp1 - temp2);                                                        // Compute the delta temperature
+  humidity1 = abs(humidity1 - humidity2);                                            // Compute the delta humidity
+  sprintf(buf,"| %3d.%02d %3d.%02d\n",(int8_t)(temp1/100),(uint8_t)(temp1%100),      //
+          (int8_t)(humidity1/1000),(uint16_t)(humidity1%1000));                      //
   Serial.print(buf);                                                                 //
   delay(10000);                                                                      // Wait 10s before repeating
 } // of method loop()
