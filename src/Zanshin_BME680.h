@@ -1,12 +1,12 @@
 /*! @file Zanshin_BME680.h
 
-@mainpage Arduino Library to control a Bosch BME680 environmental Sensor
+@mainpage Arduino Library to control a Bosch BME680 Environmental Sensor
 
 @section Zanshin_BME680_section Description
 
-Class definition header for the Bosch BME680 temperature / humidity / pressure sensor. The sensor is described at 
-https://www.bosch-sensortec.com/bst/products/all_products/BME680 and the datasheet is available from Bosch at 
-https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf 
+Class definition header for the Bosch BME680 temperature / humidity / pressure / air quality sensor. The sensor is 
+described at https://www.bosch-sensortec.com/bst/products/all_products/BME680 and the datasheet is available from 
+Bosch at https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf 
 \n\n
 
 The BME680 can use either SPI or I2C for communications. This library supports I2C at various bus speeds as well as 
@@ -21,7 +21,7 @@ will be used as part of a third-party breakout board. There are several such boa
 example:\n
 Company  | Link
 -------  | ----------
-Sparkfun | https://www.sparkfun.com/products/14570
+SparkFun | https://www.sparkfun.com/products/14570
 BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
 Adafruit | https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout 
 

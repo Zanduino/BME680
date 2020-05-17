@@ -3,7 +3,7 @@
 @section TwoDevicesI2CDemo_intro_section Description
 
 Example program for using I2C to set and read data from 2 Bosch BME680 sensors. The sensors measure temperature, 
-pressure, humidity and air quality and is described at https://www.bosch-sensortec.com/bst/products/all_products/BME680. 
+pressure, humidity and air quality and are described at https://www.bosch-sensortec.com/bst/products/all_products/BME680. 
 The datasheet is available from Bosch at https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680_DS001-11.pdf \n\n
 
 The most recent version of the BME680 library is available at https://github.com/SV-Zanshin/BME680 and the 
