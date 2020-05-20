@@ -1,9 +1,9 @@
 ---
 name: Bug report
 about: Submit a bug report
-title: ''
+title: BUG One-Line Title
 labels: ''
-assignees: ''
+assignees: SV-Zanshin
 
 ---
 
