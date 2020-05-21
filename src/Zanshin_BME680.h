@@ -150,6 +150,9 @@ Version | Date       | Developer                     | Comments
   const uint8_t BME680_ADDR_RANGE_SW_ERR_ADDR     =  0x04;
   const uint8_t BME680_RSERROR_MSK	              =  0xF0;
 
+  #if defined(ARDUINO_SAMD_ZERO)
+    #define _BV(bit) (1 << (bit)) // The Zero doesn't have this macro defined
+  #endif
 
   /*****************************************************************************************************************
   ** Declare enumerated types used in the class                                                                   **
