@@ -210,9 +210,9 @@ void BME680_Class::getCalibration()
   getData(BME680_ADDR_RES_HEAT_RANGE_ADDR,temp_var);
   _res_heat_range = ((temp_var & BME680_RHRANGE_MSK) / 16);
   getData(BME680_ADDR_RES_HEAT_VAL_ADDR,temp_var);
-  _res_heat_val = (int8_t) temp_var;
+  _res_heat = (int8_t) temp_var;
   getData(BME680_ADDR_RANGE_SW_ERR_ADDR,temp_var);
-  _range_sw_error = ((int8_t) temp_var & (int8_t) BME680_RSERROR_MSK) / 16;
+  _rng_sw_err = ((int8_t) temp_var & (int8_t) BME680_RSERROR_MSK) / 16;
 } // of method getCalibration()
 bool BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling) 
 {
@@ -374,7 +374,7 @@ const uint32_t lookupTable2[16]  = {
                     // Compute the Gas      //
                     //**********************//
 	uint64_t uvar2;
-	var1 = (int64_t)((1340+(5*(int64_t)_range_sw_error))*
+	var1 = (int64_t)((1340+(5*(int64_t)_rng_sw_err))*
 	((int64_t) lookupTable1[gas_range])) >> 16;
 	uvar2 = (((int64_t)((int64_t)adc_gas_res<<15)-(int64_t)(16777216))+var1);
 	var3 = (((int64_t) lookupTable2[gas_range] * (int64_t) var1) >> 9);
@@ -415,7 +415,7 @@ bool BME680_Class::setGas(uint16_t GasTemp,  uint16_t GasMillis)
     var2 = (_H1+784)*(((((_H2+154009)*GasTemp*5)/100)+3276800)/10);
     var3 = var1 + (var2 / 2);
     var4 = (var3 / (_res_heat_range+4));
-    var5 = (131 * _res_heat_val) + 65536;
+    var5 = (131 * _res_heat) + 65536;
     heatr_res_x100 = (int32_t) (((var4 / var5) - 250) * 34);
     heatr_res = (uint8_t) ((heatr_res_x100 + 50) / 100);
     putData(BME680_GAS_HEATER_REGISTER0,heatr_res);

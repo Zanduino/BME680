@@ -100,7 +100,6 @@ Version | Date       | Developer                     | Comments
   const uint8_t  BME680_HUMIDITY_MASK             =    0xF8; ///< Mask is binary B11111000
   const uint8_t  BME680_TEMPERATURE_MASK          =    0xE3; ///< Mask is binary B11100011
   const uint8_t  BME680_PRESSURE_MASK             =    0x1F; ///< Mask is binary B00011111
-
   /*********************************************** 
   ** Declare the constants used for calibration **
   ***********************************************/
@@ -195,8 +194,7 @@ Version | Date       | Developer                     | Comments
       uint8_t  _I2CAddress = 0;                                               ///< Default is I2C address is unknown
       uint8_t  _cs,_sck,_mosi,_miso;                                          ///< Hardware and software SPI pins
       uint8_t  _H6,_P10,_res_heat_range;                                      ///< unsigned configuration vars
-      int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,                       //
-               _res_heat_val,_range_sw_error;                                 ///< signed configuration vars
+      int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,_res_heat,_rng_sw_err; ///< signed configuration vars
       uint16_t _H1,_H2,_T1,_P1;                                               ///< unsigned 16bit configuration vars
       int16_t  _G2,_T2,_P2,_P4,_P5,_P8,_P9;                                   ///< signed 16bit configuration vars
       int32_t  _tfine,_Temperature,_Pressure,_Humidity,_Gas;                  ///< signed 32bit configuration vars
