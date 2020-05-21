@@ -49,14 +49,14 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
-1.0.5   | 2020-05-21 | https://github.com/SV-Zanshin | Issue #12 - First call to read data always invalid
+1.0.5   | 2020-05-21 | https://github.com/SV-Zanshin | Issue #12 - First call to getSensorData() returns invalid data
 1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
 1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
 1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue  #5 - Adjust readings. Subsequently removed code again
 1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue  #8 - clean up comments and code
 1.0.2   | 2019-01-26 | https://github.com/SV-Zanshin | Issue  #3 - Converted documentation to doxygen style
 1.0.1   | 2018-07-22 | https://github.com/SV-Zanshin | Corrected I2C datatypes
-1.0.1   | 2018-07-03 | https://github.com/SV-Zanshin | Issue  #1. Added waitForReading and parameter to getSensorData()
+1.0.1   | 2018-07-03 | https://github.com/SV-Zanshin | Issue  #1. Added waitForReading and param to getSensorData()
 1.0.0   | 2018-07-02 | https://github.com/SV-Zanshin | Added guard code against multiple I2C constants definitions
 1.0.0   | 2018-07-01 | https://github.com/SV-Zanshin | Added and tested I2C, SPI and software SPI connections
 1.0.0a  | 2018-06-30 | https://github.com/SV-Zanshin | Cloned from BME280 library and started recoding
@@ -93,6 +93,64 @@ Version | Date       | Developer                     | Comments
   const uint8_t  BME680_SOFTRESET_REGISTER        =    0xE0; ///< Reset when 0xB6 is written here
   const uint8_t  BME680_CHIPID                    =    0x61; ///< Hard-coded value 0x61 for BME680
   const uint8_t  BME680_RESET_CODE                =    0xB6; ///< Reset when this put in reset reg
+  const uint8_t  BME680_MEASURING_BIT_POSITION    =       5; ///< Bit position for measuring flag
+  const uint8_t  BME680_I2C_MIN_ADDRESS           =    0x76; ///< Minimum possible address for BME680
+  const uint8_t  BME680_I2C_MAX_ADDRESS           =    0x77; ///< Minimum possible address for BME680
+  const uint8_t  BME680_SPI_MEM_PAGE_POSITION     =       4; ///< Bit position for the memory page value
+  const uint8_t  BME680_HUMIDITY_MASK             =    0xF8; ///< Mask is binary B11111000
+  const uint8_t  BME680_TEMPERATURE_MASK          =    0xE3; ///< Mask is binary B11100011
+  const uint8_t  BME680_PRESSURE_MASK             =    0x1F; ///< Mask is binary B00011111
+
+  /*********************************************** 
+  ** Declare the constants used for calibration **
+  ***********************************************/
+  const uint8_t BME680_COEFF_SIZE1                =    25; // First array with coefficients
+  const uint8_t BME680_COEFF_SIZE2                =    16; // Second array with coefficients
+  const uint8_t BME680_COEFF_START_ADDRESS1       =  0x89; // start address for array 1
+  const uint8_t BME680_COEFF_START_ADDRESS2       =  0xE1; // start address for array 2
+  const uint8_t BME680_HUM_REG_SHIFT_VAL          =     4; // Ambient humidity shift value
+  const uint8_t BME680_BIT_H1_DATA_MSK            =  0x0F;
+  const uint8_t BME680_T2_LSB_REG                 =     1;
+  const uint8_t BME680_T2_MSB_REG                 =     2;
+  const uint8_t BME680_T3_REG		                  =     3;
+  const uint8_t BME680_P1_LSB_REG   	            =     5;
+  const uint8_t BME680_P1_MSB_REG	                =     6;
+  const uint8_t BME680_P2_LSB_REG	                =     7;
+  const uint8_t BME680_P2_MSB_REG	                =     8;
+  const uint8_t BME680_P3_REG		                  =     9;
+  const uint8_t BME680_P4_LSB_REG           	    =    11;
+  const uint8_t BME680_P4_MSB_REG          	      =    12;
+  const uint8_t BME680_P5_LSB_REG             	  =    13;
+  const uint8_t BME680_P5_MSB_REG           	    =    14;
+  const uint8_t BME680_P7_REG  	                  =    15;
+  const uint8_t BME680_P6_REG	                    =    16;
+  const uint8_t BME680_P8_LSB_REG    	            =    19;
+  const uint8_t BME680_P8_MSB_REG	                =    20;
+  const uint8_t BME680_P9_LSB_REG      	          =    21;
+  const uint8_t BME680_P9_MSB_REG	                =    22;
+  const uint8_t BME680_P10_REG		                =    23;
+  const uint8_t BME680_H2_MSB_REG	                =     0;
+  const uint8_t BME680_H2_LSB_REG	                =     1;
+  const uint8_t BME680_H1_LSB_REG    	            =     1;
+  const uint8_t BME680_H1_MSB_REG	                =     2;
+  const uint8_t BME680_H3_REG	                    =     3;
+  const uint8_t BME680_H4_REG    	                =     4;
+  const uint8_t BME680_H5_REG	                    =     5;
+  const uint8_t BME680_H6_REG                     =     6;
+  const uint8_t BME680_H7_REG                     =     7;
+  const uint8_t BME680_T1_LSB_REG	                =     8;
+  const uint8_t BME680_T1_MSB_REG      	          =     9;
+  const uint8_t BME680_GH2_LSB_REG                =    10;
+  const uint8_t BME680_GH2_MSB_REG                =    11;
+  const uint8_t BME680_GH1_REG	                  =    12;
+  const uint8_t BME680_GH3_REG	                  =    13;
+  const uint8_t BME680_ADDR_RES_HEAT_RANGE_ADDR   =  0x02;
+  const uint8_t BME680_RHRANGE_MSK                =  0x30;
+  const uint8_t BME680_ADDR_RES_HEAT_VAL_ADDR     =  0x00;
+  const uint8_t BME680_ADDR_RANGE_SW_ERR_ADDR     =  0x04;
+  const uint8_t BME680_RSERROR_MSK	              =  0xF0;
+
+
   /*****************************************************************************************************************
   ** Declare enumerated types used in the class                                                                   **
   *****************************************************************************************************************/
