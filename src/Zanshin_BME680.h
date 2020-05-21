@@ -1,12 +1,12 @@
 /*! @file Zanshin_BME680.h
 
-@mainpage Arduino Library to control a Bosch BME680 environmental Sensor
+@mainpage Arduino Library to control a Bosch BME680 Environmental Sensor
 
 @section Zanshin_BME680_section Description
 
-Class definition header for the Bosch BME680 temperature / humidity / pressure sensor. The sensor is described at 
-https://www.bosch-sensortec.com/bst/products/all_products/BME680 and the datasheet is available from Bosch at 
-https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf 
+Class definition header for the Bosch BME680 temperature / humidity / pressure / air quality sensor. The sensor is 
+described at https://www.bosch-sensortec.com/bst/products/all_products/BME680 and the datasheet is available from 
+Bosch at https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf 
 \n\n
 
 The BME680 can use either SPI or I2C for communications. This library supports I2C at various bus speeds as well as 
@@ -21,7 +21,7 @@ will be used as part of a third-party breakout board. There are several such boa
 example:\n
 Company  | Link
 -------  | ----------
-Sparkfun | https://www.sparkfun.com/products/14570
+SparkFun | https://www.sparkfun.com/products/14570
 BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
 Adafruit | https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout 
 
@@ -49,12 +49,14 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
-1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue #9 - Allow 2 devices when using I2C
-1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #5 - Adjust readings. Subsequently removed code again
-1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #8 - clean up comments and code
-1.0.2   | 2019-01-26 | https://github.com/SV-Zanshin | Issue #3 - Converted documentation to doxygen style
+1.0.5   | 2020-05-21 | https://github.com/SV-Zanshin | Issue #12 - First call to getSensorData() returns invalid data
+1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
+1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
+1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue  #5 - Adjust readings. Subsequently removed code again
+1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue  #8 - clean up comments and code
+1.0.2   | 2019-01-26 | https://github.com/SV-Zanshin | Issue  #3 - Converted documentation to doxygen style
 1.0.1   | 2018-07-22 | https://github.com/SV-Zanshin | Corrected I2C datatypes
-1.0.1   | 2018-07-03 | https://github.com/SV-Zanshin | Issue #1. Added waitForReading and parameter to getSensorData()
+1.0.1   | 2018-07-03 | https://github.com/SV-Zanshin | Issue  #1. Added waitForReading and param to getSensorData()
 1.0.0   | 2018-07-02 | https://github.com/SV-Zanshin | Added guard code against multiple I2C constants definitions
 1.0.0   | 2018-07-01 | https://github.com/SV-Zanshin | Added and tested I2C, SPI and software SPI connections
 1.0.0a  | 2018-06-30 | https://github.com/SV-Zanshin | Cloned from BME280 library and started recoding
@@ -91,15 +93,75 @@ Version | Date       | Developer                     | Comments
   const uint8_t  BME680_SOFTRESET_REGISTER        =    0xE0; ///< Reset when 0xB6 is written here
   const uint8_t  BME680_CHIPID                    =    0x61; ///< Hard-coded value 0x61 for BME680
   const uint8_t  BME680_RESET_CODE                =    0xB6; ///< Reset when this put in reset reg
+  const uint8_t  BME680_MEASURING_BIT_POSITION    =       5; ///< Bit position for measuring flag
+  const uint8_t  BME680_I2C_MIN_ADDRESS           =    0x76; ///< Minimum possible address for BME680
+  const uint8_t  BME680_I2C_MAX_ADDRESS           =    0x77; ///< Minimum possible address for BME680
+  const uint8_t  BME680_SPI_MEM_PAGE_POSITION     =       4; ///< Bit position for the memory page value
+  const uint8_t  BME680_HUMIDITY_MASK             =    0xF8; ///< Mask is binary B11111000
+  const uint8_t  BME680_TEMPERATURE_MASK          =    0xE3; ///< Mask is binary B11100011
+  const uint8_t  BME680_PRESSURE_MASK             =    0x1F; ///< Mask is binary B00011111
+  /*********************************************** 
+  ** Declare the constants used for calibration **
+  ***********************************************/
+  const uint8_t BME680_COEFF_SIZE1                =      25; ///< First array with coefficients
+  const uint8_t BME680_COEFF_SIZE2                =      16; ///< Second array with coefficients
+  const uint8_t BME680_COEFF_START_ADDRESS1       =    0x89; ///< start address for array 1
+  const uint8_t BME680_COEFF_START_ADDRESS2       =    0xE1; ///< start address for array 2
+  const uint8_t BME680_HUM_REG_SHIFT_VAL          =       4; ///< Ambient humidity shift value
+  const uint8_t BME680_BIT_H1_DATA_MSK            =    0x0F; ///< Mask for humidity
+  const uint8_t BME680_T2_LSB_REG                 =       1; ///< Register for temperature calibration
+  const uint8_t BME680_T2_MSB_REG                 =       2; ///< Register for temperature calibration
+  const uint8_t BME680_T3_REG		                  =       3; ///< Register for temperature calibration
+  const uint8_t BME680_P1_LSB_REG   	            =       5; ///< Register for pressure calibration
+  const uint8_t BME680_P1_MSB_REG	                =       6; ///< Register for pressure calibration
+  const uint8_t BME680_P2_LSB_REG	                =       7; ///< Register for pressure calibration
+  const uint8_t BME680_P2_MSB_REG	                =       8; ///< Register for pressure calibration
+  const uint8_t BME680_P3_REG		                  =       9; ///< Register for pressure calibration
+  const uint8_t BME680_P4_LSB_REG           	    =      11; ///< Register for pressure calibration
+  const uint8_t BME680_P4_MSB_REG          	      =      12; ///< Register for pressure calibration
+  const uint8_t BME680_P5_LSB_REG             	  =      13; ///< Register for pressure calibration
+  const uint8_t BME680_P5_MSB_REG           	    =      14; ///< Register for pressure calibration
+  const uint8_t BME680_P7_REG  	                  =      15; ///< Register for pressure calibration
+  const uint8_t BME680_P6_REG	                    =      16; ///< Register for pressure calibration
+  const uint8_t BME680_P8_LSB_REG    	            =      19; ///< Register for pressure calibration
+  const uint8_t BME680_P8_MSB_REG	                =      20; ///< Register for pressure calibration
+  const uint8_t BME680_P9_LSB_REG      	          =      21; ///< Register for pressure calibration
+  const uint8_t BME680_P9_MSB_REG	                =      22; ///< Register for pressure calibration
+  const uint8_t BME680_P10_REG		                =      23; ///< Register for pressure calibration
+  const uint8_t BME680_H2_MSB_REG	                =       0; ///< Register for humidity calibration
+  const uint8_t BME680_H2_LSB_REG	                =       1; ///< Register for humidity calibration
+  const uint8_t BME680_H1_LSB_REG    	            =       1; ///< Register for humidity calibration
+  const uint8_t BME680_H1_MSB_REG	                =       2; ///< Register for humidity calibration
+  const uint8_t BME680_H3_REG	                    =       3; ///< Register for humidity calibration
+  const uint8_t BME680_H4_REG    	                =       4; ///< Register for humidity calibration
+  const uint8_t BME680_H5_REG	                    =       5; ///< Register for humidity calibration
+  const uint8_t BME680_H6_REG                     =       6; ///< Register for humidity calibration
+  const uint8_t BME680_H7_REG                     =       7; ///< Register for humidity calibration
+  const uint8_t BME680_T1_LSB_REG	                =       8; ///< Register for gas calibration
+  const uint8_t BME680_T1_MSB_REG      	          =       9; ///< Register for gas calibration
+  const uint8_t BME680_GH2_LSB_REG                =      10; ///< Register for gas calibration
+  const uint8_t BME680_GH2_MSB_REG                =      11; ///< Register for gas calibration
+  const uint8_t BME680_GH1_REG	                  =      12; ///< Register for gas calibration
+  const uint8_t BME680_GH3_REG	                  =      13; ///< Register for gas calibration
+  const uint8_t BME680_ADDR_RES_HEAT_RANGE_ADDR   =    0x02; ///< Register for gas calibration
+  const uint8_t BME680_RHRANGE_MSK                =    0x30; ///< Register for gas calibration
+  const uint8_t BME680_ADDR_RES_HEAT_VAL_ADDR     =    0x00; ///< Register for gas calibration
+  const uint8_t BME680_ADDR_RANGE_SW_ERR_ADDR     =    0x04; ///< Register for gas calibration
+  const uint8_t BME680_RSERROR_MSK	              =    0xF0; ///< Register for gas calibration
+
+  #ifndef _BV
+    #define _BV(bit) (1 << (bit)) ///< Some implementations don't have this bit-shift macro pre-defined
+  #endif
+
   /*****************************************************************************************************************
   ** Declare enumerated types used in the class                                                                   **
   *****************************************************************************************************************/
   /*! @brief  Enumerate the sensor type */
-  enum sensorTypes       {TemperatureSensor,HumiditySensor,PressureSensor,GasSensor,UnknownSensor};
+  enum sensorTypes       {TemperatureSensor, HumiditySensor, PressureSensor, GasSensor, UnknownSensor};
   /*! @brief  Enumerate the Oversampling types */
   enum oversamplingTypes {SensorOff,Oversample1,Oversample2,Oversample4,Oversample8,Oversample16,UnknownOversample};
   /*! @brief  Enumerate the iir filter types */
-  enum iirFilterTypes    {IIROff,IIR2,IIR4,IIR8,IIR16,IIR32,IIR64,IIR128,UnknownIIR};
+  enum iirFilterTypes    {IIROff, IIR2, IIR4, IIR8, IIR16, IIR32, IIR64, IIR128, UnknownIIR};
   
   class BME680_Class 
   {
@@ -132,8 +194,7 @@ Version | Date       | Developer                     | Comments
       uint8_t  _I2CAddress = 0;                                               ///< Default is I2C address is unknown
       uint8_t  _cs,_sck,_mosi,_miso;                                          ///< Hardware and software SPI pins
       uint8_t  _H6,_P10,_res_heat_range;                                      ///< unsigned configuration vars
-      int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,                       //
-               _res_heat_val,_range_sw_error;                                 ///< signed configuration vars
+      int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,_res_heat,_rng_sw_err; ///< signed configuration vars
       uint16_t _H1,_H2,_T1,_P1;                                               ///< unsigned 16bit configuration vars
       int16_t  _G2,_T2,_P2,_P4,_P5,_P8,_P9;                                   ///< signed 16bit configuration vars
       int32_t  _tfine,_Temperature,_Pressure,_Humidity,_Gas;                  ///< signed 32bit configuration vars
@@ -149,11 +210,11 @@ Version | Date       | Developer                     | Comments
       template< typename T > uint8_t &getData(const uint8_t addr,T &value)
       {
         /*!
-        @brief     Template for reading from I2C or SPI using any data type
-        @details   As a template it can support compile-time data type definitions
-        @param[in] addr Memory address
-        @param[in] value Data Type "T" to read
-        @return    Size of data read in bytes
+          @brief     Template for reading from I2C or SPI using any data type
+          @details   As a template it can support compile-time data type definitions
+          @param[in] addr Memory address
+          @param[in] value Data Type "T" to read
+          @return    Size of data read in bytes
         */
         uint8_t* bytePtr    = (uint8_t*)&value;                              // Pointer to structure beginning
         static uint8_t  structSize = sizeof(T);                              // Number of bytes in structure
@@ -208,11 +269,11 @@ Version | Date       | Developer                     | Comments
       template< typename T > uint8_t &putData(const uint8_t addr,const T &value)
       {
         /*!
-        @brief     Template for writing to I2C or SPI using any data type
-        @details   As a template it can support compile-time data type definitions
-        @param[in] addr Memory address
-        @param[in] value Data Type "T" to write
-        @return    Size of data written in bytes
+          @brief     Template for writing to I2C or SPI using any data type
+          @details   As a template it can support compile-time data type definitions
+          @param[in] addr Memory address
+          @param[in] value Data Type "T" to write
+          @return    Size of data written in bytes
         */
         const uint8_t* bytePtr = (const uint8_t*)&value;                     // Pointer to structure beginning
         static uint8_t  structSize = sizeof(T);                              // Number of bytes in structure

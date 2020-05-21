@@ -53,21 +53,22 @@ bool BME680_Class::begin(const uint32_t i2cSpeed, const uint8_t i2cAddress)
   * @param[in] i2cAddress I2C Address, use 0 to self-determine
   * return "true" if successful otherwise false
   */
-  Wire.begin();                                          // Start I2C as master device
-  Wire.setClock(i2cSpeed);                               // Set I2C bus speed
-  for (_I2CAddress=0x76;_I2CAddress<=0x77;_I2CAddress++) // loop all possible addresses
+  Wire.begin();                                                                     // Start I2C as master
+  Wire.setClock(i2cSpeed);                                                          // Set I2C bus speed
+  for (_I2CAddress = BME680_I2C_MIN_ADDRESS;_I2CAddress <= BME680_I2C_MAX_ADDRESS;  // Loop through all possible
+       _I2CAddress++)                                                               // I2C addresses
   {
-    if (i2cAddress == 0 || _I2CAddress == i2cAddress)
+    if (i2cAddress == 0 || _I2CAddress == i2cAddress)                               // Only check íf relevant 
     {
-      Wire.beginTransmission(_I2CAddress);                 // Check current address for BME680
-      if (Wire.endTransmission()==0)                       // If no error we have found a device
-      {
-        return commonInitialization();                     // Perform common initialization
+      Wire.beginTransmission(_I2CAddress);                                          // Check for BME680 here
+      if (Wire.endTransmission()==0)                                                // We have found a device
+      {                                                                             // that could be a BME680, so
+        return commonInitialization();                                              // perform common initialization
       } // of if-then we have found a device
     } // of if-then check all or a specific address
   } // of for-next each I2C address loop
-  _I2CAddress = 0; // Set to 0 to denote no I2C found
-  return false;    // return failure if we get here 
+  _I2CAddress = 0;                                                                  // Set to denote no device found
+  return false;                                                                     // return failure if we get here 
 } // of method begin()
 bool BME680_Class::begin(const uint8_t chipSelect)
 {
@@ -78,15 +79,15 @@ bool BME680_Class::begin(const uint8_t chipSelect)
   * @param[in] chipSelect Arduino Pin number for the Slave-Select pin or the I2C address
   * return     "true" if successful otherwise false
   */
-  if (chipSelect == 0x76 || chipSelect == 0x77)  // If 0x76 or 0x77 then we have an I2C call
-  {                                              //
-    return begin(I2C_STANDARD_MODE, chipSelect); // I2C standard speed but use explicit address
-  } // if-then we have an I2C call               //
-  _cs = chipSelect;                              // Store value for future use
-  digitalWrite(_cs, HIGH);                       // High means ignore master
-  pinMode(_cs, OUTPUT);                          // Make the chip select pin output
-  SPI.begin();                                   // Start hardware SPI
-  return commonInitialization();                 // Perform common initialization
+  if (chipSelect==BME680_I2C_MIN_ADDRESS || chipSelect==BME680_I2C_MIN_ADDRESS) // If 0x76 or 0x77 then we have I2C
+  {                                                                             //
+    return begin(I2C_STANDARD_MODE, chipSelect);                                // Std speed with explicit address
+  } // if-then we have an I2C call                                              //
+  _cs = chipSelect;                                                             // Store value for future use
+  digitalWrite(_cs, HIGH);                                                      // High means ignore master
+  pinMode(_cs, OUTPUT);                                                         // Make the chip select pin output
+  SPI.begin();                                                                  // Start hardware SPI
+  return commonInitialization();                                                // Perform common initialization
 } // of method begin()
 bool BME680_Class::begin(const uint8_t chipSelect, const uint8_t mosi, const uint8_t miso, const uint8_t sck)
 {
@@ -114,17 +115,20 @@ bool BME680_Class::commonInitialization()
   * @details Called from all of the overloaded "begin()" functions once protocol has been selected
   * return "true" if successful otherwise false
   */
-  if (_I2CAddress==0 && readByte(BME680_SPI_REGISTER)!=0) 
+  if (_I2CAddress==0 && readByte(BME680_SPI_REGISTER)!=0)               // Wrong mode for SPI
   {
-    putData(BME680_SPI_REGISTER,(uint8_t)0); // We are in the wrong mode for SPI so return to correct SPI page
+    putData(BME680_SPI_REGISTER,(uint8_t)0);                            // return to correct SPI page
   } // of if-then we are in SPI mode
-  if (readByte(BME680_CHIPID_REGISTER)==BME680_CHIPID) // check for correct chip id
+  if (readByte(BME680_CHIPID_REGISTER)==BME680_CHIPID)                  // check for correct chip id
   {
-    getCalibration();                                       // get the calibration values
-    if (_I2CAddress==0) 
-    {
-      putData(BME680_SPI_REGISTER|0x80,(uint8_t)B00010000); // Switch to correct register bank
+    getCalibration();                                                   // get the calibration values
+    if (_I2CAddress==0)                                                 // If using SPI, then we need to ensure
+    {                                                                   // that we switch to the correct
+      putData(BME680_SPI_REGISTER|0x80,                                 // register bank by setting the
+              (uint8_t)_BV(BME680_SPI_MEM_PAGE_POSITION));              // page position bit
     } // of if-then SPI mode
+    uint8_t workRegister = readByte(BME680_CONTROL_MEASURE_REGISTER);   // Read the control measure
+    putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(workRegister|1)); // Trigger start of first measurement
     return true;
   } // of if-then device is really a BME680
   else return false;
@@ -161,51 +165,6 @@ void BME680_Class::getCalibration()
   * param[in] addr Address of device
   * return    single byte read
   */
-  const uint8_t BME680_COEFF_SIZE1              =    25; // First array with coefficients
-  const uint8_t BME680_COEFF_SIZE2              =    16; // Second array with coefficients
-  const uint8_t BME680_COEFF_START_ADDRESS1     =  0x89; // start address for array 1
-  const uint8_t BME680_COEFF_START_ADDRESS2     =  0xE1; // start address for array 2
-  const uint8_t BME680_HUM_REG_SHIFT_VAL        =     4; // Ambient humidity shift value
-  const uint8_t BME680_BIT_H1_DATA_MSK          =  0x0F;
-  const uint8_t BME680_T2_LSB_REG               =     1;
-  const uint8_t BME680_T2_MSB_REG               =     2;
-  const uint8_t BME680_T3_REG		                =     3;
-  const uint8_t BME680_P1_LSB_REG   	          =     5;
-  const uint8_t BME680_P1_MSB_REG	              =     6;
-  const uint8_t BME680_P2_LSB_REG	              =     7;
-  const uint8_t BME680_P2_MSB_REG	              =     8;
-  const uint8_t BME680_P3_REG		                =     9;
-  const uint8_t BME680_P4_LSB_REG         	    =    11;
-  const uint8_t BME680_P4_MSB_REG        	      =    12;
-  const uint8_t BME680_P5_LSB_REG           	  =    13;
-  const uint8_t BME680_P5_MSB_REG         	    =    14;
-  const uint8_t BME680_P7_REG  	                =    15;
-  const uint8_t BME680_P6_REG	                  =    16;
-  const uint8_t BME680_P8_LSB_REG    	          =    19;
-  const uint8_t BME680_P8_MSB_REG	              =    20;
-  const uint8_t BME680_P9_LSB_REG    	          =    21;
-  const uint8_t BME680_P9_MSB_REG	              =    22;
-  const uint8_t BME680_P10_REG		              =    23;
-  const uint8_t BME680_H2_MSB_REG	              =     0;
-  const uint8_t BME680_H2_LSB_REG	              =     1;
-  const uint8_t BME680_H1_LSB_REG    	          =     1;
-  const uint8_t BME680_H1_MSB_REG	              =     2;
-  const uint8_t BME680_H3_REG	                  =     3;
-  const uint8_t BME680_H4_REG    	              =     4;
-  const uint8_t BME680_H5_REG	                  =     5;
-  const uint8_t BME680_H6_REG                   =     6;
-  const uint8_t BME680_H7_REG                   =     7;
-  const uint8_t BME680_T1_LSB_REG	              =     8;
-  const uint8_t BME680_T1_MSB_REG    	          =     9;
-  const uint8_t BME680_GH2_LSB_REG              =    10;
-  const uint8_t BME680_GH2_MSB_REG              =    11;
-  const uint8_t BME680_GH1_REG	                =    12;
-  const uint8_t BME680_GH3_REG	                =    13;
-  const uint8_t BME680_ADDR_RES_HEAT_RANGE_ADDR =  0x02;
-  const uint8_t BME680_RHRANGE_MSK              =  0x30;
-  const uint8_t BME680_ADDR_RES_HEAT_VAL_ADDR   =  0x00;
-  const uint8_t BME680_ADDR_RANGE_SW_ERR_ADDR   =  0x04;
-  const uint8_t BME680_RSERROR_MSK	            =  0xF0;
                        /*************************************
                        ** Temperature related coefficients **
                        *************************************/
@@ -251,9 +210,9 @@ void BME680_Class::getCalibration()
   getData(BME680_ADDR_RES_HEAT_RANGE_ADDR,temp_var);
   _res_heat_range = ((temp_var & BME680_RHRANGE_MSK) / 16);
   getData(BME680_ADDR_RES_HEAT_VAL_ADDR,temp_var);
-  _res_heat_val = (int8_t) temp_var;
+  _res_heat = (int8_t) temp_var;
   getData(BME680_ADDR_RANGE_SW_ERR_ADDR,temp_var);
-  _range_sw_error = ((int8_t) temp_var & (int8_t) BME680_RSERROR_MSK) / 16;
+  _rng_sw_err = ((int8_t) temp_var & (int8_t) BME680_RSERROR_MSK) / 16;
 } // of method getCalibration()
 bool BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling) 
 {
@@ -272,19 +231,19 @@ bool BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling)
   {
     case HumiditySensor :
     {
-      tempRegister = readByte(BME680_CONTROL_HUMIDITY_REGISTER) & B11111000;  // Get contents, mask bits 3-7
+      tempRegister = readByte(BME680_CONTROL_HUMIDITY_REGISTER) & BME680_HUMIDITY_MASK;  // Get contents and mask
       putData(BME680_CONTROL_HUMIDITY_REGISTER,(uint8_t)(tempRegister|sampling));// Update humidity bits 0:2
       break;
     } // of HumiditySensor
     case PressureSensor : 
     {
-      tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & B11100011; // Get contents, mask unused bits
+      tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & BME680_TEMPERATURE_MASK; // Get contents and mask
       putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(tempRegister|(sampling<<2))); // Update pressure bits
       break;
     } // of PressureSensor
     case TemperatureSensor : 
     {
-      tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & B00011111; // Get contents, mask bits 0-4
+      tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & BME680_PRESSURE_MASK; // Get contentsand mask
       putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(tempRegister|(sampling<<5)));// Update humidity bits 5:7
       break;
     } // of TemperatureSensor
@@ -352,7 +311,7 @@ const uint32_t lookupTable2[16]  = {
   int64_t var1, var2, var3, var4, var5, var6, temp_scaled; // Work variables
   uint32_t adc_temp, adc_pres;                             // Raw ADC temperature and pressure
   uint16_t adc_hum, adc_gas_res;                           // Raw ADC humidity and gas
-  if (waitSwitch) waitForReadings();                       // Don't return until readings done
+  if (waitSwitch) waitForReadings();                       // Doesn't return until the readings are finished
   getData(BME680_STATUS_REGISTER,buff);                    // read all 15 bytes in one go
   adc_pres    = (uint32_t)(((uint32_t) buff[2]*4096)|((uint32_t)buff[3]*16)| ((uint32_t)buff[4]/16));// put the 3 bytes of Pressure
   adc_temp    = (uint32_t)(((uint32_t) buff[5]*4096)|((uint32_t)buff[6]*16)| ((uint32_t)buff[7]/16));// put the 3 bytes of Temperature
@@ -415,7 +374,7 @@ const uint32_t lookupTable2[16]  = {
                     // Compute the Gas      //
                     //**********************//
 	uint64_t uvar2;
-	var1 = (int64_t)((1340+(5*(int64_t)_range_sw_error))*
+	var1 = (int64_t)((1340+(5*(int64_t)_rng_sw_err))*
 	((int64_t) lookupTable1[gas_range])) >> 16;
 	uvar2 = (((int64_t)((int64_t)adc_gas_res<<15)-(int64_t)(16777216))+var1);
 	var3 = (((int64_t) lookupTable2[gas_range] * (int64_t) var1) >> 9);
@@ -428,7 +387,8 @@ void BME680_Class::waitForReadings()
   /*!
   * @brief   Only returns once a measurement on the BME680 has completed
   */
-  while ((readByte(BME680_STATUS_REGISTER)&B00100000)!=0); // Loop until readings bit is cleared by BME680
+  while ((readByte(BME680_STATUS_REGISTER) &       // Loop until the "measuring" bit
+          _BV(BME680_MEASURING_BIT_POSITION))!=0); // is cleared by BME680
 } // of method waitForReadings
 bool BME680_Class::setGas(uint16_t GasTemp,  uint16_t GasMillis) 
 {
@@ -455,7 +415,7 @@ bool BME680_Class::setGas(uint16_t GasTemp,  uint16_t GasMillis)
     var2 = (_H1+784)*(((((_H2+154009)*GasTemp*5)/100)+3276800)/10);
     var3 = var1 + (var2 / 2);
     var4 = (var3 / (_res_heat_range+4));
-    var5 = (131 * _res_heat_val) + 65536;
+    var5 = (131 * _res_heat) + 65536;
     heatr_res_x100 = (int32_t) (((var4 / var5) - 250) * 34);
     heatr_res = (uint8_t) ((heatr_res_x100 + 50) / 100);
     putData(BME680_GAS_HEATER_REGISTER0,heatr_res);
