@@ -114,17 +114,19 @@ bool BME680_Class::commonInitialization()
   * @details Called from all of the overloaded "begin()" functions once protocol has been selected
   * return "true" if successful otherwise false
   */
-  if (_I2CAddress==0 && readByte(BME680_SPI_REGISTER)!=0) 
+  if (_I2CAddress==0 && readByte(BME680_SPI_REGISTER)!=0)               // Wrong mode for SPI
   {
-    putData(BME680_SPI_REGISTER,(uint8_t)0); // We are in the wrong mode for SPI so return to correct SPI page
+    putData(BME680_SPI_REGISTER,(uint8_t)0);                            // return to correct SPI page
   } // of if-then we are in SPI mode
-  if (readByte(BME680_CHIPID_REGISTER)==BME680_CHIPID) // check for correct chip id
+  if (readByte(BME680_CHIPID_REGISTER)==BME680_CHIPID)                  // check for correct chip id
   {
-    getCalibration();                                       // get the calibration values
+    getCalibration();                                                   // get the calibration values
     if (_I2CAddress==0) 
     {
-      putData(BME680_SPI_REGISTER|0x80,(uint8_t)B00010000); // Switch to correct register bank
+      putData(BME680_SPI_REGISTER|0x80,(uint8_t)B00010000);             // Switch to correct register bank
     } // of if-then SPI mode
+    uint8_t workRegister = readByte(BME680_CONTROL_MEASURE_REGISTER);   // Read the control measure
+    putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(workRegister|1)); // Trigger start of first measurement
     return true;
   } // of if-then device is really a BME680
   else return false;
@@ -352,7 +354,7 @@ const uint32_t lookupTable2[16]  = {
   int64_t var1, var2, var3, var4, var5, var6, temp_scaled; // Work variables
   uint32_t adc_temp, adc_pres;                             // Raw ADC temperature and pressure
   uint16_t adc_hum, adc_gas_res;                           // Raw ADC humidity and gas
-  if (waitSwitch) waitForReadings();                       // Don't return until readings done
+  if (waitSwitch) waitForReadings();                       // Doesn't return until the readings are finished
   getData(BME680_STATUS_REGISTER,buff);                    // read all 15 bytes in one go
   adc_pres    = (uint32_t)(((uint32_t) buff[2]*4096)|((uint32_t)buff[3]*16)| ((uint32_t)buff[4]/16));// put the 3 bytes of Pressure
   adc_temp    = (uint32_t)(((uint32_t) buff[5]*4096)|((uint32_t)buff[6]*16)| ((uint32_t)buff[7]/16));// put the 3 bytes of Temperature

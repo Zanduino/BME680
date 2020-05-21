@@ -49,12 +49,14 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
-1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue #9 - Allow 2 devices when using I2C
-1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #5 - Adjust readings. Subsequently removed code again
-1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue #8 - clean up comments and code
-1.0.2   | 2019-01-26 | https://github.com/SV-Zanshin | Issue #3 - Converted documentation to doxygen style
+1.0.5   | 2020-05-21 | https://github.com/SV-Zanshin | Issue #12 - First call to read data always invalid
+1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
+1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
+1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue  #5 - Adjust readings. Subsequently removed code again
+1.0.3   | 2020-05-09 | https://github.com/SV-Zanshin | Issue  #8 - clean up comments and code
+1.0.2   | 2019-01-26 | https://github.com/SV-Zanshin | Issue  #3 - Converted documentation to doxygen style
 1.0.1   | 2018-07-22 | https://github.com/SV-Zanshin | Corrected I2C datatypes
-1.0.1   | 2018-07-03 | https://github.com/SV-Zanshin | Issue #1. Added waitForReading and parameter to getSensorData()
+1.0.1   | 2018-07-03 | https://github.com/SV-Zanshin | Issue  #1. Added waitForReading and parameter to getSensorData()
 1.0.0   | 2018-07-02 | https://github.com/SV-Zanshin | Added guard code against multiple I2C constants definitions
 1.0.0   | 2018-07-01 | https://github.com/SV-Zanshin | Added and tested I2C, SPI and software SPI connections
 1.0.0a  | 2018-06-30 | https://github.com/SV-Zanshin | Cloned from BME280 library and started recoding
