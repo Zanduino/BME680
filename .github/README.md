@@ -25,6 +25,6 @@ Non-condensing humidity between 0% and 100% is measured with an accuracy of ±3%
 The pressure sensor works in temperatures between -40°C and +85°C although the zone of full accuracy only goes from 0°C to +65°C. Pressure is measured between 300hPa and 1100hPa with an accuracy of ±1.0 hPa and a resolution of 0.2Pa
 
 ### Environment gas sensing
-The gas sensor works by heating a small surface internally and measuring the resistance of the gas layer. This indicates the amount of volatile components in the air and can be used as an indirect means of measuring of air quality.
+The gas sensor works by heating a small surface internally and measuring the resistance of the gas layer. This indicates the amount of volatile components in the air and can be used as an indirect means of measuring of air quality. The actual computation of "indoor air quality" is more complex than measuring the resistance, as the relative humidity, temperature, and element heating all play a role in determining that value. These calculations not only require the use of floating-point math, but are quite complex and memory-intensive and are not included in the library. If IAQ measurements are required, then the best solution is to use Bosch's [BSEC](https://www.bosch-sensortec.com/software-tools/software/bsec/) software  - but keep in mind that it won't run on most smaller Arduino platforms.
 
 ![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
