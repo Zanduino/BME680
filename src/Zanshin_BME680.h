@@ -151,7 +151,7 @@ Version | Date       | Developer                     | Comments
   const uint8_t BME680_RSERROR_MSK	              =    0xF0; ///< Register for gas calibration
 
   #ifndef _BV
-    #define _BV(bit) (1 << (bit)) // Some imlpementation don't have this macro pre-defined
+    #define _BV(bit) (1 << (bit)) ///< Some implementations don't have this bit-shift macro pre-defined
   #endif
 
   /*****************************************************************************************************************
