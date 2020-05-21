@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">BME680
-   &#160;<span id="projectnumber">Version 1.0.4</span>
+   &#160;<span id="projectnumber">Version 1.0.5</span>
    </div>
    <div id="projectbrief">Arduino Library for Bosch BME680 Temperature, Humidity, Pressure and Gas sensor</div>
   </td>
@@ -116,6 +116,10 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#ab1ba09cc86d54a24a664eacdd9d30030">I2C_MODES</a></td></tr>
 <tr class="memdesc:ab1ba09cc86d54a24a664eacdd9d30030"><td class="mdescLeft">&#160;</td><td class="mdescRight">Guard code definition for the I2C modes. <br /></td></tr>
 <tr class="separator:ab1ba09cc86d54a24a664eacdd9d30030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11643f271076024c395a93800b3d9546"><td class="memItemLeft" align="right" valign="top"><a id="a11643f271076024c395a93800b3d9546"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a11643f271076024c395a93800b3d9546">_BV</a>(bit)&#160;&#160;&#160;(1 &lt;&lt; (bit))</td></tr>
+<tr class="memdesc:a11643f271076024c395a93800b3d9546"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some implementations don't have this bit-shift macro pre-defined. <br /></td></tr>
+<tr class="separator:a11643f271076024c395a93800b3d9546"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -234,6 +238,214 @@ const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a16debb81be1c7b592d11fb192196e81a">BME680_RESET_CODE</a> = 0xB6</td></tr>
 <tr class="memdesc:a16debb81be1c7b592d11fb192196e81a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset when this put in reset reg. <br /></td></tr>
 <tr class="separator:a16debb81be1c7b592d11fb192196e81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95927b2b08471c08ac3871baf04496ce"><td class="memItemLeft" align="right" valign="top"><a id="a95927b2b08471c08ac3871baf04496ce"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a95927b2b08471c08ac3871baf04496ce">BME680_MEASURING_BIT_POSITION</a> = 5</td></tr>
+<tr class="memdesc:a95927b2b08471c08ac3871baf04496ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bit position for measuring flag. <br /></td></tr>
+<tr class="separator:a95927b2b08471c08ac3871baf04496ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25ac0a24b74d5de2a99511f8ac60924d"><td class="memItemLeft" align="right" valign="top"><a id="a25ac0a24b74d5de2a99511f8ac60924d"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a25ac0a24b74d5de2a99511f8ac60924d">BME680_I2C_MIN_ADDRESS</a> = 0x76</td></tr>
+<tr class="memdesc:a25ac0a24b74d5de2a99511f8ac60924d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum possible address for BME680. <br /></td></tr>
+<tr class="separator:a25ac0a24b74d5de2a99511f8ac60924d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5839fa66b9178a4d7181a684a26d1000"><td class="memItemLeft" align="right" valign="top"><a id="a5839fa66b9178a4d7181a684a26d1000"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a5839fa66b9178a4d7181a684a26d1000">BME680_I2C_MAX_ADDRESS</a> = 0x77</td></tr>
+<tr class="memdesc:a5839fa66b9178a4d7181a684a26d1000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum possible address for BME680. <br /></td></tr>
+<tr class="separator:a5839fa66b9178a4d7181a684a26d1000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a209c17e27853bd492679d181521a7157"><td class="memItemLeft" align="right" valign="top"><a id="a209c17e27853bd492679d181521a7157"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a209c17e27853bd492679d181521a7157">BME680_SPI_MEM_PAGE_POSITION</a> = 4</td></tr>
+<tr class="memdesc:a209c17e27853bd492679d181521a7157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bit position for the memory page value. <br /></td></tr>
+<tr class="separator:a209c17e27853bd492679d181521a7157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc3d0b97ab3e408db0d3ee3cbe5143de"><td class="memItemLeft" align="right" valign="top"><a id="acc3d0b97ab3e408db0d3ee3cbe5143de"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#acc3d0b97ab3e408db0d3ee3cbe5143de">BME680_HUMIDITY_MASK</a> = 0xF8</td></tr>
+<tr class="memdesc:acc3d0b97ab3e408db0d3ee3cbe5143de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask is binary B11111000. <br /></td></tr>
+<tr class="separator:acc3d0b97ab3e408db0d3ee3cbe5143de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08500e8b503f5687278ef3d372652a0"><td class="memItemLeft" align="right" valign="top"><a id="ac08500e8b503f5687278ef3d372652a0"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#ac08500e8b503f5687278ef3d372652a0">BME680_TEMPERATURE_MASK</a> = 0xE3</td></tr>
+<tr class="memdesc:ac08500e8b503f5687278ef3d372652a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask is binary B11100011. <br /></td></tr>
+<tr class="separator:ac08500e8b503f5687278ef3d372652a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa253bf5f102bcdfb2c1f402e78ade65f"><td class="memItemLeft" align="right" valign="top"><a id="aa253bf5f102bcdfb2c1f402e78ade65f"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#aa253bf5f102bcdfb2c1f402e78ade65f">BME680_PRESSURE_MASK</a> = 0x1F</td></tr>
+<tr class="memdesc:aa253bf5f102bcdfb2c1f402e78ade65f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask is binary B00011111. <br /></td></tr>
+<tr class="separator:aa253bf5f102bcdfb2c1f402e78ade65f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15560776ecd660390278c8ea59165af8"><td class="memItemLeft" align="right" valign="top"><a id="a15560776ecd660390278c8ea59165af8"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a15560776ecd660390278c8ea59165af8">BME680_COEFF_SIZE1</a> = 25</td></tr>
+<tr class="memdesc:a15560776ecd660390278c8ea59165af8"><td class="mdescLeft">&#160;</td><td class="mdescRight">First array with coefficients. <br /></td></tr>
+<tr class="separator:a15560776ecd660390278c8ea59165af8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77001398d1e2ff56fe299987830732cc"><td class="memItemLeft" align="right" valign="top"><a id="a77001398d1e2ff56fe299987830732cc"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a77001398d1e2ff56fe299987830732cc">BME680_COEFF_SIZE2</a> = 16</td></tr>
+<tr class="memdesc:a77001398d1e2ff56fe299987830732cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second array with coefficients. <br /></td></tr>
+<tr class="separator:a77001398d1e2ff56fe299987830732cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab14258e0c80219dda52cb9a5e25c909f"><td class="memItemLeft" align="right" valign="top"><a id="ab14258e0c80219dda52cb9a5e25c909f"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#ab14258e0c80219dda52cb9a5e25c909f">BME680_COEFF_START_ADDRESS1</a> = 0x89</td></tr>
+<tr class="memdesc:ab14258e0c80219dda52cb9a5e25c909f"><td class="mdescLeft">&#160;</td><td class="mdescRight">start address for array 1 <br /></td></tr>
+<tr class="separator:ab14258e0c80219dda52cb9a5e25c909f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03779edb5939e7bd0eb9c938f5df0fae"><td class="memItemLeft" align="right" valign="top"><a id="a03779edb5939e7bd0eb9c938f5df0fae"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a03779edb5939e7bd0eb9c938f5df0fae">BME680_COEFF_START_ADDRESS2</a> = 0xE1</td></tr>
+<tr class="memdesc:a03779edb5939e7bd0eb9c938f5df0fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">start address for array 2 <br /></td></tr>
+<tr class="separator:a03779edb5939e7bd0eb9c938f5df0fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e6f3c85b8fc80e89e8a218b32917d27"><td class="memItemLeft" align="right" valign="top"><a id="a5e6f3c85b8fc80e89e8a218b32917d27"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a5e6f3c85b8fc80e89e8a218b32917d27">BME680_HUM_REG_SHIFT_VAL</a> = 4</td></tr>
+<tr class="memdesc:a5e6f3c85b8fc80e89e8a218b32917d27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ambient humidity shift value. <br /></td></tr>
+<tr class="separator:a5e6f3c85b8fc80e89e8a218b32917d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a158cb9a8b64ddb74c494d62bb774310d"><td class="memItemLeft" align="right" valign="top"><a id="a158cb9a8b64ddb74c494d62bb774310d"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a158cb9a8b64ddb74c494d62bb774310d">BME680_BIT_H1_DATA_MSK</a> = 0x0F</td></tr>
+<tr class="memdesc:a158cb9a8b64ddb74c494d62bb774310d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask for humidity. <br /></td></tr>
+<tr class="separator:a158cb9a8b64ddb74c494d62bb774310d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa59b597a6ff1c4b3d75335f2fba9f02"><td class="memItemLeft" align="right" valign="top"><a id="afa59b597a6ff1c4b3d75335f2fba9f02"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#afa59b597a6ff1c4b3d75335f2fba9f02">BME680_T2_LSB_REG</a> = 1</td></tr>
+<tr class="memdesc:afa59b597a6ff1c4b3d75335f2fba9f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for temperature calibration. <br /></td></tr>
+<tr class="separator:afa59b597a6ff1c4b3d75335f2fba9f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0812885c49ed199bd229ade7f433c771"><td class="memItemLeft" align="right" valign="top"><a id="a0812885c49ed199bd229ade7f433c771"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a0812885c49ed199bd229ade7f433c771">BME680_T2_MSB_REG</a> = 2</td></tr>
+<tr class="memdesc:a0812885c49ed199bd229ade7f433c771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for temperature calibration. <br /></td></tr>
+<tr class="separator:a0812885c49ed199bd229ade7f433c771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bb283f982f60b9a8c23a7df436875fa"><td class="memItemLeft" align="right" valign="top"><a id="a2bb283f982f60b9a8c23a7df436875fa"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a2bb283f982f60b9a8c23a7df436875fa">BME680_T3_REG</a> = 3</td></tr>
+<tr class="memdesc:a2bb283f982f60b9a8c23a7df436875fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for temperature calibration. <br /></td></tr>
+<tr class="separator:a2bb283f982f60b9a8c23a7df436875fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8ccaddd4499507f92b7a04e9b6036ef"><td class="memItemLeft" align="right" valign="top"><a id="af8ccaddd4499507f92b7a04e9b6036ef"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#af8ccaddd4499507f92b7a04e9b6036ef">BME680_P1_LSB_REG</a> = 5</td></tr>
+<tr class="memdesc:af8ccaddd4499507f92b7a04e9b6036ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:af8ccaddd4499507f92b7a04e9b6036ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a862b3e25a4ba0211ce782d7a10da499f"><td class="memItemLeft" align="right" valign="top"><a id="a862b3e25a4ba0211ce782d7a10da499f"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a862b3e25a4ba0211ce782d7a10da499f">BME680_P1_MSB_REG</a> = 6</td></tr>
+<tr class="memdesc:a862b3e25a4ba0211ce782d7a10da499f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a862b3e25a4ba0211ce782d7a10da499f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a996b4bf540847cd920bc2d496e584721"><td class="memItemLeft" align="right" valign="top"><a id="a996b4bf540847cd920bc2d496e584721"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a996b4bf540847cd920bc2d496e584721">BME680_P2_LSB_REG</a> = 7</td></tr>
+<tr class="memdesc:a996b4bf540847cd920bc2d496e584721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a996b4bf540847cd920bc2d496e584721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ee1c7d5e24f5af428b00782c3cf3a26"><td class="memItemLeft" align="right" valign="top"><a id="a3ee1c7d5e24f5af428b00782c3cf3a26"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a3ee1c7d5e24f5af428b00782c3cf3a26">BME680_P2_MSB_REG</a> = 8</td></tr>
+<tr class="memdesc:a3ee1c7d5e24f5af428b00782c3cf3a26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a3ee1c7d5e24f5af428b00782c3cf3a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8adc1de4e105c05457922bda89f4fe2b"><td class="memItemLeft" align="right" valign="top"><a id="a8adc1de4e105c05457922bda89f4fe2b"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a8adc1de4e105c05457922bda89f4fe2b">BME680_P3_REG</a> = 9</td></tr>
+<tr class="memdesc:a8adc1de4e105c05457922bda89f4fe2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a8adc1de4e105c05457922bda89f4fe2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79b03e82b75203060d966abfc8decc52"><td class="memItemLeft" align="right" valign="top"><a id="a79b03e82b75203060d966abfc8decc52"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a79b03e82b75203060d966abfc8decc52">BME680_P4_LSB_REG</a> = 11</td></tr>
+<tr class="memdesc:a79b03e82b75203060d966abfc8decc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a79b03e82b75203060d966abfc8decc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e370e73ca3b599c45acbf43712a8fb"><td class="memItemLeft" align="right" valign="top"><a id="ab1e370e73ca3b599c45acbf43712a8fb"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#ab1e370e73ca3b599c45acbf43712a8fb">BME680_P4_MSB_REG</a> = 12</td></tr>
+<tr class="memdesc:ab1e370e73ca3b599c45acbf43712a8fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:ab1e370e73ca3b599c45acbf43712a8fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51c0f273fdc5bfb9bd7e98ca43e6f425"><td class="memItemLeft" align="right" valign="top"><a id="a51c0f273fdc5bfb9bd7e98ca43e6f425"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a51c0f273fdc5bfb9bd7e98ca43e6f425">BME680_P5_LSB_REG</a> = 13</td></tr>
+<tr class="memdesc:a51c0f273fdc5bfb9bd7e98ca43e6f425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a51c0f273fdc5bfb9bd7e98ca43e6f425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a203cbecdf84a766710d81b8c039bb5"><td class="memItemLeft" align="right" valign="top"><a id="a9a203cbecdf84a766710d81b8c039bb5"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a9a203cbecdf84a766710d81b8c039bb5">BME680_P5_MSB_REG</a> = 14</td></tr>
+<tr class="memdesc:a9a203cbecdf84a766710d81b8c039bb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a9a203cbecdf84a766710d81b8c039bb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf20157ac7c32e24aa7c8253eeb7fe92"><td class="memItemLeft" align="right" valign="top"><a id="aaf20157ac7c32e24aa7c8253eeb7fe92"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#aaf20157ac7c32e24aa7c8253eeb7fe92">BME680_P7_REG</a> = 15</td></tr>
+<tr class="memdesc:aaf20157ac7c32e24aa7c8253eeb7fe92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:aaf20157ac7c32e24aa7c8253eeb7fe92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b15450b8cb9b6bff83788cb48cfd42c"><td class="memItemLeft" align="right" valign="top"><a id="a0b15450b8cb9b6bff83788cb48cfd42c"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a0b15450b8cb9b6bff83788cb48cfd42c">BME680_P6_REG</a> = 16</td></tr>
+<tr class="memdesc:a0b15450b8cb9b6bff83788cb48cfd42c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a0b15450b8cb9b6bff83788cb48cfd42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3565c188efc8e45466c391e0662798b5"><td class="memItemLeft" align="right" valign="top"><a id="a3565c188efc8e45466c391e0662798b5"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a3565c188efc8e45466c391e0662798b5">BME680_P8_LSB_REG</a> = 19</td></tr>
+<tr class="memdesc:a3565c188efc8e45466c391e0662798b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a3565c188efc8e45466c391e0662798b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a142ed049d3e23e8397b61d8bc0a90947"><td class="memItemLeft" align="right" valign="top"><a id="a142ed049d3e23e8397b61d8bc0a90947"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a142ed049d3e23e8397b61d8bc0a90947">BME680_P8_MSB_REG</a> = 20</td></tr>
+<tr class="memdesc:a142ed049d3e23e8397b61d8bc0a90947"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a142ed049d3e23e8397b61d8bc0a90947"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae06b49e82c025465cc1b85d0adf12a5d"><td class="memItemLeft" align="right" valign="top"><a id="ae06b49e82c025465cc1b85d0adf12a5d"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#ae06b49e82c025465cc1b85d0adf12a5d">BME680_P9_LSB_REG</a> = 21</td></tr>
+<tr class="memdesc:ae06b49e82c025465cc1b85d0adf12a5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:ae06b49e82c025465cc1b85d0adf12a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf4862d940b8284ce741c2272a9b91f1"><td class="memItemLeft" align="right" valign="top"><a id="aaf4862d940b8284ce741c2272a9b91f1"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#aaf4862d940b8284ce741c2272a9b91f1">BME680_P9_MSB_REG</a> = 22</td></tr>
+<tr class="memdesc:aaf4862d940b8284ce741c2272a9b91f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:aaf4862d940b8284ce741c2272a9b91f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94b6e7a1e9cac0aa73ae0d8b0bb92871"><td class="memItemLeft" align="right" valign="top"><a id="a94b6e7a1e9cac0aa73ae0d8b0bb92871"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a94b6e7a1e9cac0aa73ae0d8b0bb92871">BME680_P10_REG</a> = 23</td></tr>
+<tr class="memdesc:a94b6e7a1e9cac0aa73ae0d8b0bb92871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for pressure calibration. <br /></td></tr>
+<tr class="separator:a94b6e7a1e9cac0aa73ae0d8b0bb92871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9358c68a0d1b2d80ba4776d0606039a4"><td class="memItemLeft" align="right" valign="top"><a id="a9358c68a0d1b2d80ba4776d0606039a4"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a9358c68a0d1b2d80ba4776d0606039a4">BME680_H2_MSB_REG</a> = 0</td></tr>
+<tr class="memdesc:a9358c68a0d1b2d80ba4776d0606039a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for humidity calibration. <br /></td></tr>
+<tr class="separator:a9358c68a0d1b2d80ba4776d0606039a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67ac292e35f1b0eeafecb74474f43d21"><td class="memItemLeft" align="right" valign="top"><a id="a67ac292e35f1b0eeafecb74474f43d21"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a67ac292e35f1b0eeafecb74474f43d21">BME680_H2_LSB_REG</a> = 1</td></tr>
+<tr class="memdesc:a67ac292e35f1b0eeafecb74474f43d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for humidity calibration. <br /></td></tr>
+<tr class="separator:a67ac292e35f1b0eeafecb74474f43d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d311632ed1b1200ecb9958106670adc"><td class="memItemLeft" align="right" valign="top"><a id="a2d311632ed1b1200ecb9958106670adc"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a2d311632ed1b1200ecb9958106670adc">BME680_H1_LSB_REG</a> = 1</td></tr>
+<tr class="memdesc:a2d311632ed1b1200ecb9958106670adc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for humidity calibration. <br /></td></tr>
+<tr class="separator:a2d311632ed1b1200ecb9958106670adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfed5147ffedb90466760e3265dbf93c"><td class="memItemLeft" align="right" valign="top"><a id="acfed5147ffedb90466760e3265dbf93c"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#acfed5147ffedb90466760e3265dbf93c">BME680_H1_MSB_REG</a> = 2</td></tr>
+<tr class="memdesc:acfed5147ffedb90466760e3265dbf93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for humidity calibration. <br /></td></tr>
+<tr class="separator:acfed5147ffedb90466760e3265dbf93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9614435f8af898902ebf5a70cc347efe"><td class="memItemLeft" align="right" valign="top"><a id="a9614435f8af898902ebf5a70cc347efe"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a9614435f8af898902ebf5a70cc347efe">BME680_H3_REG</a> = 3</td></tr>
+<tr class="memdesc:a9614435f8af898902ebf5a70cc347efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for humidity calibration. <br /></td></tr>
+<tr class="separator:a9614435f8af898902ebf5a70cc347efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cbba1d4d01bb5bac3bde334be998804"><td class="memItemLeft" align="right" valign="top"><a id="a5cbba1d4d01bb5bac3bde334be998804"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a5cbba1d4d01bb5bac3bde334be998804">BME680_H4_REG</a> = 4</td></tr>
+<tr class="memdesc:a5cbba1d4d01bb5bac3bde334be998804"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for humidity calibration. <br /></td></tr>
+<tr class="separator:a5cbba1d4d01bb5bac3bde334be998804"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7fea5ee4ea65bda4430e06e819be06b"><td class="memItemLeft" align="right" valign="top"><a id="aa7fea5ee4ea65bda4430e06e819be06b"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#aa7fea5ee4ea65bda4430e06e819be06b">BME680_H5_REG</a> = 5</td></tr>
+<tr class="memdesc:aa7fea5ee4ea65bda4430e06e819be06b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for humidity calibration. <br /></td></tr>
+<tr class="separator:aa7fea5ee4ea65bda4430e06e819be06b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3d1d50b3c4cbf3d65579b241ca1d925"><td class="memItemLeft" align="right" valign="top"><a id="ae3d1d50b3c4cbf3d65579b241ca1d925"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#ae3d1d50b3c4cbf3d65579b241ca1d925">BME680_H6_REG</a> = 6</td></tr>
+<tr class="memdesc:ae3d1d50b3c4cbf3d65579b241ca1d925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for humidity calibration. <br /></td></tr>
+<tr class="separator:ae3d1d50b3c4cbf3d65579b241ca1d925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79eddbcef379ffa46e980b58e22b0382"><td class="memItemLeft" align="right" valign="top"><a id="a79eddbcef379ffa46e980b58e22b0382"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a79eddbcef379ffa46e980b58e22b0382">BME680_H7_REG</a> = 7</td></tr>
+<tr class="memdesc:a79eddbcef379ffa46e980b58e22b0382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for humidity calibration. <br /></td></tr>
+<tr class="separator:a79eddbcef379ffa46e980b58e22b0382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1f8555b1d1505901c361c66955f2a89"><td class="memItemLeft" align="right" valign="top"><a id="af1f8555b1d1505901c361c66955f2a89"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#af1f8555b1d1505901c361c66955f2a89">BME680_T1_LSB_REG</a> = 8</td></tr>
+<tr class="memdesc:af1f8555b1d1505901c361c66955f2a89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:af1f8555b1d1505901c361c66955f2a89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dae71333372b216ea42d588e13c8246"><td class="memItemLeft" align="right" valign="top"><a id="a6dae71333372b216ea42d588e13c8246"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a6dae71333372b216ea42d588e13c8246">BME680_T1_MSB_REG</a> = 9</td></tr>
+<tr class="memdesc:a6dae71333372b216ea42d588e13c8246"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:a6dae71333372b216ea42d588e13c8246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec15bf4ee7c611d973285f7d42b93d64"><td class="memItemLeft" align="right" valign="top"><a id="aec15bf4ee7c611d973285f7d42b93d64"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#aec15bf4ee7c611d973285f7d42b93d64">BME680_GH2_LSB_REG</a> = 10</td></tr>
+<tr class="memdesc:aec15bf4ee7c611d973285f7d42b93d64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:aec15bf4ee7c611d973285f7d42b93d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a595ba496c79e05a7fb13a8f6f499190c"><td class="memItemLeft" align="right" valign="top"><a id="a595ba496c79e05a7fb13a8f6f499190c"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a595ba496c79e05a7fb13a8f6f499190c">BME680_GH2_MSB_REG</a> = 11</td></tr>
+<tr class="memdesc:a595ba496c79e05a7fb13a8f6f499190c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:a595ba496c79e05a7fb13a8f6f499190c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4e154aa65d1f652b9442fbe43cf048a"><td class="memItemLeft" align="right" valign="top"><a id="ab4e154aa65d1f652b9442fbe43cf048a"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#ab4e154aa65d1f652b9442fbe43cf048a">BME680_GH1_REG</a> = 12</td></tr>
+<tr class="memdesc:ab4e154aa65d1f652b9442fbe43cf048a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:ab4e154aa65d1f652b9442fbe43cf048a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64756bb1d9f1a7b845af3b832ab1c553"><td class="memItemLeft" align="right" valign="top"><a id="a64756bb1d9f1a7b845af3b832ab1c553"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a64756bb1d9f1a7b845af3b832ab1c553">BME680_GH3_REG</a> = 13</td></tr>
+<tr class="memdesc:a64756bb1d9f1a7b845af3b832ab1c553"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:a64756bb1d9f1a7b845af3b832ab1c553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc096918731b5ead3c91e1b415ac4aae"><td class="memItemLeft" align="right" valign="top"><a id="abc096918731b5ead3c91e1b415ac4aae"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#abc096918731b5ead3c91e1b415ac4aae">BME680_ADDR_RES_HEAT_RANGE_ADDR</a> = 0x02</td></tr>
+<tr class="memdesc:abc096918731b5ead3c91e1b415ac4aae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:abc096918731b5ead3c91e1b415ac4aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fe20b9508073284ba527e68ee569da7"><td class="memItemLeft" align="right" valign="top"><a id="a4fe20b9508073284ba527e68ee569da7"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#a4fe20b9508073284ba527e68ee569da7">BME680_RHRANGE_MSK</a> = 0x30</td></tr>
+<tr class="memdesc:a4fe20b9508073284ba527e68ee569da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:a4fe20b9508073284ba527e68ee569da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae79eada31c86cd1ef914950817d153a3"><td class="memItemLeft" align="right" valign="top"><a id="ae79eada31c86cd1ef914950817d153a3"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#ae79eada31c86cd1ef914950817d153a3">BME680_ADDR_RES_HEAT_VAL_ADDR</a> = 0x00</td></tr>
+<tr class="memdesc:ae79eada31c86cd1ef914950817d153a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:ae79eada31c86cd1ef914950817d153a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac744589eec4799ed115d0e724c5e68f8"><td class="memItemLeft" align="right" valign="top"><a id="ac744589eec4799ed115d0e724c5e68f8"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#ac744589eec4799ed115d0e724c5e68f8">BME680_ADDR_RANGE_SW_ERR_ADDR</a> = 0x04</td></tr>
+<tr class="memdesc:ac744589eec4799ed115d0e724c5e68f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:ac744589eec4799ed115d0e724c5e68f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa45618e878d6bd94fb692189ca8830b"><td class="memItemLeft" align="right" valign="top"><a id="afa45618e878d6bd94fb692189ca8830b"></a>
+const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_zanshin___b_m_e680_8h.html#afa45618e878d6bd94fb692189ca8830b">BME680_RSERROR_MSK</a> = 0xF0</td></tr>
+<tr class="memdesc:afa45618e878d6bd94fb692189ca8830b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for gas calibration. <br /></td></tr>
+<tr class="separator:afa45618e878d6bd94fb692189ca8830b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
