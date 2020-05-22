@@ -11,11 +11,12 @@ BME680	KEYWORD1
 # Methods and Functions (KEYWORD2) #
 ####################################
 begin	KEYWORD2
-mode	KEYWORD2
 setOversampling	KEYWORD2
 setGas	KEYWORD2
 setIIRFilter	KEYWORD2
 getSensorData	KEYWORD2
+waitForReadings	KEYWORD2
+reset	KEYWORD2
 
 ########################
 # Constants (LITERAL1) #
