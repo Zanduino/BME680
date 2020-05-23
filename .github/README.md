@@ -1,11 +1,11 @@
 # BME680 library<br>[![Build Status](https://travis-ci.org/SV-Zanshin/BME680.svg?branch=master)](https://travis-ci.org/SV-Zanshin/BME680) [![DOI](https://zenodo.org/badge/139349456.svg)](https://zenodo.org/badge/latestdoi/139349456) [![arduino-library-badge](https://www.ardu-badge.com/badge/BME680.svg?)](https://www.ardu-badge.com/BME680)
-<img src="https://cdn.sparkfun.com//assets/parts/1/5/3/2/9/16466-SparkFun_Environmental_Sensor_Breakout_-_BME680__Qwiic_-01a.jpg" width="175" align="left"/><img src="https://github.com/SV-Zanshin/BME680/blob/master/Images/BlueDotBME680.jpg" width="175" align="right"/> *Arduino* library for using the [Bosch BME680](https://www.bosch-sensortec.com/bst/products/all_products/bme680) sensor which senses temperature, humidity and pressure. The BME680 is a tiny package and no hobbyist is going to be breadboarding this sensor directly, so one will be part of a breakout board. Here are some breakout board examples:
+*Arduino* library for using the [Bosch BME680](https://www.bosch-sensortec.com/bst/products/all_products/bme680) sensor which senses temperature, humidity and pressure. The BME680 is a tiny package and no hobbyist is going to be breadboarding this sensor directly, so one will be part of a breakout board. Here are some breakout board examples:
 
-| Supplier  | Instructions | Comments |
-| --------- | ------------ | -------- |
-| [Sparkfun](https://www.sparkfun.com/products/16466) | [Guide](https://learn.sparkfun.com/tutorials/sparkfun-environmental-sensor-breakout---bme680-qwiic-hookup-guide) | 3V only, Qwiic System|
-| [Bluedot](https://www.bluedot.space/sensor-boards/bme680/) | [Guide](https://www.bluedot.space/sensor-boards/bme680/) | 3-5V |
-| [Adafruit](https://www.adafruit.com/product/3660) | [Guide](https://learn.adafruit.com/adafruit-bme680-humidity-temperature-barometic-pressure-voc-gas/) | 3-5V |
+| Supplier  | Image |  Instructions | Comments |
+| --------- | ----- |------------ | -------- |
+| [Sparkfun](https://www.sparkfun.com/products/16466) | <img src="https://cdn.sparkfun.com//assets/parts/1/5/3/2/9/16466-SparkFun_Environmental_Sensor_Breakout_-_BME680__Qwiic_-01a.jpg" width="175" /> | [Guide](https://learn.sparkfun.com/tutorials/sparkfun-environmental-sensor-breakout---bme680-qwiic-hookup-guide) | 3V only, Qwiic System|
+| [Bluedot](https://www.bluedot.space/sensor-boards/bme680/) | <img src="https://github.com/SV-Zanshin/BME680/blob/master/Images/BlueDotBME680.jpg" width="175" /> | [Guide](https://www.bluedot.space/sensor-boards/bme680/) | 3-5V |
+| [Adafruit](https://www.adafruit.com/product/3660) | <img src="https://cdn-shop.adafruit.com/970x728/3660-01.jpg" width="175" /> | [Guide](https://learn.adafruit.com/adafruit-bme680-humidity-temperature-barometic-pressure-voc-gas/) | 3-5V |
 
 A complete description of the BME680 sensor can be found in the [BME680 Datasheet](https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf).
 
