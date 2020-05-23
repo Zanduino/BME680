@@ -232,19 +232,19 @@ bool BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling)
     case HumiditySensor :
     {
       tempRegister = readByte(BME680_CONTROL_HUMIDITY_REGISTER) & BME680_HUMIDITY_MASK;  // Get contents and mask
-      putData(BME680_CONTROL_HUMIDITY_REGISTER,(uint8_t)(tempRegister|sampling));// Update humidity bits 0:2
+      putData(BME680_CONTROL_HUMIDITY_REGISTER,(uint8_t)(tempRegister|sampling));        // Update humidity bits 0:2
       break;
     } // of HumiditySensor
     case PressureSensor : 
     {
       tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & BME680_TEMPERATURE_MASK; // Get contents and mask
-      putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(tempRegister|(sampling<<2))); // Update pressure bits
+      putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(tempRegister|(sampling<<2)));     // Update pressure bits
       break;
     } // of PressureSensor
     case TemperatureSensor : 
     {
-      tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & BME680_PRESSURE_MASK; // Get contentsand mask
-      putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(tempRegister|(sampling<<5)));// Update humidity bits 5:7
+      tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & BME680_PRESSURE_MASK;    // Get contents and mask
+      putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(tempRegister|(sampling<<5)));     // Update humidity bits 5:7
       break;
     } // of TemperatureSensor
     default: return(false); // Return an error if no match
@@ -295,6 +295,7 @@ void BME680_Class::readSensors(const bool waitSwitch)
   * param[in] waitSwitch Optional switch that, when set to "true" will not return until reading is finished
   */
   /*! Lookup table for the possible gas range values */
+
 const  uint32_t lookupTable1[16] = {
   UINT32_C(2147483647), UINT32_C(2147483647), UINT32_C(2147483647), UINT32_C(2147483647), UINT32_C(2147483647), 
   UINT32_C(2126008810), UINT32_C(2147483647), UINT32_C(2130303777), UINT32_C(2147483647), UINT32_C(2147483647),
@@ -307,6 +308,7 @@ const uint32_t lookupTable2[16]  = {
   UINT32_C(4000000),    UINT32_C(2000000),    UINT32_C(1000000),    UINT32_C(500000),    UINT32_C(250000),
   UINT32_C(125000) 
 };
+
   uint8_t buff[15],gas_range,status=0;                     // declare array for registers
   int64_t var1, var2, var3, var4, var5, var6, temp_scaled; // Work variables
   uint32_t adc_temp, adc_pres;                             // Raw ADC temperature and pressure

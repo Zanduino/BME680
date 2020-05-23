@@ -100,9 +100,9 @@ Version | Date       | Developer                     | Comments
   const uint8_t  BME680_HUMIDITY_MASK             =    0xF8; ///< Mask is binary B11111000
   const uint8_t  BME680_TEMPERATURE_MASK          =    0xE3; ///< Mask is binary B11100011
   const uint8_t  BME680_PRESSURE_MASK             =    0x1F; ///< Mask is binary B00011111
-  /*********************************************** 
-  ** Declare the constants used for calibration **
-  ***********************************************/
+                                                             /*********************************************** 
+                                                             ** Declare the constants used for calibration **
+                                                             ***********************************************/
   const uint8_t BME680_COEFF_SIZE1                =      25; ///< First array with coefficients
   const uint8_t BME680_COEFF_SIZE2                =      16; ///< Second array with coefficients
   const uint8_t BME680_COEFF_START_ADDRESS1       =    0x89; ///< start address for array 1
