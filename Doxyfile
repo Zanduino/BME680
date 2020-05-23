@@ -1,17 +1,18 @@
 ######################################################################################################
 ## Doxygen control file for Version 1.8.16                                                          ##
 ##                                                                                                  ##
-## Date       Developer           Comments                                                          ##
-## ========== =================== ================================================================= ##
-## 2020-05-21 Arnd@SV-Zanshin     Updated "PROJECT_NUMBER" value to 1.0.5                           ##
-## 2020-05-17 Arnd@SV-Zanshin     Updated "PROJECT_NUMBER" value to 1.0.4                           ##
-## 2020-05-10 Arnd@SV-Zanshin     Removed all comments in order to compact this file                ##
+## Date       Developer                     Comments                                                ##
+## ========== ============================= ======================================================= ##
+## 2020-05-23 https://github.com/SV-Zanshin Removed e-mail addresses from file and updated version  ##
+## 2020-05-21 https://github.com/SV-Zanshin Updated "PROJECT_NUMBER" value to 1.0.5                 ##
+## 2020-05-17 https://github.com/SV-Zanshin Updated "PROJECT_NUMBER" value to 1.0.4                 ##
+## 2020-05-10 https://github.com/SV-Zanshin Removed all comments in order to compact this file      ##
 ##                                                                                                  ##
 ######################################################################################################
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = BME680
-PROJECT_NUMBER         = "Version 1.0.5"
-PROJECT_BRIEF          = "Arduino Library for Bosch BME680 Temperature, Humidity, Pressure and Gas sensor"
+PROJECT_NUMBER         = "Version 1.0.6"
+PROJECT_BRIEF          = "Arduino Library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor"
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       =
 CREATE_SUBDIRS         = NO
