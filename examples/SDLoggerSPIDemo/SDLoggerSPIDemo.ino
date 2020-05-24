@@ -82,18 +82,48 @@ File         dataFile; ///< Class for a SD-Card file
 
 struct reading
 {
-  int32_t temperature;
-  int32_t humidity;
-  int32_t pressure;
+  int32_t temperature; ///< temperature in deci-degrees
+  int32_t humidity;    ///< humidity in milli-percent
+  int32_t pressure;    ///< pressure in Pascal
 }; // of structure reading
 
 reading  data[NUMBER_READINGS];                     ///< Structure to hold accumulated measurements
 uint8_t  idx = 0;                                   ///< Index into "data" structure
 int32_t  unused_gas;                                ///< Unused variable to hold (nonexistant) gas measurements
 char     buf[32];                                   ///< Text buffer for sprintf() function
-int32_t  avg_temperature,avg_humidity,avg_pressure; ///< Holds computed average over NUMBER_READINGS measurements
+int32_t  avg_temperature;                           ///< Holds computed average over NUMBER_READINGS measurements
+int32_t  avg_humidity;                              ///< Holds computed average over NUMBER_READINGS measurements
+int32_t  avg_pressure;                              ///< Holds computed average over NUMBER_READINGS measurements
 uint16_t loopCounter       = 0;                     ///< Loop counter for displaying iterations
 uint32_t fastModeEndMillis = 0;                     ///< Millis value when fast mode stops
+
+void normalMode()
+{
+  /*!
+  @brief    Called to set the BME680 configuration values to those for normal (less accurate) readings
+  @details  The configuration parameters are set to use minimal time (and energy) at the price of accuracy.
+  @return   void
+  */
+  BME680.setOversampling(TemperatureSensor, Oversample2); // Average 2 readings for temperature
+  BME680.setOversampling(HumiditySensor,    Oversample2); // Average 2 readings for humidity
+  BME680.setOversampling(PressureSensor,    Oversample1); // Don't average readings for pressure
+  BME680.setIIRFilter(IIR2);                              // Use IIR Filter of 2
+  BME680.setGas(0,0);                                     // Setting either value to 0 turns off gas measurements
+} // of method "normalMode()"
+void accurateMode()
+{
+  /*!
+  @brief    Called to set the BME680 configuration values to those for accurate readings
+  @details  The configuration parameters are set to get more accurate measurements at the price of both additional
+            time and energy.
+  @return   void
+  */
+  BME680.setOversampling(TemperatureSensor, Oversample8); // Average 8 readings for temperature
+  BME680.setOversampling(HumiditySensor,    Oversample8); // Average 8 readings for humidity
+  BME680.setOversampling(PressureSensor,    Oversample8); // Average 8 readings for pressure
+  BME680.setIIRFilter(IIR8);                              // Use IIR Filter of 8
+  BME680.setGas(0,0);                                     // Setting either value to 0 turns off gas measurements
+} // of method "accurateMode()"
 void setup()
 {
   /*!
@@ -103,33 +133,22 @@ void setup()
   @return   void
   */
   pinMode(BME_680_SPI_CS_PIN, OUTPUT);              // Declare the Chip-Select pin for the BME680 as output
-  digitalWrite(BME_680_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
   pinMode(SD_CARD_SPI_CS_PIN, OUTPUT);              // Declare the Chip-Select pin for the SD Card as output
   digitalWrite(SD_CARD_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
-
-  Serial.begin(SERIAL_SPEED); // Start serial port at Baud rate
-  #ifdef  __AVR_ATmega32U4__  // If this is a 32U4 processor, then wait 3 seconds to initialize USB port
-    delay(3000);
-  #endif
-  Serial.print(F("Starting SDLoggerSPIDemo example program for BME680\n"));
-  Serial.print(F("- Initializing BME680 sensor\n"));
-  while (!BME680.begin(BME_680_SPI_CS_PIN)) // Start using hardware SPI protocol
+  digitalWrite(BME_680_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
+  Serial.begin(SERIAL_SPEED);                       // Start serial port at Baud rate
+  #ifdef  __AVR_ATmega32U4__                        // If this is a 32U4 processor, 
+    delay(3000);                                    // then wait 3 seconds to initialize USB port
+  #endif                                            
+  Serial.print(F("Starting SDLoggerSPIDemo example program for BME680\n- Initializing BME680 sensor\n"));
+  while (!BME680.begin(BME_680_SPI_CS_PIN))         // Start BME680 using hardware SPI protocol
   {
     Serial.print(F("-  Unable to find BME680. Trying again in 5 seconds.\n"));
     delay(5000);
   } // of loop until device is located
-  Serial.print(F("- Setting 2x oversampling for temperature\n"));
-  Serial.print(F("- Setting 16x oversampling for pressure\n"));
-  Serial.print(F("- Setting 1x oversampling for humidity\n"));
-  BME680.setOversampling(TemperatureSensor,Oversample2); // Use enumerated type values
-  BME680.setOversampling(HumiditySensor,   Oversample16); // Use enumerated type values
-  BME680.setOversampling(PressureSensor,   Oversample1); // Use enumerated type values
-  Serial.print(F("- Setting IIR filter to a value of 4 samples\n"));
-  BME680.setIIRFilter(IIR4); // Use enumerated type values
-  Serial.print(F("- Turning off gas measurements\n")); // "°C" symbols
-  BME680.setGas(0,0); // Setting either value to 0 turns off gas measurements
+  normalMode();
   BME680.getSensorData(data[idx].temperature, data[idx].humidity, data[idx].pressure, unused_gas);
-  Serial.print(F("- Averaging over "));
+  Serial.print(F("- Setting BME680 to \"normal\" mode\n- Averaging over "));
   Serial.print(NUMBER_READINGS);
   Serial.print(F(" readings\n\nStarting SD-Card.\n"));
   while (!SD.begin(SD_CARD_SPI_CS_PIN)) // Start card using hardware SPI protocol
@@ -138,7 +157,7 @@ void setup()
     delay(5000);
   } // of loop until device is located
   Serial.print(F("- SD-Card Initialized\n"));
-  dataFile = SD.open(FILE_NAME, FILE_WRITE); // Open the logfile for writing and position to end-of-file
+  dataFile = SD.open(FILE_NAME, FILE_WRITE);        // Open the logfile for writing and position to end-of-file
   if (!dataFile)
   {
     Serial.print(F("Unable to open file \""));
@@ -149,7 +168,7 @@ void setup()
   Serial.print(F("- File \""));
   Serial.print(FILE_NAME);
   Serial.print(F("\" successfully opened. Appending data.\n\n"));
-  for (uint8_t i = 1; i < NUMBER_READINGS; i++) // fill complete array with initial reading values
+  for (uint8_t i = 1; i < NUMBER_READINGS; i++)     // fill complete array with initial reading values
   {
     data[i].temperature = data[0].temperature;
     data[i].humidity    = data[0].humidity;
@@ -185,7 +204,7 @@ void loop()
   avg_pressure    /= NUMBER_READINGS;                                                    //
   ++loopCounter;                                                                         // increment counter
 
-  sprintf(buf, "%4d %3d.%02d", ++loopCounter, 
+  sprintf(buf, "%4d %3d.%02d", loopCounter, 
           (int8_t)(data[idx].temperature/100),
           (uint8_t)(data[idx].temperature%100));                                  // Temperature in decidegrees
   Serial.print(buf); 

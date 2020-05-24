@@ -49,6 +49,8 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
+1.0.6   | 2020-05-24 | https://github.com/SV-Zanshin | Issue #14 - Humidity sometimes 100% despite turning on
+1.0.6   | 2020-05-24 | https://github.com/SV-Zanshin | Issue #15 - Pressure & Temperature oversampling switched
 1.0.5   | 2020-05-21 | https://github.com/SV-Zanshin | Issue #12 - First call to getSensorData() returns invalid data
 1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
 1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
@@ -98,8 +100,8 @@ Version | Date       | Developer                     | Comments
   const uint8_t  BME680_I2C_MAX_ADDRESS           =    0x77; ///< Minimum possible address for BME680
   const uint8_t  BME680_SPI_MEM_PAGE_POSITION     =       4; ///< Bit position for the memory page value
   const uint8_t  BME680_HUMIDITY_MASK             =    0xF8; ///< Mask is binary B11111000
-  const uint8_t  BME680_TEMPERATURE_MASK          =    0xE3; ///< Mask is binary B11100011
-  const uint8_t  BME680_PRESSURE_MASK             =    0x1F; ///< Mask is binary B00011111
+  const uint8_t  BME680_PRESSURE_MASK             =    0xE3; ///< Mask is binary B11100011
+  const uint8_t  BME680_TEMPERATURE_MASK          =    0x1F; ///< Mask is binary B00011111
                                                              /*********************************************** 
                                                              ** Declare the constants used for calibration **
                                                              ***********************************************/
