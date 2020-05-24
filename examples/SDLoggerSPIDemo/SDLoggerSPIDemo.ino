@@ -70,9 +70,9 @@ const uint32_t  LONG_DELAY         =         10000; ///< Long delay in milliseco
 const uint32_t  SHORT_DELAY        =          1000; ///< Long delay in milliseconds -  1 second
 const uint32_t  FAST_MODE_DURATION =            60; ///< How long to run detailed measurements after trigger
 const char*     FILE_NAME          = "BME_680.csv"; ///< Filename on SD-Card
-const uint16_t  TEMPERATURE_TRIP   =           100; ///< Per-mil delta fast-mode trigger for temperature readings
-const uint16_t  PRESSURE_TRIP      =           100; ///< Per-mil delta fast-mode trigger for pressure readings
-const uint16_t  HUMIDITY_TRIP      =           100; ///< Per-mil delta fast-mode trigger for humidity readings
+const uint16_t  TEMPERATURE_TRIP   =           100; ///< Trigger if delta is more than this deci-degrees
+const uint16_t  PRESSURE_TRIP      =           100; ///< Trigger if delta is more than this Pascal
+const uint16_t  HUMIDITY_TRIP      =           100; ///< Trigger if delta is more than this milli-percent
 
 /*******************************************************************************************************************
 ** Declare global variables and instantiate classes                                                               **
@@ -92,7 +92,6 @@ uint8_t  idx = 0;                                   ///< Index into "data" struc
 int32_t  unused_gas;                                ///< Unused variable to hold (nonexistant) gas measurements
 char     buf[32];                                   ///< Text buffer for sprintf() function
 int32_t  avg_temperature,avg_humidity,avg_pressure; ///< Holds computed average over NUMBER_READINGS measurements
-int16_t  pml_temperature,pml_humidity,pml_pressure; ///< Holds computed difference to running average in per-mil
 uint16_t loopCounter       = 0;                     ///< Loop counter for displaying iterations
 uint32_t fastModeEndMillis = 0;                     ///< Millis value when fast mode stops
 void setup()
@@ -184,9 +183,6 @@ void loop()
   avg_temperature /= NUMBER_READINGS;                                                    // Compute the running
   avg_humidity    /= NUMBER_READINGS;                                                    // averages for readings
   avg_pressure    /= NUMBER_READINGS;                                                    //
-  pml_temperature = (data[idx].temperature-avg_temperature)*1000/data[idx].temperature;  // Compute the per-mill
-  pml_humidity    = (data[idx].humidity   -avg_humidity)   *1000/data[idx].humidity;     // delta values to see
-  pml_pressure    = (data[idx].pressure   -avg_pressure)   *1000/data[idx].pressure;     // if speed needs changing
   ++loopCounter;                                                                         // increment counter
 
   sprintf(buf, "%4d %3d.%02d", ++loopCounter, 
@@ -206,13 +202,17 @@ void loop()
   Serial.print(buf);                                                                     //
   sprintf(buf, "%6d.%02d\n", (int16_t)(avg_pressure/100),(uint8_t)(avg_pressure%100));   // Pressure in Pascals
   Serial.print(buf);                                                                     //
-  Serial.print(pml_temperature);
   /********************************************************
   ** Put the output string together and write to SD-Card **
   ********************************************************/
-  sprintf(buf, "%d,%ld,%d.%02d,%3d.%03d,%d.%02d\n", loopCounter, (uint32_t)(millis() / 1000), (int8_t)(data[idx].temperature / 100),
-    (uint8_t)(data[idx].temperature % 100), (int8_t)(data[idx].humidity / 1000),
-    (uint16_t)(data[idx].humidity % 1000), (int16_t)(data[idx].pressure / 100),
+  sprintf(buf, "%d,%ld,%d.%02d,%3d.%03d,%d.%02d\n", 
+    loopCounter, 
+    (millis() / 1000), 
+    (int8_t)(data[idx].temperature / 100),
+    (uint8_t)(data[idx].temperature % 100),
+    (int8_t)(data[idx].humidity / 1000),
+    (uint16_t)(data[idx].humidity % 1000), 
+    (int16_t)(data[idx].pressure / 100),
     (uint8_t)(data[idx].pressure % 100));
 
   dataFile.print(buf);
