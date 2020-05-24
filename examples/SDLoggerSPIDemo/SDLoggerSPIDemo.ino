@@ -68,20 +68,20 @@ const uint32_t  SERIAL_SPEED       =        115200; ///< Set the baud rate for S
 const uint8_t   NUMBER_READINGS    =            10; ///< Number of readings to average
 const uint32_t  LONG_DELAY         =         10000; ///< Long delay in milliseconds - 10 seconds
 const uint32_t  SHORT_DELAY        =          1000; ///< Long delay in milliseconds -  1 second
-const uint32_t  FAST_MODE_DURATION =            60; ///< How long to run detailed measurements after trigger
+const uint32_t  FAST_MODE_DURATION =         60000; ///< How long to run detailed measurements after trigger
 const char*     FILE_NAME          = "BME_680.csv"; ///< Filename on SD-Card
 const uint16_t  TEMPERATURE_TRIP   =           100; ///< Trigger if delta is more than this deci-degrees
 const uint16_t  PRESSURE_TRIP      =           100; ///< Trigger if delta is more than this Pascal
-const uint16_t  HUMIDITY_TRIP      =           100; ///< Trigger if delta is more than this milli-percent
+const uint16_t  HUMIDITY_TRIP      =          1000; ///< Trigger if delta is more than this milli-percent
 
 /*******************************************************************************************************************
 ** Declare global variables and instantiate classes                                                               **
 *******************************************************************************************************************/
 BME680_Class BME680;                                ///< Create an instance of the BME680 class
 File         dataFile;                              ///< Class for a SD-Card file
+/*! @struct Structure to contain a group of readings */
 struct reading
 {
-  /*! @struct Structure to contain a group of readings */
   int32_t temperature;                              ///< temperature in deci-degrees
   int32_t humidity;                                 ///< humidity in milli-percent
   int32_t pressure;                                 ///< pressure in Pascal
@@ -95,6 +95,7 @@ char     buf[32];                                   ///< Text buffer for sprintf
 int32_t  avg_temperature;                           ///< Holds computed average over NUMBER_READINGS 
 int32_t  avg_humidity;                              ///< Holds computed average over NUMBER_READINGS 
 int32_t  avg_pressure;                              ///< Holds computed average over NUMBER_READINGS 
+uint32_t fast_mode_end = 0;                         ///< Holds the millis() value when fast_mode ends
 
 void normalMode()
 {
@@ -167,6 +168,7 @@ void setup()
   Serial.print(F("- File \""));
   Serial.print(FILE_NAME);
   Serial.print(F("\" successfully opened. Appending data.\n\n"));
+  dataFile.print("Seconds,Temperature,Humidity,Pressure");
   for (uint8_t i = 1; i < NUMBER_READINGS; i++)     // fill complete array with initial reading values
   {
     data[i].temperature = data[0].temperature;
@@ -185,8 +187,7 @@ void loop()
   */
   if (loopCounter % 25 == 0)                                                             // Header every 25 loops
   {                                                                                      //
-    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa Avg Tmp Avg Hum Avg hPa")); // Show header plus unicode
-    Serial.print(F("\n==== ====== ====== ========= ======= ====== =========\n"));        //  "°C" symbol
+    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa Avg Tmp Avg Hum Avg hPa\n==== ====== ====== ========= ======= ====== =========\n")); // Show header plus unicode "°C" symbol
   } // if-then time to show headers                                                      //
   idx = (idx+1) % NUMBER_READINGS;                                                       // increment and clamp
   BME680.getSensorData(data[idx].temperature, data[idx].humidity,                        // Read once at beginning
@@ -202,6 +203,21 @@ void loop()
   avg_humidity    /= NUMBER_READINGS;                                                    // averages for readings
   avg_pressure    /= NUMBER_READINGS;                                                    //
   ++loopCounter;                                                                         // increment counter
+  if (fast_mode_end != 0 && millis() > fast_mode_end)
+  {
+    Serial.println("Turning off FAST mode");
+    fast_mode_end = 0; // turn off fast mode
+    normalMode();
+  } // if-then we have gone past the fast mode time
+  if (fast_mode_end == 0 && 
+    (abs(data[idx].temperature - avg_temperature) > TEMPERATURE_TRIP ||
+    abs(data[idx].humidity - avg_humidity) > HUMIDITY_TRIP ||
+    abs(data[idx].pressure - avg_pressure) > PRESSURE_TRIP))
+  {
+    Serial.println("Turning on FAST mode");
+    fast_mode_end = millis() + FAST_MODE_DURATION;
+    accurateMode();
+  } // if-then we change to higher-speed readings
 
   sprintf(buf, "%4d %3d.%02d", loopCounter, 
           (int8_t)(data[idx].temperature/100),
