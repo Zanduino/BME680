@@ -62,17 +62,18 @@ Version | Date       | Developer                     | Comments
 /*******************************************************************************************************************
 ** Declare all program constants                                                                                  **
 *******************************************************************************************************************/
-const uint32_t  SERIAL_SPEED      =        115200; ///< Set the baud rate for Serial I/O
-const uint8_t   NUMBER_READINGS   =            10; ///< Number of readings to average
-const uint32_t  LONG_DELAY        =         10000; ///< Long delay in milliseconds - 10 seconds
-const uint32_t  SHORT_DELAY       =          1000; ///< Long delay in milliseconds -  1 second
-const char*     FILE_NAME         = "BME_680.csv"; ///< Filename on SD-Card
-/*!
-* The pin used for slave-select can be freely chosen from the digital pins available. The default pin for SS
-* on an Arduino Micro is used for the BME680 while pin Analog 6 (A6) is used for the SD Car in this example
-*/
-const uint8_t  BME_680_SPI_CS_PIN =            SS; ///< Use the standard SS pin for the BME680
-const uint8_t  SD_CARD_SPI_CS_PIN =            A6; ///< Use Pin A6 for the SD Card
+const uint8_t   BME_680_SPI_CS_PIN =            SS; ///< Use the standard SS pin for the BME680
+const uint8_t   SD_CARD_SPI_CS_PIN =            24; ///< Use Pin A6 for the SD Card
+const uint32_t  SERIAL_SPEED       =        115200; ///< Set the baud rate for Serial I/O
+const uint8_t   NUMBER_READINGS    =            10; ///< Number of readings to average
+const uint32_t  LONG_DELAY         =         10000; ///< Long delay in milliseconds - 10 seconds
+const uint32_t  SHORT_DELAY        =          1000; ///< Long delay in milliseconds -  1 second
+const uint32_t  FAST_MODE_DURATION =            60; ///< How long to run detailed measurements after trigger
+const char*     FILE_NAME          = "BME_680.csv"; ///< Filename on SD-Card
+const uint16_t  TEMPERATURE_TRIP   =           100; ///< Per-mil delta fast-mode trigger for temperature readings
+const uint16_t  PRESSURE_TRIP      =           100; ///< Per-mil delta fast-mode trigger for pressure readings
+const uint16_t  HUMIDITY_TRIP      =           100; ///< Per-mil delta fast-mode trigger for humidity readings
+
 /*******************************************************************************************************************
 ** Declare global variables and instantiate classes                                                               **
 *******************************************************************************************************************/
@@ -87,13 +88,13 @@ struct reading
 }; // of structure reading
 
 reading  data[NUMBER_READINGS];                     ///< Structure to hold accumulated measurements
-uint8_t  data_index = 0;                            ///< Index into "data" structure
+uint8_t  idx = 0;                                   ///< Index into "data" structure
 int32_t  unused_gas;                                ///< Unused variable to hold (nonexistant) gas measurements
 char     buf[32];                                   ///< Text buffer for sprintf() function
 int32_t  avg_temperature,avg_humidity,avg_pressure; ///< Holds computed average over NUMBER_READINGS measurements
-int16_t  pml_temperature,pml_humidity,pml_pressure; ///< Holds computed difference in per-mil
-uint16_t loopCounter = 0;                           ///< Loop counter for displaying iterations
-
+int16_t  pml_temperature,pml_humidity,pml_pressure; ///< Holds computed difference to running average in per-mil
+uint16_t loopCounter       = 0;                     ///< Loop counter for displaying iterations
+uint32_t fastModeEndMillis = 0;                     ///< Millis value when fast mode stops
 void setup()
 {
   /*!
@@ -128,7 +129,7 @@ void setup()
   BME680.setIIRFilter(IIR4); // Use enumerated type values
   Serial.print(F("- Turning off gas measurements\n")); // "°C" symbols
   BME680.setGas(0,0); // Setting either value to 0 turns off gas measurements
-  BME680.getSensorData(data[data_index].temperature, data[data_index].humidity, data[data_index].pressure, unused_gas);
+  BME680.getSensorData(data[idx].temperature, data[idx].humidity, data[idx].pressure, unused_gas);
   Serial.print(F("- Averaging over "));
   Serial.print(NUMBER_READINGS);
   Serial.print(F(" readings\n\nStarting SD-Card.\n"));
@@ -170,9 +171,9 @@ void loop()
     Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa Avg Tmp Avg Hum Avg hPa")); // Show header plus unicode
     Serial.print(F("\n==== ====== ====== ========= ======= ====== =========\n"));        //  "°C" symbol
   } // if-then time to show headers                                                      //
-  data_index = (data_index+1) % NUMBER_READINGS;                                         // increment and clamp
-  BME680.getSensorData(data[data_index].temperature, data[data_index].humidity,          // Read once at beginning
-                       data[data_index].pressure, unused_gas);                           //
+  idx = (idx+1) % NUMBER_READINGS;                                                       // increment and clamp
+  BME680.getSensorData(data[idx].temperature, data[idx].humidity,                        // Read once at beginning
+                       data[idx].pressure, unused_gas);                                  //
   avg_temperature = avg_humidity = avg_pressure = 0;                                     // Set all values to 0
   for (uint8_t i = 0; i < NUMBER_READINGS; i++)                                          // Compute the sums
   {                                                                                      //
@@ -180,18 +181,23 @@ void loop()
     avg_humidity    += data[i].humidity;                                                 //
     avg_pressure    += data[i].pressure;                                                 //
   } // for-next each measurement                                                         //
-  avg_temperature /= NUMBER_READINGS;                                                    // Compute the averages
-  avg_humidity    /= NUMBER_READINGS;                                                    //
+  avg_temperature /= NUMBER_READINGS;                                                    // Compute the running
+  avg_humidity    /= NUMBER_READINGS;                                                    // averages for readings
   avg_pressure    /= NUMBER_READINGS;                                                    //
-  sprintf(buf, "%4d %3d.%02d", ++loopCounter%9999,                                       // Clamp iterations to 9999
-          (int8_t)(data[data_index].temperature/100),
-          (uint8_t)(data[data_index].temperature%100));                                  // Temperature in decidegrees
+  pml_temperature = (data[idx].temperature-avg_temperature)*1000/data[idx].temperature;  // Compute the per-mill
+  pml_humidity    = (data[idx].humidity   -avg_humidity)   *1000/data[idx].humidity;     // delta values to see
+  pml_pressure    = (data[idx].pressure   -avg_pressure)   *1000/data[idx].pressure;     // if speed needs changing
+  ++loopCounter;                                                                         // increment counter
+
+  sprintf(buf, "%4d %3d.%02d", ++loopCounter, 
+          (int8_t)(data[idx].temperature/100),
+          (uint8_t)(data[idx].temperature%100));                                  // Temperature in decidegrees
   Serial.print(buf); 
-  sprintf(buf, "%3d.%03d", (int8_t)(data[data_index].humidity/1000),
-          (uint16_t)(data[data_index].humidity%1000));                                   // Humidity in milli-percent
+  sprintf(buf, "%3d.%03d", (int8_t)(data[idx].humidity/1000),
+          (uint16_t)(data[idx].humidity%1000));                                   // Humidity in milli-percent
   Serial.print(buf);
-  sprintf(buf, "%7d.%02d ", (int16_t)(data[data_index].pressure/100),
-          (uint8_t)(data[data_index].pressure%100));                                     // Pressure in Pascals
+  sprintf(buf, "%7d.%02d ", (int16_t)(data[idx].pressure/100),
+          (uint8_t)(data[idx].pressure%100));                                     // Pressure in Pascals
   Serial.print(buf);
   sprintf(buf, " %3d.%02d", 
     (int8_t)(avg_temperature/100),(uint8_t)(avg_temperature%100));                       // Temperature in decidegrees
@@ -200,16 +206,16 @@ void loop()
   Serial.print(buf);                                                                     //
   sprintf(buf, "%6d.%02d\n", (int16_t)(avg_pressure/100),(uint8_t)(avg_pressure%100));   // Pressure in Pascals
   Serial.print(buf);                                                                     //
-  pml_temperature = (data[data_index].temperature-avg_temperature)*1000/data[data_index].temperature;
-  pml_humidity    = (data[data_index].humidity   -avg_humidity)   *1000/data[data_index].humidity;
-  pml_pressure    = (data[data_index].pressure   -avg_pressure)   *1000/data[data_index].pressure;
   Serial.print(pml_temperature);
   /********************************************************
   ** Put the output string together and write to SD-Card **
   ********************************************************/
-  sprintf(buf, "%ld,%ld,%ld\n", data[data_index].temperature, data[data_index].humidity, 
-          data[data_index].pressure);
+  sprintf(buf, "%d,%ld,%d.%02d,%3d.%03d,%d.%02d\n", loopCounter, (uint32_t)(millis() / 1000), (int8_t)(data[idx].temperature / 100),
+    (uint8_t)(data[idx].temperature % 100), (int8_t)(data[idx].humidity / 1000),
+    (uint16_t)(data[idx].humidity % 1000), (int16_t)(data[idx].pressure / 100),
+    (uint8_t)(data[idx].pressure % 100));
+
   dataFile.print(buf);
-  if (data_index == 0) dataFile.flush();                                            // force a SD write every cycle
+  if (idx == 0) dataFile.flush();                                            // force a SD write every cycle
   delay(LONG_DELAY);                                                                // Wait 10s before repeating
 } // of method loop()
