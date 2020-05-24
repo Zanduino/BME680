@@ -82,6 +82,7 @@ File         dataFile; ///< Class for a SD-Card file
 
 struct reading
 {
+  /*! @brief Structure to contain a group of readings */
   int32_t temperature; ///< temperature in deci-degrees
   int32_t humidity;    ///< humidity in milli-percent
   int32_t pressure;    ///< pressure in Pascal
