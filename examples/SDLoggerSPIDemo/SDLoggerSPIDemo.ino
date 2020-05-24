@@ -77,26 +77,25 @@ const uint16_t  HUMIDITY_TRIP      =           100; ///< Trigger if delta is mor
 /*******************************************************************************************************************
 ** Declare global variables and instantiate classes                                                               **
 *******************************************************************************************************************/
-BME680_Class BME680;   ///< Create an instance of the BME680 class
-File         dataFile; ///< Class for a SD-Card file
+BME680_Class BME680;            ///< Create an instance of the BME680 class
+File         dataFile;          ///< Class for a SD-Card file
 
+/*! @struct Structure to contain a group of readings */
 struct reading
 {
-  /*! @brief Structure to contain a group of readings */
-  int32_t temperature; ///< temperature in deci-degrees
-  int32_t humidity;    ///< humidity in milli-percent
-  int32_t pressure;    ///< pressure in Pascal
+  int32_t temperature;           ///< temperature in deci-degrees
+  int32_t humidity;             ///< humidity in milli-percent
+  int32_t pressure;             ///< pressure in Pascal
 }; // of structure reading
-
-reading  data[NUMBER_READINGS];                     ///< Structure to hold accumulated measurements
-uint8_t  idx = 0;                                   ///< Index into "data" structure
-int32_t  unused_gas;                                ///< Unused variable to hold (nonexistant) gas measurements
-char     buf[32];                                   ///< Text buffer for sprintf() function
-int32_t  avg_temperature;                           ///< Holds computed average over NUMBER_READINGS measurements
-int32_t  avg_humidity;                              ///< Holds computed average over NUMBER_READINGS measurements
-int32_t  avg_pressure;                              ///< Holds computed average over NUMBER_READINGS measurements
-uint16_t loopCounter       = 0;                     ///< Loop counter for displaying iterations
-uint32_t fastModeEndMillis = 0;                     ///< Millis value when fast mode stops
+uint8_t  idx               = 0; ///< Index into "data" structure
+uint16_t loopCounter       = 0; ///< Loop counter for displaying iterations
+uint32_t fastModeEndMillis = 0; ///< Millis value when fast mode stops
+reading  data[NUMBER_READINGS]; ///< Structure to hold accumulated measurements
+int32_t  unused_gas;            ///< Unused variable to hold (nonexistant) gas measurements
+char     buf[32];               ///< Text buffer for sprintf() function
+int32_t  avg_temperature;       ///< Holds computed average over NUMBER_READINGS measurements
+int32_t  avg_humidity;          ///< Holds computed average over NUMBER_READINGS measurements
+int32_t  avg_pressure;          ///< Holds computed average over NUMBER_READINGS measurements
 
 void normalMode()
 {
