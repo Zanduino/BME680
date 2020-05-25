@@ -79,7 +79,7 @@ const uint16_t  HUMIDITY_TRIP      =          1000; ///< Trigger if delta is mor
 *******************************************************************************************************************/
 BME680_Class BME680;                                ///< Create an instance of the BME680 class
 File         dataFile;                              ///< Class for a SD-Card file
-/*! @struct Structure to contain a group of readings */
+/*! @struct reading Structure to contain a group of readings */
 struct reading
 {
   int32_t temperature;                              ///< temperature in deci-degrees
@@ -230,7 +230,7 @@ void loop()
           (uint8_t)(data[idx].pressure%100));                                     // Pressure in Pascals
   Serial.print(buf);
   sprintf(buf, " %3d.%02d", 
-    (int8_t)(avg_temperature/100),(uint8_t)(avg_temperature%100));                       // Temperature in decidegrees
+    (int8_t)(avg_temperature/100),(uint8_t)(avg_temperature%100));                       // Temp in deci-degrees
   Serial.print(buf);                                                                     //
   sprintf(buf, " %3d.%03d", (int8_t)(avg_humidity/1000),(uint16_t)(avg_humidity%1000));  // Humidity in milli-percent
   Serial.print(buf);                                                                     //
