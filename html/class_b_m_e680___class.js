@@ -11,5 +11,5 @@ var class_b_m_e680___class =
     [ "reset", "class_b_m_e680___class.html#a60539ad30b61e41dc0252b06ccc0652b", null ],
     [ "setGas", "class_b_m_e680___class.html#a20dcf8043b9636200c4b57cd8be44e52", null ],
     [ "setIIRFilter", "class_b_m_e680___class.html#ac36b24940ae9e3fd114b364f6f5f489e", null ],
-    [ "setOversampling", "class_b_m_e680___class.html#a204027ceeaa1a3833eea02064d4eb4db", null ]
+    [ "setOversampling", "class_b_m_e680___class.html#a9f78a8231b32bd6195b3b390ce4c65c7", null ]
 ];

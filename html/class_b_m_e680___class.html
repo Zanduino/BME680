@@ -108,8 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9611a3516b381ee43bcfd07e282cdc89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7810485e014c19050198b9e7a99449b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#a7810485e014c19050198b9e7a99449b9">begin</a> (const uint8_t chipSelect, const uint8_t mosi, const uint8_t miso, const uint8_t sck)</td></tr>
 <tr class="separator:a7810485e014c19050198b9e7a99449b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a204027ceeaa1a3833eea02064d4eb4db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#a204027ceeaa1a3833eea02064d4eb4db">setOversampling</a> (const uint8_t sensor, const uint8_t sampling)</td></tr>
-<tr class="separator:a204027ceeaa1a3833eea02064d4eb4db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f78a8231b32bd6195b3b390ce4c65c7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#a9f78a8231b32bd6195b3b390ce4c65c7">setOversampling</a> (const uint8_t sensor, const uint8_t sampling=UINT8_MAX)</td></tr>
+<tr class="separator:a9f78a8231b32bd6195b3b390ce4c65c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20dcf8043b9636200c4b57cd8be44e52"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#a20dcf8043b9636200c4b57cd8be44e52">setGas</a> (uint16_t GasTemp, uint16_t GasMillis)</td></tr>
 <tr class="separator:a20dcf8043b9636200c4b57cd8be44e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac36b24940ae9e3fd114b364f6f5f489e"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e680___class.html#ac36b24940ae9e3fd114b364f6f5f489e">setIIRFilter</a> (const uint8_t iirFilterSetting=UINT8_MAX)</td></tr>
@@ -430,14 +430,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a204027ceeaa1a3833eea02064d4eb4db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a204027ceeaa1a3833eea02064d4eb4db">&#9670;&nbsp;</a></span>setOversampling()</h2>
+<a id="a9f78a8231b32bd6195b3b390ce4c65c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f78a8231b32bd6195b3b390ce4c65c7">&#9670;&nbsp;</a></span>setOversampling()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool BME680_Class::setOversampling </td>
+          <td class="memname">uint8_t BME680_Class::setOversampling </td>
           <td>(</td>
           <td class="paramtype">const uint8_t&#160;</td>
           <td class="paramname"><em>sensor</em>, </td>
@@ -446,7 +446,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const uint8_t&#160;</td>
-          <td class="paramname"><em>sampling</em>&#160;</td>
+          <td class="paramname"><em>sampling</em> = <code>UINT8_MAX</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
