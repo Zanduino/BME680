@@ -1,7 +1,7 @@
 var searchData=
 [
   ['begin',['begin',['../class_b_m_e680___class.html#ac0d49953ce365b412b922d396b25a83f',1,'BME680_Class::begin()'],['../class_b_m_e680___class.html#ad3c587b346f158c1f65414f5b4b9de28',1,'BME680_Class::begin(const uint32_t i2cSpeed)'],['../class_b_m_e680___class.html#ac10c361538cb76c5e643509d3740b40e',1,'BME680_Class::begin(const uint8_t chipSelect)'],['../class_b_m_e680___class.html#a9611a3516b381ee43bcfd07e282cdc89',1,'BME680_Class::begin(const uint32_t i2cSpeed, const uint8_t i2cAddress)'],['../class_b_m_e680___class.html#a7810485e014c19050198b9e7a99449b9',1,'BME680_Class::begin(const uint8_t chipSelect, const uint8_t mosi, const uint8_t miso, const uint8_t sck)']]],
-  ['bme680',['BME680',['../_i2_c_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39',1,'BME680():&#160;I2CDemo.ino'],['../_soft_s_p_i_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39',1,'BME680():&#160;SoftSPIDemo.ino'],['../_s_p_i_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39',1,'BME680():&#160;SPIDemo.ino']]],
+  ['bme680',['BME680',['../_i2_c_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39',1,'BME680():&#160;I2CDemo.ino'],['../_s_d_logger_s_p_i_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39',1,'BME680():&#160;SDLoggerSPIDemo.ino'],['../_soft_s_p_i_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39',1,'BME680():&#160;SoftSPIDemo.ino'],['../_s_p_i_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39',1,'BME680():&#160;SPIDemo.ino']]],
   ['bme680_5f1',['BME680_1',['../_two_devices_i2_c_demo_8ino.html#afd0f6f3b434b6417dfa1ebf87602f02a',1,'TwoDevicesI2CDemo.ino']]],
   ['bme680_5f2',['BME680_2',['../_two_devices_i2_c_demo_8ino.html#a158aff59c2e508b7e10c2e7c89329339',1,'TwoDevicesI2CDemo.ino']]],
   ['bme680_5faddr_5frange_5fsw_5ferr_5faddr',['BME680_ADDR_RANGE_SW_ERR_ADDR',['../_zanshin___b_m_e680_8h.html#ac744589eec4799ed115d0e724c5e68f8',1,'Zanshin_BME680.h']]],
@@ -70,5 +70,7 @@ var searchData=
   ['bme680_5ft2_5flsb_5freg',['BME680_T2_LSB_REG',['../_zanshin___b_m_e680_8h.html#afa59b597a6ff1c4b3d75335f2fba9f02',1,'Zanshin_BME680.h']]],
   ['bme680_5ft2_5fmsb_5freg',['BME680_T2_MSB_REG',['../_zanshin___b_m_e680_8h.html#a0812885c49ed199bd229ade7f433c771',1,'Zanshin_BME680.h']]],
   ['bme680_5ft3_5freg',['BME680_T3_REG',['../_zanshin___b_m_e680_8h.html#a2bb283f982f60b9a8c23a7df436875fa',1,'Zanshin_BME680.h']]],
-  ['bme680_5ftemperature_5fmask',['BME680_TEMPERATURE_MASK',['../_zanshin___b_m_e680_8h.html#ac08500e8b503f5687278ef3d372652a0',1,'Zanshin_BME680.h']]]
+  ['bme680_5ftemperature_5fmask',['BME680_TEMPERATURE_MASK',['../_zanshin___b_m_e680_8h.html#ac08500e8b503f5687278ef3d372652a0',1,'Zanshin_BME680.h']]],
+  ['bme_5f680_5fspi_5fcs_5fpin',['BME_680_SPI_CS_PIN',['../_s_d_logger_s_p_i_demo_8ino.html#a3faf34f5504e22c1877fdddd905c7340',1,'SDLoggerSPIDemo.ino']]],
+  ['buf',['buf',['../_s_d_logger_s_p_i_demo_8ino.html#a4156971984155fe16c9f4158f41d58d5',1,'SDLoggerSPIDemo.ino']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['getsensordata',['getSensorData',['../class_b_m_e680___class.html#af0254182c826decbf2122375de32b62f',1,'BME680_Class']]]
+  ['data',['data',['../_s_d_logger_s_p_i_demo_8ino.html#af3f179e8973dc029502aca9ab656cf00',1,'SDLoggerSPIDemo.ino']]],
+  ['datafile',['dataFile',['../_s_d_logger_s_p_i_demo_8ino.html#a38e756be89c7fc3aa589a64f8d8eb2ad',1,'SDLoggerSPIDemo.ino']]]
 ];
