@@ -21,6 +21,9 @@ BME680_Class::~BME680_Class()
   * @details Currently empty and unused
   */
 } // of class destructor
+/***********************************************************************************************
+** The "begin()" function is overloaded to allow for variations in I2C and SPI initialization **
+***********************************************************************************************/
 bool BME680_Class::begin() 
 {
   /*!
@@ -112,7 +115,7 @@ bool BME680_Class::commonInitialization()
 {
   /*!
   * @brief   Common BME680 initialization function
-  * @details Called from all of the overloaded "begin()" functions once protocol has been selected
+  * @details Called from all of the overloaded "begin()" functions once the communicationsprotocol has been selected
   * return "true" if successful otherwise false
   */
   uint8_t SPI_Register = readByte(BME680_SPI_REGISTER);                     // Read the SPI register byte
