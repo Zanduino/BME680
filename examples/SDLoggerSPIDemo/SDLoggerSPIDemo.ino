@@ -79,7 +79,9 @@ const uint16_t  HUMIDITY_TRIP      =          1000; ///< Trigger if delta is mor
 *******************************************************************************************************************/
 BME680_Class BME680;                                ///< Create an instance of the BME680 class
 File         dataFile;                              ///< Class for a SD-Card file
-/*! @struct reading Structure to contain a group of readings */
+/*********************************************************************//*!
+** Structure type definition contains a set of readings from the BME680 **
+  ***********************************************************************/
 struct reading
 {
   int32_t temperature;                              ///< temperature in deci-degrees
