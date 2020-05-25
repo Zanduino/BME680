@@ -223,7 +223,7 @@ void BME680_Class::getCalibration()
   getData(BME680_ADDR_RANGE_SW_ERR_ADDR,temp_var);
   _rng_sw_err = ((int8_t) temp_var & (int8_t) BME680_RSERROR_MSK) / 16;
 } // of method getCalibration()
-bool BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling) 
+uint8_t BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling) 
 {
   /*!
   * @brief   sets the oversampling mode for the sensor
@@ -234,38 +234,64 @@ bool BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling)
   * param[in] sampling Sampling rate from enumerated type
   * return "true" if successful otherwise false
   */
-  if (sensor>=UnknownSensor || sampling>=UnknownOversample) return(false); // return error if out of range
-  uint8_t tempRegister;                                                    // declare temporary register byte
+  if (sensor >= UnknownSensor ||                                           // return an error if sensor is out of
+      (sampling != UINT8_MAX && sampling >= UnknownOversample))            // range or oversample value is out of
+  {                                                                        // range
+    return(UINT8_MAX);                                                     // 
+  } // if then values out of range                                         //
+  uint8_t tempRegister;                                                    // Temporary register variable
+  uint8_t returnValue = sampling;                                          // Return sampling value
   waitForReadings();                                                       // Ensure any active reading is finished
   switch (sensor)                                                          // Depending upon which sensor is chosen
   {                                                                        //
     case HumiditySensor :                                                  // Set the humidity oversampling
     {                                                                      //
       tempRegister = readByte(BME680_CONTROL_HUMIDITY_REGISTER);           // Read the register contents
-      tempRegister &= BME680_HUMIDITY_MASK;                                // Mask bits to 0
-      tempRegister |= sampling;                                            // Add in the sampling bits
-      putData(BME680_CONTROL_HUMIDITY_REGISTER,(uint8_t)tempRegister);     // Update humidity bits 0:2
+      if (sampling == UINT8_MAX)                                           // If we just want to read the values
+      {                                                                    //
+        returnValue = tempRegister & ~BME680_HUMIDITY_MASK;                // Set return value
+      }                                                                    //
+      else                                                                 //
+      {                                                                    //
+        tempRegister &= BME680_HUMIDITY_MASK;                              // Mask bits to 0
+        tempRegister |= sampling;                                          // Add in the sampling bits
+        putData(BME680_CONTROL_HUMIDITY_REGISTER, (uint8_t)tempRegister);  // Update humidity bits 0:2
+      } // if-then return current value or set new value                   //
       break;                                                               //
     } // of HumiditySensor                                                 //
     case PressureSensor :                                                  // Set the pressure oversampling
     {                                                                      //
       tempRegister  = readByte(BME680_CONTROL_MEASURE_REGISTER);           // Read the register contents
-      tempRegister &= BME680_PRESSURE_MASK;                                // Mask bits to 0
-      tempRegister |= (sampling << 2);                                     // Add in the sampling bits at offset
-      putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)tempRegister);      // Update register
+      if (sampling == UINT8_MAX)                                           // If we just want to read the values
+      {                                                                    //
+        returnValue = (tempRegister & ~BME680_PRESSURE_MASK)>>2;           // Set return value
+      }                                                                    //
+      else                                                                 //
+      {                                                                    //
+        tempRegister &= BME680_PRESSURE_MASK;                              // Mask bits to 0
+        tempRegister |= (sampling << 2);                                   // Add in the sampling bits at offset
+        putData(BME680_CONTROL_MEASURE_REGISTER, (uint8_t)tempRegister);   // Update register
+      } // if-then return current value or set new value                   //
       break;                                                               //
     } // of PressureSensor                                                 //
     case TemperatureSensor :                                               // Set the temperature oversampling
-    {
+    {                                                                      //
       tempRegister  = readByte(BME680_CONTROL_MEASURE_REGISTER);           // Read the register contents
-      tempRegister &= BME680_TEMPERATURE_MASK;                             // Mask bits to 0
-      tempRegister |= (sampling << 5);                                     // Add in the sampling bits at offset
-      putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)tempRegister);      // Update humidity bits 5:7
+      if (sampling == UINT8_MAX)                                           // If we just want to read the values
+      {                                                                    //
+        returnValue = (tempRegister & ~BME680_TEMPERATURE_MASK) >> 5;      // Set return value
+      }                                                                    //
+      else                                                                 //
+      {                                                                    //
+        tempRegister &= BME680_TEMPERATURE_MASK;                           // Mask bits to 0
+        tempRegister |= (sampling << 5);                                   // Add in the sampling bits at offset
+        putData(BME680_CONTROL_MEASURE_REGISTER, (uint8_t)tempRegister);   // Update humidity bits 5:7
+      } // if-then return current value or set new value                   //
       break;                                                               //
     } // of TemperatureSensor                                              //
-    default: return(false);                                                // Return an error if no match
+    default: return(UINT8_MAX);                                            // Return an error if no match
   } // of switch the sensor type                                           //
-  return(true);                                                            // Otherwise return success
+  return(returnValue);                                                     // Otherwise return current value
 } // of method setOversampling()
 uint8_t BME680_Class::setIIRFilter(const uint8_t iirFilterSetting ) 
 {

@@ -52,6 +52,7 @@ Written by Arnd, https://github.com/SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
+1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | Issue #17 - return value for "setOversampling()"
 1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | Issue #16 - I2C "reset()" when using 2 devices
 1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | General formatting of comments and spell-checking
 1.0.6   | 2020-05-24 | https://github.com/SV-Zanshin | Issue #14 - Humidity sometimes 100% despite turning on
@@ -185,7 +186,8 @@ Version | Date       | Developer                     | Comments
       bool     begin(const uint32_t i2cSpeed, const uint8_t i2cAddress);      // Explicitly set speed and I2C Addr.
       bool     begin(const uint8_t chipSelect, const uint8_t mosi,            // Start using software SPI
                      const uint8_t miso, const uint8_t sck);                  //
-      bool     setOversampling(const uint8_t sensor, const uint8_t sampling); // Set enum sensorType Oversampling
+      uint8_t  setOversampling(const uint8_t sensor,                          // Set enum sensorType Oversampling
+                               const uint8_t sampling=UINT8_MAX);             // and return current value
       bool     setGas(uint16_t GasTemp, uint16_t GasMillis);                  // Gas heating temperature and time
       uint8_t  setIIRFilter(const uint8_t iirFilterSetting=UINT8_MAX);        // Set IIR Filter and return value
       void     getSensorData(int32_t &temp, int32_t &hum,                     // get most recent readings
