@@ -58,6 +58,7 @@ bool BME680_Class::begin(const uint32_t i2cSpeed, const uint8_t i2cAddress)
   */
   Wire.begin();                                                                     // Start I2C as master
   Wire.setClock(i2cSpeed);                                                          // Set I2C bus speed
+  _I2CSpeed = i2cSpeed;                                                             // Set private variable to speed
   for (_I2CAddress = BME680_I2C_MIN_ADDRESS;_I2CAddress <= BME680_I2C_MAX_ADDRESS;  // Loop through all possible
        _I2CAddress++)                                                               // I2C addresses
   {
@@ -71,6 +72,7 @@ bool BME680_Class::begin(const uint32_t i2cSpeed, const uint8_t i2cAddress)
     } // of if-then check all or a specific address
   } // of for-next each I2C address loop
   _I2CAddress = 0;                                                                  // Set to denote no device found
+  _I2CSpeed   = 0;                                                                  // Set to denote no device found
   return false;                                                                     // return failure if we get here 
 } // of method begin()
 bool BME680_Class::begin(const uint8_t chipSelect)
@@ -142,9 +144,10 @@ uint8_t BME680_Class::readByte(const uint8_t addr)
 {
   /*!
   * @brief   Read a single byte from the give address
-  * @details interlude function to the "getData()" function
+  * @details interlude function to the "getData()" function. This is called so that the return value is the byte
+  *          of data that has just been read rather than the number of bytes read returned by "getData()"
   * param[in] addr Address of device
-  * return    single byte read
+  * return    single byte of read from addr
   */
   uint8_t returnValue;       // Storage for returned value
   getData(addr,returnValue); // Read just one byte
@@ -156,9 +159,9 @@ void BME680_Class::reset()
   * @brief   Performs a device reset
   */
   putData(BME680_SOFTRESET_REGISTER,BME680_RESET_CODE); // write reset code to device
-  delay(2);                                             // Datasheet states 2ms Start-up time, so wait
-  if (_I2CAddress) begin();                             // Start device again if I2C
-  else if(_sck) begin(_cs,_mosi,_miso,_sck);            // Use software serial again
+  delay(2);                                             // Datasheet states 2ms Start-up time
+  if (_I2CAddress) begin(_I2CSpeed,_I2CAddress);        // Start device with same settings again if using I2C
+  else if(_sck) begin(_cs,_mosi,_miso,_sck);            // Use software SPI again
   else begin(_cs);                                      // otherwise it must be hardware SPI
 } // of method reset()
 void BME680_Class::getCalibration()

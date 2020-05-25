@@ -52,6 +52,7 @@ Written by Arnd, https://github.com/SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
+1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | Issue #16 - I2C "reset()" when using 2 devices
 1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | General formatting of comments and spell-checking
 1.0.6   | 2020-05-24 | https://github.com/SV-Zanshin | Issue #14 - Humidity sometimes 100% despite turning on
 1.0.6   | 2020-05-24 | https://github.com/SV-Zanshin | Issue #15 - Pressure & Temperature oversampling switched
@@ -198,13 +199,15 @@ Version | Date       | Developer                     | Comments
       void     waitForReadings();                                             ///< Wait for readings to finish
       void     getCalibration();                                              ///< Load calibration from registers
       uint8_t  _I2CAddress = 0;                                               ///< Default is I2C address is unknown
+      uint16_t _I2CSpeed   = 0;                                               ///< Default is I2C speed is unknown
       uint8_t  _cs,_sck,_mosi,_miso;                                          ///< Hardware and software SPI pins
       uint8_t  _H6,_P10,_res_heat_range;                                      ///< unsigned configuration vars
       int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,_res_heat,_rng_sw_err; ///< signed configuration vars
       uint16_t _H1,_H2,_T1,_P1;                                               ///< unsigned 16bit configuration vars
       int16_t  _G2,_T2,_P2,_P4,_P5,_P8,_P9;                                   ///< signed 16bit configuration vars
       int32_t  _tfine,_Temperature,_Pressure,_Humidity,_Gas;                  ///< signed 32bit configuration vars
-      /*************************************************************************************************************
+      /*********************************************************************************************************//*! 
+      ** @section Template functions                                                                              **
       ** Declare the getData and putData methods as template functions. All device I/O is done through these two  **
       ** functions regardless of whether I2C, hardware SPI or software SPI is being used. The two functions are   **
       ** designed so that only the address and a variable are passed in and the functions determine the size of   **
@@ -212,6 +215,8 @@ Version | Date       | Developer                     | Comments
       ** array[10] then 10 bytes are read, if called with a int8 then only one byte is read. The return value, if **
       ** used, is the number of bytes read or written. Since this is implemented by using template function       **
       ** definitions, they need to be defined in this header file rather than in the c++ program library file.    **
+      ** The "getData()" function is currently not used in the library directly, but the function "readByte()" is **
+      ** used which calls the getData().  The "putData()" is called directly in the code.                         **
       *************************************************************************************************************/
       template< typename T > uint8_t &getData(const uint8_t addr,T &value)
       {
