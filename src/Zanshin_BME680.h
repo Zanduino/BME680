@@ -73,17 +73,17 @@ Version | Date       | Developer                     | Comments
 #include <Wire.h>    // Standard I2C "Wire" library
 #include <SPI.h>     // Standard SPI library
 #ifndef BME680_h
-/*****************************************************************************************************************
-** Declare constants used in the class                                                                          **
-*****************************************************************************************************************/
+/********************************************************************************************************************
+** Declare constants used in the class                                                                             **
+********************************************************************************************************************/
   #define BME680_h                                                      ///< Guard code definition for the header
   #define CONCAT_BYTES(msb, lsb) (((uint16_t)msb << 8) | (uint16_t)lsb) ///< Inline to combine msb and lsb bytes
   #ifndef _BV
     #define _BV(bit) (1 << (bit)) ///< Some implementations don't have this bit-shift macro pre-defined
   #endif
-  /*****************************************************************************************************************
-  ** Declare constants used in the class                                                                          **
-  *****************************************************************************************************************/
+  /******************************************************************************************************************
+  ** Declare constants used in the class                                                                           **
+  ******************************************************************************************************************/
   #ifndef I2C_MODES                                          //   If the I2C_Modes haven't been declared yet
     #define I2C_MODES                                        ///< Guard code definition for the I2C modes
     const uint32_t I2C_STANDARD_MODE              =  100000; ///< Default normal I2C 100KHz speed
@@ -112,9 +112,9 @@ Version | Date       | Developer                     | Comments
   const uint8_t  BME680_HUMIDITY_MASK             =    0xF8; ///< Mask is binary B11111000
   const uint8_t  BME680_PRESSURE_MASK             =    0xE3; ///< Mask is binary B11100011
   const uint8_t  BME680_TEMPERATURE_MASK          =    0x1F; ///< Mask is binary B00011111
-                                                             /*********************************************** 
-                                                             ** Declare the constants used for calibration **
-                                                             ***********************************************/
+  /******************************************************************************************************************
+  ** Declare the constants used for calibration                                                                    **
+  ******************************************************************************************************************/
   const uint8_t BME680_COEFF_SIZE1                =      25; ///< First array with coefficients
   const uint8_t BME680_COEFF_SIZE2                =      16; ///< Second array with coefficients
   const uint8_t BME680_COEFF_START_ADDRESS1       =    0x89; ///< start address for array 1
@@ -161,9 +161,9 @@ Version | Date       | Developer                     | Comments
   const uint8_t BME680_ADDR_RANGE_SW_ERR_ADDR     =    0x04; ///< Register for gas calibration
   const uint8_t BME680_RSERROR_MSK	              =    0xF0; ///< Register for gas calibration
 
-  /*****************************************************************************************************************
-  ** Declare enumerated types used in the class                                                                   **
-  *****************************************************************************************************************/
+  /******************************************************************************************************************
+  ** Declare enumerated types used in the class                                                                    **
+  ******************************************************************************************************************/
   /*! @brief  Enumerate the sensor type */
   enum sensorTypes       {TemperatureSensor, HumiditySensor, PressureSensor, GasSensor, UnknownSensor};
   /*! @brief  Enumerate the Oversampling types */
@@ -208,18 +208,18 @@ Version | Date       | Developer                     | Comments
       uint16_t _H1,_H2,_T1,_P1;                                               ///< unsigned 16bit configuration vars
       int16_t  _G2,_T2,_P2,_P4,_P5,_P8,_P9;                                   ///< signed 16bit configuration vars
       int32_t  _tfine,_Temperature,_Pressure,_Humidity,_Gas;                  ///< signed 32bit configuration vars
-      /*********************************************************************************************************//*! 
-      ** @section Template functions                                                                              **
-      ** Declare the getData and putData methods as template functions. All device I/O is done through these two  **
-      ** functions regardless of whether I2C, hardware SPI or software SPI is being used. The two functions are   **
-      ** designed so that only the address and a variable are passed in and the functions determine the size of   **
-      ** the parameter variable and reads or writes that many bytes. So if a read is called using a character     **
-      ** array[10] then 10 bytes are read, if called with a int8 then only one byte is read. The return value, if **
-      ** used, is the number of bytes read or written. Since this is implemented by using template function       **
-      ** definitions, they need to be defined in this header file rather than in the c++ program library file.    **
-      ** The "getData()" function is currently not used in the library directly, but the function "readByte()" is **
-      ** used which calls the getData().  The "putData()" is called directly in the code.                         **
-      *************************************************************************************************************/
+      /**********************************************************************************************************//*! 
+      ** @section Template functions                                                                               **
+      ** Declare the getData and putData methods as template functions. All device I/O is done through these two   **
+      ** functions regardless of whether I2C, hardware SPI or software SPI is being used. The two functions are    **
+      ** designed so that only the address and a variable are passed in and the functions determine the size of    **
+      ** the parameter variable and reads or writes that many bytes. So if a read is called using a character      **
+      ** array[10] then 10 bytes are read, if called with a int8 then only one byte is read. The return value, if  **
+      ** used, is the number of bytes read or written. Since this is implemented by using template function        **
+      ** definitions, they need to be defined in this header file rather than in the c++ program library file.     **
+      ** The "getData()" function is currently not used in the library directly, but the function "readByte()" is  **
+      ** used which calls the getData().  The "putData()" is called directly in the code.                          **
+      **************************************************************************************************************/
       template< typename T > uint8_t &getData(const uint8_t addr,T &value)
       {
         /*!

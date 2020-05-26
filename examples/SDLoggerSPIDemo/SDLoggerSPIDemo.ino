@@ -91,13 +91,13 @@ struct reading
 uint8_t  idx               = 0;                     ///< Index into "data" structure
 uint16_t loopCounter       = 0;                     ///< Loop counter for displaying iterations
 uint32_t fastModeEndMillis = 0;                     ///< Millis value when fast mode stops
+uint32_t fast_mode_end     = 0;                     ///< Holds the millis() value when fast_mode ends
 reading  data[NUMBER_READINGS];                     ///< Structure to hold accumulated measurements
 int32_t  unused_gas;                                ///< Unused variable to hold (nonexistant) gas measurements
 char     buf[32];                                   ///< Text buffer for sprintf() function
 int32_t  avg_temperature;                           ///< Holds computed average over NUMBER_READINGS 
 int32_t  avg_humidity;                              ///< Holds computed average over NUMBER_READINGS 
 int32_t  avg_pressure;                              ///< Holds computed average over NUMBER_READINGS 
-uint32_t fast_mode_end = 0;                         ///< Holds the millis() value when fast_mode ends
 
 void normalMode()
 {

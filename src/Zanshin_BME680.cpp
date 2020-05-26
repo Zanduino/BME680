@@ -73,7 +73,7 @@ bool BME680_Class::begin(const uint32_t i2cSpeed, const uint8_t i2cAddress)
   } // of for-next each I2C address loop
   _I2CAddress = 0;                                                                  // Set to denote no device found
   _I2CSpeed   = 0;                                                                  // Set to denote no device found
-  return false;                                                                     // return failure if we get here 
+  return false;                                                                     // return failure if we get here
 } // of method begin()
 bool BME680_Class::begin(const uint8_t chipSelect)
 {
