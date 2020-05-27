@@ -28,7 +28,7 @@ This example program was designed as a simple data logger which defaults to meas
 Once either the temperature, pressure or humidity changes at a rate above that set in the constants TEMPERATURE_TRIP,
 PRESSURE_TRIP or HUMIDITY_TRIP then the measurement rate is sped up to read every second and to read more accurately.
 This was intended as a data logger inside a refrigerator or freezer, where most of the time there are constant 
-values but when the door is opened or the anti-icing cycle kicks in then readings need to be done more often.
+values but when the door is opened or the defrosting cycle kicks in then readings need to be done more often.
  
 This example program initializes the BME680 to use SPI for communications. The library does not using floating
 point numbers to save on memory space and computation time. The values for Temperature, Pressure and Humidity are
