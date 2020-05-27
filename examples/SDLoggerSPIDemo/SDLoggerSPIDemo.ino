@@ -23,6 +23,12 @@ Bosch supplies sample software that runs on various platforms, including the Ard
 at https://github.com/BoschSensortec/BSEC-Arduino-library . This software is part of the Bosch "BSEC" (Bosch 
 Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence
 the choice to make a more compact and rather less abstract library. 
+
+This example program was designed as a simple data logger which defaults to measurements taken every 10 seconds. 
+Once either the temperature, pressure or humidity changes at a rate above that set in the constants TEMPERATURE_TRIP,
+PRESSURE_TRIP or HUMIDITY_TRIP then the measurement rate is sped up to read every second and to read more accurately.
+This was intended as a data logger inside a refrigerator or freezer, where most of the time there are constant 
+values but when the door is opened or the anti-icing cycle kicks in then readings need to be done more often.
  
 This example program initializes the BME680 to use SPI for communications. The library does not using floating
 point numbers to save on memory space and computation time. The values for Temperature, Pressure and Humidity are
@@ -47,12 +53,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 @section SDLoggerSPIDemoauthor Author
 
-Written by Arnd\@SV-Zanshin
+Written by https://github.com/SV-Zanshin
 
 @section SDLoggerSPIDemoversions Changelog
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | -------------------------------------------------
+1.0.0   | 2020-05-27 | https://github.com/SV-Zanshin | Completed and tested
 1.0.0b  | 2020-05-22 | https://github.com/SV-Zanshin | Cloned from original SPIDemo program and modified
 */
 #include "Zanshin_BME680.h" // Include the BME680 Sensor library
@@ -174,7 +181,7 @@ void setup()
   Serial.print(F("- File \""));
   Serial.print(FILE_NAME);
   Serial.print(F("\" successfully opened. Appending data.\n\n"));
-  dataFile.print("Seconds,Temperature,Humidity,Pressure");
+  dataFile.print("Counter,Seconds,Temperature,Humidity,Pressure\n");
   for (uint8_t i = 1; i < NUMBER_READINGS; i++)     // fill complete array with initial reading values
   {
     data[i].temperature = data[0].temperature;
