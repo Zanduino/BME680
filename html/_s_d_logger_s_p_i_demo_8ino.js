@@ -13,6 +13,7 @@ var _s_d_logger_s_p_i_demo_8ino =
     [ "buf", "_s_d_logger_s_p_i_demo_8ino.html#a4156971984155fe16c9f4158f41d58d5", null ],
     [ "data", "_s_d_logger_s_p_i_demo_8ino.html#af3f179e8973dc029502aca9ab656cf00", null ],
     [ "dataFile", "_s_d_logger_s_p_i_demo_8ino.html#a38e756be89c7fc3aa589a64f8d8eb2ad", null ],
+    [ "delayTime", "_s_d_logger_s_p_i_demo_8ino.html#a9ddd6fc09e8c164356571846adcc7fc8", null ],
     [ "FAST_MODE_DURATION", "_s_d_logger_s_p_i_demo_8ino.html#ac570dadda5df349348f53376e3fbddb3", null ],
     [ "fast_mode_end", "_s_d_logger_s_p_i_demo_8ino.html#af470b04858a297daf94ab9524b08fcf2", null ],
     [ "fastModeEndMillis", "_s_d_logger_s_p_i_demo_8ino.html#ad0f5d5220fcc34c4e729582126bf7112", null ],
