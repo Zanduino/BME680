@@ -63,7 +63,7 @@ Version | Date       | Developer                     | Comments
 1.0.0b  | 2020-05-22 | https://github.com/SV-Zanshin | Cloned from original SPIDemo program and modified
 */
 #include "Zanshin_BME680.h" // Include the BME680 Sensor library
-#include <SPI.h>            // Include the SPI standard library (it is also included in the BME680 library)    
+#include <SPI.h>            // Include the SPI standard library (also included in the BME680 library)    
 #include <SD.h>             // Include the SD Card standard library
 
 /*******************************************************************************************************************
