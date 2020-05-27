@@ -1,24 +1,26 @@
 /*! @file Zanshin_BME680.h
 
-@mainpage Arduino Library to control a Bosch BME680 Environmental Sensor
+@mainpage Arduino Library to access and control a Bosch BME680 Environmental Sensor
 
 @section Zanshin_BME680_section Description
 
-Class definition header for the Bosch BME680 temperature / humidity / pressure / air quality sensor. The sensor is 
+Class definition header for the Bosch BME680 temperature / humidity / pressure / air quality sensor. The device is 
 described at https://www.bosch-sensortec.com/bst/products/all_products/BME680 and the datasheet is available from 
 Bosch at https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf 
 \n\n
 
 The BME680 can use either SPI or I2C for communications. This library supports I2C at various bus speeds as well as 
-SPI using either the standard Arduino hardware SPI or software SPI.\n\n
+SPI using either the standard Arduino hardware SPI or software SPI. Depending upon the pin configuration a BME680 can
+have 2 distinct I2C addresses - either 0x76 or 0x77.\n\n
 
 The most recent version of the library is available at https://github.com/SV-Zanshin/BME680 and extensive 
-documentation of the library as well as example programs are described in the project's wiki pages located at
-https://github.com/SV-Zanshin/BME680/wiki
+documentation of the library as well as descriptions of the example programs are described in the project's wiki 
+pages located at https://github.com/SV-Zanshin/BME680/wiki
 \n
 The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it 
 will be used as part of a third-party breakout board. There are several such boards available at this time, for 
 example:\n
+
 Company  | Link
 -------  | ----------
 SparkFun | https://www.sparkfun.com/products/14570
@@ -26,29 +28,35 @@ BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
 Adafruit | https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout 
 
 \n
-Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed
-at https://github.com/BoschSensortec/BSEC-Arduino-library . This software is part of the Bosch "BSEC" (Bosch 
-Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, it 
-won't run on most Arduinos and the only example is for the Arduino Mega 2560 (due to the memory required), hence
-the decision to make a more compact and rather less abstract library that will run on typical Arduino hardware.
+Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaded
+at https://github.com/BoschSensortec/BSEC-Arduino-library. This software is part of the Bosch "BSEC" (Bosch 
+Sensortec Environmental Cluster) framework and is somewhat bulky and rather unwieldy for typical Arduino 
+applications, it won't run on most Arduinos and the only example is for the Arduino Mega 2560 (due to the memory 
+required), hence the decision to make this compact and rather less abstract library that will run on typical 
+Arduino hardware.
 
 @section license License
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General
-Public License as published by the Free Software Foundation, either version 3 of the License, or (at your
-option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details. You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public 
+License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later
+version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+details. You should have received a copy of the GNU General Public License along with this program.  If not, see 
+<http://www.gnu.org/licenses/>.
 
 @section author Author
 
-Written by Arnd\@SV-Zanshin
+Written by Arnd, https://github.com/SV-Zanshin
 
 @section versions Changelog
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
+1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | Issue #17 - return value for "setOversampling()"
+1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | Issue #16 - I2C "reset()" when using 2 devices
+1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | General formatting of comments and spell-checking
+1.0.6   | 2020-05-24 | https://github.com/SV-Zanshin | Issue #14 - Humidity sometimes 100% despite turning on
+1.0.6   | 2020-05-24 | https://github.com/SV-Zanshin | Issue #15 - Pressure & Temperature oversampling switched
 1.0.5   | 2020-05-21 | https://github.com/SV-Zanshin | Issue #12 - First call to getSensorData() returns invalid data
 1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
 1.0.4   | 2020-05-14 | https://github.com/SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
@@ -65,15 +73,19 @@ Version | Date       | Developer                     | Comments
 #include <Wire.h>    // Standard I2C "Wire" library
 #include <SPI.h>     // Standard SPI library
 #ifndef BME680_h
-  /** @brief  Guard code definition for the library header */
-  #define BME680_h
-  #define CONCAT_BYTES(msb, lsb) (((uint16_t)msb << 8) | (uint16_t)lsb) ///< Inline to combine msb and lsb
-  /*****************************************************************************************************************
-  ** Declare constants used in the class                                                                          **
-  *****************************************************************************************************************/
-  #ifndef I2C_MODES
-  /** @brief  Guard code definition for the I2C modes */
-  #define I2C_MODES
+/********************************************************************************************************************
+** Declare constants used in the class                                                                             **
+********************************************************************************************************************/
+  #define BME680_h                                                      ///< Guard code definition for the header
+  #define CONCAT_BYTES(msb, lsb) (((uint16_t)msb << 8) | (uint16_t)lsb) ///< Inline to combine msb and lsb bytes
+  #ifndef _BV
+    #define _BV(bit) (1 << (bit)) ///< Some implementations don't have this bit-shift macro pre-defined
+  #endif
+  /******************************************************************************************************************
+  ** Declare constants used in the class                                                                           **
+  ******************************************************************************************************************/
+  #ifndef I2C_MODES                                          //   If the I2C_Modes haven't been declared yet
+    #define I2C_MODES                                        ///< Guard code definition for the I2C modes
     const uint32_t I2C_STANDARD_MODE              =  100000; ///< Default normal I2C 100KHz speed
     const uint32_t I2C_FAST_MODE                  =  400000; ///< Fast mode
     const uint32_t I2C_FAST_MODE_PLUS             = 1000000; ///< Really fast mode
@@ -98,11 +110,11 @@ Version | Date       | Developer                     | Comments
   const uint8_t  BME680_I2C_MAX_ADDRESS           =    0x77; ///< Minimum possible address for BME680
   const uint8_t  BME680_SPI_MEM_PAGE_POSITION     =       4; ///< Bit position for the memory page value
   const uint8_t  BME680_HUMIDITY_MASK             =    0xF8; ///< Mask is binary B11111000
-  const uint8_t  BME680_TEMPERATURE_MASK          =    0xE3; ///< Mask is binary B11100011
-  const uint8_t  BME680_PRESSURE_MASK             =    0x1F; ///< Mask is binary B00011111
-  /*********************************************** 
-  ** Declare the constants used for calibration **
-  ***********************************************/
+  const uint8_t  BME680_PRESSURE_MASK             =    0xE3; ///< Mask is binary B11100011
+  const uint8_t  BME680_TEMPERATURE_MASK          =    0x1F; ///< Mask is binary B00011111
+  /******************************************************************************************************************
+  ** Declare the constants used for calibration                                                                    **
+  ******************************************************************************************************************/
   const uint8_t BME680_COEFF_SIZE1                =      25; ///< First array with coefficients
   const uint8_t BME680_COEFF_SIZE2                =      16; ///< Second array with coefficients
   const uint8_t BME680_COEFF_START_ADDRESS1       =    0x89; ///< start address for array 1
@@ -149,13 +161,9 @@ Version | Date       | Developer                     | Comments
   const uint8_t BME680_ADDR_RANGE_SW_ERR_ADDR     =    0x04; ///< Register for gas calibration
   const uint8_t BME680_RSERROR_MSK	              =    0xF0; ///< Register for gas calibration
 
-  #ifndef _BV
-    #define _BV(bit) (1 << (bit)) ///< Some implementations don't have this bit-shift macro pre-defined
-  #endif
-
-  /*****************************************************************************************************************
-  ** Declare enumerated types used in the class                                                                   **
-  *****************************************************************************************************************/
+  /******************************************************************************************************************
+  ** Declare enumerated types used in the class                                                                    **
+  ******************************************************************************************************************/
   /*! @brief  Enumerate the sensor type */
   enum sensorTypes       {TemperatureSensor, HumiditySensor, PressureSensor, GasSensor, UnknownSensor};
   /*! @brief  Enumerate the Oversampling types */
@@ -178,7 +186,8 @@ Version | Date       | Developer                     | Comments
       bool     begin(const uint32_t i2cSpeed, const uint8_t i2cAddress);      // Explicitly set speed and I2C Addr.
       bool     begin(const uint8_t chipSelect, const uint8_t mosi,            // Start using software SPI
                      const uint8_t miso, const uint8_t sck);                  //
-      bool     setOversampling(const uint8_t sensor, const uint8_t sampling); // Set enum sensorType Oversampling
+      uint8_t  setOversampling(const uint8_t sensor,                          // Set enum sensorType Oversampling
+                               const uint8_t sampling=UINT8_MAX);             // and return current value
       bool     setGas(uint16_t GasTemp, uint16_t GasMillis);                  // Gas heating temperature and time
       uint8_t  setIIRFilter(const uint8_t iirFilterSetting=UINT8_MAX);        // Set IIR Filter and return value
       void     getSensorData(int32_t &temp, int32_t &hum,                     // get most recent readings
@@ -192,21 +201,25 @@ Version | Date       | Developer                     | Comments
       void     waitForReadings();                                             ///< Wait for readings to finish
       void     getCalibration();                                              ///< Load calibration from registers
       uint8_t  _I2CAddress = 0;                                               ///< Default is I2C address is unknown
+      uint16_t _I2CSpeed   = 0;                                               ///< Default is I2C speed is unknown
       uint8_t  _cs,_sck,_mosi,_miso;                                          ///< Hardware and software SPI pins
       uint8_t  _H6,_P10,_res_heat_range;                                      ///< unsigned configuration vars
       int8_t   _H3,_H4,_H5,_H7,_G1,_G3,_T3,_P3,_P6,_P7,_res_heat,_rng_sw_err; ///< signed configuration vars
       uint16_t _H1,_H2,_T1,_P1;                                               ///< unsigned 16bit configuration vars
       int16_t  _G2,_T2,_P2,_P4,_P5,_P8,_P9;                                   ///< signed 16bit configuration vars
       int32_t  _tfine,_Temperature,_Pressure,_Humidity,_Gas;                  ///< signed 32bit configuration vars
-      /*************************************************************************************************************
-      ** Declare the getData and putData methods as template functions. All device I/O is done through these two  **
-      ** functions regardless of whether I2C, hardware SPI or software SPI is being used. The two functions are   **
-      ** designed so that only the address and a variable are passed in and the functions determine the size of   **
-      ** the parameter variable and reads or writes that many bytes. So if a read is called using a character     **
-      ** array[10] then 10 bytes are read, if called with a int8 then only one byte is read. The return value, if **
-      ** used, is the number of bytes read or written. Since this is implemented by using template function       **
-      ** definitions, they need to be defined in this header file rather than in the c++ program library file.    **
-      *************************************************************************************************************/
+      /**********************************************************************************************************//*! 
+      ** @section Template functions                                                                               **
+      ** Declare the getData and putData methods as template functions. All device I/O is done through these two   **
+      ** functions regardless of whether I2C, hardware SPI or software SPI is being used. The two functions are    **
+      ** designed so that only the address and a variable are passed in and the functions determine the size of    **
+      ** the parameter variable and reads or writes that many bytes. So if a read is called using a character      **
+      ** array[10] then 10 bytes are read, if called with a int8 then only one byte is read. The return value, if  **
+      ** used, is the number of bytes read or written. Since this is implemented by using template function        **
+      ** definitions, they need to be defined in this header file rather than in the c++ program library file.     **
+      ** The "getData()" function is currently not used in the library directly, but the function "readByte()" is  **
+      ** used which calls the getData().  The "putData()" is called directly in the code.                          **
+      **************************************************************************************************************/
       template< typename T > uint8_t &getData(const uint8_t addr,T &value)
       {
         /*!

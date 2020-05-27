@@ -1,18 +1,27 @@
 ######################################################################################################
 ## Travis-CI control file                                                                           ##
 ##                                                                                                  ##
-## Date       Developer           Comments                                                          ##
-## ========== =================== ================================================================= ##
-## 2020-05-09 Arnd@SV-Zanshin     Removed unnecessary install libraries                             ##
-## 2019-01-23 Arnd@SV-Zanshin     Corrected PRETTYNAME                                              ##
-## 2019-01-20 Arnd@SV-Zanshin     Linked to Adafruit script rather than manually defining all tests ##
-## 2019-01-19 Arnd@SV-Zanshin     Initial coding                                                    ##
+## This YML file controls the way that TRAVIS-CI works for testing the compilability of the library ##
+## and example programs for all supported platforms.  Rather than re-invent the wheel, the public   ##
+## scripts written by the folks at www.adafruit.com are used; as they will add new platforms as     ##
+## needed and thus the continuous integration process for this library will be kept up-to-date.     ##
+##                                                                                                  ##
+## Date       Developer                     Comments                                                ##
+## ========== ============================= ======================================================= ##
+## 2020-05-23 https://github.com/SV-Zanshin Cleaned up documentation format                         ##
+## 2020-05-09 https://github.com/SV-Zanshin Removed unnecessary install libraries                   ##
+## 2019-01-23 https://github.com/SV-Zanshin Corrected PRETTYNAME                                    ##
+## 2019-01-20 https://github.com/SV-Zanshin Linked to Adafruit script rather than defining all of   ##
+##                                          the tests locally and maintaining them                  ##
+## 2019-01-19 https://github.com/SV-Zanshin Initial coding                                          ##
 ##                                                                                                  ##
 ######################################################################################################
 language: c
 sudo: false
 
-# Blacklist
+#########################################################
+# Keep the gh-pages from being included in the CI runs ##
+#########################################################
 branches:
   except:
     - gh-pages
@@ -22,7 +31,7 @@ git:
   quiet: true
 env:
   global:
-    - PRETTYNAME="SV-Zanshin Bosch BME680 Arduino Library"
+    - PRETTYNAME="Bosch BME680 Arduino Library"
     - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
 
 before_install:
@@ -38,5 +47,8 @@ notifications:
     on_success: change
     on_failure: change
 
+###########################################################
+# Generate the Doxygen documentation upon successful run ##
+###########################################################
 after_success:
   - source <(curl -SLs  https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/doxy_gen_and_deploy.sh)

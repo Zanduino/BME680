@@ -21,6 +21,9 @@ BME680_Class::~BME680_Class()
   * @details Currently empty and unused
   */
 } // of class destructor
+/***********************************************************************************************
+** The "begin()" function is overloaded to allow for variations in I2C and SPI initialization **
+***********************************************************************************************/
 bool BME680_Class::begin() 
 {
   /*!
@@ -55,6 +58,7 @@ bool BME680_Class::begin(const uint32_t i2cSpeed, const uint8_t i2cAddress)
   */
   Wire.begin();                                                                     // Start I2C as master
   Wire.setClock(i2cSpeed);                                                          // Set I2C bus speed
+  _I2CSpeed = i2cSpeed;                                                             // Set private variable to speed
   for (_I2CAddress = BME680_I2C_MIN_ADDRESS;_I2CAddress <= BME680_I2C_MAX_ADDRESS;  // Loop through all possible
        _I2CAddress++)                                                               // I2C addresses
   {
@@ -68,7 +72,8 @@ bool BME680_Class::begin(const uint32_t i2cSpeed, const uint8_t i2cAddress)
     } // of if-then check all or a specific address
   } // of for-next each I2C address loop
   _I2CAddress = 0;                                                                  // Set to denote no device found
-  return false;                                                                     // return failure if we get here 
+  _I2CSpeed   = 0;                                                                  // Set to denote no device found
+  return false;                                                                     // return failure if we get here
 } // of method begin()
 bool BME680_Class::begin(const uint8_t chipSelect)
 {
@@ -79,7 +84,7 @@ bool BME680_Class::begin(const uint8_t chipSelect)
   * @param[in] chipSelect Arduino Pin number for the Slave-Select pin or the I2C address
   * return     "true" if successful otherwise false
   */
-  if (chipSelect==BME680_I2C_MIN_ADDRESS || chipSelect==BME680_I2C_MIN_ADDRESS) // If 0x76 or 0x77 then we have I2C
+  if (chipSelect==BME680_I2C_MIN_ADDRESS || chipSelect==BME680_I2C_MAX_ADDRESS) // If 0x76 or 0x77 then we have I2C
   {                                                                             //
     return begin(I2C_STANDARD_MODE, chipSelect);                                // Std speed with explicit address
   } // if-then we have an I2C call                                              //
@@ -112,23 +117,25 @@ bool BME680_Class::commonInitialization()
 {
   /*!
   * @brief   Common BME680 initialization function
-  * @details Called from all of the overloaded "begin()" functions once protocol has been selected
+  * @details Called from all of the overloaded "begin()" functions once the communicationsprotocol has been selected
   * return "true" if successful otherwise false
   */
-  if (_I2CAddress==0 && readByte(BME680_SPI_REGISTER)!=0)               // Wrong mode for SPI
-  {
-    putData(BME680_SPI_REGISTER,(uint8_t)0);                            // return to correct SPI page
-  } // of if-then we are in SPI mode
-  if (readByte(BME680_CHIPID_REGISTER)==BME680_CHIPID)                  // check for correct chip id
-  {
-    getCalibration();                                                   // get the calibration values
-    if (_I2CAddress==0)                                                 // If using SPI, then we need to ensure
-    {                                                                   // that we switch to the correct
-      putData(BME680_SPI_REGISTER|0x80,                                 // register bank by setting the
-              (uint8_t)_BV(BME680_SPI_MEM_PAGE_POSITION));              // page position bit
-    } // of if-then SPI mode
-    uint8_t workRegister = readByte(BME680_CONTROL_MEASURE_REGISTER);   // Read the control measure
-    putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(workRegister|1)); // Trigger start of first measurement
+  uint8_t SPI_Register = readByte(BME680_SPI_REGISTER);                     // Read the SPI register byte
+  if (_I2CAddress==0 && bitRead(SPI_Register,BME680_SPI_MEM_PAGE_POSITION)) // Wrong mode for SPI to read chip ID
+  {                                                                         //
+    bitWrite(SPI_Register,BME680_SPI_MEM_PAGE_POSITION,0);                  // Turn off Page bit to go to Page 0
+    putData(BME680_SPI_REGISTER,SPI_Register);                              // Write value to register
+  } // of if-then we are in SPI mode                                        //
+  if (readByte(BME680_CHIPID_REGISTER)==BME680_CHIPID)                      // check for correct chip id
+  {                                                                         //
+    getCalibration();                                                       // get the calibration values
+    if (_I2CAddress==0)                                                     // If using SPI, then we need to ensure
+    {                                                                       // that we switch to the correct
+      bitWrite(SPI_Register,BME680_SPI_MEM_PAGE_POSITION,1);                // Page "1" again
+      putData(BME680_SPI_REGISTER, SPI_Register);                           // Update register value
+    } // of if-then SPI mode                                                //
+    uint8_t workRegister = readByte(BME680_CONTROL_MEASURE_REGISTER);       // Read the control measure
+    putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(workRegister|1));     // Trigger start of first measurement
     return true;
   } // of if-then device is really a BME680
   else return false;
@@ -137,9 +144,10 @@ uint8_t BME680_Class::readByte(const uint8_t addr)
 {
   /*!
   * @brief   Read a single byte from the give address
-  * @details interlude function to the "getData()" function
+  * @details interlude function to the "getData()" function. This is called so that the return value is the byte
+  *          of data that has just been read rather than the number of bytes read returned by "getData()"
   * param[in] addr Address of device
-  * return    single byte read
+  * return    single byte of read from addr
   */
   uint8_t returnValue;       // Storage for returned value
   getData(addr,returnValue); // Read just one byte
@@ -151,8 +159,9 @@ void BME680_Class::reset()
   * @brief   Performs a device reset
   */
   putData(BME680_SOFTRESET_REGISTER,BME680_RESET_CODE); // write reset code to device
-  if (_I2CAddress) begin();                             // Start device again if I2C
-  else if(_sck) begin(_cs,_mosi,_miso,_sck);            // Use software serial again
+  delay(2);                                             // Datasheet states 2ms Start-up time
+  if (_I2CAddress) begin(_I2CSpeed,_I2CAddress);        // Start device with same settings again if using I2C
+  else if(_sck) begin(_cs,_mosi,_miso,_sck);            // Use software SPI again
   else begin(_cs);                                      // otherwise it must be hardware SPI
 } // of method reset()
 void BME680_Class::getCalibration()
@@ -214,7 +223,7 @@ void BME680_Class::getCalibration()
   getData(BME680_ADDR_RANGE_SW_ERR_ADDR,temp_var);
   _rng_sw_err = ((int8_t) temp_var & (int8_t) BME680_RSERROR_MSK) / 16;
 } // of method getCalibration()
-bool BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling) 
+uint8_t BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling) 
 {
   /*!
   * @brief   sets the oversampling mode for the sensor
@@ -222,34 +231,67 @@ bool BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampling)
   *          enumerated type oversamplingTypes. If either value is out of range or another error occurs then the 
   *          return value is false.
   * param[in] sensor Enumerated sensor type
-  * param[in] sampling Sampling rate
+  * param[in] sampling Sampling rate from enumerated type
   * return "true" if successful otherwise false
   */
-  if (sensor>=UnknownSensor || sampling>=UnknownOversample) return(false); // return error if out of range
-  uint8_t tempRegister;
-  switch (sensor) 
-  {
-    case HumiditySensor :
-    {
-      tempRegister = readByte(BME680_CONTROL_HUMIDITY_REGISTER) & BME680_HUMIDITY_MASK;  // Get contents and mask
-      putData(BME680_CONTROL_HUMIDITY_REGISTER,(uint8_t)(tempRegister|sampling));// Update humidity bits 0:2
-      break;
-    } // of HumiditySensor
-    case PressureSensor : 
-    {
-      tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & BME680_TEMPERATURE_MASK; // Get contents and mask
-      putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(tempRegister|(sampling<<2))); // Update pressure bits
-      break;
-    } // of PressureSensor
-    case TemperatureSensor : 
-    {
-      tempRegister = readByte(BME680_CONTROL_MEASURE_REGISTER) & BME680_PRESSURE_MASK; // Get contentsand mask
-      putData(BME680_CONTROL_MEASURE_REGISTER,(uint8_t)(tempRegister|(sampling<<5)));// Update humidity bits 5:7
-      break;
-    } // of TemperatureSensor
-    default: return(false); // Return an error if no match
-  } // of switch the sensor type
-  return(true);
+  if (sensor >= UnknownSensor ||                                           // return an error if sensor is out of
+      (sampling != UINT8_MAX && sampling >= UnknownOversample))            // range or oversample value is out of
+  {                                                                        // range
+    return(UINT8_MAX);                                                     // 
+  } // if then values out of range                                         //
+  uint8_t tempRegister;                                                    // Temporary register variable
+  uint8_t returnValue = sampling;                                          // Return sampling value
+  waitForReadings();                                                       // Ensure any active reading is finished
+  switch (sensor)                                                          // Depending upon which sensor is chosen
+  {                                                                        //
+    case HumiditySensor :                                                  // Set the humidity oversampling
+    {                                                                      //
+      tempRegister = readByte(BME680_CONTROL_HUMIDITY_REGISTER);           // Read the register contents
+      if (sampling == UINT8_MAX)                                           // If we just want to read the values
+      {                                                                    //
+        returnValue = tempRegister & ~BME680_HUMIDITY_MASK;                // Set return value
+      }                                                                    //
+      else                                                                 //
+      {                                                                    //
+        tempRegister &= BME680_HUMIDITY_MASK;                              // Mask bits to 0
+        tempRegister |= sampling;                                          // Add in the sampling bits
+        putData(BME680_CONTROL_HUMIDITY_REGISTER, (uint8_t)tempRegister);  // Update humidity bits 0:2
+      } // if-then return current value or set new value                   //
+      break;                                                               //
+    } // of HumiditySensor                                                 //
+    case PressureSensor :                                                  // Set the pressure oversampling
+    {                                                                      //
+      tempRegister  = readByte(BME680_CONTROL_MEASURE_REGISTER);           // Read the register contents
+      if (sampling == UINT8_MAX)                                           // If we just want to read the values
+      {                                                                    //
+        returnValue = (tempRegister & ~BME680_PRESSURE_MASK)>>2;           // Set return value
+      }                                                                    //
+      else                                                                 //
+      {                                                                    //
+        tempRegister &= BME680_PRESSURE_MASK;                              // Mask bits to 0
+        tempRegister |= (sampling << 2);                                   // Add in the sampling bits at offset
+        putData(BME680_CONTROL_MEASURE_REGISTER, (uint8_t)tempRegister);   // Update register
+      } // if-then return current value or set new value                   //
+      break;                                                               //
+    } // of PressureSensor                                                 //
+    case TemperatureSensor :                                               // Set the temperature oversampling
+    {                                                                      //
+      tempRegister  = readByte(BME680_CONTROL_MEASURE_REGISTER);           // Read the register contents
+      if (sampling == UINT8_MAX)                                           // If we just want to read the values
+      {                                                                    //
+        returnValue = (tempRegister & ~BME680_TEMPERATURE_MASK) >> 5;      // Set return value
+      }                                                                    //
+      else                                                                 //
+      {                                                                    //
+        tempRegister &= BME680_TEMPERATURE_MASK;                           // Mask bits to 0
+        tempRegister |= (sampling << 5);                                   // Add in the sampling bits at offset
+        putData(BME680_CONTROL_MEASURE_REGISTER, (uint8_t)tempRegister);   // Update humidity bits 5:7
+      } // if-then return current value or set new value                   //
+      break;                                                               //
+    } // of TemperatureSensor                                              //
+    default: return(UINT8_MAX);                                            // Return an error if no match
+  } // of switch the sensor type                                           //
+  return(returnValue);                                                     // Otherwise return current value
 } // of method setOversampling()
 uint8_t BME680_Class::setIIRFilter(const uint8_t iirFilterSetting ) 
 {
@@ -260,12 +302,15 @@ uint8_t BME680_Class::setIIRFilter(const uint8_t iirFilterSetting )
   * param[in] iirFilterSetting New setting
   * return   IIR Filter setting
   */
-  uint8_t returnValue = readByte(BME680_CONFIG_REGISTER);              // Get control register byte
-  if (iirFilterSetting==UINT8_MAX) return((returnValue>>2)&B00000111); // return the current setting
-  returnValue = returnValue&B11100011;                                 // Get control reg, mask IIR bits
-  returnValue |= (iirFilterSetting&B00000111)<<2;                      // use 3 bits of iirFilterSetting
-  putData(BME680_CONFIG_REGISTER,returnValue);                         // Write new control register value
-  returnValue = (returnValue>>2)&B00000111;                            // Extract IIR filter setting
+  waitForReadings();                                                   // Ensure any active reading is finished
+  uint8_t returnValue = readByte(BME680_CONFIG_REGISTER);              // Get control register byte contents
+  if (iirFilterSetting != UINT8_MAX)                                   // If the value is to be changed
+  {                                                                    //
+    returnValue  = returnValue & B11100011;                            // mask IIR bits
+    returnValue |= (iirFilterSetting&B00000111)<<2;                    // use 3 bits of iirFilterSetting
+    putData(BME680_CONFIG_REGISTER,returnValue);                       // Write new control register value
+  } // if the value is to be changed                                   //
+  returnValue = (returnValue >> 2) & B00000111;                        // Extract IIR filter setting from register
   return(returnValue);                                                 // Return IIR Filter setting
 } // of method setIIRFilter()
 void BME680_Class::getSensorData(int32_t &temp, int32_t &hum, int32_t &press, int32_t &gas, const bool waitSwitch )
@@ -295,6 +340,7 @@ void BME680_Class::readSensors(const bool waitSwitch)
   * param[in] waitSwitch Optional switch that, when set to "true" will not return until reading is finished
   */
   /*! Lookup table for the possible gas range values */
+
 const  uint32_t lookupTable1[16] = {
   UINT32_C(2147483647), UINT32_C(2147483647), UINT32_C(2147483647), UINT32_C(2147483647), UINT32_C(2147483647), 
   UINT32_C(2126008810), UINT32_C(2147483647), UINT32_C(2130303777), UINT32_C(2147483647), UINT32_C(2147483647),
@@ -307,6 +353,7 @@ const uint32_t lookupTable2[16]  = {
   UINT32_C(4000000),    UINT32_C(2000000),    UINT32_C(1000000),    UINT32_C(500000),    UINT32_C(250000),
   UINT32_C(125000) 
 };
+
   uint8_t buff[15],gas_range,status=0;                     // declare array for registers
   int64_t var1, var2, var3, var4, var5, var6, temp_scaled; // Work variables
   uint32_t adc_temp, adc_pres;                             // Raw ADC temperature and pressure
@@ -398,7 +445,8 @@ bool BME680_Class::setGas(uint16_t GasTemp,  uint16_t GasMillis)
   * param[in] GasMillis Milliseconds to turn on heater
   * return Always returns "true"
   */
-  uint8_t gasRegister = readByte(BME680_CONTROL_GAS_REGISTER2); // Read current register values
+  waitForReadings();                                                        // Ensure any active reading is finished
+  uint8_t gasRegister = readByte(BME680_CONTROL_GAS_REGISTER2);             // Read current register values
   if ( GasTemp==0 || GasMillis==0 ) 
   {
     // If either input variable is zero //
