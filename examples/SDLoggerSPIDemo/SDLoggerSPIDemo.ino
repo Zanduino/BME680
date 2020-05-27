@@ -98,7 +98,7 @@ char     buf[32];                                   ///< Text buffer for sprintf
 int32_t  avg_temperature;                           ///< Holds computed average over NUMBER_READINGS 
 int32_t  avg_humidity;                              ///< Holds computed average over NUMBER_READINGS 
 int32_t  avg_pressure;                              ///< Holds computed average over NUMBER_READINGS 
-
+uint32_t delayTime = LONG_DELAY;                    ///< The number of milliseconds to pause between measurements
 void normalMode()
 {
   /*!
@@ -111,6 +111,8 @@ void normalMode()
   BME680.setOversampling(PressureSensor,    Oversample1); // Don't average readings for pressure
   BME680.setIIRFilter(IIR2);                              // Use IIR Filter of 2
   BME680.setGas(0,0);                                     // Setting either value to 0 turns off gas measurements
+  delayTime = LONG_DELAY;                                 // Normal and slow readings
+
 } // of method "normalMode()"
 void accurateMode()
 {
@@ -125,6 +127,8 @@ void accurateMode()
   BME680.setOversampling(PressureSensor,    Oversample8); // Average 8 readings for pressure
   BME680.setIIRFilter(IIR8);                              // Use IIR Filter of 8
   BME680.setGas(0,0);                                     // Setting either value to 0 turns off gas measurements
+  delayTime = SHORT_DELAY;                                // Faster readings
+
 } // of method "accurateMode()"
 void setup()
 {
@@ -134,10 +138,10 @@ void setup()
             and then control goes to the main "loop()" method, from which control never returns
   @return   void
   */
-  pinMode(BME_680_SPI_CS_PIN, OUTPUT);              // Declare the Chip-Select pin for the BME680 as output
-  pinMode(SD_CARD_SPI_CS_PIN, OUTPUT);              // Declare the Chip-Select pin for the SD Card as output
   digitalWrite(SD_CARD_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
   digitalWrite(BME_680_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
+  pinMode(BME_680_SPI_CS_PIN, OUTPUT);              // Declare the Chip-Select pin for the BME680 as output
+  pinMode(SD_CARD_SPI_CS_PIN, OUTPUT);              // Declare the Chip-Select pin for the SD Card as output
   Serial.begin(SERIAL_SPEED);                       // Start serial port at Baud rate
   #ifdef  __AVR_ATmega32U4__                        // If this is a 32U4 processor, 
     delay(3000);                                    // then wait 3 seconds to initialize USB port
@@ -205,12 +209,19 @@ void loop()
   avg_humidity    /= NUMBER_READINGS;                                                    // averages for readings
   avg_pressure    /= NUMBER_READINGS;                                                    //
   ++loopCounter;                                                                         // increment counter
+  /******************************************************************************************************************
+  ** The fast mode continues for FAST_MODE_DURATION milliseconds after the last trigger event                      **
+  ******************************************************************************************************************/
   if (fast_mode_end != 0 && millis() > fast_mode_end)
   {
     Serial.println("Turning off FAST mode");
     fast_mode_end = 0; // turn off fast mode
     normalMode();
   } // if-then we have gone past the fast mode time
+  /******************************************************************************************************************
+  ** Trigger fast mode when either the temperature, humidity or pressure values differ from the running average by **
+  ** more than the "TRIP" amounts for each measurement type                                                        **
+  ******************************************************************************************************************/
   if (fast_mode_end == 0 && 
     (abs(data[idx].temperature - avg_temperature) > TEMPERATURE_TRIP ||
     abs(data[idx].humidity - avg_humidity) > HUMIDITY_TRIP ||
@@ -253,5 +264,5 @@ void loop()
 
   dataFile.print(buf);
   if (idx == 0) dataFile.flush();                                            // force a SD write every cycle
-  delay(LONG_DELAY);                                                                // Wait 10s before repeating
+  delay(delayTime);                                                  // Wait appropriate amount of time
 } // of method loop()
