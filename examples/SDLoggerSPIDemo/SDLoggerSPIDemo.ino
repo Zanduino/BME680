@@ -70,7 +70,7 @@ Version | Date       | Developer                     | Comments
 ** Declare all program constants                                                                                  **
 *******************************************************************************************************************/
 const uint8_t   BME_680_SPI_CS_PIN =            SS; ///< Use the standard SS pin for the BME680
-const uint8_t   SD_CARD_SPI_CS_PIN =            24; ///< Use Pin A6 for the SD Card
+const uint8_t   SD_CARD_SPI_CS_PIN =            24; ///< Use Pin A6/D4 for the SD Card
 const uint32_t  SERIAL_SPEED       =        115200; ///< Set the baud rate for Serial I/O
 const uint8_t   NUMBER_READINGS    =            10; ///< Number of readings to average
 const uint32_t  LONG_DELAY         =         10000; ///< Long delay in milliseconds - 10 seconds
