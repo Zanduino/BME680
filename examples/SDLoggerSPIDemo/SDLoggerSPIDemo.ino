@@ -200,7 +200,8 @@ void loop()
   */
   if (loopCounter % 25 == 0)                                                             // Header every 25 loops
   {                                                                                      //
-    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa Avg Tmp Avg Hum Avg hPa\n==== ====== ====== ========= ======= ====== =========\n")); // Show header plus unicode "°C" symbol
+    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa Avg Tmp Avg Hum Avg hPa\n"
+                    "==== ====== ====== ========= ======= ====== =========\n")); // Show header plus unicode "°C" symbol
   } // if-then time to show headers                                                      //
   idx = (idx+1) % NUMBER_READINGS;                                                       // increment and clamp
   BME680.getSensorData(data[idx].temperature, data[idx].humidity,                        // Read once at beginning
