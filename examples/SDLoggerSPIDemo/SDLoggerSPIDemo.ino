@@ -145,10 +145,10 @@ void setup()
             and then control goes to the main "loop()" method, from which control never returns
   @return   void
   */
-  digitalWrite(SD_CARD_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
-  digitalWrite(BME_680_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
   pinMode(BME_680_SPI_CS_PIN, OUTPUT);              // Declare the Chip-Select pin for the BME680 as output
   pinMode(SD_CARD_SPI_CS_PIN, OUTPUT);              // Declare the Chip-Select pin for the SD Card as output
+  digitalWrite(SD_CARD_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
+  digitalWrite(BME_680_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
   Serial.begin(SERIAL_SPEED);                       // Start serial port at Baud rate
   #ifdef  __AVR_ATmega32U4__                        // If this is a 32U4 processor, 
     delay(3000);                                    // then wait 3 seconds to initialize USB port
