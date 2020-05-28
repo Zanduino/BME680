@@ -66,11 +66,24 @@ Version | Date       | Developer                     | Comments
 #include <SPI.h>            // Include the SPI standard library (also included in the BME680 library)    
 #include <SD.h>             // Include the SD Card standard library
 
+//#define SERIAL_ATTACHED     // When commented out then no output is done to the serial port
+#ifndef SERIAL_ATTACHED
+// disable Serial output
+#define Serial SomeOtherwiseUnusedName
+static class {
+public:
+  void begin(...) {}
+  void print(...) {}
+  void println(...) {}
+} Serial;
+#endif
+
 /*******************************************************************************************************************
 ** Declare all program constants                                                                                  **
 *******************************************************************************************************************/
 const uint8_t   BME_680_SPI_CS_PIN =            SS; ///< Use the standard SS pin for the BME680
 const uint8_t   SD_CARD_SPI_CS_PIN =            24; ///< Use Pin A6/D4 for the SD Card
+const uint8_t   LED_PIN            =   LED_BUILTIN; ///< Built-in LED pin
 const uint32_t  SERIAL_SPEED       =        115200; ///< Set the baud rate for Serial I/O
 const uint8_t   NUMBER_READINGS    =            10; ///< Number of readings to average
 const uint32_t  LONG_DELAY         =         10000; ///< Long delay in milliseconds - 10 seconds
@@ -147,10 +160,12 @@ void setup()
   */
   pinMode(BME_680_SPI_CS_PIN, OUTPUT);              // Declare the Chip-Select pin for the BME680 as output
   pinMode(SD_CARD_SPI_CS_PIN, OUTPUT);              // Declare the Chip-Select pin for the SD Card as output
+  pinMode(LED_PIN, OUTPUT);                         // Declare the builtin LED to be an output
   digitalWrite(SD_CARD_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
   digitalWrite(BME_680_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
+  digitalWrite(LED_PIN, LOW);                       // Turn off the LED
   Serial.begin(SERIAL_SPEED);                       // Start serial port at Baud rate
-  #ifdef  __AVR_ATmega32U4__                        // If this is a 32U4 processor, 
+  #ifdef __AVR_ATmega32U4__                         // If this is a 32U4 processor, 
     delay(3000);                                    // then wait 3 seconds to initialize USB port
   #endif                                            
   Serial.print(F("Starting SDLoggerSPIDemo example program for BME680\n- Initializing BME680 sensor\n"));
@@ -200,8 +215,8 @@ void loop()
   */
   if (loopCounter % 25 == 0)                                                             // Header every 25 loops
   {                                                                                      //
-    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa Avg Tmp Avg Hum Avg hPa\n"
-                    "==== ====== ====== ========= ======= ====== =========\n")); // Show header plus unicode "°C" symbol
+    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa Avg Tmp Avg Hum Avg hPa\n"  // Show header plus the 
+                   "==== ====== ====== ========= ======= ====== =========\n"));          // unicode "°C" symbol
   } // if-then time to show headers                                                      //
   idx = (idx+1) % NUMBER_READINGS;                                                       // increment and clamp
   BME680.getSensorData(data[idx].temperature, data[idx].humidity,                        // Read once at beginning
