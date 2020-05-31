@@ -1,9 +1,10 @@
 ########################################################################
-# This file defines which file types are to be ignroed and skipped by  #
+# This file defines which file types are to be ignored and skipped by  #
 # git so that they are not transferred and committed.                  #
 #                                                                      #
 # Date       Author                        Comments                    #
 # ========== ============================= =========================== #
+# 2020-05-31 https://github.com/SV-Zanshin Ignore for Authentication   #
 # 2019-02-02 https://github.com/SV-Zanshin Ignores for Doxygen         #
 # 2018-09-22 https://github.com/SV-Zanshin Ignores for MS VS 2017      #
 # 2018-06-24 https://github.com/SV-Zanshin Changed file                #
@@ -94,3 +95,7 @@ Release
 ########################################################################
 html
 
+########################################################################
+# Files that contain sensitive information                             #
+########################################################################
+Authentication.h
