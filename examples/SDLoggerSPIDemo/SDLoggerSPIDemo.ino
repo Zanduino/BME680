@@ -163,7 +163,7 @@ void setup()
   pinMode(LED_PIN, OUTPUT);                         // Declare the builtin LED to be an output
   digitalWrite(SD_CARD_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
   digitalWrite(BME_680_SPI_CS_PIN, HIGH);           // Write a high value to it in order to deselect device
-  digitalWrite(LED_PIN, LOW);                       // Turn off the LED
+  digitalWrite(LED_PIN, HIGH);                      // Turn on the LED
   Serial.begin(SERIAL_SPEED);                       // Start serial port at Baud rate
   #ifdef __AVR_ATmega32U4__                         // If this is a 32U4 processor, 
     delay(3000);                                    // then wait 3 seconds to initialize USB port
@@ -172,7 +172,11 @@ void setup()
   while (!BME680.begin(BME_680_SPI_CS_PIN))         // Start BME680 using hardware SPI protocol
   {
     Serial.print(F("-  Unable to find BME680. Trying again in 5 seconds.\n"));
-    delay(5000);
+    for (uint8_t i = 0; i < 50; i++)
+    {
+      digitalWrite(LED_PIN, !digitalRead(LED_PIN));
+      delay(100);
+    } // loop to toggle LED light 10 times
   } // of loop until device is located
   normalMode();
   BME680.getSensorData(data[idx].temperature, data[idx].humidity, data[idx].pressure, unused_gas);
@@ -182,7 +186,11 @@ void setup()
   while (!SD.begin(SD_CARD_SPI_CS_PIN)) // Start card using hardware SPI protocol
   {
     Serial.print(F("-  Unable to find SD Card. Trying again in 5 seconds.\n"));
-    delay(5000);
+    for (uint8_t i = 0; i < 50; i++)
+    {
+      digitalWrite(LED_PIN, !digitalRead(LED_PIN));
+      delay(100);
+    } // loop to toggle LED light 10 times
   } // of loop until device is located
   Serial.print(F("- SD-Card Initialized\n"));
   dataFile = SD.open(FILE_NAME, FILE_WRITE);        // Open the logfile for writing and position to end-of-file
@@ -203,6 +211,7 @@ void setup()
     data[i].humidity    = data[0].humidity;
     data[i].pressure    = data[0].pressure;
   } // of for-next each array element
+  digitalWrite(LED_PIN, LOW); // turn off LED
 } // of method setup()
 void loop() 
 {
@@ -286,6 +295,11 @@ void loop()
     (uint8_t)(data[idx].pressure % 100));
 
   dataFile.print(buf);
-  if (idx == 0) dataFile.flush();                                            // force a SD write every cycle
+  if (idx == 0)
+  {
+    digitalWrite(LED_PIN, HIGH); // turn on LED
+    dataFile.flush();                                            // force a SD write every cycle
+    digitalWrite(LED_PIN, LOW); // turn off LED
+  } // if-then time to flush buffer to SD-Card
   delay(delayTime);                                                  // Wait appropriate amount of time
 } // of method loop()
