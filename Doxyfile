@@ -3,6 +3,7 @@
 ##                                                                                                  ##
 ## Date       Developer                     Comments                                                ##
 ## ========== ============================= ======================================================= ##
+## 2020-06-01 https://github.com/SV-Zanshin Updated version to 1.0.7                                ##
 ## 2020-06-01 https://github.com/SV-Zanshin Added "PREDEFINED = DOXYGEN_SHOULD_SKIP_THIS"           ##
 ## 2020-05-23 https://github.com/SV-Zanshin Removed e-mail addresses from file and updated version  ##
 ## 2020-05-21 https://github.com/SV-Zanshin Updated "PROJECT_NUMBER" value to 1.0.5                 ##
@@ -12,7 +13,7 @@
 ######################################################################################################
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = BME680
-PROJECT_NUMBER         = "Version 1.0.6"
+PROJECT_NUMBER         = "Version 1.0.7"
 PROJECT_BRIEF          = "Arduino Library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor"
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       =

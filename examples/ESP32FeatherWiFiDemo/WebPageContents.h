@@ -46,7 +46,7 @@ const char MAIN_page[] PROGMEM = R"=====(
       </div>
   <div>
     <table id="dataTable">
-      <tr><th>Time</th><th>Supply (V)</th><th>Temperature (&deg;C)</th><th>Relative Humidity (%)</th><th>Altitude (m/10)</th></tr>
+      <tr><th>Time</th><th>Supply (V)</th><th>Temperature (&deg;C)</th><th>Relative Humidity (%)</th><th>Altitude (m)</th></tr>
     </table>
   </div>
   <br>
