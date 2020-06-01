@@ -58,7 +58,8 @@ Written by https://github.com/SV-Zanshin
 @section SDLoggerSPIDemoversions Changelog
 
 Version | Date       | Developer                     | Comments
-------- | ---------- | ----------------------------- | -------------------------------------------------
+------- | ---------- | ----------------------------- | -----------------------------------------------------
+1.0.1   | 2020-06-01 | https://github.com/SV-Zanshin | Added Doxygen commenting for redefine of serial class
 1.0.0   | 2020-05-27 | https://github.com/SV-Zanshin | Completed and tested
 1.0.0b  | 2020-05-22 | https://github.com/SV-Zanshin | Cloned from original SPIDemo program and modified
 */
@@ -66,16 +67,24 @@ Version | Date       | Developer                     | Comments
 #include <SPI.h>            // Include the SPI standard library (also included in the BME680 library)    
 #include <SD.h>             // Include the SD Card standard library
 
-//#define SERIAL_ATTACHED     // When commented out then no output is done to the serial port
+#define SERIAL_ATTACHED     // When commented out then no output is done to the serial port
+
 #ifndef SERIAL_ATTACHED
-// disable Serial output
-#define Serial SomeOtherwiseUnusedName
-static class {
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+// override Serial output
+#define Serial DummySerial
+static class 
+{
+  /*!
+  @class Serial
+  @Brief Redefine a dummy Serial class when no serial port is attached
+  */
 public:
-  void begin(...) {}
-  void print(...) {}
-  void println(...) {}
+  void begin(...) {}   ///< Redefine a dummy begin
+  void print(...) {}   ///< Redefine a dummy print
+  void println(...) {} ///< Redefine a dummy println
 } Serial;
+#endif // of skipped Doxygen code
 #endif
 
 /*******************************************************************************************************************
