@@ -1,8 +1,17 @@
+/*!
+  This character string "MAIN_page" is loaded into program memory and contains the web page that is served when a
+  browser calls up the site. It uses the javascript from https://www.chartjs.org to generate a page with a dynamic
+  chart and lists the data in tabular form underneath as well.
+  
+  Since this is used for demonstration purposes it has been kept basic and simple.
+  
+*/
+
 const char MAIN_page[] PROGMEM = R"=====(
   <!doctype html>
   <html>
   <head>
-    <title>ESP32 Feather BME680 WiFi Program</title>
+    <title>ESP32FeatherWiFiDemo - BME680 demononstration program</title>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>  
     <style>
     canvas{
@@ -37,7 +46,7 @@ const char MAIN_page[] PROGMEM = R"=====(
       </div>
   <div>
     <table id="dataTable">
-      <tr><th>Time</th><th>Supply Voltage</th><th>Temperature &deg;C</th><th>Relative Humidity %</th><th>Pressure Pa</th></tr>
+      <tr><th>Time</th><th>Supply (V)</th><th>Temperature (&deg;C)</th><th>Relative Humidity (%)</th><th>Altitude (m/10)</th></tr>
     </table>
   </div>
   <br>
@@ -58,7 +67,7 @@ const char MAIN_page[] PROGMEM = R"=====(
           data: {
               labels: timeStamp,
               datasets: [{
-                  label: "SupplyVoltage",
+                  label: "Supply",
                   fill: false,
                   backgroundColor: 'rgba( 243,18, 156 , 1)',
                   borderColor: 'rgba( 243, 18, 156 , 1)',
@@ -78,17 +87,17 @@ const char MAIN_page[] PROGMEM = R"=====(
                   data: Hvalues,
               }, 
 			  {
-                  label: "Pressure",
+                  label: "Altitude",
                   fill: false,
-                  backgroundColor: 'rgba(156, 18, 243 , 1)',
-                  borderColor: 'rgba(156, 18, 243 , 1)',
+                  backgroundColor: 'rgba(60, 60, 60, 1)',
+                  borderColor: 'rgba(60, 60, 60, 1)',
                   data: Pvalues,
               }],
           },
           options: {
               title: {
                       display: true,
-                      text: "Real-Time BME680 Data Display"
+                      text: "Real-Time BME680 Data Display with 10 second auto-refresh"
                   },
               maintainAspectRatio: false,
               elements: {
@@ -96,14 +105,14 @@ const char MAIN_page[] PROGMEM = R"=====(
                       tension: 0.5  // Smooth data lines
                   }
               }
-//			  ,
-//              scales: {
-//                      yAxes: [{
-//                          ticks: {
-//                              beginAtZero:true
-//                          }
-//                      }]
-//              }
+			  ,
+              scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero:true
+                          }
+                      }]
+              }
           }
       });
   }
@@ -111,11 +120,7 @@ const char MAIN_page[] PROGMEM = R"=====(
     console.log(new Date().toLocaleTimeString());
   };
   
-  // Get a new measurement every 5 Seconds 
-  setInterval(function() {
-    getData();
-  }, 5000); // 5000ms update rate
-   
+  setInterval(function() { getData(); }, 10000); // Get a new measurement every 10 Seconds 
   function getData() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -123,14 +128,15 @@ const char MAIN_page[] PROGMEM = R"=====(
        //Push the data in array
     var time = new Date().toLocaleTimeString();
     var txt = this.responseText;
-    var obj = JSON.parse(txt); //Ref: https://www.w3schools.com/js/js_json_parse.asp
+    var obj = JSON.parse(txt);
         SupplyVoltage.push(obj.SupplyVoltage);
         Tvalues.push(obj.Temperature);
         Hvalues.push(obj.Humidity);
+		Pvalues.push(obj.Altitude);
         timeStamp.push(time);
-        showGraph();  //Update Graphs
+        showGraph();
       var table = document.getElementById("dataTable");
-      var row = table.insertRow(1); //Add after headings
+      var row = table.insertRow(1);
       var cell1 = row.insertCell(0);
       var cell2 = row.insertCell(1);
       var cell3 = row.insertCell(2);
@@ -140,7 +146,7 @@ const char MAIN_page[] PROGMEM = R"=====(
       cell2.innerHTML = obj.SupplyVoltage;
       cell3.innerHTML = obj.Temperature;
       cell4.innerHTML = obj.Humidity;
-      cell5.innerHTML = obj.Pressure;
+      cell5.innerHTML = obj.Altitude;
       }
     };
     xhttp.open("GET", "readADC", true);

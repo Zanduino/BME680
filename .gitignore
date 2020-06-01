@@ -4,6 +4,7 @@
 #                                                                      #
 # Date       Author                        Comments                    #
 # ========== ============================= =========================== #
+# 2020-06-01 https://github.com/SV-Zanshin Removed ignore again        #
 # 2020-05-31 https://github.com/SV-Zanshin Ignore for Authentication   #
 # 2019-02-02 https://github.com/SV-Zanshin Ignores for Doxygen         #
 # 2018-09-22 https://github.com/SV-Zanshin Ignores for MS VS 2017      #
@@ -94,8 +95,3 @@ Release
 # Files and directories from Doxygen                                   #
 ########################################################################
 html
-
-########################################################################
-# Files that contain sensitive information                             #
-########################################################################
-Authentication.h
