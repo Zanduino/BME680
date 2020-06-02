@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['normalmode',['normalMode',['../_s_d_logger_s_p_i_demo_8ino.html#a2da02f9fe2a7e6ae7a9dcbea796297c2',1,'SDLoggerSPIDemo.ino']]],
-  ['number_5freadings',['NUMBER_READINGS',['../_s_d_logger_s_p_i_demo_8ino.html#aa4594c2761e7ec9ee5143db14c27c16c',1,'SDLoggerSPIDemo.ino']]]
+  ['pressure',['pressure',['../structreading.html#a2112429ccfec7e0aab639289177840b4',1,'reading']]],
+  ['pressure_5ftrip',['PRESSURE_TRIP',['../_s_d_logger_s_p_i_demo_8ino.html#ada280a5922caef362c34838b73a51dd3',1,'SDLoggerSPIDemo.ino']]]
 ];

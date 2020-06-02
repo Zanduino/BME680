@@ -31,7 +31,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_e_s_p32_feather_wi_fi_demo_8ino.html"
+"_i2_c_demo_8ino.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
