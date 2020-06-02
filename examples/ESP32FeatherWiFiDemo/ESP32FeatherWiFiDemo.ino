@@ -132,29 +132,29 @@ void setup()
             and configured here.
   @return   void
   */
-  pinMode(SD_CARD_SPI_CS_PIN, OUTPUT);                     // Declare the Chip-Select pin for the SD Card as output
-  pinMode(SD_CARD_SPI_CD_PIN, INPUT_PULLUP);               // Declare the Carrier detect pin for the SD Card as input
-  digitalWrite(SD_CARD_SPI_CS_PIN, HIGH);                  // Write a high value to it in order to deselect device
-  pinMode(LED_PIN, OUTPUT);                                // make the on-board LED an output pin so we can change it
-  Serial.begin(SERIAL_SPEED);                              // Start the Serial port with the specified speed
-  Serial.print("Starting ESP32FeatherWiFiDemo example program for BME680\n");
+  pinMode(SD_CARD_SPI_CS_PIN, OUTPUT);                               // Chip-Select pin for the SD Card as output
+  pinMode(SD_CARD_SPI_CD_PIN, INPUT_PULLUP);                         // Carrier detect pin for the SD Card as input
+  digitalWrite(SD_CARD_SPI_CS_PIN, HIGH);                            // Deselect device by writing HIGH to it
+  pinMode(LED_PIN, OUTPUT);                                          // Make the on-board LED an output pin
+  Serial.begin(SERIAL_SPEED);                                        // Start the Serial comms at specified speed
   /**********************
   ** Initialize BME680 **
   **********************/
+  Serial.print("Starting ESP32FeatherWiFiDemo for BME680\n");
   Serial.print("- Initializing BME680 sensor\n");
-  while (!BME680.begin(I2C_STANDARD_MODE))                 // Start BME680 using I2C, use first device found
+  while (!BME680.begin(I2C_STANDARD_MODE))                           // Start using I2C, use first device found
   {
     Serial.print("-  Unable to find BME680. Trying again in 5 seconds.\n");
     delay(5000);
   } // of loop until device is located
   Serial.print("- Setting 16x oversampling for all sensors\n");
-  BME680.setOversampling(TemperatureSensor, Oversample16); // Use enumerated type values to set value
-  BME680.setOversampling(HumiditySensor, Oversample16);    // Use enumerated type values to set value
-  BME680.setOversampling(PressureSensor, Oversample16);    // Use enumerated type values to set value
   Serial.print("- Setting IIR filter to a value of 4 samples\n");
-  BME680.setIIRFilter(IIR4); // Use enumerated type values
   Serial.print("- Turning off gas measurements\n");
-  BME680.setGas(0, 0);                                     // Setting either to 0 turns off gas measurement
+  BME680.setOversampling(TemperatureSensor, Oversample16);           // Use enumerated type values to set value
+  BME680.setOversampling(HumiditySensor, Oversample16);              // Use enumerated type values to set value
+  BME680.setOversampling(PressureSensor, Oversample16);              // Use enumerated type values to set value
+  BME680.setIIRFilter(IIR4);                                         // Use enumerated type values to set value
+  BME680.setGas(0, 0);                                               // Setting either to 0 turns off gas
   BME680.getSensorData(temperature, humidity, start_pressure, gas);  // Get most recent readings
   /***************************************************************
   ** Initialize SD-Card for logging, if not found then continue **
