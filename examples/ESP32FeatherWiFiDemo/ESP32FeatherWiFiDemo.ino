@@ -102,17 +102,17 @@ const float    SEA_LEVEL_PRESSURE =        1013.25; ///< Standard atmosphere sea
 /*******************************************************************************************************************
 ** Declare all global variables                                                                                   **
 *******************************************************************************************************************/
-WebServer    server(80);                             ///< Instantiate a web server on port 80
-BME680_Class BME680;                                 ///< Create an instance of the BME680 class
-File         dataFile;                               ///< Class for a SD-Card file
-int32_t      temperature;                            ///< BME680 temperature value
-int32_t      humidity;                               ///< BME680 humidity value
-int32_t      pressure;                               ///< BME680 pressure value
-int32_t      gas;                                    ///< BME680 gas resistance value
-int32_t      start_pressure;                         ///< Initial pressure reading
-bool         sd_card_present = false;                ///< Switch set when SD-Card detected
-String       jsonData;                               ///< JSON data string 
-uint16_t     loopCounter = 0;                        ///< Counter for number of write operations since startup
+WebServer    server(80);                            ///< Instantiate a web server on port 80
+BME680_Class BME680;                                ///< Create an instance of the BME680 class
+File         dataFile;                              ///< Class for a SD-Card file
+int32_t      temperature;                           ///< BME680 temperature value
+int32_t      humidity;                              ///< BME680 humidity value
+int32_t      pressure;                              ///< BME680 pressure value
+int32_t      gas;                                   ///< BME680 gas resistance value
+int32_t      start_pressure;                        ///< Initial pressure reading
+bool         sd_card_present = false;               ///< Switch set when SD-Card detected
+String       jsonData;                              ///< JSON data string 
+uint16_t     loopCounter = 0;                       ///< Counter for number of write operations since startup
 
 /*******************************************************************************************************************
 ** Macro that returns the floating point voltage. The formula is the analog value of POWER_PIN. Since this goes   **
@@ -281,7 +281,7 @@ void getSensorData()
   float altitude = 44330.0 * (1.0 - pow(((float)pressure/100) / SEA_LEVEL_PRESSURE, 0.1903)); 
   if (sd_card_present)                                        // Log data to the SD-Card, if present
   {
-    dataFile.print(millis() / 1000);
+    dataFile.print(millis()    / 1000);
     dataFile.print(",");
     dataFile.print(VOLTAGE);
     dataFile.print(",");
@@ -291,11 +291,10 @@ void getSensorData()
     dataFile.print(",");
     dataFile.print(altitude, 2);
     dataFile.print("\n");
-
-    if (++loopCounter % SD_FLUSH_INTERVAL == 0)
-    {
+    if (++loopCounter % SD_FLUSH_INTERVAL == 0)               // Flush every N-Iterations
+    {                                                         //
       digitalWrite(LED_PIN, !digitalRead(LED_PIN));           // Toggle LED before flushing buffer
-      dataFile.flush();
+      dataFile.flush();                                       // flush pending writes to SD
       digitalWrite(LED_PIN, !digitalRead(LED_PIN));           // Toggle LED after flushing is complete
       Serial.print("Flushed data to SD-Card\n");
     } // flush the buffer
