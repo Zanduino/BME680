@@ -223,7 +223,6 @@ void setup()
   server.begin();                         // Start server
   Serial.print("HTTP server started\n");
   digitalWrite(LED_PIN, false);           // Turn the LED off
-
 } // of method "setup()"
 void handleRoot() 
 {
@@ -245,6 +244,10 @@ void handleADC()
             the current value in the jsonData string, which is continuously updated in the main loop
   @return   void
   */
+  if (!sd_card_present) // If no SD-Card is present then we need to get data,
+  {                     // if there is an SD-Card then the data has already been fetched
+    getSensorData();    // get the BME680 data
+  } // if-then SD-Card not present
   server.send(200, "text/plain", jsonData); // Send JSON to client ajax request
 } // of method "handleADC()"
 void loop()
