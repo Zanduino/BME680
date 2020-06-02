@@ -59,6 +59,7 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | -------------------------------------------
+1.0.0   | 2020-06-02 | https://github.com/SV-Zanshin | Ready to commit and publish
 1.0.0b  | 2020-05-30 | https://github.com/SV-Zanshin | Initial coding
 */
 
@@ -80,10 +81,16 @@ Version | Date       | Developer                     | Comments
 /*******************************************************************************************************************
 ** Declare all program constants                                                                                  **
 *******************************************************************************************************************/
+
+               /*************************************************************************
+               ** Please change the "WIFI_SSID", "WIFI_PASSWORD", "SD_CARD_SPI_CS_PIN" **
+               ** and "SD_CARD_SPI_CD_PIN" constants to match your installation        **
+               *************************************************************************/
+
 const char*    FILE_NAME          = "/BME_680.csv"; ///< Filename on SD-Card
 const char*    HOSTNAME           =       "BME680"; ///< Give the device a name
-const char*    WIFI_SSID          =      "Zanshin"; ///< Network SSID for connection
-const char*    WIFI_PASSWORD      =  "TANSTAAFl1!"; ///< Network authentication code
+const char*    WIFI_SSID          =  "NetworkSSID"; ///< Network SSID for connection
+const char*    WIFI_PASSWORD      =     "Password"; ///< Network authentication code
 const uint32_t SERIAL_SPEED       =         115200; ///< Set the baud rate for Serial I/O
 const uint8_t  POWER_PIN          =            A13; ///< Supply voltage through a divider
 const uint8_t  LED_PIN            =             13; ///< This pin is the on-board red LED
