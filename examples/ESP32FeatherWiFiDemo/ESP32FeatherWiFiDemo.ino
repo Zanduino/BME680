@@ -59,7 +59,7 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | -------------------------------------------
-1.0.0   | 2020-06-02 | https://github.com/SV-Zanshin | Ready to commit and publish
+1.0.0   | 2020-06-02 | https://github.com/SV-Zanshin | Ready to commit and publish as Issue #20
 1.0.0b  | 2020-05-30 | https://github.com/SV-Zanshin | Initial coding
 */
 
@@ -291,9 +291,9 @@ void getSensorData()
 
     if (++loopCounter % SD_FLUSH_INTERVAL == 0)
     {
-      digitalWrite(LED_PIN, !digitalRead(LED_PIN));               // Toggle LED before flushing buffer
+      digitalWrite(LED_PIN, !digitalRead(LED_PIN));           // Toggle LED before flushing buffer
       dataFile.flush();
-      digitalWrite(LED_PIN, !digitalRead(LED_PIN));               // Toggle LED after flushing is complete
+      digitalWrite(LED_PIN, !digitalRead(LED_PIN));           // Toggle LED after flushing is complete
       Serial.print("Flushed data to SD-Card\n");
     } // flush the buffer
   } // if-then SD card is present       

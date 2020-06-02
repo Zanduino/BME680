@@ -5,13 +5,17 @@
   
   Since this is used for demonstration purposes it has been kept basic and simple.
   
+  Version | Date       | Developer                     | Comments
+  ------- | ---------- | ----------------------------- | -------------------------------------------
+  1.0.0   | 2020-06-02 | https://github.com/SV-Zanshin | Ready to commit and publish as Issue #20
+
 */
 
 const char MAIN_page[] PROGMEM = R"=====(
   <!doctype html>
   <html>
   <head>
-    <title>ESP32FeatherWiFiDemo - BME680 demononstration program</title>
+    <title>ESP32FeatherWiFiDemo - BME680 demonstration program</title>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>  
     <style>
     canvas{
