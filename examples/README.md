@@ -9,5 +9,6 @@ Various example programs illustrating the use of the *Arduino* BME680 library ar
 | software SPI Demo   | [SoftSPIDemo.ino](https://github.com/SV-Zanshin/BME680/wiki/SoftSPIDemo.ino)             | Identical to the I2C Demo program, but using SPI connectivity emulated in software |
 | Two I2C BME680s     | [TwoDevicesI2CDemo.ino](https://github.com/SV-Zanshin/BME680/wiki/TwoDevicesI2CDemo.ino) | Example to illustrate attaching 2 BME680 devices with different addresses using I2C |
 | SD-Card Logging     | [SDLoggerSPIDemo.ino](https://github.com/SV-Zanshin/BME680/wiki/SDLoggerSPIDemo.ino)     | Example sketch using SPI for the BME680 and a SD-Card to log data at variable rates - faster logging when the measurements change rapidly and less frequent measurements when there is little change. |
+| ESP32 WiFi demo     | [ESP32FeatherWiFiDemo.ino](https://github.com/SV-Zanshin/BME680/wiki/ESP32FeatherWiFiDemo.ino)     | Example sketch using I2C for the BME680 (and an optional SD-Card to log data) to connect to WiFi and dynamically display measurement data on a web page. |
 
 ![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
