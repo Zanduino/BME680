@@ -12,7 +12,7 @@ the local WiFi network to use and the corresponding authentication code.
 
 Once started, the IP-Address is set by the WiFi router and displayed on the serial output of the ESP32, this IP
 address should then be entered as the URL in a web browser of a computer attached to the same network and the 
-data should be presented there, updated every 5 seconds.
+data should be presented there, updated every 10 seconds.
 
 The Bosch BME680 sensor measures temperature, pressure, humidity and air quality and is described at
 https://www.bosch-sensortec.com/bst/products/all_products/BME680. The datasheet is available from Bosch at 
@@ -53,7 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 @section ESP32FeatherWiFiDemoauthor Author
 
-Written by Arnd\@SV-Zanshin
+Written by https://github.com/SV-Zanshin
 
 @section ESP32FeatherWiFiDemoversions Changelog
 
