@@ -12,7 +12,7 @@ The [Fritzing](https://fritzing.org/home/) sources are also included in the dire
 | TwoBME680.jpg  | <img src="https://github.com/SV-Zanshin/BME680/blob/master/Images/TwoBME680.jpg" width="50%"/> |
 | SDLoggerSPIDemo.jpg  | <img src="https://github.com/SV-Zanshin/BME680/blob/master/Images/SDLoggerSPIDemo.jpg" width="50%"/> |
 | Feather_SD_BME680.jpg  | <img src="https://github.com/SV-Zanshin/BME680/blob/master/Images/Feather_SD_BME680.jpg" width="50%"/> |
-| Doxygen-complete.svg  | [![Doxygen](https://github.com/SV-Zanshin/BME680/blob/master/Images/Doxygen-complete.svg)] |
-| Documentation-wiki.svg | [![Wiki](https://github.com/SV-Zanshin/BME680/blob/master/Images/Documentation-wiki.svg)] |
+| Doxygen-complete.svg  | <img src="https://github.com/SV-Zanshin/BME680/blob/master/Images/Doxygen-complete.svg" />
+| Documentation-wiki.svg | <img src="https://github.com/SV-Zanshin/BME680/blob/master/Images/Documentation-wiki.svg" />
 
 ![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
