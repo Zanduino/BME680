@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['handleadc',['handleADC',['../_e_s_p32_feather_wi_fi_demo_8ino.html#aad40cbb4c74c580139b681ed6ad4eb85',1,'ESP32FeatherWiFiDemo.ino']]],
-  ['handleroot',['handleRoot',['../_e_s_p32_feather_wi_fi_demo_8ino.html#a8427468f39342a1990703e9f5ce7fd29',1,'ESP32FeatherWiFiDemo.ino']]],
-  ['hostname',['HOSTNAME',['../_e_s_p32_feather_wi_fi_demo_8ino.html#ac4fbed25c9d82b26a56813f4892022d8',1,'ESP32FeatherWiFiDemo.ino']]],
-  ['humidity',['humidity',['../structreading.html#a8c71fb32bc91942a7f451ac4c6c679a2',1,'reading::humidity()'],['../_e_s_p32_feather_wi_fi_demo_8ino.html#a8dc8b9a805a3f68eaeaefbf53a2e0664',1,'humidity():&#160;ESP32FeatherWiFiDemo.ino']]],
-  ['humidity_5ftrip',['HUMIDITY_TRIP',['../_s_d_logger_s_p_i_demo_8ino.html#a70caf7518825c0488eff08e1010c97e2',1,'SDLoggerSPIDemo.ino']]]
+  ['i2c_5ffast_5fmode',['I2C_FAST_MODE',['../_zanshin___b_m_e680_8h.html#a575b1d77d752156e2175f705573647b7',1,'Zanshin_BME680.h']]],
+  ['i2c_5ffast_5fmode_5fplus',['I2C_FAST_MODE_PLUS',['../_zanshin___b_m_e680_8h.html#a875790cc4599ac8d56430c1f3e54daa5',1,'Zanshin_BME680.h']]],
+  ['i2c_5fhigh_5fspeed_5fmode',['I2C_HIGH_SPEED_MODE',['../_zanshin___b_m_e680_8h.html#a4fa63c7d7ea29d06b825a86baa622b2b',1,'Zanshin_BME680.h']]],
+  ['i2c_5fmodes',['I2C_MODES',['../_zanshin___b_m_e680_8h.html#ab1ba09cc86d54a24a664eacdd9d30030',1,'Zanshin_BME680.h']]],
+  ['i2c_5fstandard_5fmode',['I2C_STANDARD_MODE',['../_zanshin___b_m_e680_8h.html#a348cbfad3423827f84b19829d91be1a7',1,'Zanshin_BME680.h']]],
+  ['i2cdemo_2eino',['I2CDemo.ino',['../_i2_c_demo_8ino.html',1,'']]],
+  ['idx',['idx',['../_s_d_logger_s_p_i_demo_8ino.html#a266732d9c228f9bac150e7554734d112',1,'SDLoggerSPIDemo.ino']]],
+  ['iirfiltertypes',['iirFilterTypes',['../_zanshin___b_m_e680_8h.html#a4f6cef16a63b2abb900de00e609f991c',1,'Zanshin_BME680.h']]]
 ];
