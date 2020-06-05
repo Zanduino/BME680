@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['reading',['reading',['../structreading.html',1,'']]],
-  ['reset',['reset',['../class_b_m_e680___class.html#a60539ad30b61e41dc0252b06ccc0652b',1,'BME680_Class']]]
+  ['oversamplingtypes',['oversamplingTypes',['../_zanshin___b_m_e680_8h.html#a5833bdd04da4d5224e3e2c4435e05620',1,'Zanshin_BME680.h']]]
 ];

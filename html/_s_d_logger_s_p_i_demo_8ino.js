@@ -1,6 +1,7 @@
 var _s_d_logger_s_p_i_demo_8ino =
 [
     [ "reading", "structreading.html", "structreading" ],
+    [ "SERIAL_ATTACHED", "_s_d_logger_s_p_i_demo_8ino.html#abf74dfcf74758b54c29b1a9098e9e59b", null ],
     [ "accurateMode", "_s_d_logger_s_p_i_demo_8ino.html#ae5a4849cfbb24159b7e11e0f722e37b5", null ],
     [ "loop", "_s_d_logger_s_p_i_demo_8ino.html#afe461d27b9c48d5921c00d521181f12f", null ],
     [ "normalMode", "_s_d_logger_s_p_i_demo_8ino.html#a2da02f9fe2a7e6ae7a9dcbea796297c2", null ],
@@ -20,6 +21,7 @@ var _s_d_logger_s_p_i_demo_8ino =
     [ "FILE_NAME", "_s_d_logger_s_p_i_demo_8ino.html#a3759f27c4ea5a76e7b642613fc366bf5", null ],
     [ "HUMIDITY_TRIP", "_s_d_logger_s_p_i_demo_8ino.html#a70caf7518825c0488eff08e1010c97e2", null ],
     [ "idx", "_s_d_logger_s_p_i_demo_8ino.html#a266732d9c228f9bac150e7554734d112", null ],
+    [ "LED_PIN", "_s_d_logger_s_p_i_demo_8ino.html#a5046d5397ff8775579ff977503a3d07d", null ],
     [ "LONG_DELAY", "_s_d_logger_s_p_i_demo_8ino.html#af77629bb2c4a458631ff0ebf39bb0d72", null ],
     [ "loopCounter", "_s_d_logger_s_p_i_demo_8ino.html#a89199aa2db6f8b251f165107a2398da9", null ],
     [ "NUMBER_READINGS", "_s_d_logger_s_p_i_demo_8ino.html#aa4594c2761e7ec9ee5143db14c27c16c", null ],
