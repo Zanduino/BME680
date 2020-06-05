@@ -117,10 +117,9 @@ uint16_t     loopCounter = 0;                       ///< Counter for number of w
 /*******************************************************************************************************************
 ** Macro that returns the floating point voltage. The formula is the analog value of POWER_PIN. Since this goes   **
 ** through a voltage divider the value is multiplied by 2. The register is 12-bit (0-4095) so we divide by 4095   **
-** and then by the 3.3V reference voltage and, finally, by the ADC reference voltage of 1.1V. The formula is:     **
-**                         analogRead(POWER_PIN) / 4095.0 * 3.3v * 2 * 1.1v)                                      **
+** and then by the 3.3V reference voltage and, finally, by the ADC reference voltage of 1.1V.                     **
 *******************************************************************************************************************/
-#define VOLTAGE ( analogRead(POWER_PIN) / 4095.0 * 3.3 * 2 * 1.1) 
+#define VOLTAGE ( analogRead(POWER_PIN) * 2 / 4095.0 * 3.3 * 1.1) 
 
 void setup()
 {
