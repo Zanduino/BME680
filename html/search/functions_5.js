@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['normalmode',['normalMode',['../_s_d_logger_s_p_i_demo_8ino.html#a2da02f9fe2a7e6ae7a9dcbea796297c2',1,'SDLoggerSPIDemo.ino']]]
+  ['reset',['reset',['../class_b_m_e680___class.html#a60539ad30b61e41dc0252b06ccc0652b',1,'BME680_Class']]]
 ];
