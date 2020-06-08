@@ -14,5 +14,4 @@ The [Fritzing](https://fritzing.org/home/) sources are also included in the dire
 | Documentation-wiki.svg | [![Wiki](https://github.com/SV-Zanshin/BME680/blob/master/Images/Documentation-wiki.svg)] |
 | bosch-bme680.jpg | <img src="https://github.com/SV-Zanshin/BME680/blob/master/Images/bosch-bme680.jpg" width="50%"/> |
 
-
 ![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
