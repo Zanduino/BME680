@@ -118,7 +118,7 @@ FILE_PATTERNS          = *.ino \
                          *.cpp \
                          *.h
 RECURSIVE              = YES
-EXCLUDE                = 
+EXCLUDE                =
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       =
 EXCLUDE_SYMBOLS        =
