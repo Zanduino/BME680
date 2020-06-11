@@ -15,4 +15,4 @@ The [Fritzing](https://fritzing.org/home/) sources are also included in the dire
 | Doxygen-complete.svg  | <img src="https://github.com/SV-Zanshin/BME680/blob/master/Images/Doxygen-complete.svg" />
 | Documentation-wiki.svg | <img src="https://github.com/SV-Zanshin/BME680/blob/master/Images/Documentation-wiki.svg" />
 
-![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
+[![Zanshin Logo](https://zanduino.github.io/Images/zanshinkanjitiny.gif) <img src="https://zanduino.github.io/Images/zanshintext.gif" width="75"/>](https://www.sv-zanshin.com)

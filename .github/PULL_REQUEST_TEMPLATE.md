@@ -25,7 +25,8 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 **Test Configuration**:
 * Arduino version:
 * Arduino Hardware:
-* SDK: (Arduino IDE, Atmel Studio, etc.)
+* SDK: (Arduino IDE, Atmel Studio, Visual Studio, Visual Micro, etc.)
+* Development sytem: (Windows, Web, Linux, etc.)
 
 # Checklist:
 
@@ -39,4 +40,4 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 - [ ] I have added tests that prove my fix is effective or that my feature works
 - [ ] New and existing unit tests pass locally with my changes
 
-![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
+[![Zanshin Logo](https://zanduino.github.io/Images/zanshinkanjitiny.gif) <img src="https://zanduino.github.io/Images/zanshintext.gif" width="75"/>](https://www.sv-zanshin.com)
