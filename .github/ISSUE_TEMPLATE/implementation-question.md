@@ -2,7 +2,7 @@
 name: Implementation Question
 about: Ask a question about the library implementation
 title: ''
-labels: Question
+labels: question
 assignees: SV-Zanshin
 
 ---
