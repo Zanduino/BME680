@@ -35,7 +35,9 @@ env:
     - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
 
 before_install:
-  - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
+#  - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
+  - source <(curl -SLs https://zanduino.github.io/Travis/install.sh)
+  
 
 install:
 

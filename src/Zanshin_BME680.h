@@ -14,7 +14,7 @@ SPI using either the standard Arduino hardware SPI or software SPI. Depending up
 have 2 distinct I2C addresses - either 0x76 or 0x77.\n\n
 
 The most recent version of the library is available at https://github.com/SV-Zanshin/BME680 and extensive 
-documentation of the library as well as descriptions of the example programs are described in the project's wiki 
+documentation of the library as well as descriptions of the various example programs are described in the project's wiki 
 pages located at https://github.com/SV-Zanshin/BME680/wiki
 \n
 The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it 

@@ -1,5 +1,5 @@
 # BME680 Images<br>
-This directory contains the images used in the library documentation and wiki pages. 
+This directory contains the images used in the library documentation and wiki pages.
 The [Fritzing](https://fritzing.org/home/) sources are also included in the directory
 
 | File Name | Image |
