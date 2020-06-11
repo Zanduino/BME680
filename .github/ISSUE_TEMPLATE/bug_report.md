@@ -2,7 +2,7 @@
 name: Bug report
 about: Submit a bug report
 title: BUG One-Line Title
-labels: ''
+labels: 'bug'
 assignees: SV-Zanshin
 
 ---
@@ -18,14 +18,11 @@ assignees: SV-Zanshin
 ## Steps to Reproduce the Problem
 
   1.
-  1.
-  1.
+  2.
+  3.
 
 ## Specifications
 
   - Version:
   - Platform:
   - Subsystem:
-
-
-[![Zanshin Logo](https://zanduino.github.io/Images/zanshinkanjitiny.gif) <img src="https://zanduino.github.io/Images/zanshintext.gif" width="75"/>](https://www.sv-zanshin.com)
