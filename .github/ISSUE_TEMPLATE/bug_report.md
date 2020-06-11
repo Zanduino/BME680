@@ -2,7 +2,7 @@
 name: Bug report
 about: Submit a bug report
 title: BUG One-Line Title
-labels: ''
+labels: bug
 assignees: SV-Zanshin
 
 ---
@@ -18,14 +18,11 @@ assignees: SV-Zanshin
 ## Steps to Reproduce the Problem
 
   1.
-  1.
-  1.
+  2.
+  3.
 
 ## Specifications
 
   - Version:
   - Platform:
   - Subsystem:
-
-
-![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
