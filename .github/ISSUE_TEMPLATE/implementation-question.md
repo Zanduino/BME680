@@ -2,8 +2,8 @@
 name: Implementation Question
 about: Ask a question about the library implementation
 title: ''
-labels: 'Question'
-assignees: 'SV-Zanshin'
+labels: Question
+assignees: SV-Zanshin
 
 ---
 

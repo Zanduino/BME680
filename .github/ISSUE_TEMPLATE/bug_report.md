@@ -2,7 +2,7 @@
 name: Bug report
 about: Submit a bug report
 title: BUG One-Line Title
-labels: 'bug'
+labels: bug
 assignees: SV-Zanshin
 
 ---
