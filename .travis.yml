@@ -8,6 +8,7 @@
 ##                                                                                                  ##
 ## Date       Developer                     Comments                                                ##
 ## ========== ============================= ======================================================= ##
+## 2020-06-12 https://github.com/SV-Zanshin Added "cache:" section                                  ##
 ## 2020-05-23 https://github.com/SV-Zanshin Cleaned up documentation format                         ##
 ## 2020-05-09 https://github.com/SV-Zanshin Removed unnecessary install libraries                   ##
 ## 2019-01-23 https://github.com/SV-Zanshin Corrected PRETTYNAME                                    ##
@@ -25,6 +26,11 @@ sudo: false
 branches:
   except:
     - gh-pages
+    
+cache:
+  directories:
+    - ~/arduino_ide
+    - ~/.arduino15/packages/
     
 git:
   depth: false
