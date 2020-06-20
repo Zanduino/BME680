@@ -329,6 +329,16 @@ void BME680_Class::getSensorData(int32_t &temp, int32_t &hum, int32_t &press, in
   press = _Pressure;       // Copy global variables to parameters
   gas   = _Gas;            // Copy global variables to parameters
 } // of method getSensorData()
+
+uint8_t BME680_Class::getI2CAddress()
+{
+  /*!
+  * @brief   Returns the I2C address of the BME680
+  * return   I2C Address from private variables
+  */
+  return(_I2CAddress);
+} // of method getI2CAddress()
+
 void BME680_Class::readSensors(const bool waitSwitch) 
 {
   /*!
