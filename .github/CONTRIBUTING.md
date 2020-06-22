@@ -18,3 +18,4 @@ Some things that will increase the speed at which a pull request is completed:
 * Write as much information as a beginner would need to understand the problem and solution
 
 [![Zanshin Logo](https://zanduino.github.io/Images/zanshinkanjitiny.gif) <img src="https://zanduino.github.io/Images/zanshintext.gif" width="75"/>](https://www.sv-zanshin.com)
+

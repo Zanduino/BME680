@@ -28,4 +28,3 @@ _Explain what needs to be done in order to reproduce the problem._
   - IDE Version:
   - Platform:
   - Subsystem:
-  - _any other details needed to reproduce the problem_
