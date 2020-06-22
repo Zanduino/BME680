@@ -7,6 +7,7 @@
   
   Version | Date       | Developer                     | Comments
   ------- | ---------- | ----------------------------- | -------------------------------------------
+  1.0.1   | 2020-06-11 | https://github.com/SV-Zanshin | Changed URL to Zanshin kanji gif file
   1.0.0   | 2020-06-02 | https://github.com/SV-Zanshin | Ready to commit and publish as Issue #20
 
 */
@@ -44,7 +45,7 @@ const char MAIN_page[] PROGMEM = R"=====(
     </style>
   </head>
   <body>
-      <div style="text-align:center;"><img src="https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif" alt="Zanshin Logo"> <b>Zanshin</b></div>
+      <div style="text-align:center;"><img src="https://zanduino.github.io/Images/zanshinkanjitiny.gif" alt="Zanshin Logo"> <b>Zanshin</b></div>
       <div class="chart-container" position: relative; height:350px; width:100%">
           <canvas id="Chart" width="400" height="400"></canvas>
       </div>

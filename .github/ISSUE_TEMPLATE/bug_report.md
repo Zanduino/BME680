@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Submit a bug report
-title: BUG One-Line Title
+title: {Add Short one-line Bug title}
 labels: bug
 assignees: SV-Zanshin
 
@@ -9,20 +9,22 @@ assignees: SV-Zanshin
 
 ## Expected Behavior
 
--enter information on what is expected to happen
+_Detail what the expected program behavior should be, or what is expected to happen._
 
 ## Actual Behavior
 
--enter information on what actually happens
+_Detail what actually happens._
 
 ## Steps to Reproduce the Problem
 
+_Explain what needs to be done in order to reproduce the problem._
   1.
   2.
   3.
 
 ## Specifications
 
-  - Version:
+  - Library Version:
+  - IDE Version:
   - Platform:
   - Subsystem:

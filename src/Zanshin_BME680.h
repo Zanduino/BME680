@@ -52,6 +52,7 @@ Written by Arnd, https://github.com/SV-Zanshin
 
 Version | Date       | Developer                     | Comments
 ------- | ---------- | ----------------------------- | --------
+1.0.8   | 2020-06-20 | https://github.com/SV-Zanshin | Issue #22 - added "getI2CAddress()" function
 1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | Issue #17 - return value for "setOversampling()"
 1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | Issue #16 - I2C "reset()" when using 2 devices
 1.0.6   | 2020-05-25 | https://github.com/SV-Zanshin | General formatting of comments and spell-checking
@@ -193,6 +194,7 @@ Version | Date       | Developer                     | Comments
       void     getSensorData(int32_t &temp, int32_t &hum,                     // get most recent readings
                              int32_t &press, int32_t &gas,                    //
                              const bool waitSwitch = true);                   //
+      uint8_t  getI2CAddress();                                               // Return the I2C Address of the BME680
       void     reset();                                                       // Reset the BME680
   private:                                                                    //
       bool     commonInitialization();                                        ///< Common initialization code

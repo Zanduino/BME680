@@ -1,4 +1,4 @@
-# Example programs for the BME680 library<br>[![Build Status](https://travis-ci.org/SV-Zanshin/BME680.svg?branch=master)](https://travis-ci.org/SV-Zanshin/BME680) [![DOI](https://zenodo.org/badge/139349456.svg)](https://zenodo.org/badge/latestdoi/139349456) [![arduino-library-badge](https://www.ardu-badge.com/badge/BME680.svg?)](https://www.ardu-badge.com/BME680)
+# Example programs for the BME680 library<br>[![License: GPL v3](https://zanduino.github.io/Badges/GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Build Status](https://travis-ci.org/SV-Zanshin/BME680.svg?branch=master)](https://travis-ci.org/SV-Zanshin/BME680) [![arduino-library-badge](https://www.ardu-badge.com/badge/BME680.svg?)](https://www.ardu-badge.com/BME680) [![DOI](https://zenodo.org/badge/139349456.svg)](https://zenodo.org/badge/latestdoi/139349456) [![Doxygen](https://zanduino.github.io/Badges/Doxygen-Badge.svg)](https://sv-zanshin.github.io/BME680/html/index.html) [![Wiki](https://zanduino.github.io/Badges/Documentation-Badge.svg)](https://github.com/SV-Zanshin/BME680/wiki)
 
 Various example programs illustrating the use of the *Arduino* BME680 library are included in this directory and sub-directories.
 
@@ -11,4 +11,4 @@ Various example programs illustrating the use of the *Arduino* BME680 library ar
 | SD-Card Logging     | [SDLoggerSPIDemo.ino](https://github.com/SV-Zanshin/BME680/wiki/SDLoggerSPIDemo.ino)     | Example sketch using SPI for the BME680 and a SD-Card to log data at variable rates - faster logging when the measurements change rapidly and less frequent measurements when there is little change. |
 | ESP32 WiFi demo     | [ESP32FeatherWiFiDemo.ino](https://github.com/SV-Zanshin/BME680/wiki/ESP32FeatherWiFiDemo.ino)     | Example sketch using I2C for the BME680 (and an optional SD-Card on SPI to log data) to connect to WiFi and dynamically display measurement data on a web page. |
 
-![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
+[![Zanshin Logo](https://zanduino.github.io/Images/zanshinkanjitiny.gif) <img src="https://zanduino.github.io/Images/zanshintext.gif" width="75"/>](https://www.sv-zanshin.com)

@@ -3,4 +3,4 @@ This directory contains the two files that define [Bosch BME680](https://www.bos
 
 The "Zanshin_BME680.h" is the library header file, and the program code is contained in the "Zanshin_BME680.cpp" file.
 
-![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
+[![Zanshin Logo](https://zanduino.github.io/Images/zanshinkanjitiny.gif) <img src="https://zanduino.github.io/Images/zanshintext.gif" width="75"/>](https://www.sv-zanshin.com)
