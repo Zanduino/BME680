@@ -14,7 +14,7 @@
 ######################################################################################################
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = BME680
-PROJECT_NUMBER         = "Version 1.0.7"
+PROJECT_NUMBER         = "Version 1.0.8"
 PROJECT_BRIEF          = "Arduino Library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor"
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       =
