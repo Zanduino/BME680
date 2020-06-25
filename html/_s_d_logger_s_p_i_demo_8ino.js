@@ -3,6 +3,7 @@ var _s_d_logger_s_p_i_demo_8ino =
     [ "reading", "structreading.html", "structreading" ],
     [ "SERIAL_ATTACHED", "_s_d_logger_s_p_i_demo_8ino.html#abf74dfcf74758b54c29b1a9098e9e59b", null ],
     [ "accurateMode", "_s_d_logger_s_p_i_demo_8ino.html#ae5a4849cfbb24159b7e11e0f722e37b5", null ],
+    [ "errorBlink", "_s_d_logger_s_p_i_demo_8ino.html#a253190cd1e1c1ca7068848f99fe79fe4", null ],
     [ "loop", "_s_d_logger_s_p_i_demo_8ino.html#afe461d27b9c48d5921c00d521181f12f", null ],
     [ "normalMode", "_s_d_logger_s_p_i_demo_8ino.html#a2da02f9fe2a7e6ae7a9dcbea796297c2", null ],
     [ "setup", "_s_d_logger_s_p_i_demo_8ino.html#a4fc01d736fe50cf5b977f755b675f11d", null ],

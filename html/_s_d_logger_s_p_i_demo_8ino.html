@@ -105,6 +105,8 @@ Functions</h2></td></tr>
 <tr class="separator:a2da02f9fe2a7e6ae7a9dcbea796297c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5a4849cfbb24159b7e11e0f722e37b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#ae5a4849cfbb24159b7e11e0f722e37b5">accurateMode</a> ()</td></tr>
 <tr class="separator:ae5a4849cfbb24159b7e11e0f722e37b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a253190cd1e1c1ca7068848f99fe79fe4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a253190cd1e1c1ca7068848f99fe79fe4">errorBlink</a> ()</td></tr>
+<tr class="separator:a253190cd1e1c1ca7068848f99fe79fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
 <tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
@@ -114,7 +116,7 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a3faf34f5504e22c1877fdddd905c7340"><td class="memItemLeft" align="right" valign="top"><a id="a3faf34f5504e22c1877fdddd905c7340"></a>
 const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a3faf34f5504e22c1877fdddd905c7340">BME_680_SPI_CS_PIN</a> = SS</td></tr>
-<tr class="memdesc:a3faf34f5504e22c1877fdddd905c7340"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the standard SS pin for the BME680. <br /></td></tr>
+<tr class="memdesc:a3faf34f5504e22c1877fdddd905c7340"><td class="mdescLeft">&#160;</td><td class="mdescRight">"SS" pin used as "chip select", see Arduino docs for details <br /></td></tr>
 <tr class="separator:a3faf34f5504e22c1877fdddd905c7340"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85ca07df7dc31b49c31f1c94b26ad25c"><td class="memItemLeft" align="right" valign="top"><a id="a85ca07df7dc31b49c31f1c94b26ad25c"></a>
 const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a85ca07df7dc31b49c31f1c94b26ad25c">SD_CARD_SPI_CS_PIN</a> = 24</td></tr>
@@ -184,6 +186,10 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#af470b04858a297daf94ab9524b08fcf2">fast_mode_end</a> = 0</td></tr>
 <tr class="memdesc:af470b04858a297daf94ab9524b08fcf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds the millis() value when fast_mode ends. <br /></td></tr>
 <tr class="separator:af470b04858a297daf94ab9524b08fcf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ddd6fc09e8c164356571846adcc7fc8"><td class="memItemLeft" align="right" valign="top"><a id="a9ddd6fc09e8c164356571846adcc7fc8"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a9ddd6fc09e8c164356571846adcc7fc8">delayTime</a> = <a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#af77629bb2c4a458631ff0ebf39bb0d72">LONG_DELAY</a></td></tr>
+<tr class="memdesc:a9ddd6fc09e8c164356571846adcc7fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of milliseconds to pause between measurements. <br /></td></tr>
+<tr class="separator:a9ddd6fc09e8c164356571846adcc7fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3f179e8973dc029502aca9ab656cf00"><td class="memItemLeft" align="right" valign="top"><a id="af3f179e8973dc029502aca9ab656cf00"></a>
 <a class="el" href="structreading.html">reading</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#af3f179e8973dc029502aca9ab656cf00">data</a> [<a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#aa4594c2761e7ec9ee5143db14c27c16c">NUMBER_READINGS</a>]</td></tr>
 <tr class="memdesc:af3f179e8973dc029502aca9ab656cf00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure to hold accumulated measurements. <br /></td></tr>
@@ -208,10 +214,6 @@ int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a67acfc3f4453439da95a7bef3f19bf0e">avg_pressure</a></td></tr>
 <tr class="memdesc:a67acfc3f4453439da95a7bef3f19bf0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds computed average over NUMBER_READINGS. <br /></td></tr>
 <tr class="separator:a67acfc3f4453439da95a7bef3f19bf0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ddd6fc09e8c164356571846adcc7fc8"><td class="memItemLeft" align="right" valign="top"><a id="a9ddd6fc09e8c164356571846adcc7fc8"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a9ddd6fc09e8c164356571846adcc7fc8">delayTime</a> = <a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#af77629bb2c4a458631ff0ebf39bb0d72">LONG_DELAY</a></td></tr>
-<tr class="memdesc:a9ddd6fc09e8c164356571846adcc7fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of milliseconds to pause between measurements. <br /></td></tr>
-<tr class="separator:a9ddd6fc09e8c164356571846adcc7fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h1><a class="anchor" id="SDLoggerSPIDemo_intro_section"></a>
@@ -273,6 +275,25 @@ Changelog</h1>
 </div><div class="memdoc">
 <p>Called to set the BME680 configuration values to those for accurate readings</p>
 <p>The configuration parameters are set to get more accurate measurements at the price of both additional time and energy. </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
+
+</div>
+</div>
+<a id="a253190cd1e1c1ca7068848f99fe79fe4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a253190cd1e1c1ca7068848f99fe79fe4">&#9670;&nbsp;</a></span>errorBlink()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void errorBlink </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Blink the LED 50 times at 10 times a second</p>
+<p>Short function to blink the LED while searching for a device </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
 
 </div>
 </div>
