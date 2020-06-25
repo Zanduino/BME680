@@ -160,9 +160,21 @@ void BME680_Class::reset()
   */
   putData(BME680_SOFTRESET_REGISTER,BME680_RESET_CODE); // write reset code to device
   delay(2);                                             // Datasheet states 2ms Start-up time
-  if (_I2CAddress) begin(_I2CSpeed,_I2CAddress);        // Start device with same settings again if using I2C
-  else if(_sck) begin(_cs,_mosi,_miso,_sck);            // Use software SPI again
-  else begin(_cs);                                      // otherwise it must be hardware SPI
+  if (_I2CAddress)                                      // Branch depending on if using I2C or SPI
+  {                                                     //
+    begin(_I2CSpeed, _I2CAddress);                      // Start device with same settings again if using I2C
+  }                                                     //
+  else                                                  //
+  {                                                     //
+    if (_sck)                                           // If _sck is set the use software SPI
+    {                                                   //
+      begin(_cs, _mosi, _miso, _sck);                   // Use software SPI again
+    }                                                   //
+    else                                                //
+    {                                                   //
+      begin(_cs);                                       // otherwise it must be hardware SPI
+    } // if-then-else using sw or hw SPI 
+  } // if-then-else using I2C
 } // of method reset()
 void BME680_Class::getCalibration()
 {
@@ -177,8 +189,8 @@ void BME680_Class::getCalibration()
                        /*************************************
                        ** Temperature related coefficients **
                        *************************************/
-	uint8_t coeff_array1[BME680_COEFF_SIZE1]  = { 0 }; // Define temporary array 1
-	uint8_t coeff_array2[BME680_COEFF_SIZE2]  = { 0 }; // Define temporary array 2
+	uint8_t coeff_array1[BME680_COEFF_SIZE1]  = { 0 }; // Define temporary array 1 and initialize with zeroes
+	uint8_t coeff_array2[BME680_COEFF_SIZE2]  = { 0 }; // Define temporary array 2 and initialize with zeroes
   getData(BME680_COEFF_START_ADDRESS1,coeff_array1); // Split reading registers into 2
   getData(BME680_COEFF_START_ADDRESS2,coeff_array2); // one 25 bytes and the other 16
   _T1  = (uint16_t) (CONCAT_BYTES(coeff_array2[BME680_T1_MSB_REG], coeff_array2[BME680_T1_LSB_REG]));
@@ -329,7 +341,6 @@ void BME680_Class::getSensorData(int32_t &temp, int32_t &hum, int32_t &press, in
   press = _Pressure;       // Copy global variables to parameters
   gas   = _Gas;            // Copy global variables to parameters
 } // of method getSensorData()
-
 uint8_t BME680_Class::getI2CAddress()
 {
   /*!
@@ -338,7 +349,6 @@ uint8_t BME680_Class::getI2CAddress()
   */
   return(_I2CAddress);
 } // of method getI2CAddress()
-
 void BME680_Class::readSensors(const bool waitSwitch) 
 {
   /*!
@@ -350,7 +360,6 @@ void BME680_Class::readSensors(const bool waitSwitch)
   * param[in] waitSwitch Optional switch that, when set to "true" will not return until reading is finished
   */
   /*! Lookup table for the possible gas range values */
-
 const  uint32_t lookupTable1[16] = {
   UINT32_C(2147483647), UINT32_C(2147483647), UINT32_C(2147483647), UINT32_C(2147483647), UINT32_C(2147483647), 
   UINT32_C(2126008810), UINT32_C(2147483647), UINT32_C(2130303777), UINT32_C(2147483647), UINT32_C(2147483647),

@@ -80,7 +80,7 @@ Version | Date       | Developer                     | Comments
   #define BME680_h                                                      ///< Guard code definition for the header
   #define CONCAT_BYTES(msb, lsb) (((uint16_t)msb << 8) | (uint16_t)lsb) ///< Inline to combine msb and lsb bytes
   #ifndef _BV
-    #define _BV(bit) (1 << (bit)) ///< Some implementations don't have this bit-shift macro pre-defined
+    #define _BV(bit) (1 << (bit))                                       ///< Sometimes this macro isn't pre-defined
   #endif
   /******************************************************************************************************************
   ** Declare constants used in the class                                                                           **
@@ -196,7 +196,7 @@ Version | Date       | Developer                     | Comments
                              const bool waitSwitch = true);                   //
       uint8_t  getI2CAddress();                                               // Return the I2C Address of the BME680
       void     reset();                                                       // Reset the BME680
-  private:                                                                    //
+    private:                                                                  //
       bool     commonInitialization();                                        ///< Common initialization code
       uint8_t  readByte(const uint8_t addr);                                  ///< Read byte from register address
       void     readSensors(const bool waitSwitch);                            ///< read the registers in one burst
