@@ -90,8 +90,8 @@ public:
 /*******************************************************************************************************************
 ** Declare all program constants                                                                                  **
 *******************************************************************************************************************/
-const uint8_t   BME_680_SPI_CS_PIN =            SS; ///< Use the standard SS pin for the BME680
-const uint8_t   SD_CARD_SPI_CS_PIN =            24; ///< Use Pin A6/D4 for the SD Card
+const uint8_t   BME_680_SPI_CS_PIN =            SS; ///< "SS" pin used as "chip select", see Arduino docs for details
+const uint8_t   SD_CARD_SPI_CS_PIN =            24; ///< Use Pin A6/D4 for the SD Card.
 const uint8_t   LED_PIN            =   LED_BUILTIN; ///< Built-in LED pin
 const uint32_t  SERIAL_SPEED       =        115200; ///< Set the baud rate for Serial I/O
 const uint8_t   NUMBER_READINGS    =            10; ///< Number of readings to average
@@ -121,13 +121,13 @@ uint8_t  idx               = 0;                     ///< Index into "data" struc
 uint16_t loopCounter       = 0;                     ///< Loop counter for displaying iterations
 uint32_t fastModeEndMillis = 0;                     ///< Millis value when fast mode stops
 uint32_t fast_mode_end     = 0;                     ///< Holds the millis() value when fast_mode ends
+uint32_t delayTime         = LONG_DELAY;            ///< The number of milliseconds to pause between measurements
 reading  data[NUMBER_READINGS];                     ///< Structure to hold accumulated measurements
 int32_t  unused_gas;                                ///< Unused variable to hold (nonexistant) gas measurements
 char     buf[32];                                   ///< Text buffer for sprintf() function
 int32_t  avg_temperature;                           ///< Holds computed average over NUMBER_READINGS 
 int32_t  avg_humidity;                              ///< Holds computed average over NUMBER_READINGS 
 int32_t  avg_pressure;                              ///< Holds computed average over NUMBER_READINGS 
-uint32_t delayTime = LONG_DELAY;                    ///< The number of milliseconds to pause between measurements
 void normalMode()
 {
   /*!
@@ -159,6 +159,19 @@ void accurateMode()
   delayTime = SHORT_DELAY;                                // Faster readings
 
 } // of method "accurateMode()"
+void errorBlink()
+{
+  /*!
+  @brief    Blink the LED 50 times at 10 times a second
+  @details  Short function to blink the LED while searching for a device
+  @return   void
+  */
+  for (uint8_t i = 0; i < 50; i++)
+  {
+    digitalWrite(LED_PIN, !digitalRead(LED_PIN));
+    delay(100);
+  } // loop to toggle LED light 10 times
+} // of method "errorBlink()"
 void setup()
 {
   /*!
@@ -176,16 +189,12 @@ void setup()
   Serial.begin(SERIAL_SPEED);                       // Start serial port at Baud rate
   #ifdef __AVR_ATmega32U4__                         // If this is a 32U4 processor, 
     delay(3000);                                    // then wait 3 seconds to initialize USB port
-  #endif                                            
+  #endif                                            // before continuing
   Serial.print(F("Starting SDLoggerSPIDemo example program for BME680\n- Initializing BME680 sensor\n"));
   while (!BME680.begin(BME_680_SPI_CS_PIN))         // Start BME680 using hardware SPI protocol
   {
     Serial.print(F("-  Unable to find BME680. Trying again in 5 seconds.\n"));
-    for (uint8_t i = 0; i < 50; i++)
-    {
-      digitalWrite(LED_PIN, !digitalRead(LED_PIN));
-      delay(100);
-    } // loop to toggle LED light 10 times
+    errorBlink();
   } // of loop until device is located
   normalMode();
   BME680.getSensorData(data[idx].temperature, data[idx].humidity, data[idx].pressure, unused_gas);
@@ -195,14 +204,10 @@ void setup()
   while (!SD.begin(SD_CARD_SPI_CS_PIN)) // Start card using hardware SPI protocol
   {
     Serial.print(F("-  Unable to find SD Card. Trying again in 5 seconds.\n"));
-    for (uint8_t i = 0; i < 50; i++)
-    {
-      digitalWrite(LED_PIN, !digitalRead(LED_PIN));
-      delay(100);
-    } // loop to toggle LED light 10 times
+    errorBlink();
   } // of loop until device is located
   Serial.print(F("- SD-Card Initialized\n"));
-  dataFile = SD.open(FILE_NAME, FILE_WRITE);        // Open the logfile for writing and position to end-of-file
+  dataFile = SD.open(FILE_NAME, FILE_WRITE);  // Open the logfile for writing and position to end-of-file
   if (!dataFile)
   {
     Serial.print(F("Unable to open file \""));
