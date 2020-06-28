@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">BME680
-   &#160;<span id="projectnumber">Version 1.0.8</span>
+   &#160;<span id="projectnumber">Version 1.0.9</span>
    </div>
    <div id="projectbrief">Arduino Library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor</div>
   </td>
@@ -90,9 +90,9 @@ $(document).ready(function(){initNavTree('_s_d_logger_s_p_i_demo_8ino.html','');
 <div class="title">SDLoggerSPIDemo.ino File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_zanshin___b_m_e680_8h_source.html">Zanshin_BME680.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;SD.h&gt;</code><br />
 <code>#include &lt;SPI.h&gt;</code><br />
-<code>#include &lt;SD.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_zanshin___b_m_e680_8h_source.html">Zanshin_BME680.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -116,7 +116,7 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a3faf34f5504e22c1877fdddd905c7340"><td class="memItemLeft" align="right" valign="top"><a id="a3faf34f5504e22c1877fdddd905c7340"></a>
 const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a3faf34f5504e22c1877fdddd905c7340">BME_680_SPI_CS_PIN</a> = SS</td></tr>
-<tr class="memdesc:a3faf34f5504e22c1877fdddd905c7340"><td class="mdescLeft">&#160;</td><td class="mdescRight">"SS" pin used as "chip select", see Arduino docs for details <br /></td></tr>
+<tr class="memdesc:a3faf34f5504e22c1877fdddd905c7340"><td class="mdescLeft">&#160;</td><td class="mdescRight">"SS" pin used as "chip select" <br /></td></tr>
 <tr class="separator:a3faf34f5504e22c1877fdddd905c7340"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85ca07df7dc31b49c31f1c94b26ad25c"><td class="memItemLeft" align="right" valign="top"><a id="a85ca07df7dc31b49c31f1c94b26ad25c"></a>
 const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a85ca07df7dc31b49c31f1c94b26ad25c">SD_CARD_SPI_CS_PIN</a> = 24</td></tr>
@@ -144,7 +144,7 @@ const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="separator:a971e4524a4d294d016af280f14ae5ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac570dadda5df349348f53376e3fbddb3"><td class="memItemLeft" align="right" valign="top"><a id="ac570dadda5df349348f53376e3fbddb3"></a>
 const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#ac570dadda5df349348f53376e3fbddb3">FAST_MODE_DURATION</a> = 60000</td></tr>
-<tr class="memdesc:ac570dadda5df349348f53376e3fbddb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">How long to run detailed measurements after trigger. <br /></td></tr>
+<tr class="memdesc:ac570dadda5df349348f53376e3fbddb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ms to run detailed measurements. <br /></td></tr>
 <tr class="separator:ac570dadda5df349348f53376e3fbddb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3759f27c4ea5a76e7b642613fc366bf5"><td class="memItemLeft" align="right" valign="top"><a id="a3759f27c4ea5a76e7b642613fc366bf5"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a3759f27c4ea5a76e7b642613fc366bf5">FILE_NAME</a> = &quot;BME_680.csv&quot;</td></tr>
@@ -152,7 +152,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a3759f27c4ea5a76e7b642613fc366bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7107930b12cdaaa16dc1c5d8730bf528"><td class="memItemLeft" align="right" valign="top"><a id="a7107930b12cdaaa16dc1c5d8730bf528"></a>
 const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a7107930b12cdaaa16dc1c5d8730bf528">TEMPERATURE_TRIP</a> = 100</td></tr>
-<tr class="memdesc:a7107930b12cdaaa16dc1c5d8730bf528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger if delta is more than this deci-degrees. <br /></td></tr>
+<tr class="memdesc:a7107930b12cdaaa16dc1c5d8730bf528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger if delta is more deci-degrees. <br /></td></tr>
 <tr class="separator:a7107930b12cdaaa16dc1c5d8730bf528"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada280a5922caef362c34838b73a51dd3"><td class="memItemLeft" align="right" valign="top"><a id="ada280a5922caef362c34838b73a51dd3"></a>
 const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#ada280a5922caef362c34838b73a51dd3">PRESSURE_TRIP</a> = 100</td></tr>
@@ -160,7 +160,7 @@ const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="separator:ada280a5922caef362c34838b73a51dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70caf7518825c0488eff08e1010c97e2"><td class="memItemLeft" align="right" valign="top"><a id="a70caf7518825c0488eff08e1010c97e2"></a>
 const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a70caf7518825c0488eff08e1010c97e2">HUMIDITY_TRIP</a> = 1000</td></tr>
-<tr class="memdesc:a70caf7518825c0488eff08e1010c97e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger if delta is more than this milli-percent. <br /></td></tr>
+<tr class="memdesc:a70caf7518825c0488eff08e1010c97e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trigger if delta is more than this m-pct. <br /></td></tr>
 <tr class="separator:a70caf7518825c0488eff08e1010c97e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5063630ccead4138f04d3c1bc67c9a39"><td class="memItemLeft" align="right" valign="top"><a id="a5063630ccead4138f04d3c1bc67c9a39"></a>
 <a class="el" href="class_b_m_e680___class.html">BME680_Class</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_s_d_logger_s_p_i_demo_8ino.html#a5063630ccead4138f04d3c1bc67c9a39">BME680</a></td></tr>
@@ -230,12 +230,10 @@ Description</h1>
 <td>Sparkfun </td><td><a href="https://www.sparkfun.com/products/14570">https://www.sparkfun.com/products/14570</a> </td></tr>
 <tr>
 <td>BlueDot </td><td><a href="https://www.bluedot.space/sensor-boards/bme680/">https://www.bluedot.space/sensor-boards/bme680/</a> </td></tr>
-<tr>
-<td>Adafruit </td><td><a href="https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout">https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout</a> <br />
-<br />
-</td></tr>
 </table>
-<p>Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed at <a href="https://github.com/BoschSensortec/BSEC-Arduino-library">https://github.com/BoschSensortec/BSEC-Arduino-library</a> . This software is part of the Bosch "BSEC" (Bosch Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence the choice to make a more compact and rather less abstract library.</p>
+<p>Adafruit | <a href="https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout">https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout</a> <br />
+<br />
+ Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed at <a href="https://github.com/BoschSensortec/BSEC-Arduino-library">https://github.com/BoschSensortec/BSEC-Arduino-library</a> . This software is part of the Bosch "BSEC" (Bosch Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence the choice to make a more compact and rather less abstract library.</p>
 <p>This example program was designed as a simple data logger which defaults to measurements taken every 10 seconds. Once either the temperature, pressure or humidity changes at a rate above that set in the constants TEMPERATURE_TRIP, PRESSURE_TRIP or HUMIDITY_TRIP then the measurement rate is sped up to read every second and to read more accurately. This was intended as a data logger inside a refrigerator or freezer, where most of the time there are constant values but when the door is opened or the defrosting cycle kicks in then readings need to be done more often.</p>
 <p>This example program initializes the BME680 to use SPI for communications. The library does not using floating point numbers to save on memory space and computation time. The values for Temperature, Pressure and Humidity are returned in deci-units, e.g. a Temperature reading of "2731" means "27.31" degrees Celsius. The display in the example program uses floating point for demonstration purposes only. Note that the temperature reading is generally higher than the ambient temperature due to die and PCB temperature and self-heating of the element.<br />
 <br />
@@ -252,11 +250,13 @@ Changelog</h1>
 <tr>
 <th>Version </th><th>Date </th><th>Developer </th><th>Comments  </th></tr>
 <tr>
-<td>1.0.1 </td><td>2020-06-01 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Added Doxygen commenting for redefine of serial class </td></tr>
+<td>1.0.2 </td><td>2020-06-28 </td><td>SV-Zanshin </td><td>Changed to adhere to clang Google formatting </td></tr>
 <tr>
-<td>1.0.0 </td><td>2020-05-27 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Completed and tested </td></tr>
+<td>1.0.1 </td><td>2020-06-01 </td><td>SV-Zanshin </td><td>Added Doxygen commenting for redefine of serial class </td></tr>
 <tr>
-<td>1.0.0b </td><td>2020-05-22 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Cloned from original SPIDemo program and modified </td></tr>
+<td>1.0.0 </td><td>2020-05-27 </td><td>SV-Zanshin </td><td>Completed and tested </td></tr>
+<tr>
+<td>1.0.0b </td><td>2020-05-22 </td><td>SV-Zanshin </td><td>Cloned from original SPIDemo program and modified </td></tr>
 </table>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ae5a4849cfbb24159b7e11e0f722e37b5"></a>
@@ -274,7 +274,7 @@ Changelog</h1>
       </table>
 </div><div class="memdoc">
 <p>Called to set the BME680 configuration values to those for accurate readings</p>
-<p>The configuration parameters are set to get more accurate measurements at the price of both additional time and energy. </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
+<p>The configuration parameters are set to get more accurate measurements at the price of both additional conversion time and energy consumption. </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
 
 </div>
 </div>
@@ -312,7 +312,7 @@ Changelog</h1>
       </table>
 </div><div class="memdoc">
 <p>Arduino method for the main program loop</p>
-<p>This is the main program for the Arduino IDE, it is an infinite loop and keeps on repeating. The "sprintf()" function is to pretty-print the values, since floating point is not supported on the Arduino, split the values into those before and those after the decimal point. </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
+<p>Main program for the Arduino IDE, it is an infinite loop and keeps on looping The "sprintf()" function is to pretty-print the values, since floating point is not supported on the Arduino, split the values into those before and those after the decimal point. </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
 
 </div>
 </div>
@@ -330,8 +330,8 @@ Changelog</h1>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Called to set the BME680 configuration values to those for normal (less accurate) readings</p>
-<p>The configuration parameters are set to use minimal time (and energy) at the price of accuracy. </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
+<p>Called to set the BME680 configuration values to those for normal readings</p>
+<p>Configuration params are set to use minimal time (and energy) at the price of accuracy </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
 
 </div>
 </div>
