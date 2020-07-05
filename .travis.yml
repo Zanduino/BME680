@@ -1,22 +1,24 @@
-######################################################################################################
-## Travis-CI control file                                                                           ##
-##                                                                                                  ##
-## This YML file controls the way that TRAVIS-CI works for testing the compilability of the library ##
-## and example programs for all supported platforms.  Rather than re-invent the wheel, the public   ##
-## scripts written by the folks at www.adafruit.com are used; as they will add new platforms as     ##
-## needed and thus the continuous integration process for this library will be kept up-to-date.     ##
-##                                                                                                  ##
-## Date       Developer                     Comments                                                ##
-## ========== ============================= ======================================================= ##
-## 2020-06-12 https://github.com/SV-Zanshin Added "cache:" section                                  ##
-## 2020-05-23 https://github.com/SV-Zanshin Cleaned up documentation format                         ##
-## 2020-05-09 https://github.com/SV-Zanshin Removed unnecessary install libraries                   ##
-## 2019-01-23 https://github.com/SV-Zanshin Corrected PRETTYNAME                                    ##
-## 2019-01-20 https://github.com/SV-Zanshin Linked to Adafruit script rather than defining all of   ##
-##                                          the tests locally and maintaining them                  ##
-## 2019-01-19 https://github.com/SV-Zanshin Initial coding                                          ##
-##                                                                                                  ##
-######################################################################################################
+###################################################################################################
+## Travis-CI control file                                                                        ##
+##                                                                                               ##
+## This YML file controls the way that TRAVIS-CI works for testing the compilability of the      ##
+## library and example programs for all supported platforms.  Rather than re-invent the wheel,   ##
+## the public scripts written by the folks at www.adafruit.com are used; as they will add new    ##
+## platforms as needed and thus the continuous integration process for this library will be kept ##
+## up-to-date.                                                                                   ##
+##                                                                                               ##
+## Date       Developer         Comments                                                         ##
+## ========== ================= ================================================================ ##
+## 2020-07-01 SV-Zanshin        Issue #25, added clang-format checking                           ##
+## 2020-06-12 SV-Zanshin        Added "cache:" section                                           ##
+## 2020-05-23 SV-Zanshin        Cleaned up documentation format                                  ##
+## 2020-05-09 SV-Zanshin        Removed unnecessary install libraries                            ##
+## 2019-01-23 SV-Zanshin        Corrected PRETTYNAME                                             ##
+## 2019-01-20 SV-Zanshin        Linked to Adafruit script rather than defining all of the tests  ##
+##                              locally and maintaining them                                     ##
+## 2019-01-19 SV-Zanshin        Initial coding                                                   ##
+##                                                                                               ##
+###################################################################################################
 language: c
 sudo: false
 
@@ -35,6 +37,16 @@ cache:
 git:
   depth: false
   quiet: true
+addons:
+  apt:
+    sources:
+      - llvm-toolchain-trusty-5.0
+      - key_url: 'http://apt.llvm.org/llvm-snapshot.gpg.key'
+    packages:
+      - python3-pip
+      - python3-wheel
+      - clang-format-5.0
+
 env:
   global:
     - PRETTYNAME="Bosch BME680 Arduino Library"
@@ -42,10 +54,12 @@ env:
 
 before_install:
   - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
+  - curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/run-clang-format.py > run-clang-format.py
 
 install:
 
 script:
+  - python run-clang-format.py -r .
   - build_main_platforms
 
 notifications:
