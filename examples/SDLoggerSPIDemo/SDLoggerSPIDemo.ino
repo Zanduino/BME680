@@ -80,6 +80,7 @@ Written by https://github.com/SV-Zanshin
 
 Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
+1.0.3   | 2020-07-05 | SV-Zanshin | Issue #25 - implement clang-formatting
 1.0.2   | 2020-06-28 | SV-Zanshin | Changed to adhere to clang Google formatting
 1.0.1   | 2020-06-01 | SV-Zanshin | Added Doxygen commenting for redefine of serial class
 1.0.0   | 2020-05-27 | SV-Zanshin | Completed and tested
