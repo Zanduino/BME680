@@ -61,7 +61,7 @@ bool BME680_Class::begin(const uint32_t i2cSpeed, const uint8_t i2cAddress)
   _I2CSpeed = i2cSpeed;                                                             
   for (_I2CAddress = BME680_I2C_MIN_ADDRESS;_I2CAddress <= BME680_I2C_MAX_ADDRESS;  
        _I2CAddress++) {                                   // Loop through all I2C addresses
-    if (i2cAddress == 0 || _I2CAddress == i2cAddress) {   // Only check íf relevant 
+    if (i2cAddress == 0 || _I2CAddress == i2cAddress) {   // Only check if relevant 
       Wire.beginTransmission(_I2CAddress);                // Check for BME680 here
       if (Wire.endTransmission()==0) {                    // We have found a device that could be
         return commonInitialization();                    // a BME680, so perform common init
