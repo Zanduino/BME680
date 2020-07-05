@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('_soft_s_p_i_demo_8ino.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a1beda5a9dd994d2856e8233d2acba63c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_soft_s_p_i_demo_8ino.html#a1beda5a9dd994d2856e8233d2acba63c">altitude</a> (const int32_t press, const float seaLevel=1013.25)</td></tr>
-<tr class="memdesc:a1beda5a9dd994d2856e8233d2acba63c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward declaration with default value.  <a href="#a1beda5a9dd994d2856e8233d2acba63c">More...</a><br /></td></tr>
+<tr class="memdesc:a1beda5a9dd994d2856e8233d2acba63c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward declaration.  <a href="#a1beda5a9dd994d2856e8233d2acba63c">More...</a><br /></td></tr>
 <tr class="separator:a1beda5a9dd994d2856e8233d2acba63c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_soft_s_p_i_demo_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
 <tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,20 +133,18 @@ Description</h1>
 <br />
  The most recent version of the BME680 library is available at <a href="https://github.com/SV-Zanshin/BME680">https://github.com/SV-Zanshin/BME680</a> and the documentation of the library as well as example programs are described in the project's wiki pages located at <a href="https://github.com/SV-Zanshin/BME680/wiki">https://github.com/SV-Zanshin/BME680/wiki</a>. <br />
 <br />
- The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it will be used as part of a third-party breakout board. There are several such boards available at this time, for example <br />
-</p><table class="doxtable">
+ The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it will be used as part of a third-party breakout board. There are several such boards </p><table class="doxtable">
 <tr>
-<th>Company </th><th>Link  </th></tr>
+<th>available at this time, for example <br />
+ Company </th><th>Link  </th></tr>
 <tr>
 <td>Sparkfun </td><td><a href="https://www.sparkfun.com/products/14570">https://www.sparkfun.com/products/14570</a> </td></tr>
 <tr>
 <td>BlueDot </td><td><a href="https://www.bluedot.space/sensor-boards/bme680/">https://www.bluedot.space/sensor-boards/bme680/</a> </td></tr>
-<tr>
-<td>Adafruit </td><td><a href="https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout">https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout</a> <br />
-<br />
-</td></tr>
 </table>
-<p>Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed at <a href="https://github.com/BoschSensortec/BSEC-Arduino-library">https://github.com/BoschSensortec/BSEC-Arduino-library</a> . This software is part of the Bosch "BSEC" (Bosch Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence the choice to make a more compact and rather less abstract library.</p>
+<p>Adafruit | <a href="https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout">https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout</a> <br />
+<br />
+ Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed at <a href="https://github.com/BoschSensortec/BSEC-Arduino-library">https://github.com/BoschSensortec/BSEC-Arduino-library</a> . This software is part of the Bosch "BSEC" (Bosch Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence the choice to make a more compact and rather less abstract library.</p>
 <p>This example program initializes the BME680 to use software SPI for communications. The library does not use floating point mathematics to save on computation space and time, the values for Temperature, Pressure and Humidity are returned in deci-units, e.g. a Temperature reading of "2731" means "27.31" degrees Celsius. The display in the example program uses floating point for demonstration purposes only. Note that the temperature reading is generally higher than the ambient temperature due to die and PCB temperature and self-heating of the element.<br />
 <br />
  The pressure reading needs to be adjusted for altitude to get the adjusted pressure reading. There are numerous sources on the internet for formula converting from standard sea-level pressure to altitude, see the data sheet for the BME180 on page 16 of <a href="http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf">http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf</a>. Rather than put a floating-point function in the library which may not be used but which would use space, an example altitude computation function has been added to this example program to show how it might be done.</p>
@@ -162,11 +160,13 @@ Changelog</h1>
 <tr>
 <th>Version </th><th>Date </th><th>Developer </th><th>Comments  </th></tr>
 <tr>
-<td>1.0.2 </td><td>2020-05-13 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #8 - clean up comments and code </td></tr>
+<td>1.0.3 </td><td>2020-07-05 </td><td>SV-Zanshin </td><td>Issue #25 - implement clang-formatting </td></tr>
 <tr>
-<td>1.0.1 </td><td>2019-01-26 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #3 - convert documentation to Doxygen </td></tr>
+<td>1.0.2 </td><td>2020-05-13 </td><td>SV-Zanshin </td><td>Issue #8 - clean up comments and code </td></tr>
 <tr>
-<td>1.0.0 </td><td>2017-07-01 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Cloned from original <a class="el" href="_s_p_i_demo_8ino.html">SPIDemo.ino</a> program for BME280 </td></tr>
+<td>1.0.1 </td><td>2019-01-26 </td><td>SV-Zanshin </td><td>Issue #3 - convert documentation to Doxygen </td></tr>
+<tr>
+<td>1.0.0 </td><td>2017-07-01 </td><td>SV-Zanshin </td><td>Cloned from original <a class="el" href="_s_p_i_demo_8ino.html">SPIDemo.ino</a> program for BME280 </td></tr>
 </table>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a1beda5a9dd994d2856e8233d2acba63c"></a>
@@ -195,9 +195,9 @@ Changelog</h1>
       </table>
 </div><div class="memdoc">
 
-<p>Forward declaration with default value. </p>
+<p>Forward declaration. </p>
 <p>This converts a pressure measurement into a height in meters</p>
-<p>The corrected sea-level pressure can be passed into the function if it is know, otherwise the standard atmospheric pressure of 1013.25hPa is used (see <a href="https://en.wikipedia.org/wiki/Atmospheric_pressure">https://en.wikipedia.org/wiki/Atmospheric_pressure</a>) </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The corrected sea-level pressure can be passed into the function if it is know, other- wise the standard atmospheric pressure of 1013.25hPa is used (see <a href="https://en.wikipedia.org/wiki/Atmospheric_pressure">https://en.wikipedia.org/wiki/Atmospheric_pressure</a>) for details </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">press</td><td>Pressure reading from BME680 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">seaLevel</td><td>Sea-Level pressure in millibars </td></tr>
@@ -223,7 +223,7 @@ Changelog</h1>
       </table>
 </div><div class="memdoc">
 <p>Arduino method for the main program loop</p>
-<p>This is the main program for the Arduino IDE, it is an infinite loop and keeps on repeating. The "sprintf()" function is to pretty-print the values, since floating point is not supported on the Arduino, split the values into those before and those after the decimal point. </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
+<p>This is the main program for the Arduino IDE, it is an infinite loop and keeps on repeating. The "sprintf()" function is to pretty-print the values, since floating point is not supported on the Arduino , split the values into those before and those after the decimal point. </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
 
 </div>
 </div>
