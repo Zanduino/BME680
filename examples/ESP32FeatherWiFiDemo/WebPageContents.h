@@ -1,17 +1,17 @@
 /*!
-  This character string "MAIN_page" is loaded into program memory and contains the web page that is served when a
-  browser calls up the site. It uses the javascript from https://www.chartjs.org to generate a page with a dynamic
-  chart and lists the data in tabular form underneath as well.
-  
+  This character string "MAIN_page" is loaded into program memory and contains the web page that is
+  served when a browser calls up the site. It uses the javascript from https://www.chartjs.org to
+  generate a page with a dynamic chart and lists the data in tabular form underneath as well.
+
   Since this is used for demonstration purposes it has been kept basic and simple.
-  
-  Version | Date       | Developer                     | Comments
-  ------- | ---------- | ----------------------------- | -------------------------------------------
-  1.0.1   | 2020-06-11 | https://github.com/SV-Zanshin | Changed URL to Zanshin kanji gif file
-  1.0.0   | 2020-06-02 | https://github.com/SV-Zanshin | Ready to commit and publish as Issue #20
+
+  Version | Date       | Developer  | Comments
+  ------- | ---------- | ---------- | -------------------------------------------------------------
+  1.0.2   | 2020-07-04 | SV-Zanshin | Issue #25 - implement clang-formatting
+  1.0.1   | 2020-06-11 | SV-Zanshin | Changed URL to Zanshin kanji gif file
+  1.0.0   | 2020-06-02 | SV-Zanshin | Ready to commit and publish as Issue #20
 
 */
-
 const char MAIN_page[] PROGMEM = R"=====(
   <!doctype html>
   <html>
