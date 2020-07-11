@@ -29,10 +29,10 @@ branches:
   except:
     - gh-pages
     
-cache:
-  directories:
-    - ~/arduino_ide
-    - ~/.arduino15/packages/
+##cache:
+##  directories:
+##    - ~/arduino_ide
+##    - ~/.arduino15/packages/
     
 git:
   depth: false
