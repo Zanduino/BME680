@@ -145,7 +145,7 @@ void setup() {
   **********************/
   Serial.print("Starting ESP32FeatherWiFiDemo for BME680\n");
   Serial.print("- Initializing BME680 sensor\n");
-  while (!BME680.begin(I2C_STANDARD_MODE)) { // Start using I2C, use first device found
+  while (!BME680.begin(I2C_STANDARD_MODE)) {  // Start using I2C, use first device found
     Serial.print("-  Unable to find BME680. Trying again in 5 seconds.\n");
     delay(5000);
   }  // of loop until device is located
