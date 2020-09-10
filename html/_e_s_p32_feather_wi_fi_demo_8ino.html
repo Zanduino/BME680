@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">BME680
-   &#160;<span id="projectnumber">Version 1.0.9</span>
+   &#160;<span id="projectnumber">Version 1.0.8</span>
    </div>
    <div id="projectbrief">Arduino Library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor</div>
   </td>
@@ -88,11 +88,11 @@ $(document).ready(function(){initNavTree('_e_s_p32_feather_wi_fi_demo_8ino.html'
 <div class="title">ESP32FeatherWiFiDemo.ino File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;SD.h&gt;</code><br />
-<code>#include &lt;SPI.h&gt;</code><br />
-<code>#include &lt;WebServer.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;SPI.h&gt;</code><br />
+<code>#include &lt;SD.h&gt;</code><br />
 <code>#include &lt;WiFi.h&gt;</code><br />
 <code>#include &lt;WiFiClient.h&gt;</code><br />
+<code>#include &lt;WebServer.h&gt;</code><br />
 <code>#include &quot;WebPageContents.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -115,7 +115,7 @@ WebServer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a3759f27c4ea5a76e7b642613fc366bf5"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32_feather_wi_fi_demo_8ino.html#a3759f27c4ea5a76e7b642613fc366bf5">FILE_NAME</a> = &quot;/BME_680.csv&quot;</td></tr>
-<tr class="memdesc:a3759f27c4ea5a76e7b642613fc366bf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; WiFi Client library  <a href="#a3759f27c4ea5a76e7b642613fc366bf5">More...</a><br /></td></tr>
+<tr class="memdesc:a3759f27c4ea5a76e7b642613fc366bf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; WiFi Web Server library  <a href="#a3759f27c4ea5a76e7b642613fc366bf5">More...</a><br /></td></tr>
 <tr class="separator:a3759f27c4ea5a76e7b642613fc366bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4fbed25c9d82b26a56813f4892022d8"><td class="memItemLeft" align="right" valign="top"><a id="ac4fbed25c9d82b26a56813f4892022d8"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32_feather_wi_fi_demo_8ino.html#ac4fbed25c9d82b26a56813f4892022d8">HOSTNAME</a> = &quot;BME680&quot;</td></tr>
@@ -143,15 +143,15 @@ const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <tr class="separator:a5046d5397ff8775579ff977503a3d07d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85ca07df7dc31b49c31f1c94b26ad25c"><td class="memItemLeft" align="right" valign="top"><a id="a85ca07df7dc31b49c31f1c94b26ad25c"></a>
 const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32_feather_wi_fi_demo_8ino.html#a85ca07df7dc31b49c31f1c94b26ad25c">SD_CARD_SPI_CS_PIN</a> = 21</td></tr>
-<tr class="memdesc:a85ca07df7dc31b49c31f1c94b26ad25c"><td class="mdescLeft">&#160;</td><td class="mdescRight">(general GPIO) on ESP32 for chip select <br /></td></tr>
+<tr class="memdesc:a85ca07df7dc31b49c31f1c94b26ad25c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Pin 21 (general GPIO) on the ESP32 for chip select. <br /></td></tr>
 <tr class="separator:a85ca07df7dc31b49c31f1c94b26ad25c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72212ee3f1de5d7697d92de244d17def"><td class="memItemLeft" align="right" valign="top"><a id="a72212ee3f1de5d7697d92de244d17def"></a>
 const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32_feather_wi_fi_demo_8ino.html#a72212ee3f1de5d7697d92de244d17def">SD_CARD_SPI_CD_PIN</a> = A5</td></tr>
-<tr class="memdesc:a72212ee3f1de5d7697d92de244d17def"><td class="mdescLeft">&#160;</td><td class="mdescRight">(general GPIO) on ESP32 for carrier detect <br /></td></tr>
+<tr class="memdesc:a72212ee3f1de5d7697d92de244d17def"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Pin A5 (general GPIO) on the ESP32 for carrier detect. <br /></td></tr>
 <tr class="separator:a72212ee3f1de5d7697d92de244d17def"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8e493b161e62fc1da4241514f934a8a"><td class="memItemLeft" align="right" valign="top"><a id="ab8e493b161e62fc1da4241514f934a8a"></a>
 const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32_feather_wi_fi_demo_8ino.html#ab8e493b161e62fc1da4241514f934a8a">SD_LOG_INTERVAL</a> = 1000</td></tr>
-<tr class="memdesc:ab8e493b161e62fc1da4241514f934a8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Milliseconds between writes to SD-Card. <br /></td></tr>
+<tr class="memdesc:ab8e493b161e62fc1da4241514f934a8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Milliseconds between measurements to SD-Card. <br /></td></tr>
 <tr class="separator:ab8e493b161e62fc1da4241514f934a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5377ccc1c55e0b844a354b5147252d9"><td class="memItemLeft" align="right" valign="top"><a id="ad5377ccc1c55e0b844a354b5147252d9"></a>
 const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_e_s_p32_feather_wi_fi_demo_8ino.html#ad5377ccc1c55e0b844a354b5147252d9">SD_FLUSH_INTERVAL</a> = 60</td></tr>
@@ -212,18 +212,20 @@ Description</h1>
 <br />
  The most recent version of the BME680 library is available at <a href="https://github.com/SV-Zanshin/BME680">https://github.com/SV-Zanshin/BME680</a> and the documentation of the library as well as example programs are described in the project's wiki pages located at <a href="https://github.com/SV-Zanshin/BME680/wiki">https://github.com/SV-Zanshin/BME680/wiki</a>. <br />
 <br />
- The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it will be used as part of a third-party breakout board. There are several such boards </p><table class="doxtable">
+ The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it will be used as part of a third-party breakout board. There are several such boards available at this time, for example <br />
+</p><table class="doxtable">
 <tr>
-<th>available at this time, for example <br />
- Company </th><th>Link  </th></tr>
+<th>Company </th><th>Link  </th></tr>
 <tr>
 <td>Sparkfun </td><td><a href="https://www.sparkfun.com/products/14570">https://www.sparkfun.com/products/14570</a> </td></tr>
 <tr>
 <td>BlueDot </td><td><a href="https://www.bluedot.space/sensor-boards/bme680/">https://www.bluedot.space/sensor-boards/bme680/</a> </td></tr>
-</table>
-<p>Adafruit | <a href="https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout">https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout</a> <br />
+<tr>
+<td>Adafruit </td><td><a href="https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout">https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout</a> <br />
 <br />
- Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed at <a href="https://github.com/BoschSensortec/BSEC-Arduino-library">https://github.com/BoschSensortec/BSEC-Arduino-library</a> . This software is part of the Bosch "BSEC" (Bosch Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence the choice to make a more compact and rather less abstract library.</p>
+</td></tr>
+</table>
+<p>Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaed at <a href="https://github.com/BoschSensortec/BSEC-Arduino-library">https://github.com/BoschSensortec/BSEC-Arduino-library</a> . This software is part of the Bosch "BSEC" (Bosch Sensortec Environmental Cluster) framework and somewhat bulky and unwieldy for typical Arduino applications, hence the choice to make a more compact and rather less abstract library.</p>
 <p>The pressure reading needs to be adjusted for altitude to get the adjusted pressure reading. There are numerous sources on the internet for formulae converting from standard sea-level pressure to altitude, see the data sheet for the BME180 on page 16 of <a href="http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf">http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf</a>. Rather than put a floating-point function in the library which may not be used but which would use space, an example altitude computation function has been added to this example program to show how it might be done.</p>
 <h1><a class="anchor" id="ESP32FeatherWiFiDemolicense"></a>
 License</h1>
@@ -237,11 +239,9 @@ Changelog</h1>
 <tr>
 <th>Version </th><th>Date </th><th>Developer </th><th>Comments  </th></tr>
 <tr>
-<td>1.0.1 </td><td>2020-07-04 </td><td>SV-Zanshin </td><td>Issue #25 - implement clang-formatting </td></tr>
+<td>1.0.0 </td><td>2020-06-02 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Ready to commit and publish as Issue #20 </td></tr>
 <tr>
-<td>1.0.0 </td><td>2020-06-02 </td><td>SV-Zanshin </td><td>Ready to commit and publish as Issue #20 </td></tr>
-<tr>
-<td>1.0.0b </td><td>2020-05-30 </td><td>SV-Zanshin </td><td>Initial coding </td></tr>
+<td>1.0.0b </td><td>2020-05-30 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Initial coding </td></tr>
 </table>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ac1cef0304194a18962c7b6b409f99c7c"></a>
@@ -297,7 +297,7 @@ Changelog</h1>
       </table>
 </div><div class="memdoc">
 <p>Called when a request is sent from a browser client</p>
-<p>When the ESP32 gets an IP address and that address is entered in a browser then this ISR get called to handle that request. The response is to send the HTML page which is contained in the variable "MAIN_page" which is set in the "WebPageContents.h" file </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
+<p>When the ESP32 gets an IP address and that address is entered in a browser then this ISR get called to handle that request. The response is to send the HTML page which is contained in the variable "MAIN_page" which is set in the "WebPageContents.h" include file </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
 
 </div>
 </div>
@@ -316,8 +316,8 @@ Changelog</h1>
       </table>
 </div><div class="memdoc">
 <p>Arduino method for the main program loop</p>
-<p>This is the main program for the Arduino IDE, it is an infinite loop and keeps on repeating. The timed measurements from the BME680 are handled here, while the actual web page serving and responses are handled by the ISRs "handleADC()" and "handleRoot()" </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
-<p>&lt; Millis() value for next SD-Card write time </p>
+<p>This is the main program for the Arduino IDE, it is an infinite loop and keeps on repeating. The timed measurements from the BME680 are handled here, while the actual web page serving and responses are handled by the 2 ISRs - "handleADC()" and "handleRoot()". </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
+<p>&lt; Millis() value for next SD-Card measurement time </p>
 
 </div>
 </div>
@@ -337,7 +337,7 @@ Changelog</h1>
 </div><div class="memdoc">
 <p>Arduino method called once at startup to initialize the system</p>
 <p>This is an Arduino IDE method which is called first upon boot or restart. It is only called one time and then control goes to the main "loop()" method, from which control never returns. The BME680, then the SD-Card (if present, if not present then it is ignored), then the Wi-Fi connection are initialized and configured here. </p><dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
-<p>&lt; countdown to 0 to detect card </p>
+<p>&lt; countdown to 0 to detect car </p>
 
 </div>
 </div>
@@ -354,8 +354,8 @@ Changelog</h1>
       </table>
 </div><div class="memdoc">
 
-<p>&lt; WiFi Client library </p>
-<p>&lt; Include the SD Card standard library &lt; Include the SPI standard library &lt; WiFi Web Server library &lt; ESP32 WiFi LibraryFilename on SD-Card </p>
+<p>&lt; WiFi Web Server library </p>
+<p>&lt; Include the SPI standard library &lt; Include the SD Card standard library &lt; ESP32 WiFi Library &lt; WiFi Client libraryFilename on SD-Card </p>
 
 </div>
 </div>
