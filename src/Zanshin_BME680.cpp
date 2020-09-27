@@ -388,7 +388,7 @@ void BME680_Class::readSensors(const bool waitSwitch) {
   _Pressure = 1048576 - adc_pres;
   _Pressure = (int32_t)((_Pressure - (var2 >> 12)) * ((uint32_t)3125));
 
-  if (_Pressure >= INT32_C(0x40000000)) // Issue #26
+  if (_Pressure >= INT32_C(0x40000000))  // Issue #26
     _Pressure = ((_Pressure / (uint32_t)var1) << 1);
   else
     _Pressure = ((_Pressure << 1) / (uint32_t)var1);
