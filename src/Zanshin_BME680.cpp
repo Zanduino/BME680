@@ -462,11 +462,11 @@ bool BME680_Class::setGas(uint16_t GasTemp, uint16_t GasMillis) {
       GasTemp = 200;
     else if (GasTemp > 400)
       GasTemp = 400;  // Clamp temperature to min/max
-    var1           = (((int32_t)(_Temperature / 100) * _H3) / 1000) * 256;
-    var2           = (_G1 + 784) * (((((_G2 + 154009) * GasTemp * 5) / 100) + 3276800) / 10); //Issue #26
-    var3           = var1 + (var2 / 2);
-    var4           = (var3 / (_res_heat_range + 4));
-    var5           = (131 * _res_heat) + 65536;
+    var1 = (((int32_t)(_Temperature / 100) * _H3) / 1000) * 256;
+    var2 = (_G1 + 784) * (((((_G2 + 154009) * GasTemp * 5) / 100) + 3276800) / 10);  // Issue #26
+    var3 = var1 + (var2 / 2);
+    var4 = (var3 / (_res_heat_range + 4));
+    var5 = (131 * _res_heat) + 65536;
     heatr_res_x100 = (int32_t)(((var4 / var5) - 250) * 34);
     heatr_res      = (uint8_t)((heatr_res_x100 + 50) / 100);
     putData(BME680_GAS_HEATER_REGISTER0, heatr_res);
