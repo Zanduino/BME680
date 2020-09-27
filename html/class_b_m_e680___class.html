@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">BME680
-   &#160;<span id="projectnumber">Version 1.0.8</span>
+   &#160;<span id="projectnumber">Version 1.0.9</span>
    </div>
    <div id="projectbrief">Arduino Library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor</div>
   </td>
@@ -223,7 +223,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>starts communications with device (overloaded)</p>
-<p>When called with a single 8-bit parameter is assumed that hardware SPI is to be used if the value is not 0x76 or 0x77, in which case it is assumed that this is the I2C address </p><dl class="params"><dt>Parameters</dt><dd>
+<p>When called with a single 8-bit parameter is assumed that hardware SPI is to be used if the value is not 0x76 or 0x77, in which case it is assumed that it is the I2C addr </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">chipSelect</td><td>Arduino Pin number for the Slave-Select pin or the I2C address return "true" if successful otherwise false</td></tr>
   </table>
@@ -379,7 +379,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the most recent temperature, humidity and pressure readings param[out] temp Temperature reading param[out] hum Humidity reading param[out] press Pressure reading param[out] gas Gas reading param[in] waitSwitch Optional switch that, when set to "true" will not return until reading is finished</p>
+<p>Returns the most recent temperature, humidity and pressure readings param[out] temp Temperature reading param[out] hum Humidity reading param[out] press Pressure reading param[out] gas Gas reading param[in] waitSwitch (Optional) When set will not return until reading is finished</p>
 
 </div>
 </div>

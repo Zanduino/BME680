@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">BME680
-   &#160;<span id="projectnumber">Version 1.0.8</span>
+   &#160;<span id="projectnumber">Version 1.0.9</span>
    </div>
    <div id="projectbrief">Arduino Library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor</div>
   </td>
@@ -100,9 +100,8 @@ The BME680 is an extremely small physical package that is so tiny as to be impos
 <td>SparkFun </td><td><a href="https://www.sparkfun.com/products/14570">https://www.sparkfun.com/products/14570</a> </td></tr>
 <tr>
 <td>BlueDot </td><td><a href="https://www.bluedot.space/sensor-boards/bme680/">https://www.bluedot.space/sensor-boards/bme680/</a> </td></tr>
-<tr>
-<td>Adafruit </td><td><a href="https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout">https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout</a> </td></tr>
 </table>
+<p>Adafruit | <a href="https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout">https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout</a></p>
 <p><br />
 Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaded at <a href="https://github.com/BoschSensortec/BSEC-Arduino-library">https://github.com/BoschSensortec/BSEC-Arduino-library</a>. This software is part of the Bosch "BSEC" (Bosch Sensortec Environmental Cluster) framework and is somewhat bulky and rather unwieldy for typical Arduino applications, it won't run on most Arduinos and the only example is for the Arduino Mega 2560 (due to the memory required), hence the decision to make this compact and rather less abstract library that will run on typical Arduino hardware.</p>
 <h1><a class="anchor" id="license"></a>
@@ -117,39 +116,43 @@ Changelog</h1>
 <tr>
 <th>Version </th><th>Date </th><th>Developer </th><th>Comments  </th></tr>
 <tr>
-<td>1.0.8 </td><td>2020-06-20 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #22 - added "getI2CAddress()" function </td></tr>
+<td>1.0.9 </td><td>2020-09-27 </td><td>SV-Zanshin </td><td>Issue #26 - Corrected computation of gas heater resistance value </td></tr>
 <tr>
-<td>1.0.6 </td><td>2020-05-25 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #17 - return value for "setOversampling()" </td></tr>
+<td>1.0.9 </td><td>2020-06-28 </td><td>SV-Zanshin </td><td>Issue #28 - Reformat according to standard c++ style </td></tr>
 <tr>
-<td>1.0.6 </td><td>2020-05-25 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #16 - I2C "reset()" when using 2 devices </td></tr>
+<td>1.0.8 </td><td>2020-06-20 </td><td>SV-Zanshin </td><td>Issue #22 - added "getI2CAddress()" function </td></tr>
 <tr>
-<td>1.0.6 </td><td>2020-05-25 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>General formatting of comments and spell-checking </td></tr>
+<td>1.0.6 </td><td>2020-05-25 </td><td>SV-Zanshin </td><td>Issue #17 - return value for "setOversampling()" </td></tr>
 <tr>
-<td>1.0.6 </td><td>2020-05-24 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #14 - Humidity sometimes 100% despite turning on </td></tr>
+<td>1.0.6 </td><td>2020-05-25 </td><td>SV-Zanshin </td><td>Issue #16 - I2C "reset()" when using 2 devices </td></tr>
 <tr>
-<td>1.0.6 </td><td>2020-05-24 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #15 - Pressure &amp; Temperature oversampling switched </td></tr>
+<td>1.0.6 </td><td>2020-05-25 </td><td>SV-Zanshin </td><td>General formatting of comments and spell-checking </td></tr>
 <tr>
-<td>1.0.5 </td><td>2020-05-21 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #12 - First call to <a class="el" href="_e_s_p32_feather_wi_fi_demo_8ino.html#ac1cef0304194a18962c7b6b409f99c7c">getSensorData()</a> returns invalid data </td></tr>
+<td>1.0.6 </td><td>2020-05-24 </td><td>SV-Zanshin </td><td>Issue #14 - Humidity sometimes 100% despite turning on </td></tr>
 <tr>
-<td>1.0.4 </td><td>2020-05-14 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #9 - Allow 2 devices when using I2C </td></tr>
+<td>1.0.6 </td><td>2020-05-24 </td><td>SV-Zanshin </td><td>Issue #15 - Pressure &amp; Temperature oversampling switched </td></tr>
 <tr>
-<td>1.0.4 </td><td>2020-05-14 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #9 - Allow 2 devices when using I2C </td></tr>
+<td>1.0.5 </td><td>2020-05-21 </td><td>SV-Zanshin </td><td>Issue #12 - First call to <a class="el" href="_e_s_p32_feather_wi_fi_demo_8ino.html#ac1cef0304194a18962c7b6b409f99c7c">getSensorData()</a> returns invalid data </td></tr>
 <tr>
-<td>1.0.3 </td><td>2020-05-09 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #5 - Adjust readings. Subsequently removed code again </td></tr>
+<td>1.0.4 </td><td>2020-05-14 </td><td>SV-Zanshin </td><td>Issue #9 - Allow 2 devices when using I2C </td></tr>
 <tr>
-<td>1.0.3 </td><td>2020-05-09 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #8 - clean up comments and code </td></tr>
+<td>1.0.4 </td><td>2020-05-14 </td><td>SV-Zanshin </td><td>Issue #9 - Allow 2 devices when using I2C </td></tr>
 <tr>
-<td>1.0.2 </td><td>2019-01-26 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #3 - Converted documentation to doxygen style </td></tr>
+<td>1.0.3 </td><td>2020-05-09 </td><td>SV-Zanshin </td><td>Issue #5 - Adjust readings. Subsequently removed code again </td></tr>
 <tr>
-<td>1.0.1 </td><td>2018-07-22 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Corrected I2C datatypes </td></tr>
+<td>1.0.3 </td><td>2020-05-09 </td><td>SV-Zanshin </td><td>Issue #8 - clean up comments and code </td></tr>
 <tr>
-<td>1.0.1 </td><td>2018-07-03 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Issue #1. Added waitForReading and param to <a class="el" href="_e_s_p32_feather_wi_fi_demo_8ino.html#ac1cef0304194a18962c7b6b409f99c7c">getSensorData()</a> </td></tr>
+<td>1.0.2 </td><td>2019-01-26 </td><td>SV-Zanshin </td><td>Issue #3 - Converted documentation to doxygen style </td></tr>
 <tr>
-<td>1.0.0 </td><td>2018-07-02 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Added guard code against multiple I2C constants definitions </td></tr>
+<td>1.0.1 </td><td>2018-07-22 </td><td>SV-Zanshin </td><td>Corrected I2C datatypes </td></tr>
 <tr>
-<td>1.0.0 </td><td>2018-07-01 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Added and tested I2C, SPI and software SPI connections </td></tr>
+<td>1.0.1 </td><td>2018-07-03 </td><td>SV-Zanshin </td><td>Issue #1. Added waitForReading and param to <a class="el" href="_e_s_p32_feather_wi_fi_demo_8ino.html#ac1cef0304194a18962c7b6b409f99c7c">getSensorData()</a> </td></tr>
 <tr>
-<td>1.0.0a </td><td>2018-06-30 </td><td><a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a> </td><td>Cloned from BME280 library and started recoding </td></tr>
+<td>1.0.0 </td><td>2018-07-02 </td><td>SV-Zanshin </td><td>Added guard code against multiple I2C constants definitions </td></tr>
+<tr>
+<td>1.0.0 </td><td>2018-07-01 </td><td>SV-Zanshin </td><td>Added and tested I2C, SPI and software SPI connections </td></tr>
+<tr>
+<td>1.0.0a </td><td>2018-06-30 </td><td>SV-Zanshin </td><td>Cloned from BME280 library and started recoding </td></tr>
 </table>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
