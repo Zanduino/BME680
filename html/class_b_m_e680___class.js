@@ -8,7 +8,7 @@ var class_b_m_e680___class =
     [ "begin", "class_b_m_e680___class.html#a9611a3516b381ee43bcfd07e282cdc89", null ],
     [ "begin", "class_b_m_e680___class.html#a7810485e014c19050198b9e7a99449b9", null ],
     [ "getI2CAddress", "class_b_m_e680___class.html#a4122359f66d3ea58efe7978e2b10725a", null ],
-    [ "getSensorData", "class_b_m_e680___class.html#af0254182c826decbf2122375de32b62f", null ],
+    [ "getSensorData", "class_b_m_e680___class.html#a8b291ae32b68545bc9944d8c515adf7d", null ],
     [ "reset", "class_b_m_e680___class.html#a60539ad30b61e41dc0252b06ccc0652b", null ],
     [ "setGas", "class_b_m_e680___class.html#a20dcf8043b9636200c4b57cd8be44e52", null ],
     [ "setIIRFilter", "class_b_m_e680___class.html#ac36b24940ae9e3fd114b364f6f5f489e", null ],
