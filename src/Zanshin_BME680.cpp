@@ -303,8 +303,8 @@ uint8_t BME680_Class::setIIRFilter(const uint8_t iirFilterSetting) {
   returnValue = (returnValue >> 2) & B00000111;  // Extract IIR filter setting from register
   return (returnValue);                          // Return IIR Filter setting
 }  // of method setIIRFilter()
-void BME680_Class::getSensorData(int32_t& temp, int32_t& hum, int32_t& press, int32_t& gas,
-                                 const bool waitSwitch) {
+uint8_t BME680_Class::getSensorData(int32_t& temp, int32_t& hum, int32_t& press, int32_t& gas,
+                                    const bool waitSwitch) {
   /*!
    @brief   Returns the most recent temperature, humidity and pressure readings
    param[out] temp       Temperature reading
@@ -313,11 +313,12 @@ void BME680_Class::getSensorData(int32_t& temp, int32_t& hum, int32_t& press, in
    param[out] gas        Gas reading
    param[in]  waitSwitch (Optional) When set will not return until reading is finished
    */
-  readSensors(waitSwitch);  // Get compensated data from BME680
-  temp  = _Temperature;     // Copy global variables to parameters
-  hum   = _Humidity;        // Copy global variables to parameters
-  press = _Pressure;        // Copy global variables to parameters
-  gas   = _Gas;             // Copy global variables to parameters
+  uint8_t status = readSensors(waitSwitch);  // Get compensated data from BME680
+  temp           = _Temperature;             // Copy global variables to parameters
+  hum            = _Humidity;                // Copy global variables to parameters
+  press          = _Pressure;                // Copy global variables to parameters
+  gas            = _Gas;                     // Copy global variables to parameters
+  return (status);                           // Nonzero if gas is invalid or unstable
 }  // of method getSensorData()
 uint8_t BME680_Class::getI2CAddress() {
   /*!
@@ -326,7 +327,7 @@ uint8_t BME680_Class::getI2CAddress() {
    */
   return (_I2CAddress);
 }  // of method getI2CAddress()
-void BME680_Class::readSensors(const bool waitSwitch) {
+uint8_t BME680_Class::readSensors(const bool waitSwitch) {
   /*!
    @brief   reads all 4 sensor values from the registers in one operation and then proceeds to
             convert the raw temperature, pressure & humidity readings into standard metric units
@@ -348,7 +349,7 @@ void BME680_Class::readSensors(const bool waitSwitch) {
       UINT32_C(16016016),   UINT32_C(8000000),    UINT32_C(4000000),    UINT32_C(2000000),
       UINT32_C(1000000),    UINT32_C(500000),     UINT32_C(250000),     UINT32_C(125000)};
 
-  uint8_t  buff[15], gas_range, status = 0;                  // declare array for registers
+  uint8_t  buff[15], gas_range = 0;                          // declare array for registers
   int64_t  var1, var2, var3, var4, var5, var6, temp_scaled;  // Work variables
   uint32_t adc_temp, adc_pres;                               // Raw ADC temperature and pressure
   uint16_t adc_hum, adc_gas_res;                             // Raw ADC humidity and gas
@@ -363,11 +364,9 @@ void BME680_Class::readSensors(const bool waitSwitch) {
   adc_gas_res =
       (uint16_t)((uint32_t)buff[13] * 4 | (((uint32_t)buff[14]) / 64));  // put the 2 bytes of Gas
   gas_range = buff[14] & 0X0F;                                           // Retrieve the range
-  status |= buff[14] & 0X20;  // See if the gas range is valid
-  status |= buff[14] & 0X10;  // and the measurement is valid
-                              //*******************************//
-                              // First compute the temperature //
-                              //*******************************//
+                                //*******************************//
+                                // First compute the temperature //
+                                //*******************************//
   var1         = ((int32_t)adc_temp >> 3) - ((int32_t)_T1 << 1);  // Perform calibration/adjustment
   var2         = (var1 * (int32_t)_T2) >> 11;                     // of Temperature values according
   var3         = ((var1 >> 1) * (var1 >> 1)) >> 12;               // to formula defined by Bosch
@@ -431,6 +430,7 @@ void BME680_Class::readSensors(const bool waitSwitch) {
   uint8_t workRegister = readByte(BME680_CONTROL_MEASURE_REGISTER);  // Read the control measure
   putData(BME680_CONTROL_MEASURE_REGISTER,
           (uint8_t)(workRegister | 1));  // Trigger start of next measurement
+  return (buff[14] & 0X30);              // Return nonzero if gas or heat stabilization is invalid
 }  // of method readSensors()
 void BME680_Class::waitForReadings() {
   /*!

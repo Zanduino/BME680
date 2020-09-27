@@ -55,6 +55,7 @@ Written by Arnd, https://github.com/SV-Zanshin
 
 Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
+1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - added return status for getSensorData
 1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - Corrected computation of gas heater resistance value
 1.0.9   | 2020-06-28 | SV-Zanshin | Issue #28 - Reformat according to standard c++ style
 1.0.8   | 2020-06-20 | SV-Zanshin | Issue #22 - added "getI2CAddress()" function
@@ -204,7 +205,7 @@ class BME680_Class {
                           const uint8_t sampling = UINT8_MAX);  // and return current value
   bool    setGas(uint16_t GasTemp, uint16_t GasMillis);         // Gas heating temperature and time
   uint8_t setIIRFilter(const uint8_t iirFilterSetting = UINT8_MAX);  // Set IIR Filter
-  void    getSensorData(int32_t &temp, int32_t &hum,                 // get most recent readings
+  uint8_t getSensorData(int32_t &temp, int32_t &hum,                 // get most recent readings
                         int32_t &press, int32_t &gas,                //
                         const bool waitSwitch = true);               //
   uint8_t getI2CAddress();                      // Return the I2C Address of the BME680
@@ -212,7 +213,7 @@ class BME680_Class {
  private:                                       //
   bool     commonInitialization();              ///< Common initialization code
   uint8_t  readByte(const uint8_t addr);        ///< Read byte from register address
-  void     readSensors(const bool waitSwitch);  ///< read the registers in one burst
+  uint8_t  readSensors(const bool waitSwitch);  ///< read the registers in one burst
   void     waitForReadings();                   ///< Wait for readings to finish
   void     getCalibration();                    ///< Load calibration from registers
   uint8_t  _I2CAddress = 0;                     ///< Default is I2C address is unknown
