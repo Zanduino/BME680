@@ -57,11 +57,11 @@ Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
 1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - added return status for getSensorData
 1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - Corrected computation of gas heater resistance value
-1.0.9   | 2020-06-28 | SV-Zanshin | Issue #28 - Reformat according to standard c++ style
+1.0.9   | 2020-06-28 | SV-Zanshin | Issue #25 - Reformat according to standard c++ style
 1.0.8   | 2020-06-20 | SV-Zanshin | Issue #22 - added "getI2CAddress()" function
 1.0.6   | 2020-05-25 | SV-Zanshin | Issue #17 - return value for "setOversampling()"
 1.0.6   | 2020-05-25 | SV-Zanshin | Issue #16 - I2C "reset()" when using 2 devices
-1.0.6   | 2020-05-25 | SV-Zanshin | General formatting of comments and spell-checking
+1.0.6   | 2020-05-25 | SV-Zanshin |             General formatting of comments and spell-checking
 1.0.6   | 2020-05-24 | SV-Zanshin | Issue #14 - Humidity sometimes 100% despite turning on
 1.0.6   | 2020-05-24 | SV-Zanshin | Issue #15 - Pressure & Temperature oversampling switched
 1.0.5   | 2020-05-21 | SV-Zanshin | Issue #12 - First call to getSensorData() returns invalid data
@@ -70,11 +70,11 @@ Version | Date       | Developer  | Comments
 1.0.3   | 2020-05-09 | SV-Zanshin | Issue  #5 - Adjust readings. Subsequently removed code again
 1.0.3   | 2020-05-09 | SV-Zanshin | Issue  #8 - clean up comments and code
 1.0.2   | 2019-01-26 | SV-Zanshin | Issue  #3 - Converted documentation to doxygen style
-1.0.1   | 2018-07-22 | SV-Zanshin | Corrected I2C datatypes
-1.0.1   | 2018-07-03 | SV-Zanshin | Issue  #1. Added waitForReading and param to getSensorData()
-1.0.0   | 2018-07-02 | SV-Zanshin | Added guard code against multiple I2C constants definitions
-1.0.0   | 2018-07-01 | SV-Zanshin | Added and tested I2C, SPI and software SPI connections
-1.0.0a  | 2018-06-30 | SV-Zanshin | Cloned from BME280 library and started recoding
+1.0.1   | 2018-07-22 | SV-Zanshin |             Corrected I2C datatypes
+1.0.1   | 2018-07-03 | SV-Zanshin | Issue  #1 - Added waitForReading and param to getSensorData()
+1.0.0   | 2018-07-02 | SV-Zanshin |             Added guard code against multiple I2C constants defs
+1.0.0   | 2018-07-01 | SV-Zanshin |             Added and tested I2C, SPI and soft-SPI connections
+1.0.0a  | 2018-06-30 | SV-Zanshin |             Cloned from BME280 library and started recoding
 */
 #include <SPI.h>   // Standard SPI library
 #include <Wire.h>  // Standard I2C "Wire" library
