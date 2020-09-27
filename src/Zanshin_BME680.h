@@ -55,6 +55,7 @@ Written by Arnd, https://github.com/SV-Zanshin
 
 Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
+1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - Corrected computation of gas heater resistance value
 1.0.9   | 2020-06-28 | SV-Zanshin | Issue #28 - Reformat according to standard c++ style
 1.0.8   | 2020-06-20 | SV-Zanshin | Issue #22 - added "getI2CAddress()" function
 1.0.6   | 2020-05-25 | SV-Zanshin | Issue #17 - return value for "setOversampling()"

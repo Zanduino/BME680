@@ -463,7 +463,7 @@ bool BME680_Class::setGas(uint16_t GasTemp, uint16_t GasMillis) {
     else if (GasTemp > 400)
       GasTemp = 400;  // Clamp temperature to min/max
     var1           = (((int32_t)(_Temperature / 100) * _H3) / 1000) * 256;
-    var2           = (_H1 + 784) * (((((_H2 + 154009) * GasTemp * 5) / 100) + 3276800) / 10);
+    var2           = (_G1 + 784) * (((((_G2 + 154009) * GasTemp * 5) / 100) + 3276800) / 10); //Issue #26
     var3           = var1 + (var2 / 2);
     var4           = (var3 / (_res_heat_range + 4));
     var5           = (131 * _res_heat) + 65536;
