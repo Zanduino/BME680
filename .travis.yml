@@ -9,6 +9,7 @@
 ##                                                                                               ##
 ## Date       Developer         Comments                                                         ##
 ## ========== ================= ================================================================ ##
+## 2020-10-04 SV-Zanshin        Issue #29, common doxyfile and define environment vars here      ##
 ## 2020-07-01 SV-Zanshin        Issue #25, added clang-format checking                           ##
 ## 2020-06-12 SV-Zanshin        Added "cache:" section                                           ##
 ## 2020-05-23 SV-Zanshin        Cleaned up documentation format                                  ##
@@ -51,6 +52,10 @@ env:
   global:
     - PRETTYNAME="Bosch BME680 Arduino Library"
     - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
+    - PROJECT_NAME: "BME680"
+    - PROJECT_NUMBER: "Version 1.0.9"
+    - PROJECT_BRIEF: "Arduino Library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor"
+    - PROJECT_LOGO: ""
 
 before_install:
   - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
