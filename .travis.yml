@@ -9,6 +9,7 @@
 ##                                                                                               ##
 ## Date       Developer         Comments                                                         ##
 ## ========== ================= ================================================================ ##
+## 2020-10-05 SV-Zanshin        Issue #29, changed location of default doxyfile                  ##
 ## 2020-10-04 SV-Zanshin        Issue #29, common doxyfile and define environment vars here      ##
 ## 2020-07-01 SV-Zanshin        Issue #25, added clang-format checking                           ##
 ## 2020-06-12 SV-Zanshin        Added "cache:" section                                           ##
@@ -60,7 +61,7 @@ env:
 before_install:
   - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
   - curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/run-clang-format.py > run-clang-format.py
-  - curl -SLs https://raw.githubusercontent.com/Zanduino/Common/main/Doxyfile > Doxyfile
+  - curl -SLs https://raw.githubusercontent.com/Zanduino/Common/main/Doxygen/Doxyfile > Doxyfile
 
 install:
 
