@@ -55,7 +55,6 @@ Written by Arnd, https://github.com/SV-Zanshin
 
 Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
-1.0.10  | 2020-10-10 | Alain2019  | Issue #31 - Incorrect computation of _H1 and _H2
 1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - added return status for getSensorData
 1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - Corrected computation of gas heater resistance value
 1.0.9   | 2020-06-28 | SV-Zanshin | Issue #25 - Reformat according to standard c++ style
@@ -100,74 +99,7 @@ const uint32_t I2C_FAST_MODE_PLUS  = 1000000;  ///< Really fast mode
 const uint32_t I2C_HIGH_SPEED_MODE = 3400000;  ///< Turbo mode
 #endif
 const uint32_t SPI_HERZ                         = 500000;  ///< SPI speed in Hz
-const uint8_t  BME680_STATUS_REGISTER           = 0x1D;    ///< Device status register
-const uint8_t  BME680_GAS_HEATER_REGISTER0      = 0x5A;    ///< Heater Register 0 address
-const uint8_t  BME680_GAS_DURATION_REGISTER0    = 0x64;    ///< Heater Register 0 address
-const uint8_t  BME680_CONTROL_GAS_REGISTER1     = 0x70;    ///< Gas control register on/off
-const uint8_t  BME680_CONTROL_GAS_REGISTER2     = 0x71;    ///< Gas control register settings
-const uint8_t  BME680_CONTROL_HUMIDITY_REGISTER = 0x72;    ///< Humidity control register
-const uint8_t  BME680_SPI_REGISTER              = 0x73;    ///< Status register for SPI memory
-const uint8_t  BME680_CONTROL_MEASURE_REGISTER  = 0x74;    ///< Temp, Pressure control register
-const uint8_t  BME680_CONFIG_REGISTER           = 0x75;    ///< Configuration register
-const uint8_t  BME680_CHIPID_REGISTER           = 0xD0;    ///< Chip-Id register
-const uint8_t  BME680_SOFTRESET_REGISTER        = 0xE0;    ///< Reset when 0xB6 is written here
-const uint8_t  BME680_CHIPID                    = 0x61;    ///< Hard-coded value 0x61 for BME680
-const uint8_t  BME680_RESET_CODE                = 0xB6;    ///< Reset when this put in reset reg
-const uint8_t  BME680_MEASURING_BIT_POSITION    = 5;       ///< Bit position for measuring flag
-const uint8_t  BME680_I2C_MIN_ADDRESS           = 0x76;    ///< Minimum possible address for BME680
-const uint8_t  BME680_I2C_MAX_ADDRESS           = 0x77;    ///< Minimum possible address for BME680
-const uint8_t  BME680_SPI_MEM_PAGE_POSITION     = 4;     ///< Bit position for the memory page value
-const uint8_t  BME680_HUMIDITY_MASK             = 0xF8;  ///< Mask is binary B11111000
-const uint8_t  BME680_PRESSURE_MASK             = 0xE3;  ///< Mask is binary B11100011
-const uint8_t  BME680_TEMPERATURE_MASK          = 0x1F;  ///< Mask is binary B00011111
-/**************************************************************************************************
-** Declare the constants used for calibration                                                    **
-**************************************************************************************************/
-const uint8_t BME680_COEFF_SIZE1              = 25;    ///< First array with coefficients
-const uint8_t BME680_COEFF_SIZE2              = 16;    ///< Second array with coefficients
-const uint8_t BME680_COEFF_START_ADDRESS1     = 0x89;  ///< start address for array 1
-const uint8_t BME680_COEFF_START_ADDRESS2     = 0xE1;  ///< start address for array 2
-const uint8_t BME680_HUM_REG_SHIFT_VAL        = 4;     ///< Ambient humidity shift value
-const uint8_t BME680_BIT_H1_DATA_MSK          = 0x0F;  ///< Mask for humidity
-const uint8_t BME680_T2_LSB_REG               = 1;     ///< Register for temperature calibration
-const uint8_t BME680_T2_MSB_REG               = 2;     ///< Register for temperature calibration
-const uint8_t BME680_T3_REG                   = 3;     ///< Register for temperature calibration
-const uint8_t BME680_P1_LSB_REG               = 5;     ///< Register for pressure calibration
-const uint8_t BME680_P1_MSB_REG               = 6;     ///< Register for pressure calibration
-const uint8_t BME680_P2_LSB_REG               = 7;     ///< Register for pressure calibration
-const uint8_t BME680_P2_MSB_REG               = 8;     ///< Register for pressure calibration
-const uint8_t BME680_P3_REG                   = 9;     ///< Register for pressure calibration
-const uint8_t BME680_P4_LSB_REG               = 11;    ///< Register for pressure calibration
-const uint8_t BME680_P4_MSB_REG               = 12;    ///< Register for pressure calibration
-const uint8_t BME680_P5_LSB_REG               = 13;    ///< Register for pressure calibration
-const uint8_t BME680_P5_MSB_REG               = 14;    ///< Register for pressure calibration
-const uint8_t BME680_P7_REG                   = 15;    ///< Register for pressure calibration
-const uint8_t BME680_P6_REG                   = 16;    ///< Register for pressure calibration
-const uint8_t BME680_P8_LSB_REG               = 19;    ///< Register for pressure calibration
-const uint8_t BME680_P8_MSB_REG               = 20;    ///< Register for pressure calibration
-const uint8_t BME680_P9_LSB_REG               = 21;    ///< Register for pressure calibration
-const uint8_t BME680_P9_MSB_REG               = 22;    ///< Register for pressure calibration
-const uint8_t BME680_P10_REG                  = 23;    ///< Register for pressure calibration
-const uint8_t BME680_H2_MSB_REG               = 0;     ///< Register for humidity calibration
-const uint8_t BME680_H2_LSB_REG               = 1;     ///< Register for humidity calibration
-const uint8_t BME680_H1_LSB_REG               = 1;     ///< Register for humidity calibration
-const uint8_t BME680_H1_MSB_REG               = 2;     ///< Register for humidity calibration
-const uint8_t BME680_H3_REG                   = 3;     ///< Register for humidity calibration
-const uint8_t BME680_H4_REG                   = 4;     ///< Register for humidity calibration
-const uint8_t BME680_H5_REG                   = 5;     ///< Register for humidity calibration
-const uint8_t BME680_H6_REG                   = 6;     ///< Register for humidity calibration
-const uint8_t BME680_H7_REG                   = 7;     ///< Register for humidity calibration
-const uint8_t BME680_T1_LSB_REG               = 8;     ///< Register for gas calibration
-const uint8_t BME680_T1_MSB_REG               = 9;     ///< Register for gas calibration
-const uint8_t BME680_GH2_LSB_REG              = 10;    ///< Register for gas calibration
-const uint8_t BME680_GH2_MSB_REG              = 11;    ///< Register for gas calibration
-const uint8_t BME680_GH1_REG                  = 12;    ///< Register for gas calibration
-const uint8_t BME680_GH3_REG                  = 13;    ///< Register for gas calibration
-const uint8_t BME680_ADDR_RES_HEAT_RANGE_ADDR = 0x02;  ///< Register for gas calibration
-const uint8_t BME680_RHRANGE_MSK              = 0x30;  ///< Register for gas calibration
-const uint8_t BME680_ADDR_RES_HEAT_VAL_ADDR   = 0x00;  ///< Register for gas calibration
-const uint8_t BME680_ADDR_RANGE_SW_ERR_ADDR   = 0x04;  ///< Register for gas calibration
-const uint8_t BME680_RSERROR_MSK              = 0xF0;  ///< Register for gas calibration
+
 
 /**************************************************************************************************
 ** Declare enumerated types used in the class                                                    **
@@ -208,13 +140,18 @@ class BME680_Class {
   uint8_t setIIRFilter(const uint8_t iirFilterSetting = UINT8_MAX);  // Set IIR Filter
   uint8_t getSensorData(int32_t &temp, int32_t &hum,                 // get most recent readings
                         int32_t &press, int32_t &gas,                //
-                        const bool waitSwitch = true);               //
+                        const bool waitSwitch = true,
+                        const bool startNewMeasurement = true);               //
   uint8_t getI2CAddress();                      // Return the I2C Address of the BME680
+  bool    isMeasurementBusy();                   // true if the sensor is measuring 
+  void    startMeasurement();                    // starting measurement
+
   void    reset();                              // Reset the BME680
- private:                                       //
+ private :                                       //
   bool     commonInitialization();              ///< Common initialization code
   uint8_t  readByte(const uint8_t addr);        ///< Read byte from register address
-  uint8_t  readSensors(const bool waitSwitch);  ///< read the registers in one burst
+  uint8_t  readSensors(const bool waitSwitch, 
+                       const bool startNewMeasurement);  ///< read the registers in one burst
   void     waitForReadings();                   ///< Wait for readings to finish
   void     getCalibration();                    ///< Load calibration from registers
   uint8_t  _I2CAddress = 0;                     ///< Default is I2C address is unknown
