@@ -357,14 +357,14 @@ uint8_t BME680_Class::readSensors(const bool waitSwitch) {
   uint16_t adc_hum, adc_gas_res;                             // Raw ADC humidity and gas
   if (waitSwitch) waitForReadings();      // Doesn't return until the readings are finished
   getData(BME680_STATUS_REGISTER, buff);  // read all 15 bytes in one go
-  adc_pres = (uint32_t)(((uint32_t)buff[2] * 4096) | ((uint32_t)buff[3] * 16) |
-                        ((uint32_t)buff[4] / 16));  // put the 3 bytes of Pressure
-  adc_temp = (uint32_t)(((uint32_t)buff[5] * 4096) | ((uint32_t)buff[6] * 16) |
-                        ((uint32_t)buff[7] / 16));  // put the 3 bytes of Temperature
+  adc_pres = (uint32_t)(((uint32_t)buff[2] << 12) | ((uint32_t)buff[3] << 4) |
+                        ((uint32_t)buff[4] >> 4));  // put the 3 bytes of Pressure
+  adc_temp = (uint32_t)(((uint32_t)buff[5] << 12) | ((uint32_t)buff[6] << 4) |
+                        ((uint32_t)buff[7] >> 4));  // put the 3 bytes of Temperature
   adc_hum =
-      (uint16_t)(((uint32_t)buff[8] * 256) | (uint32_t)buff[9]);  // put the 2 bytes of Humidity
+      (uint16_t)(((uint32_t)buff[8] << 8) | (uint32_t)buff[9]);  // put the 2 bytes of Humidity
   adc_gas_res =
-      (uint16_t)((uint32_t)buff[13] * 4 | (((uint32_t)buff[14]) / 64));  // put the 2 bytes of Gas
+      (uint16_t)((uint32_t)buff[13] << 2 | (((uint32_t)buff[14]) >> 6));  // put the 2 bytes of Gas
   gas_range = buff[14] & 0X0F;                                           // Retrieve the range
                                 //*******************************//
                                 // First compute the temperature //
@@ -403,7 +403,7 @@ uint8_t BME680_Class::readSensors(const bool waitSwitch) {
   // Compute the humidity //
   //**********************//
   temp_scaled = (((int32_t)_tfine * 5) + 128) >> 8;
-  var1        = (int32_t)(adc_hum - ((int32_t)((int32_t)_H1 * 16))) -
+  var1        = (int32_t)(adc_hum - ((int32_t)((int32_t)_H1 << 4))) -
          (((temp_scaled * (int32_t)_H3) / ((int32_t)100)) >> 1);
   var2 =
       ((int32_t)_H2 *
@@ -464,7 +464,7 @@ bool BME680_Class::setGas(uint16_t GasTemp, uint16_t GasMillis) {
       GasTemp = 200;
     else if (GasTemp > 400)
       GasTemp = 400;  // Clamp temperature to min/max
-    var1 = (((int32_t)(_Temperature / 100) * _H3) / 1000) * 256;
+    var1 = (((int32_t)(_Temperature / 100) * _H3) / 1000) << 8;
     var2 = (_G1 + 784) * (((((_G2 + 154009) * GasTemp * 5) / 100) + 3276800) / 10);  // Issue #26
     var3 = var1 + (var2 / 2);
     var4 = (var3 / (_res_heat_range + 4));
@@ -478,7 +478,7 @@ bool BME680_Class::setGas(uint16_t GasTemp, uint16_t GasMillis) {
       durval = 0xff;  // Max duration
     else {
       while (GasMillis > 0x3F) {
-        GasMillis = GasMillis / 4;
+        GasMillis = GasMillis >> 2;
         factor += 1;
       }  // of while loop
       durval = (uint8_t)(GasMillis + (factor * 64));

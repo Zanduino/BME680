@@ -55,6 +55,7 @@ Written by Arnd, https://github.com/SV-Zanshin
 
 Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
+1.0.10  | 2020-10-19 | Alain2019  | Issue #32 - Change division to bit shifts for clarity
 1.0.10  | 2020-10-10 | Alain2019  | Issue #31 - Incorrect computation of _H1 and _H2
 1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - added return status for getSensorData
 1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - Corrected computation of gas heater resistance value
