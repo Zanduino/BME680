@@ -56,30 +56,30 @@ Written by Arnd, https://github.com/SV-Zanshin
 
 Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
-1.0.10  | 2020-12-03 | SV-Zanshin | Issue #34 - Enhancements from Alain2019 - added measurement functionality
-1.0.10  | 2020-12-02 | SV-Zanshin | Issue #33 - Optimize library code for size, performance, initializers
-1.0.10  | 2020-10-19 | Alain2019  | Issue #32 - Change division to bit shifts for clarity
-1.0.10  | 2020-10-10 | Alain2019  | Issue #31 - Incorrect computation of _H1 and _H2
-1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - added return status for getSensorData
-1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 - Corrected computation of gas heater resistance value
-1.0.9   | 2020-06-28 | SV-Zanshin | Issue #25 - Reformat according to standard c++ style
-1.0.8   | 2020-06-20 | SV-Zanshin | Issue #22 - added "getI2CAddress()" function
-1.0.6   | 2020-05-25 | SV-Zanshin | Issue #17 - return value for "setOversampling()"
-1.0.6   | 2020-05-25 | SV-Zanshin | Issue #16 - I2C "reset()" when using 2 devices
-1.0.6   | 2020-05-25 | SV-Zanshin |             General formatting of comments and spell-checking
-1.0.6   | 2020-05-24 | SV-Zanshin | Issue #14 - Humidity sometimes 100% despite turning on
-1.0.6   | 2020-05-24 | SV-Zanshin | Issue #15 - Pressure & Temperature oversampling switched
-1.0.5   | 2020-05-21 | SV-Zanshin | Issue #12 - First call to getSensorData() returns invalid data
-1.0.4   | 2020-05-14 | SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
-1.0.4   | 2020-05-14 | SV-Zanshin | Issue  #9 - Allow 2 devices when using I2C
-1.0.3   | 2020-05-09 | SV-Zanshin | Issue  #5 - Adjust readings. Subsequently removed code again
-1.0.3   | 2020-05-09 | SV-Zanshin | Issue  #8 - clean up comments and code
-1.0.2   | 2019-01-26 | SV-Zanshin | Issue  #3 - Converted documentation to doxygen style
-1.0.1   | 2018-07-22 | SV-Zanshin |             Corrected I2C datatypes
-1.0.1   | 2018-07-03 | SV-Zanshin | Issue  #1 - Added waitForReading and param to getSensorData()
-1.0.0   | 2018-07-02 | SV-Zanshin |             Added guard code against multiple I2C constants defs
-1.0.0   | 2018-07-01 | SV-Zanshin |             Added and tested I2C, SPI and soft-SPI connections
-1.0.0a  | 2018-06-30 | SV-Zanshin |             Cloned from BME280 library and started recoding
+1.0.10  | 2020-12-03 | SV-Zanshin | Issue #34 Enhancements from Alain2019 - added measurement functionality
+1.0.10  | 2020-12-02 | SV-Zanshin | Issue #33 Optimize library code for size, performance, initializers
+1.0.10  | 2020-10-19 | Alain2019  | Issue #32 Change division to bit shifts for clarity
+1.0.10  | 2020-10-10 | Alain2019  | Issue #31 Incorrect computation of _H1 and _H2
+1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 added return status for getSensorData
+1.0.9   | 2020-09-27 | SV-Zanshin | Issue #26 Corrected computation of gas heater resistance value
+1.0.9   | 2020-06-28 | SV-Zanshin | Issue #25 Reformat according to standard c++ style
+1.0.8   | 2020-06-20 | SV-Zanshin | Issue #22 added "getI2CAddress()" function
+1.0.6   | 2020-05-25 | SV-Zanshin | Issue #17 return value for "setOversampling()"
+1.0.6   | 2020-05-25 | SV-Zanshin | Issue #16 I2C "reset()" when using 2 devices
+1.0.6   | 2020-05-25 | SV-Zanshin |           General formatting of comments and spell-checking
+1.0.6   | 2020-05-24 | SV-Zanshin | Issue #14 Humidity sometimes 100% despite turning on
+1.0.6   | 2020-05-24 | SV-Zanshin | Issue #15 Pressure & Temperature oversampling switched
+1.0.5   | 2020-05-21 | SV-Zanshin | Issue #12 First call to getSensorData() returns invalid data
+1.0.4   | 2020-05-14 | SV-Zanshin | Issue  #9 Allow 2 devices when using I2C
+1.0.4   | 2020-05-14 | SV-Zanshin | Issue  #9 Allow 2 devices when using I2C
+1.0.3   | 2020-05-09 | SV-Zanshin | Issue  #5 Adjust readings. Subsequently removed code again
+1.0.3   | 2020-05-09 | SV-Zanshin | Issue  #8 clean up comments and code
+1.0.2   | 2019-01-26 | SV-Zanshin | Issue  #3 Converted documentation to doxygen style
+1.0.1   | 2018-07-22 | SV-Zanshin |           Corrected I2C datatypes
+1.0.1   | 2018-07-03 | SV-Zanshin | Issue  #1 Added waitForReading and param to getSensorData()
+1.0.0   | 2018-07-02 | SV-Zanshin |           Added guard code against multiple I2C constants defs
+1.0.0   | 2018-07-01 | SV-Zanshin |           Added and tested I2C, SPI and soft-SPI connections
+1.0.0a  | 2018-06-30 | SV-Zanshin |           Cloned from BME280 library and started recoding
 */
 // clang-format on
 #include <SPI.h>   // Standard SPI library
@@ -89,10 +89,9 @@ Version | Date       | Developer  | Comments
 
 #ifndef BME680_h
 #define BME680_h  ///< Guard code definition for the header
-#define CONCAT_BYTES(msb, lsb) \
-  (((uint16_t)msb << 8) | (uint16_t)lsb)  ///< Inline to combine msb and lsb bytes
+#define CONCAT_BYTES(msb, lsb) (((uint16_t)msb << 8) | (uint16_t)lsb)  ///< combine msb & lsb bytes
 #ifndef _BV
-#define _BV(bit) (1 << (bit))  ///< Sometimes this macro isn't pre-defined
+#define _BV(bit) (1 << (bit))  ///< This macro isn't pre-defined on all platforms
 #endif
 /***************************************************************************************************
 ** Declare publically visible constants used in the class                                         **
