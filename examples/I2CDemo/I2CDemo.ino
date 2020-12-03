@@ -107,7 +107,7 @@ void setup() {
 #endif
   Serial.print(F("Starting I2CDemo example program for BME680\n"));
   Serial.print(F("- Initializing BME680 sensor\n"));
-  while (!BME680.begin(I2C_STANDARD_MODE))  { // Start BME680 using I2C, use first device found
+  while (!BME680.begin(I2C_STANDARD_MODE)) {  // Start BME680 using I2C, use first device found
     Serial.print(F("-  Unable to find BME680. Trying again in 5 seconds.\n"));
     delay(5000);
   }  // of loop until device is located
