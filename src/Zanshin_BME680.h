@@ -144,7 +144,7 @@ class BME680_Class {
   uint8_t setIIRFilter(const uint8_t iirFilterSetting = UINT8_MAX) const;  // Set IIR Filter
   uint8_t getSensorData(int32_t &temp, int32_t &hum,          // get most recent readings
                         int32_t &press, int32_t &gas,         //
-                        const bool waitSwitch = true) const;  //
+                        const bool waitSwitch = true);        //
   uint8_t getI2CAddress() const;                // Return the I2C Address of the BME680
   void    reset();                              // Reset the BME680
   bool    measuring() const;                    ///< true if currently measuring

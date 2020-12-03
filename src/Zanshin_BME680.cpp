@@ -378,7 +378,7 @@ uint8_t BME680_Class::setIIRFilter(const uint8_t iirFilterSetting) const {
   return (returnValue);                          // Return IIR Filter setting
 }  // of method setIIRFilter()
 uint8_t BME680_Class::getSensorData(int32_t& temp, int32_t& hum, int32_t& press, int32_t& gas,
-                                    const bool waitSwitch) const {
+                                    const bool waitSwitch) {
   /*!
    @brief   Returns the most recent temperature, humidity and pressure readings
    param[out] temp       Temperature reading
