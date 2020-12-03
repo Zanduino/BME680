@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['zanshin_5fbme680_2ecpp',['Zanshin_BME680.cpp',['../_zanshin___b_m_e680_8cpp.html',1,'']]],
-  ['zanshin_5fbme680_2eh',['Zanshin_BME680.h',['../_zanshin___b_m_e680_8h.html',1,'']]]
+  ['wifi_5fpassword',['WIFI_PASSWORD',['../_e_s_p32_feather_wi_fi_demo_8ino.html#a148a1777c915283bcb3f4bf32233e16b',1,'ESP32FeatherWiFiDemo.ino']]],
+  ['wifi_5fssid',['WIFI_SSID',['../_e_s_p32_feather_wi_fi_demo_8ino.html#a586c86c64e7d30517aeee0fe47a25ae4',1,'ESP32FeatherWiFiDemo.ino']]]
 ];

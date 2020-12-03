@@ -7,10 +7,12 @@ var class_b_m_e680___class =
     [ "begin", "class_b_m_e680___class.html#ac10c361538cb76c5e643509d3740b40e", null ],
     [ "begin", "class_b_m_e680___class.html#a9611a3516b381ee43bcfd07e282cdc89", null ],
     [ "begin", "class_b_m_e680___class.html#a7810485e014c19050198b9e7a99449b9", null ],
-    [ "getI2CAddress", "class_b_m_e680___class.html#a4122359f66d3ea58efe7978e2b10725a", null ],
+    [ "getI2CAddress", "class_b_m_e680___class.html#a04d23e7f2f7a23c22339b0bfaa0e316a", null ],
     [ "getSensorData", "class_b_m_e680___class.html#a8b291ae32b68545bc9944d8c515adf7d", null ],
+    [ "measuring", "class_b_m_e680___class.html#a3b80b3a0e3592a7b769ff66fcdbaa056", null ],
     [ "reset", "class_b_m_e680___class.html#a60539ad30b61e41dc0252b06ccc0652b", null ],
-    [ "setGas", "class_b_m_e680___class.html#a20dcf8043b9636200c4b57cd8be44e52", null ],
-    [ "setIIRFilter", "class_b_m_e680___class.html#ac36b24940ae9e3fd114b364f6f5f489e", null ],
-    [ "setOversampling", "class_b_m_e680___class.html#a9f78a8231b32bd6195b3b390ce4c65c7", null ]
+    [ "setGas", "class_b_m_e680___class.html#ab33aa219dd0e878108abcbaaf34a185c", null ],
+    [ "setIIRFilter", "class_b_m_e680___class.html#a1f2a706a187601526b0c8556325ecc8a", null ],
+    [ "setOversampling", "class_b_m_e680___class.html#a3e7705a65f0adddeba16ceee14819185", null ],
+    [ "triggerMeasurement", "class_b_m_e680___class.html#a7d6604f4c468f33ee38dcf385b909b7d", null ]
 ];
