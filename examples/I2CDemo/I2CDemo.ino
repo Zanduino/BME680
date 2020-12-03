@@ -59,17 +59,17 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
-1.0.3   | 2020-07-04 | SV-Zanshin | Issue #25 - implement clang-formatting
-1.0.2   | 2020-05-09 | SV-Zanshin | Issue #8 - clean up comments and code
-1.0.1   | 2019-01-30 | SV-Zanshin | Removed old comments
-1.0.1   | 2019-01-26 | SV-Zanshin | Issue #3 - convert documentation to Doxygen
-1.0.0b  | 2018-06-30 | SV-Zanshin | Cloned from original BME280 program
+1.0.3   | 2020-07-04 | SV-Zanshin | Issue #25 implement clang-formatting
+1.0.2   | 2020-05-09 | SV-Zanshin | Issue #8  clean up comments and code
+1.0.1   | 2019-01-30 | SV-Zanshin |           Removed old comments
+1.0.1   | 2019-01-26 | SV-Zanshin | Issue #3  convert documentation to Doxygen
+1.0.0b  | 2018-06-30 | SV-Zanshin |           Cloned from original BME280 program
 */
 #include "Zanshin_BME680.h"  // Include the BME680 Sensor library
 /**************************************************************************************************
 ** Declare all program constants                                                                 **
 **************************************************************************************************/
-const uint32_t SERIAL_SPEED = 115200;  ///< Set the baud rate for Serial I/O
+const uint32_t SERIAL_SPEED{115200};  ///< Set the baud rate for Serial I/O
 
 /**************************************************************************************************
 ** Declare global variables and instantiate classes                                              **
@@ -107,7 +107,7 @@ void setup() {
 #endif
   Serial.print(F("Starting I2CDemo example program for BME680\n"));
   Serial.print(F("- Initializing BME680 sensor\n"));
-  while (!BME680.begin(I2C_STANDARD_MODE))  { // Start BME680 using I2C, use first device found
+  while (!BME680.begin(I2C_STANDARD_MODE)) {  // Start BME680 using I2C, use first device found
     Serial.print(F("-  Unable to find BME680. Trying again in 5 seconds.\n"));
     delay(5000);
   }  // of loop until device is located
@@ -136,21 +136,23 @@ void loop() {
   if (loopCounter % 25 == 0) {                    // Show header @25 loops
     Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa   Alt m Air m"));
     Serial.print(F("\xE2\x84\xA6\n==== ====== ====== ========= ======= ======\n"));  // "°C" symbol
-  }                                                      // if-then time to show headers
-  BME680.getSensorData(temp, humidity, pressure, gas);   // Get readings
-  sprintf(buf, "%4d %3d.%02d", ++loopCounter % 9999,     // Clamp to 9999,
-          (int8_t)(temp / 100), (uint8_t)(temp % 100));  // Temp in decidegrees
-  Serial.print(buf);
-  sprintf(buf, "%3d.%03d", (int8_t)(humidity / 1000),
-          (uint16_t)(humidity % 1000));  // Humidity milli-pct
-  Serial.print(buf);
-  sprintf(buf, "%7d.%02d", (int16_t)(pressure / 100),
-          (uint8_t)(pressure % 100));  // Pressure Pascals
-  Serial.print(buf);
-  alt = altitude(pressure);                                                // temp altitude
-  sprintf(buf, "%5d.%02d", (int16_t)(alt), ((uint8_t)(alt * 100) % 100));  // Altitude meters
-  Serial.print(buf);
-  sprintf(buf, "%4d.%02d\n", (int16_t)(gas / 100), (uint8_t)(gas % 100));  // Resistance milliohms
-  Serial.print(buf);
-  delay(10000);  // Wait 10s
+  }                                                     // if-then time to show headers
+  BME680.getSensorData(temp, humidity, pressure, gas);  // Get readings
+  if (loopCounter++ != 0) {                             // Ignore first reading, might be incorrect
+    sprintf(buf, "%4d %3d.%02d", (loopCounter - 1) % 9999,  // Clamp to 9999,
+            (int8_t)(temp / 100), (uint8_t)(temp % 100));   // Temp in decidegrees
+    Serial.print(buf);
+    sprintf(buf, "%3d.%03d", (int8_t)(humidity / 1000),
+            (uint16_t)(humidity % 1000));  // Humidity milli-pct
+    Serial.print(buf);
+    sprintf(buf, "%7d.%02d", (int16_t)(pressure / 100),
+            (uint8_t)(pressure % 100));  // Pressure Pascals
+    Serial.print(buf);
+    alt = altitude(pressure);                                                // temp altitude
+    sprintf(buf, "%5d.%02d", (int16_t)(alt), ((uint8_t)(alt * 100) % 100));  // Altitude meters
+    Serial.print(buf);
+    sprintf(buf, "%4d.%02d\n", (int16_t)(gas / 100), (uint8_t)(gas % 100));  // Resistance milliohms
+    Serial.print(buf);
+    delay(10000);  // Wait 10s
+  }                // of ignore first reading
 }  // of method loop()
