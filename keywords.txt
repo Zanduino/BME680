@@ -2,11 +2,12 @@
 ## Syntax Coloring Map for library. The values below MUST be separated by a single "TAB", otherwise ##
 ## the file will not be parsed correctly.                                                           ##
 ##                                                                                                  ##
-## Date       Developer                     Comments                                                ##
-## ========== ============================= ======================================================= ##
-## 2020-06-25 https://github.com/SV-Zanshin Added "getI2CAddress" to list                           ##
-## 2020-05-23 https://github.com/SV-Zanshin Updated values, added versioning comments               ##
-## 2018-06-14 https://github.com/SV-Zanshin Fixed multiple tab errors                               ##
+## Date       Developer  Comments                                                                   ##
+## ========== ========== ========================================================================== ##
+## 2020-12-03 SV-Zanshin Added "measuring()" and "triggerMeasurement()"                             ##
+## 2020-06-25 SV-Zanshin Added "getI2CAddress" to list                                              ##
+## 2020-05-23 SV-Zanshin Updated values, added versioning comments                                  ##
+## 2018-06-14 SV-Zanshin Fixed multiple tab errors                                                  ##
 ##                                                                                                  ##
 ######################################################################################################
 
@@ -26,6 +27,8 @@ getSensorData	KEYWORD2
 getI2CAddress	KEYWORD2
 waitForReadings	KEYWORD2
 reset	KEYWORD2
+measuring	KEYWORD2
+triggerMeasurement	KEYWORD2
 
 ######################################################################################################
 ## Constants (LITERAL1)                                                                             ##

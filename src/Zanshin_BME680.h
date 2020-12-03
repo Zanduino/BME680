@@ -56,7 +56,7 @@ Written by Arnd, https://github.com/SV-Zanshin
 
 Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
-1.0.10  | 2020-12-03 | SV-Zanshin | Enhancements from Alain2019 - added measurement functionality
+1.0.10  | 2020-12-03 | SV-Zanshin | Issue #34 - Enhancements from Alain2019 - added measurement functionality
 1.0.10  | 2020-12-02 | SV-Zanshin | Issue #33 - Optimize library code for size, performance, initializers
 1.0.10  | 2020-10-19 | Alain2019  | Issue #32 - Change division to bit shifts for clarity
 1.0.10  | 2020-10-10 | Alain2019  | Issue #31 - Incorrect computation of _H1 and _H2
@@ -142,22 +142,23 @@ class BME680_Class {
                           const uint8_t sampling = UINT8_MAX) const;  // and return current value
   bool    setGas(uint16_t GasTemp, uint16_t GasMillis) const;  // Gas heating temperature and time
   uint8_t setIIRFilter(const uint8_t iirFilterSetting = UINT8_MAX) const;  // Set IIR Filter
-  uint8_t getSensorData(int32_t &temp, int32_t &hum,          // get most recent readings
-                        int32_t &press, int32_t &gas,         //
-                        const bool waitSwitch = true);        //
-  uint8_t getI2CAddress() const;                // Return the I2C Address of the BME680
-  void    reset();                              // Reset the BME680
-  bool    measuring() const;                    ///< true if currently measuring
- private:                                       //
-  bool     commonInitialization();              ///< Common initialization code
-  uint8_t  readByte(const uint8_t addr) const;  ///< Read byte from register address
-  uint8_t  readSensors(const bool waitSwitch);  ///< read the registers in one burst
-  void     waitForReadings() const;             ///< Wait for readings to finish
-  void     getCalibration();                    ///< Load calibration from registers
-  uint8_t  _I2CAddress = 0;                     ///< Default is I2C address is unknown
-  uint16_t _I2CSpeed   = 0;                     ///< Default is I2C speed is unknown
-  uint8_t  _cs, _sck, _mosi, _miso;             ///< Hardware and software SPI pins
-  uint8_t  _H6, _P10, _res_heat_range;          ///< unsigned configuration vars
+  uint8_t getSensorData(int32_t &temp, int32_t &hum,    // get most recent readings
+                        int32_t &press, int32_t &gas,   //
+                        const bool waitSwitch = true);  //
+  uint8_t getI2CAddress() const;                        // Return the I2C Address of the BME680
+  void    reset();                                      // Reset the BME680
+  bool    measuring() const;                            ///< true if currently measuring
+  void    triggerMeasurement() const;                   ///< trigger a measurement
+ private:                                               //
+  bool     commonInitialization();                      ///< Common initialization code
+  uint8_t  readByte(const uint8_t addr) const;          ///< Read byte from register address
+  uint8_t  readSensors(const bool waitSwitch);          ///< read the registers in one burst
+  void     waitForReadings() const;                     ///< Wait for readings to finish
+  void     getCalibration();                            ///< Load calibration from registers
+  uint8_t  _I2CAddress = 0;                             ///< Default is I2C address is unknown
+  uint16_t _I2CSpeed   = 0;                             ///< Default is I2C speed is unknown
+  uint8_t  _cs, _sck, _mosi, _miso;                     ///< Hardware and software SPI pins
+  uint8_t  _H6, _P10, _res_heat_range;                  ///< unsigned configuration vars
   int8_t   _H3, _H4, _H5, _H7, _G1, _G3, _T3, _P3, _P6, _P7, _res_heat,
       _rng_sw_err;                                            ///< signed configuration vars
   uint16_t _H1, _H2, _T1, _P1;                                ///< unsigned 16bit configuration vars

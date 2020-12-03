@@ -501,9 +501,7 @@ uint8_t BME680_Class::readSensors(const bool waitSwitch) {
   uvar2 = (((int64_t)((int64_t)adc_gas_res << 15) - (int64_t)(16777216)) + var1);
   var3  = (((int64_t)lookupTable2[gas_range] * (int64_t)var1) >> 9);
   _Gas  = (uint32_t)((var3 + ((int64_t)uvar2 >> 1)) / (int64_t)uvar2);
-  uint8_t workRegister = readByte(BME680_CONTROL_MEASURE_REGISTER);  // Read the control measure
-  putData(BME680_CONTROL_MEASURE_REGISTER,
-          (uint8_t)(workRegister | 1));  // Trigger start of next measurement
+  triggerMeasurement(); // trigger the next measurement
   return (buff[14] & 0X30);              // Return nonzero if gas or heat stabilization is invalid
 }  // of method readSensors()
 void BME680_Class::waitForReadings() const {
@@ -572,3 +570,11 @@ bool BME680_Class::measuring() const {
   }  // if-then device is currently measuring
   return result;
 }  // of method "measuring()"
+void BME680_Class::triggerMeasurement() const {
+  /*!
+   * @brief Trigger a new measurement on the BME680
+   */
+  uint8_t workRegister = readByte(BME680_CONTROL_MEASURE_REGISTER);  // Read the control measure
+  putData(BME680_CONTROL_MEASURE_REGISTER,
+          (uint8_t)(workRegister | 1));  // Trigger start of next measurement
+}  // of method "triggerMeasurement()"
