@@ -59,17 +59,17 @@ Written by Arnd\@SV-Zanshin
 
 Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
-1.0.3   | 2020-07-04 | SV-Zanshin | Issue #25 - implement clang-formatting
-1.0.2   | 2020-05-09 | SV-Zanshin | Issue #8 - clean up comments and code
-1.0.1   | 2019-01-30 | SV-Zanshin | Removed old comments
-1.0.1   | 2019-01-26 | SV-Zanshin | Issue #3 - convert documentation to Doxygen
-1.0.0b  | 2018-06-30 | SV-Zanshin | Cloned from original BME280 program
+1.0.3   | 2020-07-04 | SV-Zanshin | Issue #25 implement clang-formatting
+1.0.2   | 2020-05-09 | SV-Zanshin | Issue #8  clean up comments and code
+1.0.1   | 2019-01-30 | SV-Zanshin |           Removed old comments
+1.0.1   | 2019-01-26 | SV-Zanshin | Issue #3  convert documentation to Doxygen
+1.0.0b  | 2018-06-30 | SV-Zanshin |           Cloned from original BME280 program
 */
 #include "Zanshin_BME680.h"  // Include the BME680 Sensor library
 /**************************************************************************************************
 ** Declare all program constants                                                                 **
 **************************************************************************************************/
-const uint32_t SERIAL_SPEED = 115200;  ///< Set the baud rate for Serial I/O
+const uint32_t SERIAL_SPEED{115200};  ///< Set the baud rate for Serial I/O
 
 /**************************************************************************************************
 ** Declare global variables and instantiate classes                                              **

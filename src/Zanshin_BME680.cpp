@@ -501,8 +501,8 @@ uint8_t BME680_Class::readSensors(const bool waitSwitch) {
   uvar2 = (((int64_t)((int64_t)adc_gas_res << 15) - (int64_t)(16777216)) + var1);
   var3  = (((int64_t)lookupTable2[gas_range] * (int64_t)var1) >> 9);
   _Gas  = (uint32_t)((var3 + ((int64_t)uvar2 >> 1)) / (int64_t)uvar2);
-  triggerMeasurement(); // trigger the next measurement
-  return (buff[14] & 0X30);              // Return nonzero if gas or heat stabilization is invalid
+  triggerMeasurement();      // trigger the next measurement
+  return (buff[14] & 0X30);  // Return nonzero if gas or heat stabilization is invalid
 }  // of method readSensors()
 void BME680_Class::waitForReadings() const {
   /*!
