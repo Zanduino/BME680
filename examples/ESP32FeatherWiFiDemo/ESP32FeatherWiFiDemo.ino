@@ -18,9 +18,9 @@ The Bosch BME680 sensor measures temperature, pressure, humidity and air quality
 https://www.bosch-sensortec.com/bst/products/all_products/BME680. The datasheet is available from
 Bosch at https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680_DS001-11.pdf \n\n
 
-The most recent version of the BME680 library is available at https://github.com/SV-Zanshin/BME680
+The most recent version of the BME680 library is available at https://github.com/Zanduino/BME680
 and the documentation of the library as well as example programs are described in the project's wiki
-pages located at https://github.com/SV-Zanshin/BME680/wiki. \n\n
+pages located at https://github.com/Zanduino/BME680/wiki. \n\n
 
 The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at
 home, hence it will be used as part of a third-party breakout board. There are several such boards
@@ -57,7 +57,7 @@ received a copy of the GNU General Public License along with this program.  If n
 
 @section ESP32FeatherWiFiDemoauthor Author
 
-Written by https://github.com/SV-Zanshin
+ Written by Arnd <Zanshin_Github@sv-zanshin.com> / https://www.github.com/SV-Zanshin
 
 @section ESP32FeatherWiFiDemoversions Changelog
 

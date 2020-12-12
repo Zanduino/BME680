@@ -8,9 +8,9 @@ https://www.bosch-sensortec.com/bst/products/all_products/BME680. The datasheet 
 Bosch at https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680_DS001-11.pdf
 \n\n
 
-The most recent version of the BME680 library is available at https://github.com/SV-Zanshin/BME680
+The most recent version of the BME680 library is available at https://github.com/Zanduino/BME680
 and the documentation of the library as well as example programs are described in the project's wiki
-pages located at https://github.com/SV-Zanshin/BME680/wiki. \n\n
+pages located at https://github.com/Zanduino/BME680/wiki. \n\n
 
 The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at
 home, hence it will be used as part of a third-party breakout board. There are several such boards
@@ -121,8 +121,8 @@ void setup() {
   BME680.setOversampling(PressureSensor, Oversample16);
   Serial.println(F("- Setting IIR filter to maximum value of 16 samples"));
   BME680.setIIRFilter(IIR16);
-  Serial.print(F("- Setting gas measurement to 320\xC2\xB0\x43 for 150ms\n"));  // "°C" symbol
-  BME680.setGas(320, 150);  // 320°c for 150 milliseconds
+  Serial.print(F("- Setting gas measurement to 320\xC2\xB0\x43 for 150ms\n"));  // "ï¿½C" symbol
+  BME680.setGas(320, 150);  // 320ï¿½c for 150 milliseconds
 }  // of method setup()
 void loop() {
   /*!
@@ -138,7 +138,7 @@ void loop() {
   static float    alt;                            // temp altitude
   static uint16_t loopCounter = 0;                // Display iterations
   if (loopCounter % 25 == 0) {                    // Display header
-    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa   Alt m  Air m"));  // Show header "°C"
+    Serial.print(F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa   Alt m  Air m"));  // Show header "ï¿½C"
     Serial.print(F("\xE2\x84\xA6\n==== ====== ====== ========= ======= =======\n"));
   }                                                      // if-then time to show headers
   BME680.getSensorData(temp, humidity, pressure, gas);   // Get readings

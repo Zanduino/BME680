@@ -15,9 +15,9 @@ The BME680 can use either SPI or I2C for communications. This library supports I
 speeds as well as SPI using either the standard Arduino hardware SPI or software SPI. Depending upon
 the pin configuration a BME680 can have 2 distinct I2C addresses - either 0x76 or 0x77.\n\n
 
-The most recent version of the library is available at https://github.com/SV-Zanshin/BME680 and
+The most recent version of the library is available at https://github.com/Zanduino/BME680 and
 extensive documentation of the library as well as descriptions of the various example programs are
-described in the project's wiki pages located at https://github.com/SV-Zanshin/BME680/wiki
+described in the project's wiki pages located at https://github.com/Zanduino/BME680/wiki
 \n
 The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at
 home, hence it will be used as part of a third-party breakout board. There are several such boards
@@ -38,19 +38,37 @@ rather unwieldy for typical Arduino applications, it won't run on most Arduinos 
 is for the Arduino Mega 2560 (due to the memory required), hence the decision to make this compact
 and rather less abstract library that will run on typical Arduino hardware.
 
-@section license License
+@section doxygen doxygen configuration
+
+This library is built with the standard "Doxyfile", which is located at
+https://github.com/Zanduino/Common/blob/main/Doxygen. As described on that page, there are only 5
+environment variables used, and these are set in the project's actions file, located at
+https://github.com/Zanduino/BME680/blob/master/.github/workflows/ci-doxygen.yml
+Edit this file and set the 5 variables -  PRETTYNAME, PROJECT_NAME, PROJECT_NUMBER, PROJECT_BRIEF
+and PROJECT_LOGO so that these values are used in the doxygen documentation.
+The local copy of the doxyfile should be in the project's root directory in order to do local
+doxygen testing, but the file is ignored on upload to GitHub.
+
+@section clang-format
+Part of the GitHub actions for CI is running every source file through "clang-format" to ensure
+that coding formatting is done the same for all files. The configuration file ".clang-format" is
+located at https://github.com/Zanduino/Common/tree/main/clang-format and this is used for CI tests
+when pushing to GitHub. The local file, if present in the root directory, is ignored when
+committing and uploading.
+
+@section license GNU General Public License v3.0
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU
 General Public License as published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version. This program is distributed in the hope that it will
-be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have
-received a copy of the GNU General Public License along with this program.  If not, see
+License, or (at your option) any later version. This program is distributed in the hope that it
+will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should
+have received a copy of the GNU General Public License along with this program.  If not, see
 <http://www.gnu.org/licenses/>.
 
 @section author Author
 
-Written by Arnd, https://github.com/SV-Zanshin
+Written by Arnd <Zanshin_Github@sv-zanshin.com> / https://www.github.com/SV-Zanshin
 
 @section versions Changelog
 

@@ -7,9 +7,9 @@ temperature, pressure, humidity and air quality and are described at
 https://www.bosch-sensortec.com/bst/products/all_products/BME680. The datasheet is available from
 Bosch at https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680_DS001-11.pdf \n\n
 
-The most recent version of the BME680 library is available at https://github.com/SV-Zanshin/BME680
+The most recent version of the BME680 library is available at https://github.com/Zanduino/BME680
 and the documentation of the library as well as example programs are described in the project's wiki
-pages located at https://github.com/SV-Zanshin/BME680/wiki. \n\n
+pages located at https://github.com/Zanduino/BME680/wiki. \n\n
 
 The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at
 home, hence it will be used as part of a third-party breakout board. There are several such boards
@@ -92,7 +92,7 @@ void setup() {
   BME680_1.setOversampling(PressureSensor, SensorOff);
   Serial.print(F("- Setting IIR filter to a value of 4 samples\n"));
   BME680_1.setIIRFilter(IIR4);
-  Serial.print(F("- Turning off pressure and gas sensors\n"));  // "°C" symbols
+  Serial.print(F("- Turning off pressure and gas sensors\n"));  // "ï¿½C" symbols
   BME680_1.setGas(0, 0);  // When either Temp/Time is zero then gas measurements are turned off
   Serial.print(F("\n- Initializing BME680 sensor 2 at address 0x77\n"));
   while (!BME680_2.begin(I2C_STANDARD_MODE, 0x77)) {  // Start BME680 using I2C, use address 0x76
@@ -105,7 +105,7 @@ void setup() {
   BME680_2.setOversampling(PressureSensor, SensorOff);
   Serial.print(F("- Setting IIR filter to a value of 4 samples\n"));
   BME680_2.setIIRFilter(IIR4);
-  Serial.print(F("- Turning off pressure and gas sensors\n\n"));  // "°C" symbols
+  Serial.print(F("- Turning off pressure and gas sensors\n\n"));  // "ï¿½C" symbols
   BME680_2.setGas(0, 0);  // When either Temp/Time is zero then gas measurements are turned off
 }  // of method setup()
 void loop() {
@@ -124,7 +124,7 @@ void loop() {
   if (loopCounter % 25 == 0)                          // Display header every 25 loops
   {
     Serial.print(F("\nLoop Temp1\xC2\xB0\x43 Humid1% | Temp2\xC2\xB0\x43 Humid2%"));  // Show header
-    Serial.print(F(" |  \xCE\x94Temp \xCE\x94Humid%"));                               // and "°C"
+    Serial.print(F(" |  \xCE\x94Temp \xCE\x94Humid%"));                               // and "ï¿½C"
     Serial.print(F("\n==== ======= ======= | ======= ======= | ====== =======\n"));
   }  // if-then time to show headers
   BME680_1.getSensorData(temp1, humidity1, pressure1, gas1);

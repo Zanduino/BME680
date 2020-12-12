@@ -2,13 +2,12 @@
 # This file defines which file types are to be ignored and skipped by  #
 # git so that they are not transferred and committed.                  #
 #                                                                      #
-# Date       Author                        Comments                    #
-# ========== ============================= =========================== #
-# 2020-06-01 https://github.com/SV-Zanshin Removed ignore again        #
-# 2020-05-31 https://github.com/SV-Zanshin Ignore for Authentication   #
-# 2019-02-02 https://github.com/SV-Zanshin Ignores for Doxygen         #
-# 2018-09-22 https://github.com/SV-Zanshin Ignores for MS VS 2017      #
-# 2018-06-24 https://github.com/SV-Zanshin Changed file                #
+# Date       Author     Comments                                       #
+# ========== ========== ============================================== #
+# 2020-12-11 SV-Zanshin Ignores for doxygen and clang-format files     #
+# 2019-01-31 SV-Zanshin Ignores for doxygen                            #
+# 2018-09-22 SV-Zanshin Ignores for MS VS 2017                         #
+# 2018-06-24 SV-Zanshin Changed file                                   #
 #                                                                      #
 ########################################################################
 
@@ -92,6 +91,12 @@ Release
 *.user
 
 ########################################################################
-# Files and directories from Doxygen                                   #
+# Files and directories from doxygen                                   #
 ########################################################################
 html
+Doxyfile
+
+########################################################################
+# Clang-format files                                                   #
+########################################################################
+.clang-format

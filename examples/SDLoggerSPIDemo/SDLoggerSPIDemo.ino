@@ -11,9 +11,9 @@ https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680_DS001-
 \n\n
 
 The most recent version of the BME680 library is available at
-https://github.com/SV-Zanshin/BME680 and the documentation of the library as
+https://github.com/Zanduino/BME680 and the documentation of the library as
 well as example programs are described in the project's wiki pages located at
-https://github.com/SV-Zanshin/BME680/wiki. \n\n
+https://github.com/Zanduino/BME680/wiki. \n\n
 
 The BME680 is an extremely small physical package that is so tiny as to be
 impossible to solder at home, hence it will be used as part of a third-party
@@ -74,7 +74,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 @section SDLoggerSPIDemoauthor Author
 
-Written by https://github.com/SV-Zanshin
+ Written by Arnd <Zanshin_Github@sv-zanshin.com> / https://www.github.com/SV-Zanshin
 
 @section SDLoggerSPIDemoversions Changelog
 
@@ -255,7 +255,7 @@ void loop() {
     Serial.print(
         F("\nLoop Temp\xC2\xB0\x43 Humid% Press hPa Avg Tmp Avg Hum Avg hPa\n==== ====== ====== "
           "========= ======= ====== =========\n"));
-    // Show header plus the // unicode "°C" symbol
+    // Show header plus the // unicode "ï¿½C" symbol
   }                                                                // if-then time to show headers
   idx = (idx + 1) % NUMBER_READINGS;                               // increment and clamp
   BME680.getSensorData(data[idx].temperature, data[idx].humidity,  // Read once at beginning
