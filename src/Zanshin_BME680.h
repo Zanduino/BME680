@@ -56,6 +56,7 @@ Written by Arnd, https://github.com/SV-Zanshin
 
 Version | Date       | Developer  | Comments
 ------- | ---------- | ---------- | ---------------------------------------------------------------
+1.0.11  | 2020-12-03 | SV-Zanshin | New branch - no changes yet
 1.0.10  | 2020-12-03 | SV-Zanshin | Issue #34 Enhancements from Alain2019 - added measurement functionality
 1.0.10  | 2020-12-02 | SV-Zanshin | Issue #33 Optimize library code for size, performance, initializers
 1.0.10  | 2020-10-19 | Alain2019  | Issue #32 Change division to bit shifts for clarity

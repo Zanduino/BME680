@@ -54,7 +54,7 @@ env:
     - PRETTYNAME="Bosch BME680 Arduino Library"
     - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
     - PROJECT_NAME="BME680"
-    - PROJECT_NUMBER="Version 1.0.9"
+    - PROJECT_NUMBER="Version 1.0.11"
     - PROJECT_BRIEF="Arduino library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor"
     - PROJECT_LOGO=""
 

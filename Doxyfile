@@ -3,6 +3,10 @@
 ##                                                                                                  ##
 ## Date       Developer                     Comments                                                ##
 ## ========== ============================= ======================================================= ##
+<<<<<<< refs/remotes/origin/Development_v1.0.11
+## 2020-12-03 https://github.com/SV-Zanshin Updated version to 1.0.11                               ##
+=======
+>>>>>>> Updated to new version
 ## 2020-09-27 https://github.com/SV-Zanshin Updated version to 1.0.10                               ##
 ## 2020-06-25 https://github.com/SV-Zanshin Updated version to 1.0.9                                ##
 ## 2020-06-25 https://github.com/SV-Zanshin Updated version to 1.0.8                                ##
@@ -16,7 +20,11 @@
 ######################################################################################################
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = BME680
+<<<<<<< refs/remotes/origin/Development_v1.0.11
+PROJECT_NUMBER         = "Version 1.0.11"
+=======
 PROJECT_NUMBER         = "Version 1.0.10"
+>>>>>>> Updated to new version
 PROJECT_BRIEF          = "Arduino Library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor"
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       =
