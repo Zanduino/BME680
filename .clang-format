@@ -27,7 +27,7 @@ AllowShortLoopsOnASingleLine: true
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: true
-AlwaysBreakTemplateDeclarations: Yes
+AlwaysBreakTemplateDeclarations: true
 BinPackArguments: true
 BinPackParameters: true
 BraceWrapping:
@@ -153,4 +153,3 @@ SpacesInParentheses: false
 SpacesInSquareBrackets: false
 TabWidth:        8
 UseTab:          Never
-...
