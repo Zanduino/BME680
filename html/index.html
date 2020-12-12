@@ -29,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">BME680
-   &#160;<span id="projectnumber">Version 1.0.11</span>
+   &#160;<span id="projectnumber">v1.0.12</span>
    </div>
-   <div id="projectbrief">Arduino library for the Bosch BME680 Temperature, Humidity, Pressure and Gas sensor</div>
+   <div id="projectbrief">Arduino Library for Bosch BME680 Temperature, Humidity, and Pressure</div>
   </td>
  </tr>
  </tbody>
@@ -91,7 +91,7 @@ Description</h1>
 <br />
  The BME680 can use either SPI or I2C for communications. This library supports I2C at various bus speeds as well as SPI using either the standard Arduino hardware SPI or software SPI. Depending upon the pin configuration a BME680 can have 2 distinct I2C addresses - either 0x76 or 0x77.<br />
 <br />
- The most recent version of the library is available at <a href="https://github.com/SV-Zanshin/BME680">https://github.com/SV-Zanshin/BME680</a> and extensive documentation of the library as well as descriptions of the various example programs are described in the project's wiki pages located at <a href="https://github.com/SV-Zanshin/BME680/wiki">https://github.com/SV-Zanshin/BME680/wiki</a> <br />
+ The most recent version of the library is available at <a href="https://github.com/Zanduino/BME680">https://github.com/Zanduino/BME680</a> and extensive documentation of the library as well as descriptions of the various example programs are described in the project's wiki pages located at <a href="https://github.com/Zanduino/BME680/wiki">https://github.com/Zanduino/BME680/wiki</a> <br />
 The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at home, hence it will be used as part of a third-party breakout board. There are several such boards available at this time, for example:<br />
  </p><table class="doxtable">
 <tr>
@@ -104,12 +104,18 @@ The BME680 is an extremely small physical package that is so tiny as to be impos
 <p>Adafruit | <a href="https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout">https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout</a></p>
 <p><br />
 Bosch supplies sample software that runs on various platforms, including the Arduino family; this can be downloaded at <a href="https://github.com/BoschSensortec/BSEC-Arduino-library">https://github.com/BoschSensortec/BSEC-Arduino-library</a>. This software is part of the Bosch "BSEC" (Bosch Sensortec Environmental Cluster) framework and is somewhat bulky and rather unwieldy for typical Arduino applications, it won't run on most Arduinos and the only example is for the Arduino Mega 2560 (due to the memory required), hence the decision to make this compact and rather less abstract library that will run on typical Arduino hardware.</p>
+<h1><a class="anchor" id="doxygen"></a>
+doxygen configuration</h1>
+<p>This library is built with the standard "Doxyfile", which is located at <a href="https://github.com/Zanduino/Common/blob/main/Doxygen">https://github.com/Zanduino/Common/blob/main/Doxygen</a>. As described on that page, there are only 5 environment variables used, and these are set in the project's actions file, located at <a href="https://github.com/Zanduino/BME680/blob/master/.github/workflows/ci-doxygen.yml">https://github.com/Zanduino/BME680/blob/master/.github/workflows/ci-doxygen.yml</a> Edit this file and set the 5 variables - PRETTYNAME, PROJECT_NAME, PROJECT_NUMBER, PROJECT_BRIEF and PROJECT_LOGO so that these values are used in the doxygen documentation. The local copy of the doxyfile should be in the project's root directory in order to do local doxygen testing, but the file is ignored on upload to GitHub.</p>
+<h1><a class="anchor" id="clang-format"></a>
+clang-format</h1>
+<p>Part of the GitHub actions for CI is running every source file through "clang-format" to ensure that coding formatting is done the same for all files. The configuration file ".clang-format" is located at <a href="https://github.com/Zanduino/Common/tree/main/clang-format">https://github.com/Zanduino/Common/tree/main/clang-format</a> and this is used for CI tests when pushing to GitHub. The local file, if present in the root directory, is ignored when committing and uploading.</p>
 <h1><a class="anchor" id="license"></a>
-License</h1>
+GNU General Public License v3.0</h1>
 <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
 <h1><a class="anchor" id="author"></a>
 Author</h1>
-<p>Written by Arnd, <a href="https://github.com/SV-Zanshin">https://github.com/SV-Zanshin</a></p>
+<p>Written by Arnd <a href="#" onclick="location.href='mai'+'lto:'+'Zan'+'sh'+'in_'+'Gi'+'thu'+'b@'+'sv-'+'za'+'nsh'+'in'+'.co'+'m'; return false;">Zansh<span style="display: none;">.nosp@m.</span>in_G<span style="display: none;">.nosp@m.</span>ithub<span style="display: none;">.nosp@m.</span>@sv-<span style="display: none;">.nosp@m.</span>zansh<span style="display: none;">.nosp@m.</span>in.c<span style="display: none;">.nosp@m.</span>om</a> / <a href="https://www.github.com/SV-Zanshin">https://www.github.com/SV-Zanshin</a></p>
 <h1><a class="anchor" id="versions"></a>
 Changelog</h1>
 <table class="doxtable">
