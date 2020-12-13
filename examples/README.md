@@ -12,4 +12,4 @@ Various example programs illustrating the use of the *Arduino* BME680 library ar
 | SD-Card Logging     | [SDLoggerSPIDemo.ino](https://github.com/Zanduino/BME680/wiki/SDLoggerSPIDemo.ino)     | Example sketch using SPI for the BME680 and a SD-Card to log data at variable rates - faster logging when the measurements change rapidly and less frequent measurements when there is little change. |
 | ESP32 WiFi demo     | [ESP32FeatherWiFiDemo.ino](https://github.com/Zanduino/BME680/wiki/ESP32FeatherWiFiDemo.ino)     | Example sketch using I2C for the BME680 (and an optional SD-Card on SPI to log data) to connect to WiFi and dynamically display measurement data on a web page. |
 
-[![Zanshin Logo](https://zanduino.github.io/Images/zanshinkanjitiny.gif) <img src="https://zanduino.github.io/Images/zanshintext.gif" width="75"/>](https://www.sv-zanshin.com)
+[![Zanshin Logo](https://zanduino.github.io/Images/zanshinkanjitiny.gif) <img src="https://zanduino.github.io/Images/zanshintext.gif" width="75"/>](https://zanduino.github.io)

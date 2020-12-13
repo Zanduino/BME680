@@ -74,7 +74,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 @section SDLoggerSPIDemoauthor Author
 
- Written by Arnd <Zanshin_Github@sv-zanshin.com> / https://www.github.com/SV-Zanshin
+ Written by Arnd <Arnd@Zanduino.Com> at https://www.github.com/SV-Zanshin
 
 @section SDLoggerSPIDemoversions Changelog
 
