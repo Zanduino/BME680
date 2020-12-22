@@ -13,12 +13,14 @@ pages located at https://github.com/Zanduino/BME680/wiki. \n\n
 
 The BME680 is an extremely small physical package that is so tiny as to be impossible to solder at
 home, hence it will be used as part of a third-party breakout board. There are several such boards
-available at this time, for example \n Company  | Link
--------  | ----------
-Sparkfun | https://www.sparkfun.com/products/14570
-BlueDot  | https://www.bluedot.space/sensor-boards/bme680/
-Adafruit |
+available at this time, for example \n
+| Company  | Link       |
+| -------  | ---------- |
+| Sparkfun | https://www.sparkfun.com/products/14570 |
+| BlueDot  | https://www.bluedot.space/sensor-boards/bme680/ |
+| Adafruit |
 https://learn.adafruit.com/adafruit-BME680-humidity-barometric-pressure-temperature-sensor-breakout
+|
 \n\n
 
 Bosch supplies sample software that runs on various platforms, including the Arduino family; this
@@ -53,17 +55,17 @@ received a copy of the GNU General Public License along with this program.  If n
 
 @section I2CDemoauthor Author
 
- Written by Arnd <Arnd@Zanduino.Com> at https://www.github.com/SV-Zanshin
+Written by Arnd <Arnd@Zanduino.Com> at https://www.github.com/SV-Zanshin
 
 @section I2CDemoversions Changelog
 
-Version | Date       | Developer  | Comments
-------- | ---------- | ---------- | ---------------------------------------------------------------
-1.0.3   | 2020-07-04 | SV-Zanshin | Issue #25 implement clang-formatting
-1.0.2   | 2020-05-09 | SV-Zanshin | Issue #8  clean up comments and code
-1.0.1   | 2019-01-30 | SV-Zanshin |           Removed old comments
-1.0.1   | 2019-01-26 | SV-Zanshin | Issue #3  convert documentation to Doxygen
-1.0.0b  | 2018-06-30 | SV-Zanshin |           Cloned from original BME280 program
+| Version | Date       | Developer  | Comments
+| ------- | ---------- | ---------- | ------------------------------------------------------------ |
+| 1.0.3   | 2020-07-04 | SV-Zanshin | Issue #25 implement clang-formatting                         |
+| 1.0.2   | 2020-05-09 | SV-Zanshin | Issue #8  clean up comments and code                         |
+| 1.0.1   | 2019-01-30 | SV-Zanshin |           Removed old comments                               |
+| 1.0.1   | 2019-01-26 | SV-Zanshin | Issue #3  convert documentation to Doxygen                   |
+| 1.0.0b  | 2018-06-30 | SV-Zanshin |           Cloned from original BME280 program                |
 */
 #include "Zanshin_BME680.h"  // Include the BME680 Sensor library
 /**************************************************************************************************
