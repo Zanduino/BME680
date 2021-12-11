@@ -94,9 +94,9 @@ Version | Date       | Developer  | Comments
 #define SERIAL_ATTACHED  // When commented out then no output is done to the serial port
 
 #ifndef SERIAL_ATTACHED
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-// override Serial output
-#define Serial DummySerial
+  #ifndef DOXYGEN_SHOULD_SKIP_THIS
+    // override Serial output
+    #define Serial DummySerial
 static class {
   /*!
   @class Serial
@@ -107,7 +107,7 @@ static class {
   void print(...) {}    ///< Redefine a dummy print
   void println(...) {}  ///< Redefine a dummy println
 } Serial;
-#endif  // of skipped Doxygen code
+  #endif  // of skipped Doxygen code
 #endif
 
 /**************************************************************************************************
