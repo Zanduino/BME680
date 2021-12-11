@@ -69,7 +69,7 @@ Version | Date       | Developer  | Comments
 */
 
 #if !defined(ESP32)
-#error This program is designed for the ESP32 platform and might not work on other platforms
+  #error This program is designed for the ESP32 platform and might not work on other platforms
 #endif
 
 /**************************************************************************************************
