@@ -107,21 +107,22 @@ Version | Date       | Developer  | Comments
 #include "Arduino.h"  // Arduino data type definitions
 
 #ifndef BME680_h
-#define BME680_h  ///< Guard code definition for the header
-#define CONCAT_BYTES(msb, lsb) (((uint16_t)msb << 8) | (uint16_t)lsb)  ///< combine msb & lsb bytes
-#ifndef _BV
-#define _BV(bit) (1 << (bit))  ///< This macro isn't pre-defined on all platforms
-#endif
-/***************************************************************************************************
-** Declare publically visible constants used in the class                                         **
-***************************************************************************************************/
-#ifndef I2C_MODES                             //   If the I2C_Modes haven't been declared yet
-#define I2C_MODES                             ///< Guard code definition for the I2C modes
+  #define BME680_h  ///< Guard code definition for the header
+  #define CONCAT_BYTES(msb, lsb) \
+    (((uint16_t)msb << 8) | (uint16_t)lsb)  ///< combine msb & lsb bytes
+  #ifndef _BV
+    #define _BV(bit) (1 << (bit))  ///< This macro isn't pre-defined on all platforms
+  #endif
+  /***************************************************************************************************
+  ** Declare publically visible constants used in the class **
+  ***************************************************************************************************/
+  #ifndef I2C_MODES                           //   If the I2C_Modes haven't been declared yet
+    #define I2C_MODES                         ///< Guard code definition for the I2C modes
 const uint32_t I2C_STANDARD_MODE{100000};     ///< Default normal I2C 100KHz speed
 const uint32_t I2C_FAST_MODE{400000};         ///< Fast mode
 const uint32_t I2C_FAST_MODE_PLUS{1000000};   ///< Really fast mode
 const uint32_t I2C_HIGH_SPEED_MODE{3400000};  ///< Turbo mode
-#endif
+  #endif
 const uint32_t SPI_HERZ{500000};  ///< SPI speed in Hz
 
 /***************************************************************************************************
@@ -205,7 +206,7 @@ class BME680_Class {
       @param[in] value Data Type "T" to read
       @return    Size of data read in bytes
     */
-    uint8_t *      bytePtr    = (uint8_t *)&value;  // Pointer to structure beginning
+    uint8_t       *bytePtr    = (uint8_t *)&value;  // Pointer to structure beginning
     static uint8_t structSize = sizeof(T);          // Number of bytes in structure
     if (_I2CAddress)                                // Using I2C if address is non-zero
     {                                               //

@@ -270,12 +270,12 @@ void BME680_Class::getCalibration() {
   /**********************************
   ** Humidity related coefficients **
   **********************************/
-  _H1 = (uint16_t)(
-      ((uint16_t)coeff_arr2[BME680_H1_MSB_REG] << BME680_HUM_REG_SHIFT_VAL) |
-      ((coeff_arr2[BME680_H1_LSB_REG] >> BME680_HUM_REG_SHIFT_VAL) & BME680_BIT_H1_DATA_MSK));
-  _H2 = (uint16_t)(
-      ((uint16_t)coeff_arr2[BME680_H2_MSB_REG] << BME680_HUM_REG_SHIFT_VAL) |
-      ((coeff_arr2[BME680_H2_LSB_REG] >> BME680_HUM_REG_SHIFT_VAL) & BME680_BIT_H1_DATA_MSK));
+  _H1 = (uint16_t)(((uint16_t)coeff_arr2[BME680_H1_MSB_REG] << BME680_HUM_REG_SHIFT_VAL) |
+                   ((coeff_arr2[BME680_H1_LSB_REG] >> BME680_HUM_REG_SHIFT_VAL) &
+                    BME680_BIT_H1_DATA_MSK));
+  _H2 = (uint16_t)(((uint16_t)coeff_arr2[BME680_H2_MSB_REG] << BME680_HUM_REG_SHIFT_VAL) |
+                   ((coeff_arr2[BME680_H2_LSB_REG] >> BME680_HUM_REG_SHIFT_VAL) &
+                    BME680_BIT_H1_DATA_MSK));
   _H3 = (int8_t)coeff_arr2[BME680_H3_REG];
   _H4 = (int8_t)coeff_arr2[BME680_H4_REG];
   _H5 = (int8_t)coeff_arr2[BME680_H5_REG];
@@ -352,11 +352,10 @@ uint8_t BME680_Class::setOversampling(const uint8_t sensor, const uint8_t sampli
                 (uint8_t)tempRegister);  // Update humidity bits 5:7
       }                                  // if-then return current value or set new value
       break;
-    }  // of TemperatureSensor
-    default:
-      return (UINT8_MAX);  // Return an error if no match
-  }                        // of switch the sensor type
-  return (returnValue);    // Otherwise return current value
+    }                             // of TemperatureSensor
+    default: return (UINT8_MAX);  // Return an error if no match
+  }                               // of switch the sensor type
+  return (returnValue);           // Otherwise return current value
 }  // of method setOversampling()
 uint8_t BME680_Class::setIIRFilter(const uint8_t iirFilterSetting) const {
   /*!
@@ -508,8 +507,7 @@ void BME680_Class::waitForReadings() const {
   /*!
    @brief   Only returns once a measurement on the BME680 has completed
    */
-  while (measuring()) {
-  }  // loop until any active measurment is complete
+  while (measuring()) {}  // loop until any active measurment is complete
 }  // of method waitForReadings
 bool BME680_Class::setGas(uint16_t GasTemp, uint16_t GasMillis) const {
   /*!
