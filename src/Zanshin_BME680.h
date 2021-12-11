@@ -206,7 +206,7 @@ class BME680_Class {
       @param[in] value Data Type "T" to read
       @return    Size of data read in bytes
     */
-    uint8_t       *bytePtr    = (uint8_t *)&value;  // Pointer to structure beginning
+    uint8_t *      bytePtr    = (uint8_t *)&value;  // Pointer to structure beginning
     static uint8_t structSize = sizeof(T);          // Number of bytes in structure
     if (_I2CAddress)                                // Using I2C if address is non-zero
     {                                               //
