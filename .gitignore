@@ -4,6 +4,7 @@
 #                                                                      #
 # Date       Author     Comments                                       #
 # ========== ========== ============================================== #
+# 2021-12-11 SV-Zanshin New ignore for Visual Studio 2022 *.vcxitems   #
 # 2020-12-11 SV-Zanshin Ignores for doxygen and clang-format files     #
 # 2019-01-31 SV-Zanshin Ignores for doxygen                            #
 # 2018-09-22 SV-Zanshin Ignores for MS VS 2017                         #
@@ -83,12 +84,13 @@ Release
 *.cppproj
 
 ########################################################################
-# Files and directories from Microsoft Visual Studio 2017              #
+# Files and directories from Microsoft Visual Studio                   #
 ########################################################################
 *.sln
 *.vcxproj
 *.filters
 *.user
+*.vcxitems
 
 ########################################################################
 # Files and directories from doxygen                                   #
