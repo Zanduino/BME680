@@ -270,12 +270,11 @@ void BME680_Class::getCalibration() {
   /**********************************
   ** Humidity related coefficients **
   **********************************/
-  _H1 = (uint16_t)(((uint16_t)coeff_arr2[BME680_H1_MSB_REG] << BME680_HUM_REG_SHIFT_VAL) |
-                   ((coeff_arr2[BME680_H1_LSB_REG] >> BME680_HUM_REG_SHIFT_VAL) &
-                    BME680_BIT_H1_DATA_MSK));
+  _H1 = (uint16_t)(
+      ((uint16_t)coeff_arr2[BME680_H1_MSB_REG] << BME680_HUM_REG_SHIFT_VAL) |
+      ((coeff_arr2[BME680_H1_LSB_REG] >> BME680_HUM_REG_SHIFT_VAL) & BME680_BIT_H1_DATA_MSK));
   _H2 = (uint16_t)(((uint16_t)coeff_arr2[BME680_H2_MSB_REG] << BME680_HUM_REG_SHIFT_VAL) |
-                   ((coeff_arr2[BME680_H2_LSB_REG] >> BME680_HUM_REG_SHIFT_VAL) &
-                    BME680_BIT_H1_DATA_MSK));
+      ((coeff_arr2[BME680_H2_LSB_REG] >> BME680_HUM_REG_SHIFT_VAL) & BME680_BIT_H1_DATA_MSK));
   _H3 = (int8_t)coeff_arr2[BME680_H3_REG];
   _H4 = (int8_t)coeff_arr2[BME680_H4_REG];
   _H5 = (int8_t)coeff_arr2[BME680_H5_REG];
